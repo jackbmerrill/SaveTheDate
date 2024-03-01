@@ -43,7 +43,7 @@ public interface IEvent {
    * Gives the time object of the event.
    * @return the time object of event
    */
-  public Object getTime();
+  public Time getTime();
 
   /**
    * Gets the name of the event.

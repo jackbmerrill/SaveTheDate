@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Objects;
 
 /**
- * To represent an event in an individual's schedule.
+ * Class to represent an event in an individual's schedule.
  */
 public class Event implements IEvent {
 
@@ -36,7 +36,7 @@ public class Event implements IEvent {
 
   @Override
   public Location getLocation() {
-    return null;
+    return this.location;
   }
 
   @Override
@@ -65,7 +65,7 @@ public class Event implements IEvent {
   }
 
   @Override
-  public Object getTime() {
+  public Time getTime() {
     return time;
   }
 }

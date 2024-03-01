@@ -8,8 +8,7 @@ public class Time {
   private final Day startDay;
   private final Day endDay;
 
-  public enum Day { Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday; }
-//maybe make a separate class fro this so we can deal with inbetween
+
   public Time(Day startDay, int startTime, Day endDay, int endTime) {
     checkValidTime(startTime, endTime);
     if (startDay == endDay) {
@@ -28,7 +27,11 @@ public class Time {
     }
   }
 
-  public void isOverlap(Object time) {
+  /**
+   * Checks if the given time overlaps with this time
+   * @param time
+   */
+  public void isOverlap(Time time) {
 
   }
 
