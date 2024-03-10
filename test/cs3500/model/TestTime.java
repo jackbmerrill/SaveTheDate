@@ -3,17 +3,53 @@ package cs3500.model;
 import org.junit.Test;
 
 
+import cs3500.calendar.model.Day;
 import cs3500.calendar.model.Location;
 import cs3500.calendar.model.Time;
 
+import static java.util.Calendar.MONDAY;
+import static java.util.Calendar.SUNDAY;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertThrows;
 import static org.junit.Assert.assertTrue;
+
+//can we use java utils calendar days
 
 public class TestTime {
 
-  //Time time1 = new Time()
+  Time time1 = new Time(Day.MONDAY, 1200, Day.MONDAY, 1300);
+  Time time2 = new Time(Day.SUNDAY, 1259, Day.TUESDAY, 1300);
+  Time time3 = new Time(Day.TUESDAY, 1259, Day.THURSDAY, 1300);
+  Time time4 = new Time(Day.TUESDAY, 1300, Day.FRIDAY, 2359);
 
 
+  @Test
+  public void testConstructor() {
+    assertThrows("Must enter a valid time", IllegalArgumentException.class, () ->
+            new Time(Day.MONDAY, -1, Day.TUESDAY, 0));
+    assertThrows("Must enter a valid time", IllegalArgumentException.class, () ->
+            new Time(Day.MONDAY, 2400, Day.TUESDAY, 0));
+    assertThrows("Must enter a valid time", IllegalArgumentException.class, () ->
+            new Time(Day.MONDAY, 2160, Day.TUESDAY, 0));
+    assertThrows("Must enter a valid time", IllegalArgumentException.class, () ->
+            new Time(Day.MONDAY, 0, Day.TUESDAY, -10));
+    assertThrows("Must enter a valid time", IllegalArgumentException.class, () ->
+            new Time(Day.MONDAY, 0, Day.TUESDAY, 2500));
+    assertThrows("Must enter a valid time", IllegalArgumentException.class, () ->
+            new Time(Day.MONDAY, 0, Day.TUESDAY, 1390));
+    assertThrows("Must enter a valid time", IllegalArgumentException.class, () ->
+            new Time(Day.MONDAY, 1100, Day.MONDAY, 1000));
+  }
+
+  @Test
+  public void testIsOverlap() {
+    assertTrue(time2.isOverlap(time1));
+    assertTrue(time1.isOverlap(time2));
+    assertTrue(time3.isOverlap(time2));
+    assertTrue(time2.isOverlap(time3));
+    assertFalse(time4.isOverlap(time2));
+    assertFalse(time2.isOverlap(time4));
+  }
 
 }

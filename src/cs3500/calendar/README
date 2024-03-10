@@ -5,3 +5,7 @@ for the actual schedule, what we could do to edit the events is directly pass th
     passed in are fully duplicated.
         -this way we dont need 500 methods in schedule just to add or modify events. just pass
             them up
+        - cant bc then there is no way of checking for event overlap in the schedule
+
+
+- what happens if add event to invitee but they already have an event at that time
