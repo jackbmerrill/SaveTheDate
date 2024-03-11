@@ -62,19 +62,34 @@ public class CentralSystem implements ICentralSystem {
 
   }
 
-  //check all the users events if there is overlap. throw error if so
-  private void checkEventOverlap(String user, Time time) {
-    //this.system.get(user).
-    // compare times of every event that the user contains
+  @Override
+  public void updateEventName(String userID, String oldName, String newName) {
+    getSchedule(userID).modifyEventName(oldName, newName);
   }
 
   @Override
-  public void updateEvent(String userID, String name, Time time, Location location, List<String> users) {
-
+  public void updateEventTime(String userID, String name, Time newTime) {
+    getSchedule(userID).modifyEventTime(name, newTime);
   }
+
+  @Override
+  public void updateEventLocation(String userID, String name, Location newLocation) {
+    getSchedule(userID).modifyEventLocation(name, newLocation);
+  }
+
+  // checks to unsure that the user is within the central system
+  // and then gets the schedule associated with the user
+  private Schedule getSchedule(String userID) {
+    if (this.system.containsKey(userID)) {
+      return this.system.get(userID);
+    }
+    throw new IllegalStateException("System does not contain user");
+  }
+
 
   @Override
   public void removeEvent(String userID, String eventName) {
+    //if ()
 
   }
 
