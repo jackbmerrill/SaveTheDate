@@ -6,7 +6,7 @@ import java.util.List;
  * Defines the core functionalities for managing users, their schedules and events for the
  * NU planner.
  */
-public interface CentralSystem {
+public interface ICentralSystem {
 
   /**
    * To add a user to the central system with their schedule.
