@@ -26,20 +26,36 @@ public interface ICentralSystem {
   void generateEvent(String name, Time time, Location location, List<String> users);
 
   /**
-   * To update an event with the given details and modify it in the schedules of all
+   * To update an event name and modify it in the schedules of all
    * the specified users.
    * @param userID userID of the event
-   * @param name the name of the event.
-   * @param time the time of the event
-   * @param location the location of the event
-   * @param users the list of users connected to the event
+   * @param oldName the old name of the event
+   * @param newName the new name of the event
    */
-  void updateEvent(String userID, String name, Time time, Location location, List<String> users);
+  void updateEventName(String userID, String oldName, String newName);
+
+  /**
+   * To update an event time and modify it in the schedules of all
+   * the specified users.
+   * @param userID userID of the event
+   * @param name the name of the event
+   * @param newTime the new time of the event
+   */
+  void updateEventTime(String userID, String name, Time newTime);
+
+  /**
+   *  To update an event location and modify it in the schedules of all
+   *  the specified users.
+   * @param userID userID of the event
+   * @param name the name of the event
+   * @param newLocation the new location of the event
+   */
+  void updateEventLocation(String userID, String name, Location newLocation);
 
   /**
    * To remove an event with the given details and modify it in the schedules of all
    * the specified users. If user is the host, removes the event from
-   * all of the schedules. If user is not the host, only removes from user schedule.
+   * all the schedules. If user is not the host, only removes from user schedule.
    * @param userID userID of the event
    * @param eventName name of the event to be removed
    */

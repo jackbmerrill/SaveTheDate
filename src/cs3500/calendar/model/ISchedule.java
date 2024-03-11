@@ -64,4 +64,10 @@ public interface ISchedule {
    * @throws IllegalStateException if no such event exists
    */
   public Event getEvent(String eventName);
+
+  /**
+   * Checks to see if there is any time overlap within the schedule.
+   * @param time the given time
+   */
+  void checkOverlap(Time time);
 }
