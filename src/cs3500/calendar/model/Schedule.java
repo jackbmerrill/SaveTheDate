@@ -78,6 +78,7 @@ public class Schedule implements ISchedule {
   public Event getEvent(String eventName) {
     containsEvent(eventName);
     Event temp = this.eventMap.get(eventName);
+    //we could do this diff and create a new constructor
     return new Event(temp.getName(), temp.getTime(), temp.getLocation(), temp.getUsers());
   }
 }
