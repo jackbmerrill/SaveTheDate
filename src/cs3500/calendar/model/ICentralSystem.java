@@ -28,12 +28,13 @@ public interface ICentralSystem {
   /**
    * To update an event with the given details and modify it in the schedules of all
    * the specified users.
+   * @param userID userID of the event
    * @param name the name of the event.
    * @param time the time of the event
    * @param location the location of the event
    * @param users the list of users connected to the event
    */
-  void updateEvent(String name, Time time, Location location, List<String> users);
+  void updateEvent(String userID, String name, Time time, Location location, List<String> users);
 
   /**
    * To remove an event with the given details and modify it in the schedules of all
@@ -42,7 +43,6 @@ public interface ICentralSystem {
    * @param userID userID of the event
    * @param eventName name of the event to be removed
    */
-  //should we do just user id and event name
   void removeEvent(String userID, String eventName);
 
   /**
