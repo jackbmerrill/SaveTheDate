@@ -40,6 +40,7 @@ public class TestTime {
             new Time(Day.MONDAY, 0, Day.TUESDAY, 1390));
   }
 
+  //inbetween another time,(another week, day, hour) overlapping end, overlapping start
   @Test
   public void testIsOverlap() {
     assertTrue(time2.isOverlap(time1));
