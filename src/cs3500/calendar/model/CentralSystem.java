@@ -89,12 +89,21 @@ public class CentralSystem implements ICentralSystem {
 
   @Override
   public void removeEvent(String userID, String eventName) {
-    //if ()
-
+    Schedule userSchedule = getSchedule(userID);
+    Event event = userSchedule.getEvent(eventName);
+    if (event.getHost().equals(userID)) {
+      for (String user : event.getUsers()) {
+        if (this.system.containsKey(user)) {
+          system.get(user).removeEvent(eventName);
+        }
+      }
+    } else {
+      userSchedule.removeEvent(eventName);
+    }
   }
 
   @Override
   public Schedule userSchedule(String userId) {
-    return null;
+    return this.getSchedule(userId);
   }
 }

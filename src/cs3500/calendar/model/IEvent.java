@@ -39,6 +39,14 @@ public interface IEvent {
    */
   public List<String> getUsers();
 
+
+  /**
+   * Returns the first user (the host) of the given event. If the list of users is empty,
+   * returns an empty string.
+   * @return the name of the host of the event
+   */
+  public String getHost();
+
   /**
    * Gives the time object of the event.
    * @return the time object of event

@@ -70,6 +70,14 @@ public class Event implements IEvent {
   }
 
   @Override
+  public String getHost() {
+    if (!users.isEmpty()) {
+      return users.get(0);
+    }
+    return "";
+  }
+
+  @Override
   public Time getTime() {
     return time;
   }
