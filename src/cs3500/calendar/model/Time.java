@@ -10,7 +10,7 @@ public class Time {
   public Time(Day startDay, int startTime, Day endDay, int endTime) {
     checkValidTime(startTime, endTime);
     if (startDay.equals(endDay)) {
-      if (startTime > endTime) {
+      if (startTime == endTime) {
         throw new IllegalArgumentException("Must enter a valid time");
       }
     }
@@ -58,10 +58,10 @@ public class Time {
       int otherStartOrder = other.startDay.order();
       int thisEndOrder = this.endDay.order();
       int otherEndOrder = other.endDay.order();
-      if (thisStartOrder > thisEndOrder) {
+      if (thisStartOrder >= thisEndOrder) {
         thisEndOrder += 7;
       }
-      if (otherStartOrder > otherEndOrder) {
+      if (otherStartOrder >= otherEndOrder) {
         otherEndOrder += 7;
       }
       return thisStartOrder < otherStartOrder

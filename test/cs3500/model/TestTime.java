@@ -38,8 +38,6 @@ public class TestTime {
             new Time(Day.MONDAY, 0, Day.TUESDAY, 2500));
     assertThrows("Must enter a valid time", IllegalArgumentException.class, () ->
             new Time(Day.MONDAY, 0, Day.TUESDAY, 1390));
-    assertThrows("Must enter a valid time", IllegalArgumentException.class, () ->
-            new Time(Day.MONDAY, 1100, Day.MONDAY, 1000));
   }
 
   @Test
