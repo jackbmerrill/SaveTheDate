@@ -5,7 +5,11 @@ import java.util.List;
 import java.util.Objects;
 
 /**
- * Class to represent an event in an individual's schedule.
+ * Class to represent an event in an individual's schedule. The first user in the list of users for
+ * an event is the host of that event. An event includes a name for the event, a location and
+ * whether the event is online or not. It includes the starting/ending day and time of the event. It
+ * includes a list of users who are invited to the event and events can only span at most a week.
+ * (Note: An event can have both a physical location and still be online)
  */
 public class Event implements IEvent {
 
@@ -16,6 +20,7 @@ public class Event implements IEvent {
 
   /**
    * To represent a constructor for event.
+   * Contains all the information needed to create an event and cannot take in null fields. 
    * @param name name of the event
    * @param time time of the even
    * @param location location of the event
