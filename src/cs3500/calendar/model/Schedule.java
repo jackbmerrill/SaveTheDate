@@ -73,4 +73,11 @@ public class Schedule implements ISchedule {
     containsEvent(eventName);
     return this.eventMap.get(eventName).getUsers();
   }
+
+  @Override
+  public Event getEvent(String eventName) {
+    containsEvent(eventName);
+    Event temp = this.eventMap.get(eventName);
+    return new Event(temp.getName(), temp.getTime(), temp.getLocation(), temp.getUsers());
+  }
 }
