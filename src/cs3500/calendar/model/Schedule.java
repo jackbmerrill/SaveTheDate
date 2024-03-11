@@ -81,4 +81,9 @@ public class Schedule implements ISchedule {
     //we could do this diff and create a new constructor
     return new Event(temp.getName(), temp.getTime(), temp.getLocation(), temp.getUsers());
   }
+
+  @Override
+  public void checkOverlap(Time time) {
+
+  }
 }
