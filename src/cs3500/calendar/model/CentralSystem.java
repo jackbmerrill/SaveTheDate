@@ -44,12 +44,14 @@ public interface CentralSystem {
 
   /**
    * To remove an event with the given details and modify it in the schedules of all
-   * the specified users.
+   * the specified users. If user is the host, removes the event from
+   * all of the schedules. If user is not the host, only removes from user schedule.
    * @param name the name of the event
    * @param time the time of the event
    * @param location the location of the event
    * @param users the list of users connected to the event
    */
+  //should we do just user id and event name
   void removeEvent(String name, Time time, Location location, List<String> users);
 
   /**
