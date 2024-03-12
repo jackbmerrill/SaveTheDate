@@ -53,7 +53,6 @@ public class CentralSystem implements ICentralSystem {
     Event generatedEvent = new Event(name, time, location, users);
     for (String user : users) {
        if (system.containsKey(user)) {
-         system.get(user).checkOverlap(time);
          system.get(user).addEvent(generatedEvent);
        } else {
          system.put(user, new Schedule());
