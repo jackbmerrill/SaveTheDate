@@ -42,6 +42,7 @@ public class CentralSystem implements ICentralSystem {
   }
 
 
+  //need to fix this for the input
   @Override
   public void addUser(String userId, Schedule schedule) {
     this.system.put(userId, new Schedule());
@@ -67,6 +68,7 @@ public class CentralSystem implements ICentralSystem {
     getSchedule(userID).modifyEventName(oldName, newName);
   }
 
+  //check for all schedules connected
   @Override
   public void updateEventTime(String userID, String name, Time newTime) {
     getSchedule(userID).modifyEventTime(name, newTime);
@@ -79,6 +81,7 @@ public class CentralSystem implements ICentralSystem {
 
   // checks to unsure that the user is within the central system
   // and then gets the schedule associated with the user
+
   private Schedule getSchedule(String userID) {
     if (this.system.containsKey(userID)) {
       return this.system.get(userID);
@@ -102,6 +105,7 @@ public class CentralSystem implements ICentralSystem {
     }
   }
 
+  //needs to return a new copy of the schedule
   @Override
   public Schedule userSchedule(String userId) {
     return this.getSchedule(userId);

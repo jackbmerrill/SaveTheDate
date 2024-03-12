@@ -31,7 +31,7 @@ public interface ISchedule {
   /**
    * To modify the event time.
    * @param eventName an event name on the schedule to be changed
-   * @throws IllegalStateException if no such event exists
+   * @throws IllegalStateException if no such event exists or event already exists at given time
    */
   public void modifyEventTime(String eventName, Time time);
 
@@ -65,9 +65,4 @@ public interface ISchedule {
    */
   public Event getEvent(String eventName);
 
-  /**
-   * Checks to see if there is any time overlap within the schedule.
-   * @param time the given time
-   */
-  void checkOverlap(Time time);
 }

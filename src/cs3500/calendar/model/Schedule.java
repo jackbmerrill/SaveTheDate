@@ -22,8 +22,7 @@ public class Schedule implements ISchedule {
   @Override
   public void addEvent(Event event) throws IllegalStateException {
     Objects.requireNonNull(event);
-    //we need to check no overlap in dates
-
+    eventOverlap("", event.getTime());
     eventMap.put(event.getName(), event);
   }
 
@@ -47,13 +46,24 @@ public class Schedule implements ISchedule {
     this.eventMap.remove(oldEventName);
   }
 
+  //need to ignore the current event
   @Override
   public void modifyEventTime(String eventName, Time time) {
     containsEvent(eventName);
-    for (Map.Entry<String, Event> entry : eventMap.entrySet()) {
-      time.isOverlap(entry.getValue().getTime());
-    }
+    eventOverlap(eventName, time);
     this.eventMap.get(eventName).updateTime(time);
+  }
+
+  private void eventOverlap(String eventName, Time time) {
+    for (Map.Entry<String, Event> entry : eventMap.entrySet()) {
+      if (entry.getValue().getName().equals(eventName)) {
+        continue;
+      }
+      //if overlap, throw error
+      if (time.isOverlap(entry.getValue().getTime())) {
+        throw new IllegalStateException("An event already exists at this time");
+      }
+    }
   }
 
   @Override
@@ -82,8 +92,4 @@ public class Schedule implements ISchedule {
     return new Event(temp.getName(), temp.getTime(), temp.getLocation(), temp.getUsers());
   }
 
-  @Override
-  public void checkOverlap(Time time) {
-
-  }
 }
