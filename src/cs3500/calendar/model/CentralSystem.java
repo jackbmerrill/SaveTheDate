@@ -45,7 +45,7 @@ public class CentralSystem implements ICentralSystem {
 
   //need to fix this for the input
   @Override
-  public void addUser(String userId, Schedule schedule) {
+  public void addUser(String userId) {
     this.system.put(userId, new Schedule(userId));
   }
 
@@ -110,6 +110,14 @@ public class CentralSystem implements ICentralSystem {
       }
     } else {
       userSchedule.removeEvent(eventName);
+    }
+  }
+
+  @Override
+  public void addEvent(String host, String userID, String eventName) {
+    Schedule userSchedule = getSchedule(host);
+    if (system.containsKey(userID)) {
+      system.get(userID).addEvent(userSchedule.getEvent(eventName));
     }
   }
 

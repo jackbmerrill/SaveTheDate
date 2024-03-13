@@ -11,9 +11,8 @@ public interface ICentralSystem {
   /**
    * To add a user to the central system with their schedule.
    * @param userId the unique id of the user
-   * @param schedule the attached schedule of the user
    */
-  void addUser(String userId, Schedule schedule);
+  void addUser(String userId);
 
   /**
    * Generates a new event with the given details and adds it to the schedule of the
@@ -61,6 +60,14 @@ public interface ICentralSystem {
    * @param eventName name of the event to be removed
    */
   void removeEvent(String userID, String eventName);
+
+  /**
+   * To add a user to an event with the given details and modify it in the schedules of all
+   * the specified users. Adds the user to the events users.
+   * @param userID userID of the event
+   * @param eventName name of the event to be removed
+   */
+  void addEventToUser(String userID, String eventName);
 
   /**
    * To get the schedule that corresponds to the name of the given userID.
