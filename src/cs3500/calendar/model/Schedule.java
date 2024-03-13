@@ -31,7 +31,7 @@ public class Schedule implements ISchedule {
         throw new IllegalStateException("Host has a time conflict");
       }
       List<String> users = event.getUsers();
-      users.remove(this.userID);
+      users.remove(this.userID); //check if causes issue
       event.updateUsers(users);
       return;
     }

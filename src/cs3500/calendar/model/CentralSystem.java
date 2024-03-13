@@ -5,6 +5,7 @@ package cs3500.calendar.model;
  *
  */
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -54,7 +55,7 @@ public class CentralSystem implements ICentralSystem {
     for (String user : users) {
        if (system.containsKey(user)) {
          //if overlap of the object with the schedule, dont add the event and remove the user from
-         //the schedule
+         //the event
          system.get(user).addEvent(generatedEvent);
        } else {
          system.put(user, new Schedule(user));
@@ -74,7 +75,10 @@ public class CentralSystem implements ICentralSystem {
   //check for all schedules connected
   @Override
   public void updateEventTime(String userID, String name, Time newTime) {
-    getSchedule(userID).modifyEventTime(name, newTime);
+    for (String user : system.get(userID).getEvent(name).getUsers()) {
+      getSchedule(userID).modifyEventTime(name, newTime);
+    }
+
 
   }
 

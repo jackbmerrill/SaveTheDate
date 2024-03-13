@@ -36,7 +36,7 @@ public class Event implements IEvent {
     if (Objects.requireNonNull(users).isEmpty()) {
       throw new IllegalArgumentException("There cannot be no users.");
     }
-    this.users = Objects.requireNonNull(users);
+    this.users = new ArrayList<String>(users);
   }
 
   @Override
@@ -66,7 +66,7 @@ public class Event implements IEvent {
 
   @Override
   public void updateUsers(List<String> users) {
-    this.users = Objects.requireNonNull(users);
+    this.users = new ArrayList<String>(Objects.requireNonNull(users));
   }
 
   @Override
