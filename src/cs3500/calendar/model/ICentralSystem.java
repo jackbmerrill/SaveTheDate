@@ -27,7 +27,7 @@ public interface ICentralSystem {
 
   /**
    * To update an event name and modify it in the schedules of all
-   * the specified users.
+   * the specified users. Updates the name of the event for every user with the event.
    * @param userID userID of the event
    * @param oldName the old name of the event
    * @param newName the new name of the event
@@ -36,7 +36,8 @@ public interface ICentralSystem {
 
   /**
    * To update an event time and modify it in the schedules of all
-   * the specified users.
+   * the specified users. If the event time is moved to create a conflict for a user,
+   * that user is then removed from the event. If the host has a time conflict, an error is thrown.
    * @param userID userID of the event
    * @param name the name of the event
    * @param newTime the new time of the event

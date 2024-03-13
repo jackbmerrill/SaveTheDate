@@ -8,7 +8,8 @@ import java.util.List;
 public interface ISchedule {
 
   /**
-   * Adds an event to the schedule.
+   * Adds an event to the schedule. If there is a time conflict for the host, throws exception.
+   * //TODO: how do we handle invalid add for an attending user
    * @param event an event to be added to the schedule
    * @throws IllegalStateException if there is already an event at the same time
    */
@@ -42,13 +43,6 @@ public interface ISchedule {
    * @throws IllegalStateException if no such event exists
    */
   public void modifyEventLocation(String eventName, Location location);
-
-  /**
-   * To modify the event users.
-   * @param eventName an event to modify users from the schedule
-   * @throws IllegalStateException if no such event exists
-   */
-  public void modifyEventUsers(String eventName, List<String> users);
 
   /**
    * To return all the user of the event.

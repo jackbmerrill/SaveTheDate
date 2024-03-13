@@ -66,13 +66,16 @@ public class CentralSystem implements ICentralSystem {
 
   @Override
   public void updateEventName(String userID, String oldName, String newName) {
-    getSchedule(userID).modifyEventName(oldName, newName);
+    for (String user : getSchedule(userID).getAllEventUsers(oldName)) {
+      getSchedule(user).modifyEventName(oldName, newName);
+    }
   }
 
   //check for all schedules connected
   @Override
   public void updateEventTime(String userID, String name, Time newTime) {
     getSchedule(userID).modifyEventTime(name, newTime);
+
   }
 
   @Override

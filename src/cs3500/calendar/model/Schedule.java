@@ -24,7 +24,17 @@ public class Schedule implements ISchedule {
   @Override
   public void addEvent(Event event) throws IllegalStateException {
     Objects.requireNonNull(event);
-    eventOverlap("", event.getTime());
+    try {
+      eventOverlap(null, event.getTime());
+    } catch (IllegalStateException e) {
+      if (this.userID.equals(event.getHost())) {
+        throw new IllegalStateException("Host has a time conflict");
+      }
+      List<String> users = event.getUsers();
+      users.remove(this.userID);
+      event.updateUsers(users);
+      return;
+    }
     eventMap.put(event.getName(), event);
   }
 
@@ -33,7 +43,7 @@ public class Schedule implements ISchedule {
     containsEvent(eventName);
     List<String> users = this.getAllEventUsers(eventName);
     users.remove(this.userID);
-    this.modifyEventUsers(eventName, users);
+    this.eventMap.get(eventName).updateUsers(users);
     this.eventMap.remove(eventName);
   }
 
@@ -55,17 +65,27 @@ public class Schedule implements ISchedule {
   @Override
   public void modifyEventTime(String eventName, Time time) {
     containsEvent(eventName);
-    eventOverlap(eventName, time);
+    try {
+      eventOverlap(eventName, time);
+    } catch (IllegalStateException e) {
+      if (this.userID.equals(eventMap.get(eventName).getHost())) {
+        throw new IllegalStateException("The host has a time conflict");
+      }
+      //if the event has a time conflict, dont add it to schedule and remove from list of users
+      this.eventMap.remove(eventName);
+      return;
+    }
     this.eventMap.get(eventName).updateTime(time);
   }
 
-  private void eventOverlap(String eventName, Time time) {
-    for (Map.Entry<String, Event> entry : eventMap.entrySet()) {
-      if (entry.getValue().getName().equals(eventName)) {
+  private void eventOverlap(String eventName, Time time) throws IllegalStateException {
+    for (Event event : eventMap.values()) {
+      //ignores current event
+      if (event.getName().equals(eventName)) {
         continue;
       }
       //if overlap, throw error
-      if (time.isOverlap(entry.getValue().getTime())) {
+      if (time.isOverlap(event.getTime())) {
         throw new IllegalStateException("An event already exists at this time");
       }
     }
@@ -77,11 +97,6 @@ public class Schedule implements ISchedule {
     this.eventMap.get(eventName).updateLocation(location);
   }
 
-  @Override
-  public void modifyEventUsers(String eventName, List<String> users) {
-    containsEvent(eventName);
-    this.eventMap.get(eventName).updateUsers(users);
-  }
 
   @Override
   public List<String> getAllEventUsers(String eventName) {
