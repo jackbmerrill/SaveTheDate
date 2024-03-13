@@ -15,9 +15,10 @@ public interface ISchedule {
   public void addEvent(Event event) throws IllegalStateException;
 
   /**
-   * To remove an event from the schedule.
+   * To remove an event from the schedule. Removes the current user from the event
+   * and removes the event from this schedule.
    * @param eventName an event to be removed from the schedule
-   * @throws IllegalStateException if no such event exists
+   * @throws IllegalStateException if no such event exists in this schedule
    */
   public void removeEvent(String eventName);
 

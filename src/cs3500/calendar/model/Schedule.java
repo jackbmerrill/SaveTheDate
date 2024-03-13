@@ -11,11 +11,13 @@ import java.util.Objects;
 public class Schedule implements ISchedule {
 
   private final Map<String, Event> eventMap;
+  private final String userID;
 
   /**
    * To represent a constructor for a schedule.
    */
-  public Schedule() {
+  public Schedule(String userID) {
+    this.userID = userID;
     this.eventMap = new HashMap<>();
   }
 
@@ -29,6 +31,9 @@ public class Schedule implements ISchedule {
   @Override
   public void removeEvent(String eventName) {
     containsEvent(eventName);
+    List<String> users = this.getAllEventUsers(eventName);
+    users.remove(this.userID);
+    this.modifyEventUsers(eventName, users);
     this.eventMap.remove(eventName);
   }
 

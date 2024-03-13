@@ -45,7 +45,7 @@ public class CentralSystem implements ICentralSystem {
   //need to fix this for the input
   @Override
   public void addUser(String userId, Schedule schedule) {
-    this.system.put(userId, new Schedule());
+    this.system.put(userId, new Schedule(userId));
   }
 
   @Override
@@ -53,9 +53,11 @@ public class CentralSystem implements ICentralSystem {
     Event generatedEvent = new Event(name, time, location, users);
     for (String user : users) {
        if (system.containsKey(user)) {
+         //if overlap of the object with the schedule, dont add the event and remove the user from
+         //the schedule
          system.get(user).addEvent(generatedEvent);
        } else {
-         system.put(user, new Schedule());
+         system.put(user, new Schedule(user));
          system.get(user).addEvent(generatedEvent);
        }
     }
