@@ -114,12 +114,10 @@ public class CentralSystem implements ICentralSystem {
   }
 
   @Override
-  public void addEvent(String host, String userID, String eventName) {
-    Schedule userSchedule = getSchedule(host);
-    if (system.containsKey(userID)) {
-      system.get(userID).addEvent(userSchedule.getEvent(eventName));
-    }
+  public void addEventToUser(String userID, String eventName) {
+
   }
+
 
   //needs to return a new copy of the schedule
   @Override

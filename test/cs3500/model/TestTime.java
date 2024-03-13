@@ -22,6 +22,7 @@ public class TestTime {
   Time time2 = new Time(Day.SUNDAY, 1259, Day.TUESDAY, 1300);
   Time time3 = new Time(Day.TUESDAY, 1259, Day.THURSDAY, 1300);
   Time time4 = new Time(Day.TUESDAY, 1300, Day.FRIDAY, 2359);
+  Time time5 = new Time(Day.SUNDAY, 1300, Day.SATURDAY, 800);
 
 
   @Test
@@ -49,6 +50,11 @@ public class TestTime {
     assertTrue(time2.isOverlap(time3));
     assertFalse(time4.isOverlap(time2));
     assertFalse(time2.isOverlap(time4));
+    //check with an event that spans all week
+    assertTrue(time5.isOverlap(time1));
+    assertTrue(time1.isOverlap(time5));
+    assertTrue(time2.isOverlap(time5));
+    assertTrue(time5.isOverlap(time3));
   }
 
 }
