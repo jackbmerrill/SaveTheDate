@@ -15,8 +15,16 @@ import cs3500.calendar.model.Day;
 import cs3500.calendar.model.Location;
 import cs3500.calendar.model.Time;
 
+/**
+ * To represent an XMLReader.
+ */
 public class XMLReader {
 
+  /**
+   * DIO ADD JAVADOCS HERE.
+   * @param filePath filePath
+   * @param centralSystem centralSystem
+   */
   public void loadScheduleFromFile(String filePath, CentralSystem centralSystem) {
     try {
       File xmlFile = new File(filePath);
@@ -32,13 +40,18 @@ public class XMLReader {
           Element element = (Element) nNode;
 
           //extract event details and clean them up
-          String name = cleanString(element.getElementsByTagName("name").item(0).getTextContent());
-          String startDay = element.getElementsByTagName("start-day").item(0).getTextContent().toUpperCase();
+          String name = cleanString(element.getElementsByTagName("name").item(0).
+                  getTextContent());
+          String startDay = element.getElementsByTagName("start-day").item(0).
+                  getTextContent().toUpperCase();
           String startTime = element.getElementsByTagName("start").item(0).getTextContent();
-          String endDay = element.getElementsByTagName("end-day").item(0).getTextContent().toUpperCase();
+          String endDay = element.getElementsByTagName("end-day").item(0).
+                  getTextContent().toUpperCase();
           String endTime = element.getElementsByTagName("end").item(0).getTextContent();
-          String locationPlace = cleanString(element.getElementsByTagName("place").item(0).getTextContent());
-          boolean isOnline = Boolean.parseBoolean(element.getElementsByTagName("online").item(0).getTextContent());
+          String locationPlace = cleanString(element.getElementsByTagName("place").item(0).
+                  getTextContent());
+          boolean isOnline = Boolean.parseBoolean(element.getElementsByTagName("online").
+                  item(0).getTextContent());
 
           //extract users and cleanup their UIDs
           List<String> users = new ArrayList<>();

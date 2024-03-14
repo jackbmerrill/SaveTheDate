@@ -16,6 +16,9 @@ import cs3500.calendar.model.Time;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
+/**
+ * To test the public methods in the central system.
+ */
 public class TestCentralSystem {
 
   Time time1 = new Time(Day.MONDAY, 1200, Day.MONDAY, 1300);
@@ -86,14 +89,50 @@ public class TestCentralSystem {
   }
 
   // to test the updateEventTime method
+  @Test
+  public void testUpdateEventTime() {
+    central1.addUser("3043");
+    central1.addUser("5460");
+    List<String> centralUsers = List.of("3043", "5460");
+    central1.generateEvent("Event100", time1, loc1, centralUsers);
+
+    central1.updateEventTime("3043", "Event100", time6);
+    assertEquals(time6, central1.getSystem().get("3043").getEvent("Event100").getTime());
+    assertEquals(time6, central1.getSystem().get("5460").getEvent("Event100").getTime());
+  }
 
   // to test the updateEventLocation method
+  @Test
+  public void testUpdateEventLocation() {
+    central1.addUser("1000");
+    central1.generateEvent("Event4000", time4, loc3, List.of("1000"));
+
+    central1.updateEventLocation("1000", "Event4000", loc1);
+    assertEquals(loc1, central1.getSystem().get("1000").getEvent("Event4000"));
+
+  }
 
   // to test the removeEvent method
+  @Test
+  public void testRemoveEvent() {
+    return;
+  }
 
   // to test the addEventToUser method
+  @Test
+  public void testAddEventToUser() {
+    return;
+  }
 
   // to test the getEventsAtTime method
+  @Test
+  public void testGetEventsAtTime() {
+    return;
+  }
 
   // to test getSystem method
+  @Test
+  public void testGetSystem() {
+    return;
+  }
 }

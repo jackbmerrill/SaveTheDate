@@ -14,7 +14,6 @@ import cs3500.calendar.model.Schedule;
 import cs3500.calendar.model.Time;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertThrows;
 import static org.junit.Assert.assertTrue;
 

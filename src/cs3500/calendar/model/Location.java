@@ -37,4 +37,21 @@ public class Location {
   public String getPlace() {
     return place;
   }
+
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) {
+      return true;
+    }
+    if (! (o instanceof Location)) {
+      return false;
+    }
+    Location other = (Location)o;
+    return Objects.equals(this.online, other.online)
+            && Objects.equals(this.place, other.place);
+  }
+  @Override
+  public int hashCode() {
+    return Objects.hash(online, place);
+  }
 }

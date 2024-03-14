@@ -10,13 +10,22 @@ import javax.xml.transform.stream.StreamResult;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import java.io.File;
-import java.util.Map;
 
 import cs3500.calendar.model.Event;
 import cs3500.calendar.model.Time;
 import cs3500.calendar.model.Schedule;
 
+/**
+ * To represent an XML writer.
+ */
 public class XMLWriter {
+
+  /**
+   * DIO ADD JAVADOC HERE
+   * @param filePath filePath
+   * @param schedule schedule
+   * @throws Exception throws exception
+   */
   public void writeScheduleToFile(String filePath, Schedule schedule) throws Exception {
     DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
     DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
@@ -44,7 +53,8 @@ public class XMLWriter {
       timeElement.appendChild(startDayElement);
 
       Element startTimeElement = doc.createElement("start");
-      startTimeElement.appendChild(doc.createTextNode(Time.formatTime(event.getTime().getStartTime())));
+      startTimeElement.appendChild(doc.createTextNode(Time.formatTime(event.getTime().
+              getStartTime())));
       timeElement.appendChild(startTimeElement);
 
       Element endDayElement = doc.createElement("end-day");
@@ -60,7 +70,8 @@ public class XMLWriter {
       eventElement.appendChild(locationElement);
 
       Element onlineElement = doc.createElement("online");
-      onlineElement.appendChild(doc.createTextNode(Boolean.toString(event.getLocation().isOnline())));
+      onlineElement.appendChild(doc.createTextNode(Boolean.toString(event.getLocation().
+              isOnline())));
       locationElement.appendChild(onlineElement);
 
       Element placeElement = doc.createElement("place");
