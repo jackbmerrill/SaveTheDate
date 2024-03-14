@@ -112,4 +112,9 @@ public class Schedule implements ISchedule {
     return new Event(temp.getName(), temp.getTime(), temp.getLocation(), temp.getUsers());
   }
 
+  //return all events
+  public Map<String, Event> getEvents() {
+    return new HashMap<>(eventMap);
+  }
 }
+
