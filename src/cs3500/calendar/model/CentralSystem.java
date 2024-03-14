@@ -5,6 +5,7 @@ package cs3500.calendar.model;
  *
  */
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -75,6 +76,11 @@ public class CentralSystem implements ICentralSystem {
     }
   }
 
+  private void ensureUserExists(String userId) {
+    system.putIfAbsent(userId, new Schedule(userID));
+  }
+
+
   //check for all schedules connected
   @Override
   public void updateEventTime(String userID, String name, Time newTime) {
@@ -126,5 +132,33 @@ public class CentralSystem implements ICentralSystem {
   @Override
   public Schedule userSchedule(String userId) {
     return this.getSchedule(userId);
+  }
+
+  //load all schedules from an XML
+  public void loadSchedulesFromXML(String filePath) {
+    ReadXML reader = new ReadXML();
+    reader.loadScheduleFromFile(filePath, this);
+  }
+
+  //save all schedules to their assigned XML files
+  public void saveSchedulesToXML(String directoryPath) {
+    XmlWriter writer = new XmlWriter();
+    for (Map.Entry<String, Schedule> entry : system.entrySet()) {
+      //ensure directoryPath ends with seperator
+      String filePath = directoryPath.endsWith(File.separator)
+              ? directoryPath + entry.getKey() + "-schedule.xml"
+              : directoryPath + File.separator + entry.getKey() + "-schedule.xml";
+      try {
+        writer.writeScheduleToFile(filePath, entry.getValue());
+      } catch (Exception e) {
+        e.printStackTrace();
+      }
+    }
+  }
+
+
+  //return entire system
+  public Map<String, Schedule> getSystem() {
+    return this.system;
   }
 }
