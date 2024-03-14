@@ -47,7 +47,7 @@ public interface ISchedule {
   /**
    * To return all the user of the event.
    * @param eventName an event to get users of
-   *@return the event users of the requested event as a list of string
+   * @return the event users of the requested event as a list of string
    * @throws IllegalStateException if no such event exists
    */
   public List<String> getAllEventUsers(String eventName);

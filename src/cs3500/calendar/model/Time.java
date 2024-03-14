@@ -36,40 +36,21 @@ public class Time {
   //also check if works when next week
   //if this start > this end +7 to end
   public boolean isOverlap(Time other) {
-    //same day
-    if (this.startDay == other.startDay && this.endDay == other.endDay) {
-      //double check logic
-      return this.startTime <= other.startTime && this.endTime > other.startTime
-              || this.startTime < other.endTime && this.endTime >= other.endTime
-              || this.startTime >= other.startTime && this.endTime <= other.endTime;
-      //if this starts when other ends, check this starts after other ends
-    } else if (this.startDay == other.endDay) {
-      return this.startTime < other.endTime;
-      //if this ends when other starts, check this ends before other starts
-    } else if (this.endDay == other.startDay) {
-      return this.endTime > other.startTime;
-    } else {
-      /*uses order defined in the day class and sets them all to variables.
-      if a start day comes before a end day, it means its over another week
-      so add 7.
-      then use that to compare.
-      */
-      int thisStartOrder = this.startDay.order();
-      int otherStartOrder = other.startDay.order();
-      int thisEndOrder = this.endDay.order();
-      int otherEndOrder = other.endDay.order();
-      if (thisStartOrder >= thisEndOrder) {
-        thisEndOrder += 7;
-      }
-      if (otherStartOrder >= otherEndOrder) {
-        otherEndOrder += 7;
-      }
-      return (thisStartOrder < otherStartOrder && thisEndOrder > otherStartOrder)
-              || (thisStartOrder < otherEndOrder && thisEndOrder > otherEndOrder)
-              || (thisStartOrder > otherStartOrder && thisEndOrder < otherEndOrder);
-    }
-  }
+    //start and end order for week comparison
+    int thisStartOrder = this.startDay.order();
+    int otherStartOrder = other.startDay.order();
+    int thisEndOrder = this.endDay.order() + (this.endDay.compareTo(this.startDay) < 0 ? 7 : 0);
+    int otherEndOrder = other.endDay.order() + (other.endDay.compareTo(other.startDay) < 0 ? 7 : 0);
 
+    //convert times to minutes from start of week
+    int thisStartTime = thisStartOrder * 24 * 60 + this.startTime / 100 * 60 + this.startTime % 100;
+    int thisEndTime = thisEndOrder * 24 * 60 + this.endTime / 100 * 60 + this.endTime % 100;
+    int otherStartTime = otherStartOrder * 24 * 60 + other.startTime / 100 * 60 + other.startTime % 100;
+    int otherEndTime = otherEndOrder * 24 * 60 + other.endTime / 100 * 60 + other.endTime % 100;
+
+    //check for overlap
+    return !(thisEndTime <= otherStartTime || thisStartTime >= otherEndTime);
+  }
 
   //format integers to string
   public static String formatTime(int time) {

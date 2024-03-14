@@ -17,7 +17,6 @@ import cs3500.calendar.model.Time;
 import cs3500.calendar.model.Schedule;
 
 public class XMLWriter {
-
   public void writeScheduleToFile(String filePath, Schedule schedule) throws Exception {
     DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
     DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();

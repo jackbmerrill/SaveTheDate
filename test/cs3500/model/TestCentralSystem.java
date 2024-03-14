@@ -54,7 +54,7 @@ class TestCentralSystem {
     List<String> eventUsers = List.of("TestUser");
     centralSystem.generateEvent(eventName, eventTime, eventLocation, eventUsers);
     //directory path
-    String knownDirectoryPath = "src/test";
+    String knownDirectoryPath = "src";
     String fullPath = knownDirectoryPath + File.separator + "TestUser-schedule.xml";
     //save schedules to directory path
     centralSystem.saveSchedulesToXML(knownDirectoryPath);

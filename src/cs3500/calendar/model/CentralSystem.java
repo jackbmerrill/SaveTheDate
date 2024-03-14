@@ -58,10 +58,17 @@ public class CentralSystem implements ICentralSystem {
   @Override
   public void generateEvent(String name, Time time, Location location, List<String> users) {
     Event generatedEvent = new Event(name, time, location, users);
-    events.add(generatedEvent);
-    for (String user : users) {
-      system.putIfAbsent(user, new Schedule(user));
-      system.get(user).addEvent(generatedEvent);
+    for (String userId : users) {
+      //if they dont exist make new schedule
+      system.computeIfAbsent(userId, k -> new Schedule(userId));
+
+      //add event to schedule
+      Schedule userSchedule = system.get(userId);
+      try {
+        userSchedule.addEvent(generatedEvent);
+      } catch (IllegalStateException e) {
+        System.out.println("Error adding event for user " + userId + ": " + e.getMessage());
+      }
     }
   }
 
@@ -131,13 +138,12 @@ public class CentralSystem implements ICentralSystem {
     return this.getSchedule(userId);
   }
 
-  @Override
+
   public void loadSchedulesFromXML(String filePath) {
     XMLReader reader = new XMLReader();
     reader.loadScheduleFromFile(filePath, this);
   }
 
-  @Override
   public void saveSchedulesToXML(String directoryPath) {
     XMLWriter writer = new XMLWriter();
     for (Map.Entry<String, Schedule> entry : system.entrySet()) {
