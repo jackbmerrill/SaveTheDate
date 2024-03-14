@@ -161,7 +161,6 @@ public class CentralSystem implements ICentralSystem {
 
   @Override
   public Map<String, Schedule> getSystem() {
-    return null;
+    return new HashMap<>(this.system);
   }
-
 }
