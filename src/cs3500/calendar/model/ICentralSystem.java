@@ -83,11 +83,11 @@ public interface ICentralSystem {
   void saveSchedulesToXML(String directoryPath);
 
   /**
-   * Returns all events at the given time. All events that are within this time fram are
-   * returned.
+   * Returns all events at the given time. All events that are within this time frame are
+   * returned, empty is returned if no events exist.
    * @param time the desired time
    * @param userId the unique id of the user
-   * @return list of events at this time
+   * @return list of events at this time, returns empty if no events
    */
   List<Event> getEventsAtTime(String userId, Time time);
 }

@@ -58,6 +58,7 @@ public class CentralSystem implements ICentralSystem {
   @Override
   public void generateEvent(String name, Time time, Location location, List<String> users) {
     Event generatedEvent = new Event(name, time, location, users);
+    events.add(generatedEvent);
     for (String userId : users) {
       //if they dont exist make new schedule
       system.computeIfAbsent(userId, k -> new Schedule(userId));
@@ -131,12 +132,13 @@ public class CentralSystem implements ICentralSystem {
     }
   }
 
-
+  @Override
   public void loadSchedulesFromXML(String filePath) {
     XMLReader reader = new XMLReader();
     reader.loadScheduleFromFile(filePath, this);
   }
 
+  @Override
   public void saveSchedulesToXML(String directoryPath) {
     XMLWriter writer = new XMLWriter();
     for (Map.Entry<String, Schedule> entry : system.entrySet()) {
