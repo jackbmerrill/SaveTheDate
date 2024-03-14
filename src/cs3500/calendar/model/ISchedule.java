@@ -9,9 +9,11 @@ public interface ISchedule {
 
   /**
    * Adds an event to the schedule. If there is a time conflict for the host, throws exception.
+   * If there is a time conflict and the owner of the event is not the host, nothing is thrown
+   * but the event is not added
    * //TODO: how do we handle invalid add for an attending user
    * @param event an event to be added to the schedule
-   * @throws IllegalStateException if there is already an event at the same time
+   * @throws IllegalStateException if the host has a time conflict
    */
   public void addEvent(Event event) throws IllegalStateException;
 
@@ -59,5 +61,4 @@ public interface ISchedule {
    * @throws IllegalStateException if no such event exists
    */
   public Event getEvent(String eventName);
-
 }

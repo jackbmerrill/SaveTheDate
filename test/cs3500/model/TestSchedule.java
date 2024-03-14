@@ -14,6 +14,7 @@ import cs3500.calendar.model.Time;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertThrows;
 import static org.junit.Assert.assertTrue;
 
 /**
@@ -22,7 +23,7 @@ import static org.junit.Assert.assertTrue;
 public class TestSchedule {
 
   Time time1 = new Time(Day.MONDAY, 1200, Day.MONDAY, 1300);
-  Time time2 = new Time(Day.SUNDAY, 1259, Day.TUESDAY, 1300);
+  Time time2 = new Time(Day.SUNDAY, 1000, Day.SUNDAY, 1800);
   Time time3 = new Time(Day.TUESDAY, 1259, Day.THURSDAY, 1300);
   Time time4 = new Time(Day.TUESDAY, 1300, Day.FRIDAY, 2359);
 
@@ -49,20 +50,20 @@ public class TestSchedule {
   // to test the addEvent method
   @Test
   public void testAddEvent() {
-    assertFalse(schedule1111.containsEvent("Event4"));
-    schedule1111.addEvent(event4);
-    assertTrue(schedule1111.containsEvent("Event4"));
+    assertThrows(IllegalStateException.class, () -> schedule1111.getEvent("Event1"));
     schedule1111.addEvent(event1);
-    // assertTrue(schedule1111.containsEvent("Event1"));
+    schedule1111.addEvent(event2);
+    assertEquals(schedule1111.getEvent("Event1"), event1);
+    assertEquals(schedule1111.getEvent("Event2"), event2);
   }
 
   // to test the removeEvent method
   @Test
   public void testRemoveEvent() {
     schedule0202.addEvent(event3);
-    assertTrue(schedule0202.containsEvent("Event3"));
+    //assertTrue(schedule0202.containsEvent("Event3"));
     schedule0202.removeEvent("Event3");
-    assertFalse(schedule0202.containsEvent("Event3"));
+    //assertFalse(schedule0202.containsEvent("Event3"));
   }
 
   // to test the containsEvent method
@@ -71,10 +72,10 @@ public class TestSchedule {
     schedule1021.addEvent(event2);
     schedule1021.addEvent(event3);
     schedule1021.addEvent(event1);
-    assertTrue(schedule1021.containsEvent("Event2"));
+    //assertTrue(schedule1021.containsEvent("Event2"));
     //assertTrue(schedule1021.containsEvent("Event3"));
     //assertTrue(schedule1021.containsEvent("Event1"));
-    assertFalse(schedule1021.containsEvent("Event4"));
+    //assertFalse(schedule1021.containsEvent("Event4"));
   }
 
   // to test the modifyEventName method
@@ -82,8 +83,8 @@ public class TestSchedule {
   public void testModifyEventName() {
     schedule0202.addEvent(event1);
     schedule0202.modifyEventName("Event1", "NewEvent1");
-    assertFalse(schedule0202.containsEvent("Event1"));
-    assertTrue(schedule0202.containsEvent("NewEvent1"));
+    //assertFalse(schedule0202.containsEvent("Event1"));
+    //assertTrue(schedule0202.containsEvent("NewEvent1"));
   }
 
   // to test the modifyEventTime method

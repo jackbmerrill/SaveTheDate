@@ -26,17 +26,9 @@ public class Schedule implements ISchedule {
   @Override
   public void addEvent(Event event) throws IllegalStateException {
     Objects.requireNonNull(event);
-    try {
+
       eventOverlap(null, event.getTime());
-    } catch (IllegalStateException e) {
-      if (this.userID.equals(event.getHost())) {
-        throw new IllegalStateException("Host has a time conflict");
-      }
-      List<String> users = event.getUsers();
-      users.remove(this.userID); //check if causes issue
-      event.updateUsers(users);
-      return;
-    }
+
     eventMap.put(event.getName(), event);
   }
 
@@ -74,7 +66,7 @@ public class Schedule implements ISchedule {
         throw new IllegalStateException("The host has a time conflict");
       }
       //if the event has a time conflict, dont add it to schedule and remove from list of users
-      this.eventMap.remove(eventName);
+      this.removeEvent(eventName);
       return;
     }
     this.eventMap.get(eventName).updateTime(time);

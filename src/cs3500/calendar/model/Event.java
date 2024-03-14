@@ -86,4 +86,23 @@ public class Event implements IEvent {
   public Time getTime() {
     return time;
   }
+
+  @Override
+  public boolean equals(Object o) {
+    if (this == o)  {
+      return true;
+    }
+    if (! (o instanceof Event)) {
+      return false;
+    }
+    Event other = (Event)o;
+    return Objects.equals(this.name, other.name)
+            && Objects.equals(this.time, other.time)
+            && Objects.equals(this.location, other.location);
+  }
+
+  @Override
+  public int hashCode() {
+    return Objects.hash(name, time, location, users);
+  }
 }
