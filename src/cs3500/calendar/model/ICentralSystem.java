@@ -93,5 +93,5 @@ public interface ICentralSystem {
    * @param time
    * @return
    */
-  List<Event> getEventsAtTime(Time time);
+
 }
