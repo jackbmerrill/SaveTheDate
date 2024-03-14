@@ -10,11 +10,15 @@ import org.junit.Test;
 import cs3500.calendar.model.CentralSystem;
 import cs3500.calendar.model.Day;
 import cs3500.calendar.model.Location;
+import cs3500.calendar.model.Schedule;
 import cs3500.calendar.model.Time;
+import cs3500.calendar.model.Event;
 
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.io.File;
 
@@ -28,23 +32,22 @@ public class TestCentralSystemXML {
   }
 
   // to test the load schedule from XML method
-//  @Test
-//  public void testLoadScheduleFromXML() {
-//    String filePath = "src/testSchedule.xml";
-//    centralSystem.loadSchedulesFromXML(filePath);
-//    assertTrue(centralSystem.getSystem().containsKey("Prof. Lucia"));
-//    Schedule schedule = centralSystem.getSystem().get("Prof. Lucia");
-//    assertEquals(3, schedule.getEvents().size());
-//    assertTrue(schedule.getEvents().containsKey("CS3500 Morning Lecture"));
-//    Event morningLecture = schedule.getEvents().get("CS3500 Morning Lecture");
-//    assertEquals("Churchill Hall 101", morningLecture.getLocation().getPlace());
-//    assertFalse(morningLecture.getLocation().isOnline());
-//    assertTrue(morningLecture.getUsers().contains("Prof. Lucia"));
-//    assertTrue(morningLecture.getUsers().contains("Student Anon"));
-//    assertTrue(morningLecture.getUsers().contains("Chat"));
-//    String formattedStartTime = Time.formatTime(morningLecture.getTime().getStartTime());
-//    assertEquals("0950", formattedStartTime);
-//  }
+  @Test
+  public void testLoadScheduleFromXML() {
+    Time time1 = new Time(Day.TUESDAY, 950, Day.TUESDAY, 1130);
+    String filePath = "src/testSchedule.xml";
+    centralSystem.loadSchedulesFromXML(filePath);
+    List<Event> events = centralSystem.getEventsAtTime("Prof. Lucia", null);
+    assertEquals(3, events.size());
+    Event morningLecture = centralSystem.getEventsAtTime("Prof. Lucia", time1).get(0);
+    assertEquals("Churchill Hall 101", morningLecture.getLocation().getPlace());
+    assertFalse(morningLecture.getLocation().isOnline());
+    assertTrue(morningLecture.getUsers().contains("Prof. Lucia"));
+    assertTrue(morningLecture.getUsers().contains("Student Anon"));
+    assertTrue(morningLecture.getUsers().contains("Chat"));
+    String formattedStartTime = Time.formatTime(morningLecture.getTime().getStartTime());
+    assertEquals("0950", formattedStartTime);
+  }
 
   // to test the save schedule to XML method
   @Test

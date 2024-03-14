@@ -53,6 +53,7 @@ public interface ICentralSystem {
    */
   void updateEventLocation(String userID, String name, Location newLocation);
 
+
   /**
    * To remove an event with the given details and modify it in the schedules of all
    * the specified users. If user is the host, removes the event from
