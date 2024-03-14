@@ -76,10 +76,8 @@ public class CentralSystem implements ICentralSystem {
   @Override
   public void updateEventTime(String userID, String name, Time newTime) {
     for (String user : system.get(userID).getEvent(name).getUsers()) {
-      getSchedule(userID).modifyEventTime(name, newTime);
+      getSchedule(user).modifyEventTime(name, newTime);
     }
-
-
   }
 
   @Override
@@ -115,7 +113,15 @@ public class CentralSystem implements ICentralSystem {
 
   @Override
   public void addEventToUser(String userID, String eventName) {
-
+    for (Event event : events) {
+      if (event.getName().equals(eventName)) {
+        system.putIfAbsent(userID, new Schedule(userID));
+        List<String> users = event.getUsers();
+        users.add(userID);
+        event.updateUsers(users);
+        system.get(userID).addEvent(event);
+      }
+    }
   }
 
 
