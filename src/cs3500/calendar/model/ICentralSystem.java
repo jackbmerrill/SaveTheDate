@@ -75,4 +75,23 @@ public interface ICentralSystem {
    * @return the given schedule for a user.
    */
   Schedule userSchedule(String userId);
+
+  /**
+   *
+   * @param filePath
+   */
+  void loadSchedulesFromXML(String filePath);
+
+  /**
+   *
+   * @param directoryPath
+   */
+  void saveSchedulesToXML(String directoryPath);
+
+  /**
+   *
+   * @param time
+   * @return
+   */
+  List<Event> getEventsAtTime(Time time);
 }

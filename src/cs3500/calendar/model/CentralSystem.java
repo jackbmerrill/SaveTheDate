@@ -131,13 +131,13 @@ public class CentralSystem implements ICentralSystem {
     return this.getSchedule(userId);
   }
 
-  //load all schedules from an XML
+  @Override
   public void loadSchedulesFromXML(String filePath) {
     XMLReader reader = new XMLReader();
     reader.loadScheduleFromFile(filePath, this);
   }
 
-  //save all schedules to their assigned XML files
+  @Override
   public void saveSchedulesToXML(String directoryPath) {
     XMLWriter writer = new XMLWriter();
     for (Map.Entry<String, Schedule> entry : system.entrySet()) {
