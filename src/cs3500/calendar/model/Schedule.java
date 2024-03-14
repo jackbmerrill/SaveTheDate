@@ -1,5 +1,7 @@
 package cs3500.calendar.model;
 
+import java.util.ArrayList;
+import java.util.EnumMap;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -116,5 +118,36 @@ public class Schedule implements ISchedule {
   public Map<String, Event> getEvents() {
     return new HashMap<>(eventMap);
   }
+
+  public Map<Day, List<Event>> getEventsByDay() {
+    Map<Day, List<Event>> eventsByDay = new EnumMap<>(Day.class);
+
+    //empty list for each day
+    for (Day day : Day.values()) {
+      eventsByDay.put(day, new ArrayList<>());
+    }
+
+    //check events for each day
+    for (Event event : eventMap.values()) {
+      Day startDay = event.getTime().getStartDay();
+      Day endDay = event.getTime().getEndDay();
+
+      //handle events spanning multiple days
+      int startDayOrdinal = startDay.ordinal();
+      int endDayOrdinal = endDay.ordinal();
+      if (endDayOrdinal < startDayOrdinal) {
+        endDayOrdinal += Day.values().length;
+      }
+
+      //add it to the respective list
+      for (int ordinal = startDayOrdinal; ordinal <= endDayOrdinal; ordinal++) {
+        Day currentDay = Day.values()[ordinal % Day.values().length];
+        eventsByDay.get(currentDay).add(event);
+      }
+    }
+
+    return eventsByDay;
+  }
 }
+
 
