@@ -26,9 +26,7 @@ public class Schedule implements ISchedule {
   @Override
   public void addEvent(Event event) throws IllegalStateException {
     Objects.requireNonNull(event);
-
     eventOverlap(null, event.getTime());
-
     eventMap.put(event.getName(), event);
   }
 
@@ -119,6 +117,7 @@ public class Schedule implements ISchedule {
     return events;
   }
 
+  @Override
   public Map<Day, List<Event>> getEventsByDay() {
     Map<Day, List<Event>> eventsByDay = new EnumMap<>(Day.class);
 
@@ -142,7 +141,7 @@ public class Schedule implements ISchedule {
       //add it to the respective list
       for (int ordinal = startDayOrdinal; ordinal <= endDayOrdinal; ordinal++) {
         Day currentDay = Day.values()[ordinal % Day.values().length];
-        eventsByDay.get(currentDay).add(event);
+        eventsByDay.get(currentDay).add(getEvent(event.getName()));
       }
     }
 

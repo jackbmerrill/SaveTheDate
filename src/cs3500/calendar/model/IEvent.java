@@ -31,7 +31,7 @@ public interface IEvent {
    * Updates the users of the event. The first user is the event host.
    * The host cannot change
    * @param users the users to be updated
-   * @throws IllegalArgumentException if the host has changed
+   * @throws IllegalArgumentException if the host has changed or list is empty
    */
   public void updateUsers(List<String> users);
 

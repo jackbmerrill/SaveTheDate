@@ -1,10 +1,15 @@
-package cs3500.calendar.model;
+package cs3500.calendar.view;
 
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 
+import cs3500.calendar.model.CentralSystem;
+import cs3500.calendar.model.Day;
+import cs3500.calendar.model.Event;
+import cs3500.calendar.model.Schedule;
+import cs3500.calendar.model.Time;
 
 
 public class TextualView {
