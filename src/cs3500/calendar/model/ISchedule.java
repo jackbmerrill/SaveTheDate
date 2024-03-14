@@ -1,6 +1,7 @@
 package cs3500.calendar.model;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * To represent a schedule for an individual user.
@@ -70,4 +71,6 @@ public interface ISchedule {
    * @return a list of all the events at the specified time
    */
   List<Event> getEventsAtTime(Time time);
+
+  Map<Day, List<Event>> getEventsByDay();
 }

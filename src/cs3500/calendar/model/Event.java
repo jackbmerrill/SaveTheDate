@@ -66,7 +66,9 @@ public class Event implements IEvent {
 
   @Override
   public void updateUsers(List<String> users) {
-    Objects.requireNonNull(users);
+    if (Objects.requireNonNull(users).isEmpty()) {
+      throw new IllegalArgumentException("Users cannot be empty");
+    }
     if (!users.get(0).equals(getHost())) {
       throw new IllegalArgumentException("Host cannot be changed.");
     }
