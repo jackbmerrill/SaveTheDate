@@ -5,6 +5,7 @@ package cs3500.calendar.model;
  *
  */
 
+import java.io.File;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -50,17 +51,23 @@ public class CentralSystem implements ICentralSystem {
   @Override
   public void generateEvent(String name, Time time, Location location, List<String> users) {
     Event generatedEvent = new Event(name, time, location, users);
-    for (String user : users) {
-       if (system.containsKey(user)) {
-         system.get(user).checkOverlap(time);
-         system.get(user).addEvent(generatedEvent);
-       } else {
-         system.put(user, new Schedule());
-         system.get(user).addEvent(generatedEvent);
-       }
-    }
 
+    //iterate over each user
+    for (String userId : users) {
+      //ensure they exist otherwise make a new schedule
+      ensureUserExists(userId);
+
+      //add the event to the users schedule
+      Schedule userSchedule = system.get(userId);
+      userSchedule.addEvent(generatedEvent);
+    }
   }
+
+
+  public void ensureUserExists(String userId) {
+    system.putIfAbsent(userId, new Schedule());
+  }
+
 
   @Override
   public void updateEventName(String userID, String oldName, String newName) {
@@ -105,5 +112,33 @@ public class CentralSystem implements ICentralSystem {
   @Override
   public Schedule userSchedule(String userId) {
     return this.getSchedule(userId);
+  }
+
+  //load all schedules from an XML
+  public void loadSchedulesFromXML(String filePath) {
+    ReadXML reader = new ReadXML();
+    reader.loadScheduleFromFile(filePath, this);
+  }
+
+  //save all schedules to their assigned XML files
+  public void saveSchedulesToXML(String directoryPath) {
+    XmlWriter writer = new XmlWriter();
+    for (Map.Entry<String, Schedule> entry : system.entrySet()) {
+      //ensure directoryPath ends with seperator
+      String filePath = directoryPath.endsWith(File.separator)
+              ? directoryPath + entry.getKey() + "-schedule.xml"
+              : directoryPath + File.separator + entry.getKey() + "-schedule.xml";
+      try {
+        writer.writeScheduleToFile(filePath, entry.getValue());
+      } catch (Exception e) {
+        e.printStackTrace();
+      }
+    }
+  }
+
+
+  //return entire system
+  public Map<String, Schedule> getSystem() {
+    return this.system;
   }
 }

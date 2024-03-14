@@ -84,6 +84,10 @@ public class Schedule implements ISchedule {
 
   @Override
   public void checkOverlap(Time time) {
+  }
 
+  //return all events
+  public Map<String, Event> getEvents() {
+    return new HashMap<>(eventMap);
   }
 }

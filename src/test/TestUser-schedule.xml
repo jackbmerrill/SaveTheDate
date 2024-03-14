@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<schedule>
+    <event>
+        <name>Test Event</name>
+        <time>
+            <start-day>Monday</start-day>
+            <start>1000</start>
+            <end-day>Monday</end-day>
+            <end>1200</end>
+        </time>
+        <location>
+            <online>false</online>
+            <place>Test Location</place>
+        </location>
+        <users>
+            <user>TestUser</user>
+        </users>
+    </event>
+</schedule>

@@ -72,4 +72,31 @@ public class Time {
               && thisEndOrder < otherEndOrder;
     }
   }
+
+
+  //format integers to string
+  public static String formatTime(int time) {
+    return String.format("%04d", time);
+  }
+
+  public int getStartTime() {
+    return this.startTime;
+  }
+
+  public int getEndTime() {
+    return this.endTime;
+  }
+
+  public Day getStartDay() {
+    return this.startDay;
+  }
+
+  public Day getEndDay() {
+    return this.endDay;
+  }
+
+  public String getFormattedStartTime() {
+    return String.format("%04d", this.startTime);
+  }
+
 }
