@@ -4,7 +4,7 @@ import org.junit.Test;
 import static org.junit.Assert.assertTrue;
 
 import cs3500.calendar.model.CentralSystem;
-import cs3500.calendar.model.TextualView;
+import cs3500.calendar.view.TextualView;
 import cs3500.calendar.xml.XMLReader;
 
 /**

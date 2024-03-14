@@ -1,10 +1,5 @@
 package cs3500.calendar.model;
 
-/**
- * To represent a central system class.
- *
- */
-
 import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -27,13 +22,15 @@ import cs3500.calendar.xml.XMLWriter;
  * updated to remove the invitee. However, there should be no issues if a user invited to an
  * event does not exist in the system because the current instance of the system might only have
  * some of the users loaded in.
- *
+ * <p></p>
  * We will assume all user names (or uid) are unique for ease.
  * We are also creating a system based on trust. This means any user can modify events,
  * regardless if they are hosts of the event or not. In other words, there is no distinct power a
  * user has in the system. If a user wishes to interact with the system, they have the same
  * privilege as a client. 1
  */
+
+
 public class CentralSystem implements ICentralSystem {
 
   private final Map<String, Schedule> system;

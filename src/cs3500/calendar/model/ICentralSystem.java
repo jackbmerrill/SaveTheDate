@@ -73,14 +73,14 @@ public interface ICentralSystem {
 
 
   /**
-   *
-   * @param filePath
+   * add.
+   * @param filePath filePath
    */
   void loadSchedulesFromXML(String filePath);
 
   /**
-   *
-   * @param directoryPath
+   * add.
+   * @param directoryPath directoryPath
    */
   void saveSchedulesToXML(String directoryPath);
 
@@ -94,7 +94,7 @@ public interface ICentralSystem {
   List<Event> getEventsAtTime(String userId, Time time);
 
   /**
-   * To get a copy of the central system
+   * To get a copy of the central system.
    * @return a copy of the current state of the central system
    */
   Map<String, Schedule> getSystem();

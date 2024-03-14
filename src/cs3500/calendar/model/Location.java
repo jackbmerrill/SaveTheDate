@@ -5,7 +5,6 @@ import java.util.Objects;
 /**
  * A public class to represent a location. Could be online or in person,
  * and has an associated place.
- *
  * NOTE: possibly not final so host can change location
  */
 public class Location {
@@ -50,6 +49,7 @@ public class Location {
     return Objects.equals(this.online, other.online)
             && Objects.equals(this.place, other.place);
   }
+
   @Override
   public int hashCode() {
     return Objects.hash(online, place);

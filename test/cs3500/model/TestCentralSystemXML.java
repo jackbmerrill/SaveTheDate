@@ -10,18 +10,18 @@ import org.junit.Test;
 import cs3500.calendar.model.CentralSystem;
 import cs3500.calendar.model.Day;
 import cs3500.calendar.model.Location;
-import cs3500.calendar.model.Schedule;
 import cs3500.calendar.model.Time;
 import cs3500.calendar.model.Event;
 
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.io.File;
 
+/**
+ * To test central system XML methods.
+ */
 public class TestCentralSystemXML {
 
   private CentralSystem centralSystem;

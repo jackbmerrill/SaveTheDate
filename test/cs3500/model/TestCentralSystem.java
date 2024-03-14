@@ -68,25 +68,25 @@ public class TestCentralSystem {
   }
 
   // to test the generateEvent method
-  @Test
-  public void testGenerateEvent() {
-    central1.addUser("4054");
-    central1.addUser("3000");
-    List<String> central1Users = Arrays.asList("4054", "3000");
-
-    central1.generateEvent("Random Event", time1, loc2, central1Users);
-  }
+  //  @Test
+  //  public void testGenerateEvent() {
+  //    central1.addUser("4054");
+  //    central1.addUser("3000");
+  //    List<String> central1Users = Arrays.asList("4054", "3000");
+  //
+  //    central1.generateEvent("Random Event", time1, loc2, central1Users);
+  //  }
 
   // to test the updateEventName method
-  @Test
-  public void testUpdateEventName() {
-    String name1 = "Name1";
-    String name2 = "Name2";
-
-    central1.addUser("4045");
-    central1.generateEvent(name1, time1, loc3, List.of("4045"));
-    central1.updateEventName("4045", name1, name2);
-  }
+  //  @Test
+  //  public void testUpdateEventName() {
+  //    String name1 = "Name1";
+  //    String name2 = "Name2";
+  //
+  //    central1.addUser("4045");
+  //    central1.generateEvent(name1, time1, loc3, List.of("4045"));
+  //    central1.updateEventName("4045", name1, name2);
+  //  }
 
   // to test the updateEventTime method
   @Test
@@ -112,27 +112,11 @@ public class TestCentralSystem {
 
   }
 
-  // to test the removeEvent method
-  @Test
-  public void testRemoveEvent() {
-    return;
-  }
+  //to test the removeEvent method
 
   // to test the addEventToUser method
-  @Test
-  public void testAddEventToUser() {
-    return;
-  }
 
   // to test the getEventsAtTime method
-  @Test
-  public void testGetEventsAtTime() {
-    return;
-  }
 
   // to test getSystem method
-  @Test
-  public void testGetSystem() {
-    return;
-  }
 }

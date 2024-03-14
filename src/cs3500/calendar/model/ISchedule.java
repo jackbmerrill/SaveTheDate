@@ -26,7 +26,7 @@ public interface ISchedule {
   public void removeEvent(String eventName);
 
   /**
-   * To modify the event name
+   * To modify the event name.
    * @param eventName the event on the schedule name to be changed
    * @throws IllegalStateException if no such event exists
    */

@@ -1,5 +1,8 @@
 package cs3500.calendar.model;
 
+/**
+ * To represent a day.
+ */
 public enum Day {
   MONDAY("Monday", 2),
   TUESDAY("Tuesday", 3),
@@ -16,6 +19,7 @@ public enum Day {
     this.day = day;
     this.order = order;
   }
+
   @Override
   public String toString() {
     return day;

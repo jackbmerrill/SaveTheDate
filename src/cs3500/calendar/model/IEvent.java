@@ -1,11 +1,9 @@
 package cs3500.calendar.model;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 /**
- *
+ * To represent an Event interface.
  */
 public interface IEvent {
 
@@ -61,7 +59,7 @@ public interface IEvent {
   public String getName();
 
   /**
-   * Gives the location of the event
+   * Gives the location of the event.
    * @return the location object of the event
    */
   public Location getLocation();

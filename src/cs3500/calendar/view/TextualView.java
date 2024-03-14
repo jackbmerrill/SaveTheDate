@@ -12,6 +12,9 @@ import cs3500.calendar.model.Schedule;
 import cs3500.calendar.model.Time;
 
 
+/**
+ * To represent a textual view.
+ */
 public class TextualView {
 
   private CentralSystem centralSystem;
@@ -21,6 +24,10 @@ public class TextualView {
   }
 
 
+  /**
+   * DIO ADD HERE.
+   * @return what?
+   */
   public String generateTextualView() {
     StringBuilder textualViewBuilder = new StringBuilder();
     Map<String, Schedule> systemSchedules = centralSystem.getSystem();
@@ -50,8 +57,10 @@ public class TextualView {
           for (Event event : eventsForDay) {
             String formattedStartTime = Time.formatTime(event.getTime().getStartTime());
             String formattedEndTime = Time.formatTime(event.getTime().getEndTime());
-            String niceStartTime = formattedStartTime.substring(0, 2) + ":" + formattedStartTime.substring(2);
-            String niceEndTime = formattedEndTime.substring(0, 2) + ":" + formattedEndTime.substring(2);
+            String niceStartTime = formattedStartTime.substring(0, 2) + ":" + formattedStartTime.
+                    substring(2);
+            String niceEndTime = formattedEndTime.substring(0, 2) + ":" + formattedEndTime.
+                    substring(2);
 
             textualViewBuilder.append("    name: ").append(event.getName()).append("\n")
                     .append("    time: ").append(event.getTime().getStartDay()).append(": ")

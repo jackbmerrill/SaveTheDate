@@ -9,6 +9,13 @@ public class Time {
   private final Day startDay;
   private final Day endDay;
 
+  /**
+   * JACK ADD HERE.
+   * @param startDay startDay
+   * @param startTime startTime
+   * @param endDay endDay
+   * @param endTime endTime
+   */
 
   public Time(Day startDay, int startTime, Day endDay, int endTime) {
     checkValidTime(startTime, endTime);
@@ -31,8 +38,7 @@ public class Time {
   }
 
   /**
-   * Checks if the given time overlaps with this time
-   *
+   * Checks if the given time overlaps with this time.
    * @param other the other time to check
    * @return true if the times overlap
    */
@@ -48,7 +54,8 @@ public class Time {
     //convert times to minutes from start of week
     int thisStartTime = thisStartOrder * 24 * 60 + this.startTime / 100 * 60 + this.startTime % 100;
     int thisEndTime = thisEndOrder * 24 * 60 + this.endTime / 100 * 60 + this.endTime % 100;
-    int otherStartTime = otherStartOrder * 24 * 60 + other.startTime / 100 * 60 + other.startTime % 100;
+    int otherStartTime = otherStartOrder * 24 * 60 + other.startTime /
+            100 * 60 + other.startTime % 100;
     int otherEndTime = otherEndOrder * 24 * 60 + other.endTime / 100 * 60 + other.endTime % 100;
 
     //check for overlap

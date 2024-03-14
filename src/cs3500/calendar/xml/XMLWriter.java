@@ -21,7 +21,7 @@ import cs3500.calendar.model.Schedule;
 public class XMLWriter {
 
   /**
-   * DIO ADD JAVADOC HERE
+   * DIO ADD JAVADOC HERE.
    * @param filePath filePath
    * @param schedule schedule
    * @throws Exception throws exception
