@@ -33,6 +33,7 @@ import java.util.Map;
 public class CentralSystem implements ICentralSystem {
 
   private final Map<String, Schedule> system;
+  private final List<Event> events;
 
   /**
    * To represent a constructor for Central System.
@@ -40,6 +41,7 @@ public class CentralSystem implements ICentralSystem {
    */
   public CentralSystem() {
     this.system = new HashMap<>();
+    this.events = new ArrayList<>();
   }
 
 
@@ -52,6 +54,7 @@ public class CentralSystem implements ICentralSystem {
   @Override
   public void generateEvent(String name, Time time, Location location, List<String> users) {
     Event generatedEvent = new Event(name, time, location, users);
+    events.add(generatedEvent);
     for (String user : users) {
        if (system.containsKey(user)) {
          //if overlap of the object with the schedule, dont add the event and remove the user from
