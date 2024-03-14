@@ -69,4 +69,16 @@ public class Time {
               || (thisStartOrder > otherStartOrder && thisEndOrder < otherEndOrder);
     }
   }
+
+  public Day getStartDay() {
+  }
+
+  public int getStartTime() {
+  }
+
+  public Day getEndDay() {
+  }
+
+  public int getEndTime() {
+  }
 }

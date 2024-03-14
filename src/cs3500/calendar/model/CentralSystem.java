@@ -11,6 +11,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import cs3500.calendar.xml.XMLReader;
+import cs3500.calendar.xml.XMLWriter;
+
 /**
  * The central system of the NUPlanner is the main entry point of the system.
  * This central system keeps track of all users and their individual schedules and
@@ -57,16 +60,9 @@ public class CentralSystem implements ICentralSystem {
     Event generatedEvent = new Event(name, time, location, users);
     events.add(generatedEvent);
     for (String user : users) {
-       if (system.containsKey(user)) {
-         //if overlap of the object with the schedule, dont add the event and remove the user from
-         //the event
-         system.get(user).addEvent(generatedEvent);
-       } else {
-         system.put(user, new Schedule(user));
-         system.get(user).addEvent(generatedEvent);
-       }
+      system.putIfAbsent(user, new Schedule(user));
+      system.get(user).addEvent(generatedEvent);
     }
-
   }
 
   @Override
@@ -75,11 +71,6 @@ public class CentralSystem implements ICentralSystem {
       getSchedule(user).modifyEventName(oldName, newName);
     }
   }
-
-  private void ensureUserExists(String userId) {
-    system.putIfAbsent(userId, new Schedule(userID));
-  }
-
 
   //check for all schedules connected
   @Override
@@ -136,13 +127,13 @@ public class CentralSystem implements ICentralSystem {
 
   //load all schedules from an XML
   public void loadSchedulesFromXML(String filePath) {
-    ReadXML reader = new ReadXML();
+    XMLReader reader = new XMLReader();
     reader.loadScheduleFromFile(filePath, this);
   }
 
   //save all schedules to their assigned XML files
   public void saveSchedulesToXML(String directoryPath) {
-    XmlWriter writer = new XmlWriter();
+    XMLWriter writer = new XMLWriter();
     for (Map.Entry<String, Schedule> entry : system.entrySet()) {
       //ensure directoryPath ends with seperator
       String filePath = directoryPath.endsWith(File.separator)
