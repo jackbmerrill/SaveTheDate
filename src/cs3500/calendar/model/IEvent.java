@@ -29,7 +29,9 @@ public interface IEvent {
 
   /**
    * Updates the users of the event. The first user is the event host.
+   * The host cannot change
    * @param users the users to be updated
+   * @throws IllegalArgumentException if the host has changed
    */
   public void updateUsers(List<String> users);
 
@@ -41,8 +43,7 @@ public interface IEvent {
 
 
   /**
-   * Returns the first user (the host) of the given event. If the list of users is empty,
-   * returns an empty string.
+   * Returns the first user (the host) of the given event.
    * @return the name of the host of the event
    */
   public String getHost();

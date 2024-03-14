@@ -66,7 +66,11 @@ public class Event implements IEvent {
 
   @Override
   public void updateUsers(List<String> users) {
-    this.users = new ArrayList<String>(Objects.requireNonNull(users));
+    Objects.requireNonNull(users);
+    if (!users.get(0).equals(getHost())) {
+      throw new IllegalArgumentException("Host cannot be changed.");
+    }
+    this.users = new ArrayList<>(users);
   }
 
   @Override
@@ -76,10 +80,7 @@ public class Event implements IEvent {
 
   @Override
   public String getHost() {
-    if (!users.isEmpty()) {
-      return users.get(0);
-    }
-    return "";
+    return users.get(0);
   }
 
   @Override
