@@ -19,19 +19,24 @@ public class Event implements IEvent {
   private List<String> users;
 
   /**
-   * To represent a constructor for event.
+   * To represent a constructor for event. There must be at least one user in an event
    * Contains all the information needed to create an event and cannot take in null fields. 
    * @param name name of the event
    * @param time time of the even
    * @param location location of the event
    * @param users list of users
+   * @throws NullPointerException if any arguments are null
+   * @throws IllegalArgumentException if there are no users
    */
   public Event(String name, Time time, Location location, List<String> users) {
 
     this.name = Objects.requireNonNull(name);
     this.time = Objects.requireNonNull(time);
     this.location = Objects.requireNonNull(location);
-    this.users = Objects.requireNonNull(users);
+    if (Objects.requireNonNull(users).isEmpty()) {
+      throw new IllegalArgumentException("There cannot be no users.");
+    }
+    this.users = new ArrayList<>(users);
   }
 
   @Override
@@ -61,7 +66,7 @@ public class Event implements IEvent {
 
   @Override
   public void updateUsers(List<String> users) {
-    this.users = Objects.requireNonNull(users);
+    this.users = new ArrayList<String>(Objects.requireNonNull(users));
   }
 
   @Override

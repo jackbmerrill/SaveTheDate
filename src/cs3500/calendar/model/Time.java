@@ -64,12 +64,21 @@ public class Time {
       if (otherStartOrder >= otherEndOrder) {
         otherEndOrder += 7;
       }
-      return thisStartOrder < otherStartOrder
-              && thisEndOrder > otherStartOrder
-              || thisStartOrder < otherEndOrder
-              && thisEndOrder > otherEndOrder
-              || thisStartOrder > otherStartOrder
-              && thisEndOrder < otherEndOrder;
+      return (thisStartOrder < otherStartOrder && thisEndOrder > otherStartOrder)
+              || (thisStartOrder < otherEndOrder && thisEndOrder > otherEndOrder)
+              || (thisStartOrder > otherStartOrder && thisEndOrder < otherEndOrder);
     }
+  }
+
+  public Day getStartDay() {
+  }
+
+  public int getStartTime() {
+  }
+
+  public Day getEndDay() {
+  }
+
+  public int getEndTime() {
   }
 }

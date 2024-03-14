@@ -8,16 +8,18 @@ import java.util.List;
 public interface ISchedule {
 
   /**
-   * Adds an event to the schedule.
+   * Adds an event to the schedule. If there is a time conflict for the host, throws exception.
+   * //TODO: how do we handle invalid add for an attending user
    * @param event an event to be added to the schedule
    * @throws IllegalStateException if there is already an event at the same time
    */
   public void addEvent(Event event) throws IllegalStateException;
 
   /**
-   * To remove an event from the schedule.
+   * To remove an event from the schedule. Removes the current user from the event
+   * and removes the event from this schedule.
    * @param eventName an event to be removed from the schedule
-   * @throws IllegalStateException if no such event exists
+   * @throws IllegalStateException if no such event exists in this schedule
    */
   public void removeEvent(String eventName);
 
@@ -31,7 +33,7 @@ public interface ISchedule {
   /**
    * To modify the event time.
    * @param eventName an event name on the schedule to be changed
-   * @throws IllegalStateException if no such event exists
+   * @throws IllegalStateException if no such event exists or event already exists at given time
    */
   public void modifyEventTime(String eventName, Time time);
 
@@ -41,13 +43,6 @@ public interface ISchedule {
    * @throws IllegalStateException if no such event exists
    */
   public void modifyEventLocation(String eventName, Location location);
-
-  /**
-   * To modify the event users.
-   * @param eventName an event to modify users from the schedule
-   * @throws IllegalStateException if no such event exists
-   */
-  public void modifyEventUsers(String eventName, List<String> users);
 
   /**
    * To return all the user of the event.
@@ -65,9 +60,4 @@ public interface ISchedule {
    */
   public Event getEvent(String eventName);
 
-  /**
-   * Checks to see if there is any time overlap within the schedule.
-   * @param time the given time
-   */
-  void checkOverlap(Time time);
 }

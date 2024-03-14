@@ -5,9 +5,14 @@ package cs3500.calendar.model;
  *
  */
 
+import java.io.File;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import cs3500.calendar.xml.XMLReader;
+import cs3500.calendar.xml.XMLWriter;
 
 /**
  * The central system of the NUPlanner is the main entry point of the system.
@@ -32,6 +37,7 @@ import java.util.Map;
 public class CentralSystem implements ICentralSystem {
 
   private final Map<String, Schedule> system;
+  private final List<Event> events;
 
   /**
    * To represent a constructor for Central System.
@@ -39,37 +45,41 @@ public class CentralSystem implements ICentralSystem {
    */
   public CentralSystem() {
     this.system = new HashMap<>();
+    this.events = new ArrayList<>();
   }
 
 
+  //need to fix this for the input
   @Override
-  public void addUser(String userId, Schedule schedule) {
-    this.system.put(userId, new Schedule());
+  public void addUser(String userId) {
+    this.system.put(userId, new Schedule(userId));
   }
 
   @Override
   public void generateEvent(String name, Time time, Location location, List<String> users) {
     Event generatedEvent = new Event(name, time, location, users);
+    events.add(generatedEvent);
     for (String user : users) {
-       if (system.containsKey(user)) {
-         system.get(user).checkOverlap(time);
-         system.get(user).addEvent(generatedEvent);
-       } else {
-         system.put(user, new Schedule());
-         system.get(user).addEvent(generatedEvent);
-       }
+      system.putIfAbsent(user, new Schedule(user));
+      system.get(user).addEvent(generatedEvent);
     }
-
   }
 
   @Override
   public void updateEventName(String userID, String oldName, String newName) {
-    getSchedule(userID).modifyEventName(oldName, newName);
+    for (String user : getSchedule(userID).getAllEventUsers(oldName)) {
+      getSchedule(user).modifyEventName(oldName, newName);
+    }
   }
 
+  //check for all schedules connected
   @Override
   public void updateEventTime(String userID, String name, Time newTime) {
-    getSchedule(userID).modifyEventTime(name, newTime);
+    for (String user : system.get(userID).getEvent(name).getUsers()) {
+      getSchedule(userID).modifyEventTime(name, newTime);
+    }
+
+
   }
 
   @Override
@@ -79,6 +89,7 @@ public class CentralSystem implements ICentralSystem {
 
   // checks to unsure that the user is within the central system
   // and then gets the schedule associated with the user
+
   private Schedule getSchedule(String userID) {
     if (this.system.containsKey(userID)) {
       return this.system.get(userID);
@@ -103,7 +114,42 @@ public class CentralSystem implements ICentralSystem {
   }
 
   @Override
+  public void addEventToUser(String userID, String eventName) {
+
+  }
+
+
+  //needs to return a new copy of the schedule
+  @Override
   public Schedule userSchedule(String userId) {
     return this.getSchedule(userId);
+  }
+
+  //load all schedules from an XML
+  public void loadSchedulesFromXML(String filePath) {
+    XMLReader reader = new XMLReader();
+    reader.loadScheduleFromFile(filePath, this);
+  }
+
+  //save all schedules to their assigned XML files
+  public void saveSchedulesToXML(String directoryPath) {
+    XMLWriter writer = new XMLWriter();
+    for (Map.Entry<String, Schedule> entry : system.entrySet()) {
+      //ensure directoryPath ends with seperator
+      String filePath = directoryPath.endsWith(File.separator)
+              ? directoryPath + entry.getKey() + "-schedule.xml"
+              : directoryPath + File.separator + entry.getKey() + "-schedule.xml";
+      try {
+        writer.writeScheduleToFile(filePath, entry.getValue());
+      } catch (Exception e) {
+        e.printStackTrace();
+      }
+    }
+  }
+
+
+  //return entire system
+  public Map<String, Schedule> getSystem() {
+    return this.system;
   }
 }
