@@ -27,7 +27,7 @@ public class Schedule implements ISchedule {
   public void addEvent(Event event) throws IllegalStateException {
     Objects.requireNonNull(event);
 
-      eventOverlap(null, event.getTime());
+    eventOverlap(null, event.getTime());
 
     eventMap.put(event.getName(), event);
   }
@@ -106,9 +106,17 @@ public class Schedule implements ISchedule {
     return new Event(temp.getName(), temp.getTime(), temp.getLocation(), temp.getUsers());
   }
 
-  //return all events
-  public Map<String, Event> getEvents() {
-    return new HashMap<>(eventMap);
+  @Override
+  public List<Event> getEventsAtTime(Time time) {
+    ArrayList<Event> events = new ArrayList<>();
+    for (Event event : eventMap.values()) {
+      if (time == null) {
+        events.add(getEvent(event.getName()));
+      } else if (event.getTime().isOverlap(time)) {
+        events.add(getEvent(event.getName()));
+      }
+    }
+    return events;
   }
 
   public Map<Day, List<Event>> getEventsByDay() {

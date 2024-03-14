@@ -25,9 +25,8 @@ public class XMLWriter {
     Element rootElement = doc.createElement("schedule");
     doc.appendChild(rootElement);
 
-    Map<String, Event> events = schedule.getEvents();
-    for (Map.Entry<String, Event> entry : events.entrySet()) {
-      Event event = entry.getValue();
+
+    for (Event event : schedule.getEventsAtTime(null)) {
       Element eventElement = doc.createElement("event");
       rootElement.appendChild(eventElement);
 

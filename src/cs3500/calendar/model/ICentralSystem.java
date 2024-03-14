@@ -69,12 +69,6 @@ public interface ICentralSystem {
    */
   void addEventToUser(String userID, String eventName);
 
-  /**
-   * To get the schedule that corresponds to the name of the given userID.
-   * @param userId the unique id of the user
-   * @return the given schedule for a user.
-   */
-  Schedule userSchedule(String userId);
 
   /**
    *
@@ -89,9 +83,11 @@ public interface ICentralSystem {
   void saveSchedulesToXML(String directoryPath);
 
   /**
-   *
-   * @param time
-   * @return
+   * Returns all events at the given time. All events that are within this time fram are
+   * returned.
+   * @param time the desired time
+   * @param userId the unique id of the user
+   * @return list of events at this time
    */
-
+  List<Event> getEventsAtTime(String userId, Time time);
 }

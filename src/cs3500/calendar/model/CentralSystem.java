@@ -132,13 +132,6 @@ public class CentralSystem implements ICentralSystem {
   }
 
 
-  //needs to return a new copy of the schedule
-  @Override
-  public Schedule userSchedule(String userId) {
-    return this.getSchedule(userId);
-  }
-
-
   public void loadSchedulesFromXML(String filePath) {
     XMLReader reader = new XMLReader();
     reader.loadScheduleFromFile(filePath, this);
@@ -159,9 +152,9 @@ public class CentralSystem implements ICentralSystem {
     }
   }
 
-
-  //return entire system
-  public Map<String, Schedule> getSystem() {
-    return this.system;
+  @Override
+  public List<Event> getEventsAtTime(String user, Time time) {
+    return getSchedule(user).getEventsAtTime(time);
   }
+
 }
