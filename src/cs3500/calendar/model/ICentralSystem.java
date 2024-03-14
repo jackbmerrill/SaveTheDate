@@ -1,6 +1,7 @@
 package cs3500.calendar.model;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * Defines the core functionalities for managing users, their schedules and events for the
@@ -90,4 +91,10 @@ public interface ICentralSystem {
    * @return list of events at this time, returns empty if no events
    */
   List<Event> getEventsAtTime(String userId, Time time);
+
+  /**
+   * To get a copy of the central system
+   * @return a copy of the current state of the central system
+   */
+  Map<String, Schedule> getSystem();
 }

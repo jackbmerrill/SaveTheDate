@@ -56,5 +56,4 @@ public class TestTime {
     assertTrue(time2.isOverlap(time5));
     assertTrue(time5.isOverlap(time3));
   }
-
 }

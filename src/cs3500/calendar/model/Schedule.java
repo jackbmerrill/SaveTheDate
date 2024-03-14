@@ -65,7 +65,7 @@ public class Schedule implements ISchedule {
       if (this.userID.equals(eventMap.get(eventName).getHost())) {
         throw new IllegalStateException("The host has a time conflict");
       }
-      //if the event has a time conflict, dont add it to schedule and remove from list of users
+      //if the event has a time conflict, does not add it to schedule
       this.removeEvent(eventName);
       return;
     }

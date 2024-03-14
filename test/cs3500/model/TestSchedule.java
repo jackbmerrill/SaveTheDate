@@ -4,6 +4,7 @@ import org.junit.Test;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 import cs3500.calendar.model.Day;
@@ -26,6 +27,10 @@ public class TestSchedule {
   Time time2 = new Time(Day.SUNDAY, 1000, Day.SUNDAY, 1800);
   Time time3 = new Time(Day.TUESDAY, 1259, Day.THURSDAY, 1300);
   Time time4 = new Time(Day.TUESDAY, 1300, Day.FRIDAY, 2359);
+  Time time5 = new Time(Day.WEDNESDAY, 1000, Day.WEDNESDAY, 1100);
+  Time time6 = new Time(Day.THURSDAY, 800, Day.THURSDAY, 830);
+  Time time7 = new Time(Day.THURSDAY, 1801, Day.THURSDAY, 1802);
+  Time time8 = new Time(Day.THURSDAY, 2300, Day.THURSDAY, 2359);
 
   Location loc1 = new Location(true, "Churchill 101");
   Location loc2 = new Location(false, "Zoom");
@@ -41,6 +46,11 @@ public class TestSchedule {
   Event event2 = new Event("Event2", time2, loc2, list2);
   Event event3 = new Event("Event3", time3, loc3, list3);
   Event event4 = new Event("Event4", time4, loc4, list4);
+  Event event5 = new Event("Event4", time5, loc4, list4);
+  Event event6 = new Event("Event4", time6, loc4, list4);
+  Event event7 = new Event("Event4", time7, loc4, list4);
+  Event event8 = new Event("Event4", time8, loc4, list4);
+  Event newEvent1 = new Event("NewEvent1", time1, loc1, list1);
 
   Schedule schedule1021 = new Schedule("1021");
   Schedule schedule5046 = new Schedule("5046");
@@ -53,82 +63,107 @@ public class TestSchedule {
     assertThrows(IllegalStateException.class, () -> schedule1111.getEvent("Event1"));
     schedule1111.addEvent(event1);
     schedule1111.addEvent(event2);
+    schedule1111.addEvent(event3);
     assertEquals(schedule1111.getEvent("Event1"), event1);
     assertEquals(schedule1111.getEvent("Event2"), event2);
+    assertEquals(schedule1111.getEvent("Event3"), event3);
+    assertThrows(IllegalStateException.class, () -> schedule1111.addEvent(event4));
+    assertThrows(IllegalStateException.class, () -> schedule1111.addEvent(event1));
   }
 
   // to test the removeEvent method
   @Test
   public void testRemoveEvent() {
+    assertThrows(IllegalStateException.class, () -> schedule0202.removeEvent("Event10"));
+    schedule0202.addEvent(event1);
+    schedule0202.addEvent(event2);
     schedule0202.addEvent(event3);
-    //assertTrue(schedule0202.containsEvent("Event3"));
+    assertEquals(schedule0202.getEvent("Event1"), event1);
+    assertEquals(schedule0202.getEvent("Event2"), event2);
+    assertEquals(schedule0202.getEvent("Event3"), event3);
+    schedule0202.removeEvent("Event2");
     schedule0202.removeEvent("Event3");
-    //assertFalse(schedule0202.containsEvent("Event3"));
-  }
-
-  // to test the containsEvent method
-  @Test
-  public void testContainsEvent() {
-    schedule1021.addEvent(event2);
-    schedule1021.addEvent(event3);
-    schedule1021.addEvent(event1);
-    //assertTrue(schedule1021.containsEvent("Event2"));
-    //assertTrue(schedule1021.containsEvent("Event3"));
-    //assertTrue(schedule1021.containsEvent("Event1"));
-    //assertFalse(schedule1021.containsEvent("Event4"));
+    assertEquals(schedule0202.getEvent("Event1"), event1);
+    assertThrows(IllegalStateException.class, () -> schedule0202.getEvent("Event2"));
+    assertThrows(IllegalStateException.class, () -> schedule0202.getEvent("Event3"));
   }
 
   // to test the modifyEventName method
   @Test
   public void testModifyEventName() {
+    assertThrows(IllegalStateException.class, () -> schedule0202.modifyEventName(
+            "No name", "other name"));
     schedule0202.addEvent(event1);
     schedule0202.modifyEventName("Event1", "NewEvent1");
-    //assertFalse(schedule0202.containsEvent("Event1"));
-    //assertTrue(schedule0202.containsEvent("NewEvent1"));
+    assertThrows(IllegalStateException.class, () -> schedule0202.getEvent("Event1"));
+    assertEquals(schedule0202.getEvent("NewEvent1"), newEvent1);
   }
 
   // to test the modifyEventTime method
   @Test
   public void modifyEventTime() {
+    assertThrows(IllegalStateException.class, () -> schedule5046.modifyEventTime(
+            "No name", time2));
     schedule5046.addEvent(event2);
-    assertEquals(schedule5046.getEvent("Event2").getTime(), time2);
-    schedule5046.modifyEventTime("Event2", time4);
-    schedule5046.addEvent(event3);
-    assertEquals(schedule5046.getEvent("Event2").getTime(), time4);
-    //schedule5046.modifyEventTime("Event3", time1);
-    //assertEquals(schedule5046.getEvent("Event3").getTime(), time1);
-
+    schedule5046.addEvent(event4);
+    assertEquals(schedule5046.getEvent("Event4").getTime(), time4);
+    schedule5046.modifyEventTime("Event4", time1);
+    assertEquals(schedule5046.getEvent("Event4").getTime(), time1);
   }
 
   // to test the modifyEventLocation method
   @Test
   public void modifyEventLocation() {
-    schedule1111.addEvent(event2);
-    assertEquals(schedule1111.getEvent("Event2").getLocation(), loc2);
-    schedule1111.modifyEventLocation("Event2", loc3);
-    assertEquals(schedule1111.getEvent("Event2").getLocation(), loc3);
-    schedule1111.addEvent(event1);
-    //assertEquals(schedule1111.getEvent("Event1").getLocation(), loc1);
-    //schedule1111.modifyEventLocation("Event1", loc4);
-    //assertEquals(schedule1111.getEvent("Event1").getLocation(), loc4);
+    assertThrows(IllegalStateException.class, () -> schedule1021.modifyEventLocation(
+            "No name", loc2));
+    schedule1021.addEvent(event1);
+    assertEquals(schedule1021.getEvent("Event1").getLocation(), loc1);
+    schedule1021.addEvent(event2);
+    assertEquals(schedule1021.getEvent("Event2").getLocation(), loc2);
+    schedule1021.modifyEventLocation("Event1", loc3);
+    schedule1021.modifyEventLocation("Event2", loc3);
+    assertEquals(schedule1021.getEvent("Event1").getLocation(), loc3);
+    assertEquals(schedule1021.getEvent("Event2").getLocation(), loc3);
   }
 
   // to test the getAllEventUsers method
   @Test
   public void testGetAllEventUsers() {
-    schedule1021.addEvent(event4);
-    assertEquals(schedule1021.getAllEventUsers("Event4"), list4);
-    schedule1021.addEvent(event2);
-    assertEquals(schedule1021.getAllEventUsers("Event2"), list2);
+    assertThrows(IllegalStateException.class, () -> schedule1111.getAllEventUsers(
+            "Event1"));
+    schedule1111.addEvent(event1);
+    schedule1111.addEvent(event4);
+    assertEquals(schedule1111.getAllEventUsers("Event1"), list1);
+    assertEquals(schedule1111.getAllEventUsers("Event4"), list4);
   }
 
   // to test the getEvent method
   @Test
   public void testGetEvent() {
     schedule5046.addEvent(event1);
-    schedule5046.addEvent(event1);
+    schedule5046.addEvent(event2);
     schedule5046.addEvent(event3);
-    schedule5046.addEvent(event4);
+    assertEquals(schedule5046.getEvent("Event1"), event1);
+    assertEquals(schedule5046.getEvent("Event2"), event2);
+    assertEquals(schedule5046.getEvent("Event3"), event3);
+  }
+
+  // to test the getEventsAtTime method
+  @Test
+  public void testGetEventsAtTime() {
+    assertTrue(schedule1021.getEventsAtTime(time1).isEmpty());
+    schedule1021.addEvent(event1);
+    schedule1021.addEvent(event2);
+    schedule1021.addEvent(event5);
+    schedule1021.addEvent(event6);
+    schedule1021.addEvent(event7);
+    schedule1021.addEvent(event8);
+    List<Event> eventsAtTime1 = Collections.singletonList(event1);
+    assertEquals(schedule1021.getEventsAtTime(time1), eventsAtTime1);
+    List<Event> eventsAtTime4 = Arrays.asList(event5, event6, event7, event8);
+    assertEquals(schedule1021.getEventsAtTime(time4), eventsAtTime4);
+    List<Event> eventsAtTimeNull = Arrays.asList(event1, event2, event5, event6, event7, event8);
+    assertEquals(schedule1021.getEventsAtTime(null), eventsAtTimeNull);
   }
 }
 

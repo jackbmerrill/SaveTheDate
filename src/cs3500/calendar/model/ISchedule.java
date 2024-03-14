@@ -32,9 +32,10 @@ public interface ISchedule {
   public void modifyEventName(String eventName, String name);
 
   /**
-   * To modify the event time.
+   * To modify the event time. If the event has a time conflict, it does not get added to the
+   * schedule
    * @param eventName an event name on the schedule to be changed
-   * @throws IllegalStateException if no such event exists or event already exists at given time.
+   * @throws IllegalStateException if no such event exists
    */
   public void modifyEventTime(String eventName, Time time);
 
@@ -61,5 +62,12 @@ public interface ISchedule {
    */
   public Event getEvent(String eventName);
 
+  /**
+   * To get a list of all the events at a given time.
+   * Returns an empty list is no such events exist and returns all the events
+   * if given null as a time
+   * @param time the time
+   * @return a list of all the events at the specified time
+   */
   List<Event> getEventsAtTime(Time time);
 }

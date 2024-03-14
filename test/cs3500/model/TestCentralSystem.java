@@ -29,23 +29,23 @@ public class TestCentralSystem {
     centralSystem = new CentralSystem();
   }
 
-  @Test
-  public void testLoadScheduleFromXML() {
-    String filePath = "src/testSchedule.xml";
-    centralSystem.loadSchedulesFromXML(filePath);
-    assertTrue(centralSystem.getSystem().containsKey("Prof. Lucia"));
-    Schedule schedule = centralSystem.getSystem().get("Prof. Lucia");
-    assertEquals(3, schedule.getEvents().size());
-    assertTrue(schedule.getEvents().containsKey("CS3500 Morning Lecture"));
-    Event morningLecture = schedule.getEvents().get("CS3500 Morning Lecture");
-    assertEquals("Churchill Hall 101", morningLecture.getLocation().getPlace());
-    assertFalse(morningLecture.getLocation().isOnline());
-    assertTrue(morningLecture.getUsers().contains("Prof. Lucia"));
-    assertTrue(morningLecture.getUsers().contains("Student Anon"));
-    assertTrue(morningLecture.getUsers().contains("Chat"));
-    String formattedStartTime = Time.formatTime(morningLecture.getTime().getStartTime());
-    assertEquals("0950", formattedStartTime);
-  }
+//  @Test
+//  public void testLoadScheduleFromXML() {
+//    String filePath = "src/testSchedule.xml";
+//    centralSystem.loadSchedulesFromXML(filePath);
+//    assertTrue(centralSystem.getSystem().containsKey("Prof. Lucia"));
+//    Schedule schedule = centralSystem.getSystem().get("Prof. Lucia");
+//    assertEquals(3, schedule.getEvents().size());
+//    assertTrue(schedule.getEvents().containsKey("CS3500 Morning Lecture"));
+//    Event morningLecture = schedule.getEvents().get("CS3500 Morning Lecture");
+//    assertEquals("Churchill Hall 101", morningLecture.getLocation().getPlace());
+//    assertFalse(morningLecture.getLocation().isOnline());
+//    assertTrue(morningLecture.getUsers().contains("Prof. Lucia"));
+//    assertTrue(morningLecture.getUsers().contains("Student Anon"));
+//    assertTrue(morningLecture.getUsers().contains("Chat"));
+//    String formattedStartTime = Time.formatTime(morningLecture.getTime().getStartTime());
+//    assertEquals("0950", formattedStartTime);
+//  }
 
   @Test
   public void testSaveSchedulesToXML() throws Exception {

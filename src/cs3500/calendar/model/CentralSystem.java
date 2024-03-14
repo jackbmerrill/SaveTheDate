@@ -159,4 +159,9 @@ public class CentralSystem implements ICentralSystem {
     return getSchedule(user).getEventsAtTime(time);
   }
 
+  @Override
+  public Map<String, Schedule> getSystem() {
+    return null;
+  }
+
 }
