@@ -1,5 +1,0 @@
-The central system consists of a map of strings of user IDs to schedules. Whenever the schedule
-    is accessed, it calls get using the userid to get the schedule. Within the schedules,
-    there is a map of event names to events so to access the desired event. each action is
-    delegated from central system -> schedule -> event. Each event is a shared object therefore
-    each time one is modified, it modifies
