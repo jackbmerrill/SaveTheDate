@@ -13,11 +13,17 @@ import cs3500.calendar.model.Time;
 
 
 /**
- * To represent a textual view.
+ * To represent a textual view of a calendar. Sorts into each user and then into each day in
+ * order of the times.
  */
 public class TextualView {
 
-  private CentralSystem centralSystem;
+  private final CentralSystem centralSystem;
+
+  /**
+   * Constructor for the textual view for the system.
+   * @param centralSystem the central system to be textualized.
+   */
 
   public TextualView(CentralSystem centralSystem) {
     this.centralSystem = centralSystem;
@@ -25,8 +31,8 @@ public class TextualView {
 
 
   /**
-   * DIO ADD HERE.
-   * @return what?
+   * Creates a textual view of the system DIO ADD MORE
+   * @return string representation of the central system
    */
   public String generateTextualView() {
     StringBuilder textualViewBuilder = new StringBuilder();

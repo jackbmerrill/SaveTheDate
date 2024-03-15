@@ -1,5 +1,6 @@
 package cs3500.model;
 
+import org.junit.Before;
 import org.junit.Test;
 
 import java.util.ArrayList;
@@ -51,10 +52,17 @@ public class TestSchedule {
   Event event8 = new Event("Event4", time8, loc4, list4);
   Event newEvent1 = new Event("NewEvent1", time1, loc1, list1);
 
-  Schedule schedule1021 = new Schedule("1021");
-  Schedule schedule5046 = new Schedule("5046");
-  Schedule schedule1111 = new Schedule("1111");
-  Schedule schedule0202 = new Schedule("0202");
+  Schedule schedule1021;
+  Schedule schedule5046;
+  Schedule schedule1111;
+  Schedule schedule0202;
+  @Before
+  public void initData() {
+    schedule1021 = new Schedule("1021");
+    schedule5046 = new Schedule("5046");
+    schedule1111 = new Schedule("1111");
+    schedule0202 = new Schedule("0202");
+  }
 
   // to test the addEvent method
   @Test
@@ -161,10 +169,10 @@ public class TestSchedule {
     schedule1021.addEvent(event8);
     List<Event> eventsAtTime1 = Collections.singletonList(event1);
     assertEquals(schedule1021.getEventsAtTime(time1), eventsAtTime1);
-    assertEquals(schedule1021.getEventsAtTime(time4),
-            new ArrayList<>(Arrays.asList(event5, event6, event7, event8)));
-    assertEquals(schedule1021.getEventsAtTime(null), new ArrayList<>(Arrays.asList(event1,
-            event2, event5, event6, event7, event8)));
+    assertEquals(new ArrayList<>(Arrays.asList(event5, event6, event7, event8)),
+            schedule1021.getEventsAtTime(time4));
+    assertEquals(new ArrayList<>(Arrays.asList(event1, event2, event5, event6, event7, event8)),
+            schedule1021.getEventsAtTime(null));
   }
 }
 

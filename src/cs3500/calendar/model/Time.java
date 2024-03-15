@@ -1,7 +1,8 @@
 package cs3500.calendar.model;
 
 /**
- * To represent time.
+ * To represent time. Has a start time, end time, start day, end day. Each time can last up
+ * to exactly a week. Event cannot start and end at the same time.
  */
 public class Time {
   private final int startTime;
@@ -10,13 +11,13 @@ public class Time {
   private final Day endDay;
 
   /**
-   * JACK ADD HERE.
-   * @param startDay startDay
-   * @param startTime startTime
-   * @param endDay endDay
-   * @param endTime endTime
+   * Creates a new object of time. Can range up to one week exactly.
+   * @param startDay startDay enum
+   * @param startTime integer for the start time
+   * @param endDay endDay enum
+   * @param endTime integer for the end time
+   * @throws IllegalArgumentException if not a valid time
    */
-
   public Time(Day startDay, int startTime, Day endDay, int endTime) {
     checkValidTime(startTime, endTime);
     if (startDay.equals(endDay)) {
@@ -38,12 +39,11 @@ public class Time {
   }
 
   /**
-   * Checks if the given time overlaps with this time.
+   * Checks if the given time overlaps with this time. Returns true if there is an overlap,
+   * false if there is not.
    * @param other the other time to check
    * @return true if the times overlap
    */
-  //also check if works when next week
-  //if this start > this end +7 to end
   public boolean isOverlap(Time other) {
     //compute minutes in order to calculate overlaps
     int thisStartTotalMins = this.startDay.order() * 1440 + this.startTime;
@@ -57,23 +57,43 @@ public class Time {
   }
 
 
-  //format integers to string
+  /**
+   * DIO
+   * @param time
+   * @return
+   */
   public static String formatTime(int time) {
     return String.format("%04d", time);
   }
 
+  /**
+   * Gets the starting time of the time. Used for the XML and the view.
+    * @return an integer representation of the start time
+   */
   public int getStartTime() {
     return this.startTime;
   }
 
+  /**
+   * Gets the ending time of the time. Used for the XML and the view.
+   * @return an integer representation of the end time
+   */
   public int getEndTime() {
     return this.endTime;
   }
 
+  /**
+   * Gets the start day of the time. Used for the XML and the view.
+   * @return an enum representing the start day
+   */
   public Day getStartDay() {
     return this.startDay;
   }
 
+  /**
+   * Gets the end day of the time. Used for the XML and the view.
+   * @return an enum representing the end day
+   */
   public Day getEndDay() {
     return this.endDay;
   }
