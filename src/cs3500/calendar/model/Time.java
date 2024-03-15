@@ -11,7 +11,8 @@ public class Time {
   private final Day endDay;
 
   /**
-   * Creates a new object of time. Can range up to one week exactly.
+   * Creates a new object of time. Can range up to one week exactly. If invalid, throws
+   * an error.
    * @param startDay startDay enum
    * @param startTime integer for the start time
    * @param endDay endDay enum
@@ -47,9 +48,11 @@ public class Time {
   public boolean isOverlap(Time other) {
     //compute minutes in order to calculate overlaps
     int thisStartTotalMins = this.startDay.order() * 1440 + this.startTime;
-    int thisEndTotalMins = this.endDay.order() * 1440 + this.endTime + (this.endDay.order() < this.startDay.order() ? 7 * 1440 : 0);
+    int thisEndTotalMins = this.endDay.order() * 1440 + this.endTime
+            + (this.endDay.order() < this.startDay.order() ? 7 * 1440 : 0);
     int otherStartTotalMins = other.startDay.order() * 1440 + other.startTime;
-    int otherEndTotalMins = other.endDay.order() * 1440 + other.endTime + (other.endDay.order() < other.startDay.order() ? 7 * 1440 : 0);
+    int otherEndTotalMins = other.endDay.order() * 1440 + other.endTime
+            + (other.endDay.order() < other.startDay.order() ? 7 * 1440 : 0);
 
     //actually check for overlaps
     return thisStartTotalMins < otherEndTotalMins && otherStartTotalMins < thisEndTotalMins;
