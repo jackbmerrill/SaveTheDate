@@ -5,7 +5,9 @@ import java.util.Map;
 
 /**
  * Defines the core functionalities for managing users, their schedules and events for the
- * NU planner.
+ * NU planner. The central system holds access to all the schedules and is able to manipulate
+ * them as desired by each user. Can add, remove, and modify events, as well as take in
+ * an XML file and produce one of the schedule.
  */
 public interface ICentralSystem {
 

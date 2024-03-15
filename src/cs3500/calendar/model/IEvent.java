@@ -3,7 +3,9 @@ package cs3500.calendar.model;
 import java.util.List;
 
 /**
- * To represent an Event interface.
+ * Interface to represent an event. An event has a time, name, location, and list of users.
+ * All fields of the event can be modified or returned as a new copy at any point. Once the
+ * host is decided, it can never be changed.
  */
 public interface IEvent {
 

@@ -4,7 +4,9 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * To represent a schedule for an individual user.
+ * To represent a schedule for an individual user. Each schedule may consist of many events.
+ * No events may overlap, but they may start and end at the same time. Each schedule tracks
+ * the events for the given userID.
  */
 public interface ISchedule {
 
@@ -72,5 +74,10 @@ public interface ISchedule {
    */
   List<Event> getEventsAtTime(Time time);
 
+  /**
+   * Gets a map of all the events ordered by day. Creates a list of events assigned to
+   * a key of each day. Utilized for XML and view.
+   * @return A map of a Day to a list of events
+   */
   Map<Day, List<Event>> getEventsByDay();
 }
