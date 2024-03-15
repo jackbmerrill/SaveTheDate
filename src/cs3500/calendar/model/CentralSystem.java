@@ -144,6 +144,9 @@ public class CentralSystem implements ICentralSystem {
     for (Map.Entry<String, Schedule> entry : system.entrySet()) {
       String userID = entry.getKey();
       Schedule clonedSchedule = new Schedule(userID);
+      for (Event event : system.get(userID).getEventsAtTime(null)) {
+        clonedSchedule.addEvent(event);
+      }
       systemClone.put(entry.getKey(), clonedSchedule);
     }
     return systemClone;
