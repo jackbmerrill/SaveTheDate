@@ -65,33 +65,34 @@ public class TestCentralSystem {
   }
 
   // to test the generateEvent method
-    @Test
-    public void testGenerateEvent() {
-      central1.addUser("4054");
-      central1.addUser("3000");
-      List<String> central1Users = Arrays.asList("4054", "3000");
-      central1.generateEvent("Random Event", time1, loc2, central1Users);
-      assertEquals(central1.getSystem().get("4054").getEvent("Random Event"),
-              new Event("Random Event", time1, loc2, central1Users));
-      assertEquals(central1.getSystem().get("3000").getEvent("Random Event"),
-              new Event("Random Event", time1, loc2, central1Users));
-      assertThrows(IllegalStateException.class, () -> central1.generateEvent("Milo",
-              time1, loc1, central1Users));
-    }
+  @Test
+  public void testGenerateEvent() {
+    central1.addUser("4054");
+    central1.addUser("3000");
+    List<String> central1Users = Arrays.asList("4054", "3000");
+    central1.generateEvent("Random Event", time1, loc2, central1Users);
+    assertEquals(central1.getSystem().get("4054").getEvent("Random Event"),
+            new Event("Random Event", time1, loc2, central1Users));
+    assertEquals(central1.getSystem().get("3000").getEvent("Random Event"),
+            new Event("Random Event", time1, loc2, central1Users));
+    assertThrows(IllegalStateException.class, () -> central1.generateEvent("Milo",
+            time1, loc1, central1Users));
+  }
 
-   // to test the updateEventName method
-    @Test
-    public void testUpdateEventName() {
-      central1.addUser("user10");
-      central1.generateEvent("Event1000", time2, loc2, List.of("user10"));
-      central1.updateEventName("user10", "Event1000", "Event1001");
-      assertEquals(central1.getSystem().get("user10").getEvent("Event1001"),
-              new Event("Event1001", time2, loc2, List.of("user10")));
-      assertThrows(IllegalStateException.class, () -> central1.getSystem().
-              get("user10").getEvent("Event1000"));
-      assertThrows(IllegalStateException.class, () -> central1.updateEventName("user10",
-              "Not included event", "new name here"));
-    }
+  // to test the updateEventName method
+  @Test
+  public void testUpdateEventName() {
+    central1.addUser("user10");
+    central1.generateEvent("Event1000", time2, loc2, List.of("user10"));
+    central1.updateEventName("user10", "Event1000", "Event1001");
+    assertEquals(central1.getSystem().get("user10").getEvent("Event1001"),
+            new Event("Event1001", time2, loc2, List.of("user10")));
+    assertThrows(IllegalStateException.class, () -> central1.getSystem().
+            get("user10").getEvent("Event1000"));
+    assertThrows(IllegalStateException.class, () -> central1.updateEventName("user10",
+            "Not included event", "new name here"));
+  }
+
 
   // to test the updateEventTime method
   @Test

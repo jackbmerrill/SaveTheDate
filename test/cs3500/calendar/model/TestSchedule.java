@@ -6,16 +6,8 @@ import org.junit.Test;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import cs3500.calendar.model.Day;
-import cs3500.calendar.model.Event;
-import cs3500.calendar.model.Location;
-import cs3500.calendar.model.Schedule;
-import cs3500.calendar.model.Time;
-
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertThrows;
 import static org.junit.Assert.assertTrue;
@@ -61,6 +53,7 @@ public class TestSchedule {
   Schedule schedule5046;
   Schedule schedule1111;
   Schedule schedule0202;
+
   @Before
   public void initData() {
     schedule1021 = new Schedule("1021");

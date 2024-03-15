@@ -33,10 +33,12 @@ public class XMLWriter {
    * it if an old version is present.
    *
    * @param filePath filePath where the XML document is saved
-   * @param schedule schedule which contains the events and data we want to store in our XML document
+   * @param schedule schedule which contains the events and data we want to store in our
+   *                XML document
    * @throws IOException throws exception if any errors occur during the process
    */
-  public void writeScheduleToFile(String filePath, Schedule schedule, String scheduleId) throws IOException {
+  public void writeScheduleToFile(String filePath, Schedule schedule, String scheduleId)
+          throws IOException {
     try {
       DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
       DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
@@ -58,18 +60,21 @@ public class XMLWriter {
         startDayElement.appendChild(doc.createTextNode(event.getTime().getStartDay().toString()));
         timeElement.appendChild(startDayElement);
         Element startTimeElement = doc.createElement("start");
-        startTimeElement.appendChild(doc.createTextNode(Time.formatTime(event.getTime().getStartTime())));
+        startTimeElement.appendChild(doc.createTextNode(Time.formatTime(event.getTime().
+                getStartTime())));
         timeElement.appendChild(startTimeElement);
         Element endDayElement = doc.createElement("end-day");
         endDayElement.appendChild(doc.createTextNode(event.getTime().getEndDay().toString()));
         timeElement.appendChild(endDayElement);
         Element endTimeElement = doc.createElement("end");
-        endTimeElement.appendChild(doc.createTextNode(Time.formatTime(event.getTime().getEndTime())));
+        endTimeElement.appendChild(doc.createTextNode(Time.formatTime(event.getTime().
+                getEndTime())));
         timeElement.appendChild(endTimeElement);
         Element locationElement = doc.createElement("location");
         eventElement.appendChild(locationElement);
         Element onlineElement = doc.createElement("online");
-        onlineElement.appendChild(doc.createTextNode(Boolean.toString(event.getLocation().isOnline())));
+        onlineElement.appendChild(doc.createTextNode(Boolean.toString(event.getLocation().
+                isOnline())));
         locationElement.appendChild(onlineElement);
         Element placeElement = doc.createElement("place");
         placeElement.appendChild(doc.createTextNode("\"" + event.getLocation().getPlace() + "\""));

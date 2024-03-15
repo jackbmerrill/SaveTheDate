@@ -60,9 +60,9 @@ public class Time {
 
 
   /**
-   * DIO
-   * @param time
-   * @return
+   * To format the time in a readable XML format.
+   * @param time the time.
+   * @return formats the time in a readable XML format.
    */
   public static String formatTime(int time) {
     return String.format("%04d", time);

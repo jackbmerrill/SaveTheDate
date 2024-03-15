@@ -36,7 +36,7 @@ public class TestCentralSystemXML {
 
   // to test the load schedule from XML method
   @Test
-  public void testLoadScheduleFromXML() throws IOException{
+  public void testLoadScheduleFromXML() throws IOException {
     Time time1 = new Time(Day.TUESDAY, 950, Day.TUESDAY, 1130);
     String filePath = "src/testSchedule.xml";
     centralSystem.loadSchedulesFromXML(filePath);
@@ -55,7 +55,8 @@ public class TestCentralSystemXML {
   @Test
   public void testLoadScheduleFromInvalidXML() {
     String invalidFilePath = "src/doesNotExist.xml";
-    assertThrows(FileNotFoundException.class, () -> centralSystem.loadSchedulesFromXML(invalidFilePath));
+    assertThrows(FileNotFoundException.class, () -> centralSystem.
+            loadSchedulesFromXML(invalidFilePath));
   }
 
 
@@ -68,7 +69,8 @@ public class TestCentralSystemXML {
     centralSystem.generateEvent(eventName, eventTime, eventLocation, eventUsers);
 
     String invalidDirectoryPath = "\0invalidPath";
-    assertThrows(IOException.class, () -> centralSystem.saveSchedulesToXML(invalidDirectoryPath, eventUsers));
+    assertThrows(IOException.class, () -> centralSystem.
+            saveSchedulesToXML(invalidDirectoryPath, eventUsers));
   }
 
   @Test
@@ -76,7 +78,8 @@ public class TestCentralSystemXML {
     String unregisteredUser = "UnregisteredUser";
     String knownDirectoryPath = "src";
 
-    assertThrows(FileNotFoundException.class, () -> centralSystem.saveSchedulesToXML(knownDirectoryPath,
+    assertThrows(FileNotFoundException.class, () -> centralSystem.
+            saveSchedulesToXML(knownDirectoryPath,
             Arrays.asList(unregisteredUser)));
   }
 

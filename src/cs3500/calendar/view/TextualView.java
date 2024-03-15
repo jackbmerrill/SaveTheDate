@@ -35,16 +35,19 @@ public class TextualView {
   /**
    * Generates a textual representation of all the schedules of the unique users within
    * the central system. It takes each user one by one and lists all the events they have planned
-   * sorted in chronological order taking both day and time into account. Additionally, each unique event
-   * mentions its name, time, location, online status, and invitees for every unique user that is a participant
+   * sorted in chronological order taking both day and time into account. Additionally, each
+   * unique event
+   * mentions its name, time, location, online status, and invitees for every unique user that
+   * is a participant
    * and formats it in a readable textual format.
-   *
-   * Furthermore, when an event spans multiple days it will show up every day that its active for the user
-   * with the starting and finishing day and time in order to give the user a daily reminder of what
-   * their already started but unfinished events are so that they dont have to look back into their schedule.
-   *
-   * @return a String which contains a textual representation in a formated view of all of the schedules in
-   * a given system
+   * Furthermore, when an event spans multiple days it will show up every day that its active
+   * for the user
+   * with the starting and finishing day and time in order to give
+   * the user a daily reminder of what
+   * their already started but unfinished events are so that they dont have to look back
+   * into their schedule.
+   * @return     a String which contains a textual representation in a formatted view of
+   *             all the schedules in a given system
    */
   public String generateTextualView() {
     StringBuilder textualViewBuilder = new StringBuilder();

@@ -25,8 +25,8 @@ public interface ICentralSystem {
    * @param time the time of the event
    * @param location the location of the event
    * @param users the list of users connected to the event
-   * @throws IllegalStateException if there is a time conflict with an existing event
-   *    for any users
+   * @throws IllegalStateException     if there is a time conflict with an existing event
+   *                                   for any users
    */
   void generateEvent(String name, Time time, Location location, List<String> users);
 
@@ -99,8 +99,8 @@ public interface ICentralSystem {
    * not existing.
    * @param directoryPath directoryPath where the XML files are saved
    * @param userIDs The list of userIDs of users to save their schedules
-   * @throws IOException If an error occurs during the process of saving the files or user does
-   * not exist in the system.
+   * @throws IOException     If an error occurs during the process of saving the files or user does
+   *                         not exist in the system.
    */
   void saveSchedulesToXML(String directoryPath, List<String> userIDs) throws IOException;
 

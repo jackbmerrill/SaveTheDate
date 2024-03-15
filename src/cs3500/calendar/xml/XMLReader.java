@@ -27,10 +27,8 @@ public class XMLReader {
    * Reads and parses the given XML file and pushes that data into the given
    * CentralSystem. It extracts details such the name, time, location, online status, and
    * invitees of an event within a schedule in order to actually create it in the CentralSystem.
-   *
    * All of the given information through the XML file are formatted in a way to allow them
    * to be read by the CentralSystem.
-   *
    * @param filePath filePath of the XML file that needs to be read and parsed
    * @param centralSystem centralSystem where all the data will be registered
    */

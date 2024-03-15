@@ -30,12 +30,12 @@ public class Event implements IEvent {
     nullCheck(time);
     nullCheck(location);
     nullCheck(users);
-      this.name = name;
-      this.time = time;
-      this.location = location;
-      if (users.isEmpty()) {
-        throw new IllegalArgumentException("There cannot be no users");
-      }
+    this.name = name;
+    this.time = time;
+    this.location = location;
+    if (users.isEmpty()) {
+      throw new IllegalArgumentException("There cannot be no users");
+    }
     this.users = new ArrayList<>(users);
   }
 
