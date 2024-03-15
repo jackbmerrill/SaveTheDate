@@ -84,7 +84,10 @@ public interface ICentralSystem {
 
 
   /**
-   * add.
+   * Load schedules from an XML file and update the CentralSystem with its data.
+   * Read schedules from the specific XML file and use them to update or add schedules
+   * for users based on what the XML files contain. If the file does not exist then throw an
+   * IOException.
    * @param filePath filePath
    * @throws IOException for non-existent file.
    */
