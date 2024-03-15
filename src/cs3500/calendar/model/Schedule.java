@@ -35,9 +35,11 @@ public class Schedule implements ISchedule {
   @Override
   public void removeEvent(String eventName) {
     containsEvent(eventName);
-    List<String> users = this.getAllEventUsers(eventName);
-    users.remove(this.userID);
-    this.eventMap.get(eventName).updateUsers(users);
+    if (!this.userID.equals(getEvent(eventName).getHost())) {
+      List<String> users = this.getAllEventUsers(eventName);
+      users.remove(this.userID);
+      this.eventMap.get(eventName).updateUsers(users);
+    }
     this.eventMap.remove(eventName);
   }
 

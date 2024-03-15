@@ -1,11 +1,5 @@
-for the actual schedule, what we could do to edit the events is directly pass the events to the
-    central system instead of having to create a ton of functions in the schedule. We would just
-    need to ensure there is no way of a schedule being given direct access to anyone outside of
-    the central system. IE all schedules can only be made through the central and any that are
-    passed in are fully duplicated.
-        -this way we dont need 500 methods in schedule just to add or modify events. just pass
-            them up
-        - cant bc then there is no way of checking for event overlap in the schedule
-
-
-- what happens if add event to invitee but they already have an event at that time
+The central system consists of a map of strings of user IDs to schedules. Whenever the schedule
+    is accessed, it calls get using the userid to get the schedule. Within the schedules,
+    there is a map of event names to events so to access the desired event. each action is
+    delegated from central system -> schedule -> event. Each event is a shared object therefore
+    each time one is modified, it modifies

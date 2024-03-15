@@ -21,7 +21,8 @@ public interface ISchedule {
 
   /**
    * To remove an event from the schedule. Removes the current user from the event
-   * and removes the event from this schedule.
+   * and removes the event from this schedule. If the host is the person removing,
+   * it removes the event from the hosts schedule, but not from the event itself.
    * @param eventName an event to be removed from the schedule
    * @throws IllegalStateException if no such event exists in this schedule
    */
