@@ -119,4 +119,8 @@ public class TestCentralSystem {
   // to test the getEventsAtTime method
 
   // to test getSystem method
+  @Test
+  public void testGetSystem() {
+
+  }
 }
