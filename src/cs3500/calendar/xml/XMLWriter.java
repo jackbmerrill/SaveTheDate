@@ -25,10 +25,11 @@ public class XMLWriter {
 
   /**
    * This method writes the Schedule that its given to an XML file at the given file path. It
-   * then proceeds by iterating over each event in the given schedule, along with all of its details
-   * such as the name, time, location, invitees, and online status of the event and converts that data
-   * to an XML format. The XML file that is created is then stored in the requested file path which either
-   * creates an XML file or overwrites it if an old version is present.
+   * then proceeds by iterating over each event in the given schedule, along with all of its
+   * details such as the name, time, location, invitees, and online status of the event
+   * and converts that data to an XML format. The XML file that is created is then
+   * stored in the requested file path which either creates an XML file or overwrites
+   * it if an old version is present.
    *
    * @param filePath filePath where the XML document is saved
    * @param schedule schedule which contains the events and data we want to store in our XML document

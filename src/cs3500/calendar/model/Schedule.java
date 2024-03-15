@@ -8,7 +8,8 @@ import java.util.Map;
 import java.util.Objects;
 
 /**
- * To represent a user's schedule.
+ * To represent a user's schedule. Has a map of string to events, and the user id of the
+ * schedule. Implements the ISchedule interface and all of its methods.
  */
 public class Schedule implements ISchedule {
 
@@ -17,6 +18,7 @@ public class Schedule implements ISchedule {
 
   /**
    * To represent a constructor for a schedule.
+   * @param userID The userID for this schedule as a string
    */
   public Schedule(String userID) {
     this.userID = userID;
