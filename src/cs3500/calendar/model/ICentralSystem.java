@@ -77,7 +77,7 @@ public interface ICentralSystem {
    * the specified users. Adds the user to the events users.
    * @param userID userID of the event
    * @param eventName name of the event to be removed
-   * @throws IllegalStateException if user or event does not exist in system
+   * @throws IllegalStateException if event does not exist in system
    */
   void addEventToUser(String userID, String eventName);
 

@@ -110,8 +110,10 @@ public class CentralSystem implements ICentralSystem {
         users.add(userID);
         event.updateUsers(users);
         system.get(userID).addEvent(event);
+        return;
       }
     }
+    throw new IllegalStateException("Event does not exist");
   }
 
   public void loadSchedulesFromXML(String filePath) throws IOException {

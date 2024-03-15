@@ -102,6 +102,10 @@ public class TestCentralSystem {
     central1.updateEventTime("3043", "Event100", time6);
     assertEquals(time6, central1.getSystem().get("3043").getEvent("Event100").getTime());
     assertEquals(time6, central1.getSystem().get("5460").getEvent("Event100").getTime());
+    assertThrows(IllegalStateException.class, () -> central1.updateEventTime("Milo",
+            "jedd", time1));
+    assertThrows(IllegalStateException.class, () -> central1.updateEventTime("John",
+            "Event4000", time1));
   }
   
   // to test the updateEventLocation method
