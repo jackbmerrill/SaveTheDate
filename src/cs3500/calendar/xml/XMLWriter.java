@@ -34,7 +34,7 @@ public class XMLWriter {
    *
    * @param filePath filePath where the XML document is saved
    * @param schedule schedule which contains the events and data we want to store in our XML document
-   * @throws Exception throws exception if any errors occur during the process
+   * @throws IOException throws exception if any errors occur during the process
    */
   public void writeScheduleToFile(String filePath, Schedule schedule, String scheduleId) throws IOException {
     try {

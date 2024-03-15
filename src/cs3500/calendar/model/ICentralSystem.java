@@ -89,7 +89,7 @@ public interface ICentralSystem {
    * Saves the schedules of said users to XML files in the given directory
    * @param directoryPath directoryPath where the XML files are saved
    * @param userIDs The list of userIDs of users to save their schedules
-   * @throws Exception If an error occurs during the process of saving the files
+   * @throws IOException If an error occurs during the process of saving the files
    */
   void saveSchedulesToXML(String directoryPath, List<String> userIDs) throws IOException;
 
