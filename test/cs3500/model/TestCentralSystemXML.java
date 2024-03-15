@@ -2,6 +2,7 @@ package cs3500.model;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertThrows;
 import static org.junit.Assert.assertTrue;
 
 import org.junit.Before;
@@ -13,12 +14,13 @@ import cs3500.calendar.model.Location;
 import cs3500.calendar.model.Time;
 import cs3500.calendar.model.Event;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Arrays;
 import java.util.List;
-import java.io.File;
 
 /**
  * To test central system XML methods.
@@ -34,7 +36,7 @@ public class TestCentralSystemXML {
 
   // to test the load schedule from XML method
   @Test
-  public void testLoadScheduleFromXML() {
+  public void testLoadScheduleFromXML() throws IOException{
     Time time1 = new Time(Day.TUESDAY, 950, Day.TUESDAY, 1130);
     String filePath = "src/testSchedule.xml";
     centralSystem.loadSchedulesFromXML(filePath);
@@ -48,6 +50,34 @@ public class TestCentralSystemXML {
     assertTrue(morningLecture.getUsers().contains("Chat"));
     String formattedStartTime = Time.formatTime(morningLecture.getTime().getStartTime());
     assertEquals("0950", formattedStartTime);
+  }
+
+  @Test
+  public void testLoadScheduleFromInvalidXML() {
+    String invalidFilePath = "src/doesNotExist.xml";
+    assertThrows(FileNotFoundException.class, () -> centralSystem.loadSchedulesFromXML(invalidFilePath));
+  }
+
+
+  @Test
+  public void testSaveScheduleToInvalidPath() {
+    String eventName = "Sample Event";
+    Time eventTime = new Time(Day.MONDAY, 1000, Day.MONDAY, 1200);
+    Location eventLocation = new Location(false, "Sample Location");
+    List<String> eventUsers = Arrays.asList("TestUser1");
+    centralSystem.generateEvent(eventName, eventTime, eventLocation, eventUsers);
+
+    String invalidDirectoryPath = "\0invalidPath";
+    assertThrows(IOException.class, () -> centralSystem.saveSchedulesToXML(invalidDirectoryPath, eventUsers));
+  }
+
+  @Test
+  public void testSaveUnregisteredUserScheduleToXML() {
+    String unregisteredUser = "UnregisteredUser";
+    String knownDirectoryPath = "src";
+
+    assertThrows(FileNotFoundException.class, () -> centralSystem.saveSchedulesToXML(knownDirectoryPath,
+            Arrays.asList(unregisteredUser)));
   }
 
   // to test the save schedule to XML method

@@ -1,5 +1,6 @@
 package cs3500.calendar.model;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.List;
 import java.util.Map;
@@ -80,8 +81,9 @@ public interface ICentralSystem {
   /**
    * add.
    * @param filePath filePath
+   * @throws IOException for non existing file.
    */
-  void loadSchedulesFromXML(String filePath);
+  void loadSchedulesFromXML(String filePath) throws IOException;
 
   /**
    * Saves the schedules of said users to XML files in the given directory

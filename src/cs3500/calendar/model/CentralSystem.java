@@ -1,6 +1,7 @@
 package cs3500.calendar.model;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -41,16 +42,16 @@ public class CentralSystem implements ICentralSystem {
     Event generatedEvent = new Event(name, time, location, users);
     events.add(generatedEvent);
     for (String userId : users) {
-      //if they dont exist make new schedule
+      // if they don't exist, make new schedule
       system.computeIfAbsent(userId, k -> new Schedule(userId));
 
-      //add event to schedule
+      // add event to schedule
       Schedule userSchedule = system.get(userId);
-//      try {
+      try {
         userSchedule.addEvent(generatedEvent);
-//      } catch (IllegalStateException e) {
-//        System.out.println("Error adding event for user " + userId + ": " + e.getMessage());
-//      }
+      } catch (IllegalStateException e) {
+        throw new IllegalArgumentException("Error adding event for user " + userId + ": " + e.getMessage());
+      }
     }
   }
 
@@ -113,29 +114,29 @@ public class CentralSystem implements ICentralSystem {
     }
   }
 
-  @Override
-  public void loadSchedulesFromXML(String filePath) {
+  public void loadSchedulesFromXML(String filePath) throws IOException {
+    File file = new File(filePath);
+    if (!file.exists() || !file.isFile()) {
+      throw new FileNotFoundException("File does not exist: " + filePath);
+    }
     XMLReader reader = new XMLReader();
     reader.loadScheduleFromFile(filePath, this);
   }
+
+
 
   @Override
   public void saveSchedulesToXML(String directoryPath, List<String> userIDs) throws IOException {
     XMLWriter writer = new XMLWriter();
     for (String userID : userIDs) {
       Schedule userSchedule = system.get(userID);
-      if (userSchedule != null) {
-        String filePath = directoryPath.endsWith(File.separator)
-                ? directoryPath + userID + "-schedule.xml"
-                : directoryPath + File.separator + userID + "-schedule.xml";
-        try {
-          writer.writeScheduleToFile(filePath, userSchedule, userID);
-        } catch (IOException e) {
-          throw new IOException("Failed to save schedule for user: " + userID, e);
-        }
-      } else {
-        throw new IOException("Schedule not found for user: " + userID);
+      if (userSchedule == null) {
+        throw new FileNotFoundException("Schedule not found for user: " + userID);
       }
+      String filePath = directoryPath.endsWith(File.separator)
+              ? directoryPath + userID + "-schedule.xml"
+              : directoryPath + File.separator + userID + "-schedule.xml";
+      writer.writeScheduleToFile(filePath, userSchedule, userID);
     }
   }
 
