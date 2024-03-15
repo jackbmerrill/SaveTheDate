@@ -26,11 +26,7 @@ public class Schedule implements ISchedule {
   @Override
   public void addEvent(Event event) throws IllegalStateException {
     Objects.requireNonNull(event);
-
-    if (eventMap.containsKey(event.getName())) {
-      eventOverlap(event.getName(), event.getTime());
-    }
-    //eventOverlap(null, event.getTime());
+    eventOverlap(null, event.getTime());
     eventMap.put(event.getName(), event);
   }
 
