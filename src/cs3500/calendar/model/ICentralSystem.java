@@ -1,6 +1,5 @@
 package cs3500.calendar.model;
 
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.List;
 import java.util.Map;

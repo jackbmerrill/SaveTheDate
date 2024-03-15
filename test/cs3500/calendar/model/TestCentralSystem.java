@@ -5,15 +5,10 @@ import org.junit.Test;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-
-import cs3500.calendar.model.CentralSystem;
-import cs3500.calendar.model.Day;
-import cs3500.calendar.model.Event;
-import cs3500.calendar.model.Location;
-import cs3500.calendar.model.Schedule;
-import cs3500.calendar.model.Time;
+import java.util.Map;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertThrows;
 import static org.junit.Assert.assertTrue;
 
 /**
@@ -64,29 +59,38 @@ public class TestCentralSystem {
     assertTrue(central1.getSystem().containsKey("9604"));
     central1.getSystem().get("9604").addEvent(event4);
     Schedule schedule9604 = central1.getSystem().get("9604");
-    assertEquals(schedule9604.getEvent("Event4"), event4);
+    assertEquals(central1.getSystem().get("9604").getEvent("Event4"),
+            event4);
   }
 
   // to test the generateEvent method
-  //  @Test
-  //  public void testGenerateEvent() {
-  //    central1.addUser("4054");
-  //    central1.addUser("3000");
-  //    List<String> central1Users = Arrays.asList("4054", "3000");
-  //
-  //    central1.generateEvent("Random Event", time1, loc2, central1Users);
-  //  }
+    @Test
+    public void testGenerateEvent() {
+      central1.addUser("4054");
+      central1.addUser("3000");
+      List<String> central1Users = Arrays.asList("4054", "3000");
+      central1.generateEvent("Random Event", time1, loc2, central1Users);
+      assertEquals(central1.getSystem().get("4054").getEvent("Random Event"),
+              new Event("Random Event", time1, loc2, central1Users));
+      assertEquals(central1.getSystem().get("3000").getEvent("Random Event"),
+              new Event("Random Event", time1, loc2, central1Users));
+      //assertThrows(IllegalArgumentException.class, () -> central1.generateEvent("Conflicting",
+              //time2, loc2, central1Users));
+    }
 
-  // to test the updateEventName method
-  //  @Test
-  //  public void testUpdateEventName() {
-  //    String name1 = "Name1";
-  //    String name2 = "Name2";
-  //
-  //    central1.addUser("4045");
-  //    central1.generateEvent(name1, time1, loc3, List.of("4045"));
-  //    central1.updateEventName("4045", name1, name2);
-  //  }
+   // to test the updateEventName method
+    @Test
+    public void testUpdateEventName() {
+      central1.addUser("user10");
+      central1.generateEvent("Event1000", time2, loc2, List.of("user10"));
+      central1.updateEventName("user10", "Event1000", "Event1001");
+      assertEquals(central1.getSystem().get("user10").getEvent("Event1001"),
+              new Event("Event1001", time2, loc2, List.of("user10")));
+      assertThrows(IllegalStateException.class, () -> central1.getSystem().
+              get("user10").getEvent("Event1000"));
+      assertThrows(IllegalStateException.class, () -> central1.updateEventName("user10",
+              "Not included event", "new name here"));
+    }
 
   // to test the updateEventTime method
   @Test
@@ -114,14 +118,59 @@ public class TestCentralSystem {
   }
 
   //to test the removeEvent method
+  @Test
+  public void testRemoveEvent() {
+    central1.addUser("Milo");
+    central1.addUser("Jack");
+    central1.generateEvent("GoingToRemove", time3, loc3, List.of("Milo", "Jack"));
+    assertThrows(IllegalArgumentException.class, () -> central1.removeEvent("Milo",
+            "GoingToRemove"));
+    central1.removeEvent("Jack", "GoingToRemove");
+    assertTrue(central1.getSystem().get("Jack").getEventsAtTime(time3).isEmpty());
+    assertThrows(IllegalStateException.class, () -> central1.removeEvent("Milo",
+            "NON_EXISTENT"));
+  }
 
   // to test the addEventToUser method
+  @Test
+  public void testAddEventToUser() {
+    central1.addUser("Milo");
+    central1.generateEvent("New Event", time6, loc4, List.of("Milo"));
+
+    central1.addUser("Jack");
+    central1.addEventToUser("Jack", "New Event");
+    assertEquals(central1.getSystem().get("Jack").getEvent("New Event"),
+            new Event("New Event", time6, loc4, List.of("Milo", "Jack")));
+    //assertThrows(IllegalStateException.class, () -> central1.addEventToUser("Nobody",
+            //"Unheard of Event"));
+  }
 
   // to test the getEventsAtTime method
+  @Test
+  public void testGetEventsAtTime() {
+    central1.addUser("Dio");
+    central1.generateEvent("Meet101", time5, loc1, List.of("Dio"));
+    central1.generateEvent("Meet202", time8, loc3, List.of("Dio"));
+    central1.generateEvent("Meet303", time7, loc3, List.of("Dio"));
+
+    List<Event> meet101 = central1.getEventsAtTime("Dio", time5);
+    List<Event> meet202And303 = central1.getEventsAtTime("Dio", time4);
+    assertEquals(1, meet101.size());
+    assertEquals(new Event("Meet101", time5, loc1, List.of("Dio")), meet101.get(0));
+    assertEquals(3, meet202And303.size());
+    assertEquals(new Event("Meet101", time5, loc1, List.of("Dio")), meet202And303.get(2));
+    assertEquals(new Event("Meet202", time8, loc3, List.of("Dio")), meet202And303.get(1));
+    assertEquals(new Event("Meet303", time7, loc3, List.of("Dio")), meet202And303.get(0));
+  }
 
   // to test getSystem method
   @Test
   public void testGetSystem() {
-
+    central1.addUser("Milo");
+    central1.generateEvent("OOD Exam", time4, loc4, List.of("Milo"));
+    Map<String, Schedule> systemTest = central1.getSystem();
+    assertTrue(systemTest.containsKey("Milo"));
+    assertEquals(systemTest.get("Milo").getEvent("OOD Exam"), new Event(
+            "OOD Exam", time4, loc4, List.of("Milo")));
   }
 }
