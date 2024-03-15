@@ -4,12 +4,18 @@ This codebase is designed to be a weekly calendar capable of managing multiple s
 
     KEY COMPONENTS:
     CentralSystem - main hub that houses all of the schedules
-    Schedules - individual user schedules that track a users events
+    Schedules - individual user schedules that track a users events. acts as a calendar.
     Events - events in the calendar of a user with a name, location, time and list of attendees.
         - Time - the time of the event, ie. Start day to end day, start time to end time.
+                 each may last up to one week exactly.
         - Name - the name of the event as a String
         - Location - the location of the event and whether or not it is online
         - Users - the list of all users who are attending including the host.
+
+        INVARIANT:
+        within our code, Location and Time are invariants of the event class as they must
+        always be present. There is no possible way to have an object of the event class without
+        a time and a location.
 
 
 
@@ -19,3 +25,4 @@ The central system consists of a map of strings of user IDs to schedules. Whenev
     delegated from central system -> schedule -> event. Each event is a shared object therefore
     each time one is modified, it modifies the event for all users with the event in their
     schedule.
+
