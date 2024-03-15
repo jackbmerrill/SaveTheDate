@@ -94,7 +94,10 @@ public interface ICentralSystem {
   void loadSchedulesFromXML(String filePath) throws IOException;
 
   /**
-   * Saves the schedules of said users to XML files in the given directory
+   * Saves the schedules of said users to XML files in the given directory of a specified
+   * requested user. Iterate through the list in order to pick the requested userID. An IOException
+   * is thrown in the case that there is an error in the process such as the given directory
+   * not existing.
    * @param directoryPath directoryPath where the XML files are saved
    * @param userIDs The list of userIDs of users to save their schedules
    * @throws IOException If an error occurs during the process of saving the files or user does
