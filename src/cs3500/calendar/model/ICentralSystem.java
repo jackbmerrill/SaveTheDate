@@ -1,5 +1,6 @@
 package cs3500.calendar.model;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
@@ -88,7 +89,7 @@ public interface ICentralSystem {
    * @param userIDs The list of userIDs of users to save their schedules
    * @throws Exception If an error occurs during the process of saving the files
    */
-  void saveSchedulesToXML(String directoryPath, List<String> userIDs) throws Exception;
+  void saveSchedulesToXML(String directoryPath, List<String> userIDs) throws IOException;
 
 
   /**

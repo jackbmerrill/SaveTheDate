@@ -1,6 +1,7 @@
 package cs3500.calendar.model;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -119,7 +120,7 @@ public class CentralSystem implements ICentralSystem {
   }
 
   @Override
-  public void saveSchedulesToXML(String directoryPath, List<String> userIDs) throws Exception {
+  public void saveSchedulesToXML(String directoryPath, List<String> userIDs) throws IOException {
     XMLWriter writer = new XMLWriter();
     for (String userID : userIDs) {
       Schedule userSchedule = system.get(userID);
@@ -127,7 +128,13 @@ public class CentralSystem implements ICentralSystem {
         String filePath = directoryPath.endsWith(File.separator)
                 ? directoryPath + userID + "-schedule.xml"
                 : directoryPath + File.separator + userID + "-schedule.xml";
-        writer.writeScheduleToFile(filePath, userSchedule, userID);
+        try {
+          writer.writeScheduleToFile(filePath, userSchedule, userID);
+        } catch (IOException e) {
+          throw new IOException("Failed to save schedule for user: " + userID, e);
+        }
+      } else {
+        throw new IOException("Schedule not found for user: " + userID);
       }
     }
   }
