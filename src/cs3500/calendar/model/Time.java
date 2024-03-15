@@ -45,22 +45,17 @@ public class Time {
   //also check if works when next week
   //if this start > this end +7 to end
   public boolean isOverlap(Time other) {
-    //start and end order for week comparison
-    int thisStartOrder = this.startDay.order();
-    int otherStartOrder = other.startDay.order();
-    int thisEndOrder = this.endDay.order() + (this.endDay.compareTo(this.startDay) < 0 ? 7 : 0);
-    int otherEndOrder = other.endDay.order() + (other.endDay.compareTo(other.startDay) < 0 ? 7 : 0);
+    //compute minutes in order to calculate overlaps
+    int thisStartTotalMins = this.startDay.order() * 1440 + this.startTime;
+    int thisEndTotalMins = this.endDay.order() * 1440 + this.endTime + (this.endDay.order() < this.startDay.order() ? 7 * 1440 : 0);
+    int otherStartTotalMins = other.startDay.order() * 1440 + other.startTime;
+    int otherEndTotalMins = other.endDay.order() * 1440 + other.endTime + (other.endDay.order() < other.startDay.order() ? 7 * 1440 : 0);
 
-    //convert times to minutes from start of week
-    int thisStartTime = thisStartOrder * 24 * 60 + this.startTime / 100 * 60 + this.startTime % 100;
-    int thisEndTime = thisEndOrder * 24 * 60 + this.endTime / 100 * 60 + this.endTime % 100;
-    int otherStartTime = otherStartOrder * 24 * 60 + other.startTime /
-            100 * 60 + other.startTime % 100;
-    int otherEndTime = otherEndOrder * 24 * 60 + other.endTime / 100 * 60 + other.endTime % 100;
-
-    //check for overlap
-    return !(thisEndTime <= otherStartTime || thisStartTime >= otherEndTime);
+    //actually check for overlaps
+    boolean overlap = thisStartTotalMins < otherEndTotalMins && otherStartTotalMins < thisEndTotalMins;
+    return overlap;
   }
+
 
   //format integers to string
   public static String formatTime(int time) {
