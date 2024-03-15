@@ -1,4 +1,4 @@
-package cs3500.model;
+package cs3500.calendar.xml;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
