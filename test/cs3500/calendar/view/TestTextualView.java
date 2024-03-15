@@ -1,4 +1,4 @@
-package cs3500.model;
+package cs3500.calendar.view;
 
 import org.junit.Test;
 import static org.junit.Assert.assertTrue;
