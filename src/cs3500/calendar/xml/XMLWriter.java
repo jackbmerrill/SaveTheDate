@@ -34,22 +34,23 @@ public class XMLWriter {
    * @param schedule schedule which contains the events and data we want to store in our XML document
    * @throws Exception throws exception if any errors occur during the process
    */
-  public void writeScheduleToFile(String filePath, Schedule schedule) throws Exception {
+  public void writeScheduleToFile(String filePath, Schedule schedule, String scheduleId) throws Exception {
     DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
     DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
     Document doc = dBuilder.newDocument();
 
+    //root schedule creation
     Element rootElement = doc.createElement("schedule");
+    rootElement.setAttribute("id", scheduleId);
     doc.appendChild(rootElement);
-
 
     for (Event event : schedule.getEventsAtTime(null)) {
       Element eventElement = doc.createElement("event");
       rootElement.appendChild(eventElement);
 
-      //name
+      //quotes for name
       Element name = doc.createElement("name");
-      name.appendChild(doc.createTextNode(event.getName()));
+      name.appendChild(doc.createTextNode("\"" + event.getName() + "\""));
       eventElement.appendChild(name);
 
       //time
@@ -61,8 +62,7 @@ public class XMLWriter {
       timeElement.appendChild(startDayElement);
 
       Element startTimeElement = doc.createElement("start");
-      startTimeElement.appendChild(doc.createTextNode(Time.formatTime(event.getTime().
-              getStartTime())));
+      startTimeElement.appendChild(doc.createTextNode(Time.formatTime(event.getTime().getStartTime())));
       timeElement.appendChild(startTimeElement);
 
       Element endDayElement = doc.createElement("end-day");
@@ -78,20 +78,20 @@ public class XMLWriter {
       eventElement.appendChild(locationElement);
 
       Element onlineElement = doc.createElement("online");
-      onlineElement.appendChild(doc.createTextNode(Boolean.toString(event.getLocation().
-              isOnline())));
+      onlineElement.appendChild(doc.createTextNode(String.valueOf(event.getLocation().isOnline())));
       locationElement.appendChild(onlineElement);
 
+      //quotes for place
       Element placeElement = doc.createElement("place");
-      placeElement.appendChild(doc.createTextNode(event.getLocation().getPlace()));
+      placeElement.appendChild(doc.createTextNode("\"" + event.getLocation().getPlace() + "\""));
       locationElement.appendChild(placeElement);
 
       //users
       Element usersElement = doc.createElement("users");
       eventElement.appendChild(usersElement);
       for (String user : event.getUsers()) {
-        Element userElement = doc.createElement("user");
-        userElement.appendChild(doc.createTextNode(user));
+        Element userElement = doc.createElement("uid");
+        userElement.appendChild(doc.createTextNode("\"" + user + "\""));
         usersElement.appendChild(userElement);
       }
     }

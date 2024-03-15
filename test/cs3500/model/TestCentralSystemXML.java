@@ -16,6 +16,7 @@ import cs3500.calendar.model.Event;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.Arrays;
 import java.util.List;
 import java.io.File;
 
@@ -51,16 +52,16 @@ public class TestCentralSystemXML {
 
   // to test the save schedule to XML method
   @Test
-  public void testSaveSchedulesToXML() throws Exception {
-    String eventName = "Test Event";
+  public void testSaveSingleUserScheduleToXML() throws Exception {
+    String eventName = "Sample Event";
     Time eventTime = new Time(Day.MONDAY, 1000, Day.MONDAY, 1200);
-    Location eventLocation = new Location(false, "Test Location");
-    List<String> eventUsers = List.of("TestUser");
+    Location eventLocation = new Location(false, "Sample Location");
+    List<String> eventUsers = Arrays.asList("TestUser1", "TestUser2");
     centralSystem.generateEvent(eventName, eventTime, eventLocation, eventUsers);
     String knownDirectoryPath = "src";
-    String fullPath = knownDirectoryPath + File.separator + "TestUser-schedule.xml";
-    centralSystem.saveSchedulesToXML(knownDirectoryPath);
-    Path filePath = Paths.get(fullPath);
+    String userToSave = "TestUser1";
+    centralSystem.saveSchedulesToXML(knownDirectoryPath, Arrays.asList(userToSave));
+    Path filePath = Paths.get(knownDirectoryPath, userToSave + "-schedule.xml");
     assertTrue(Files.exists(filePath));
   }
 
