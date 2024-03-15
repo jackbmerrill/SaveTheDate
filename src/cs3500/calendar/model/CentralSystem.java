@@ -140,14 +140,12 @@ public class CentralSystem implements ICentralSystem {
 
   @Override
   public Map<String, Schedule> getSystem() {
-//    Map<String, Schedule> systemClone = new HashMap<>();
-//    for (String user : system.keySet()) {
-//      systemClone.put(user, new Schedule(user));
-//      for (Event event : system.get(user).getEventsAtTime(null)) {
-//        systemClone.get(user).addEvent(event);
-//      }
-//    }
-//    return systemClone;
-    return new HashMap<>(system);
+    Map<String, Schedule> systemClone = new HashMap<>();
+    for (Map.Entry<String, Schedule> entry : system.entrySet()) {
+      String userID = entry.getKey();
+      Schedule clonedSchedule = new Schedule(userID);
+      systemClone.put(entry.getKey(), clonedSchedule);
+    }
+    return systemClone;
   }
 }
