@@ -86,7 +86,7 @@ public interface ICentralSystem {
   /**
    * add.
    * @param filePath filePath
-   * @throws IOException for non existing file.
+   * @throws IOException for non-existent file.
    */
   void loadSchedulesFromXML(String filePath) throws IOException;
 
