@@ -119,20 +119,19 @@ public class CentralSystem implements ICentralSystem {
   }
 
   @Override
-  public void saveSchedulesToXML(String directoryPath) {
+  public void saveSchedulesToXML(String directoryPath, List<String> userIDs) throws Exception {
     XMLWriter writer = new XMLWriter();
-    for (Map.Entry<String, Schedule> entry : system.entrySet()) {
-      //ensure directoryPath ends with seperator
-      String filePath = directoryPath.endsWith(File.separator)
-              ? directoryPath + entry.getKey() + "-schedule.xml"
-              : directoryPath + File.separator + entry.getKey() + "-schedule.xml";
-      try {
-        writer.writeScheduleToFile(filePath, entry.getValue());
-      } catch (Exception e) {
-        e.printStackTrace();
+    for (String userID : userIDs) {
+      Schedule userSchedule = system.get(userID);
+      if (userSchedule != null) {
+        String filePath = directoryPath.endsWith(File.separator)
+                ? directoryPath + userID + "-schedule.xml"
+                : directoryPath + File.separator + userID + "-schedule.xml";
+        writer.writeScheduleToFile(filePath, userSchedule, userID);
       }
     }
   }
+
 
   @Override
   public List<Event> getEventsAtTime(String user, Time time) {

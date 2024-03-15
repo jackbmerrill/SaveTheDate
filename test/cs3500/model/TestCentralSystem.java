@@ -44,10 +44,10 @@ public class TestCentralSystem {
   Event event2 = new Event("Event2", time2, loc2, list2);
   Event event3 = new Event("Event3", time3, loc3, list3);
   Event event4 = new Event("Event4", time4, loc4, list4);
-  Event event5 = new Event("Event4", time5, loc4, list4);
-  Event event6 = new Event("Event4", time6, loc4, list4);
-  Event event7 = new Event("Event4", time7, loc4, list4);
-  Event event8 = new Event("Event4", time8, loc4, list4);
+  Event event5 = new Event("Event5", time5, loc4, list4);
+  Event event6 = new Event("Even64", time6, loc4, list4);
+  Event event7 = new Event("Event7", time7, loc4, list4);
+  Event event8 = new Event("Event8", time8, loc4, list4);
   Event newEvent1 = new Event("NewEvent1", time1, loc1, list1);
 
   Schedule schedule1021 = new Schedule("1021");

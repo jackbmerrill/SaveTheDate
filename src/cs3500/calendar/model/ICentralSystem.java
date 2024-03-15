@@ -81,10 +81,13 @@ public interface ICentralSystem {
   void loadSchedulesFromXML(String filePath);
 
   /**
-   * add.
-   * @param directoryPath directoryPath
+   * Saves the schedules of said users to XML files in the given directory
+   * @param directoryPath directoryPath where the XML files are saved
+   * @param userIDs The list of userIDs of users to save their schedules
+   * @throws Exception If an error occurs during the process of saving the files
    */
-  void saveSchedulesToXML(String directoryPath);
+  void saveSchedulesToXML(String directoryPath, List<String> userIDs) throws Exception;
+
 
   /**
    * Returns all events at the given time. All events that are within this time frame are

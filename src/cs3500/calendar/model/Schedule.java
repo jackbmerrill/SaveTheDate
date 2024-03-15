@@ -28,7 +28,11 @@ public class Schedule implements ISchedule {
   @Override
   public void addEvent(Event event) throws IllegalStateException {
     Objects.requireNonNull(event);
-    eventOverlap(null, event.getTime());
+
+    if (eventMap.containsKey(event.getName())) {
+      eventOverlap(event.getName(), event.getTime());
+    }
+    //eventOverlap(null, event.getTime());
     eventMap.put(event.getName(), event);
   }
 
@@ -109,13 +113,18 @@ public class Schedule implements ISchedule {
   @Override
   public List<Event> getEventsAtTime(Time time) {
     ArrayList<Event> events = new ArrayList<>();
+
+    if (time == null) {
+      events.addAll(eventMap.values());
+      return events;
+    }
+
     for (Event event : eventMap.values()) {
-      if (time == null) {
-        events.add(getEvent(event.getName()));
-      } else if (event.getTime().isOverlap(time)) {
-        events.add(getEvent(event.getName()));
+      if (event.getTime().isOverlap(time)) {
+        events.add(event);
       }
     }
+
     return events;
   }
 
