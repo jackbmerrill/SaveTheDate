@@ -49,17 +49,13 @@ public class TextualView {
   public String generateTextualView() {
     StringBuilder textualViewBuilder = new StringBuilder();
     Map<String, Schedule> systemSchedules = centralSystem.getSystem();
-
     for (Map.Entry<String, Schedule> entry : systemSchedules.entrySet()) {
       String userId = entry.getKey();
       Schedule schedule = entry.getValue();
       Map<Day, List<Event>> eventsByDay = schedule.getEventsByDay();
-
       textualViewBuilder.append("User: ").append(userId).append("\n");
-
       for (Day day : Day.values()) {
         List<Event> eventsForDay = eventsByDay.get(day);
-
         if (eventsForDay != null) {
           Collections.sort(eventsForDay, new Comparator<Event>() {
             @Override
@@ -68,9 +64,7 @@ public class TextualView {
             }
           });
         }
-
         textualViewBuilder.append(day.toString()).append(":\n");
-
         if (eventsForDay != null && !eventsForDay.isEmpty()) {
           for (Event event : eventsForDay) {
             String formattedStartTime = Time.formatTime(event.getTime().getStartTime());
@@ -79,7 +73,6 @@ public class TextualView {
                     substring(2);
             String niceEndTime = formattedEndTime.substring(0, 2) + ":" + formattedEndTime.
                     substring(2);
-
             textualViewBuilder.append("    name: ").append(event.getName()).append("\n")
                     .append("    time: ").append(event.getTime().getStartDay()).append(": ")
                     .append(niceStartTime).append(" -> ")
@@ -88,7 +81,6 @@ public class TextualView {
                     .append("    location: ").append(event.getLocation().getPlace()).append("\n")
                     .append("    online: ").append(event.getLocation().isOnline()).append("\n")
                     .append("    invitees: \n");
-
             for (String user : event.getUsers()) {
               textualViewBuilder.append("        ").append(user).append("\n");
             }
@@ -99,7 +91,6 @@ public class TextualView {
       }
       textualViewBuilder.append("\n");
     }
-
     return textualViewBuilder.toString();
   }
 }

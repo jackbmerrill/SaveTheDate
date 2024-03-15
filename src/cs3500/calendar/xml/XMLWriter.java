@@ -41,51 +41,39 @@ public class XMLWriter {
       DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
       DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
       Document doc = dBuilder.newDocument();
-
       //root schedule creation
       Element rootElement = doc.createElement("schedule");
       rootElement.setAttribute("id", scheduleId);
       doc.appendChild(rootElement);
-
       for (Event event : schedule.getEventsAtTime(null)) {
         Element eventElement = doc.createElement("event");
         rootElement.appendChild(eventElement);
-
         //append elements
         Element name = doc.createElement("name");
         name.appendChild(doc.createTextNode("\"" + event.getName() + "\""));
         eventElement.appendChild(name);
-
         Element timeElement = doc.createElement("time");
         eventElement.appendChild(timeElement);
-
         Element startDayElement = doc.createElement("start-day");
         startDayElement.appendChild(doc.createTextNode(event.getTime().getStartDay().toString()));
         timeElement.appendChild(startDayElement);
-
         Element startTimeElement = doc.createElement("start");
         startTimeElement.appendChild(doc.createTextNode(Time.formatTime(event.getTime().getStartTime())));
         timeElement.appendChild(startTimeElement);
-
         Element endDayElement = doc.createElement("end-day");
         endDayElement.appendChild(doc.createTextNode(event.getTime().getEndDay().toString()));
         timeElement.appendChild(endDayElement);
-
         Element endTimeElement = doc.createElement("end");
         endTimeElement.appendChild(doc.createTextNode(Time.formatTime(event.getTime().getEndTime())));
         timeElement.appendChild(endTimeElement);
-
         Element locationElement = doc.createElement("location");
         eventElement.appendChild(locationElement);
-
         Element onlineElement = doc.createElement("online");
         onlineElement.appendChild(doc.createTextNode(Boolean.toString(event.getLocation().isOnline())));
         locationElement.appendChild(onlineElement);
-
         Element placeElement = doc.createElement("place");
         placeElement.appendChild(doc.createTextNode("\"" + event.getLocation().getPlace() + "\""));
         locationElement.appendChild(placeElement);
-
         Element usersElement = doc.createElement("users");
         eventElement.appendChild(usersElement);
         for (String user : event.getUsers()) {
@@ -94,13 +82,11 @@ public class XMLWriter {
           usersElement.appendChild(userElement);
         }
       }
-
       TransformerFactory transformerFactory = TransformerFactory.newInstance();
       Transformer transformer = transformerFactory.newTransformer();
       transformer.setOutputProperty(OutputKeys.INDENT, "yes");
       DOMSource source = new DOMSource(doc);
       StreamResult result = new StreamResult(new File(filePath));
-
       transformer.transform(source, result);
     } catch (Exception e) {
       throw new IOException("Error writing XML file: " + filePath, e);

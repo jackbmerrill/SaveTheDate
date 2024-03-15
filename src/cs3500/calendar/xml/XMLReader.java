@@ -41,13 +41,11 @@ public class XMLReader {
       DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
       Document doc = dBuilder.parse(xmlFile);
       doc.getDocumentElement().normalize();
-
       NodeList nList = doc.getElementsByTagName("event");
       for (int i = 0; i < nList.getLength(); i++) {
         Node nNode = nList.item(i);
         if (nNode.getNodeType() == Node.ELEMENT_NODE) {
           Element element = (Element) nNode;
-
           //extract event details and clean them up
           String name = cleanString(element.getElementsByTagName("name").item(0).
                   getTextContent());
@@ -61,23 +59,19 @@ public class XMLReader {
                   getTextContent());
           boolean isOnline = Boolean.parseBoolean(element.getElementsByTagName("online").
                   item(0).getTextContent());
-
           //extract users and cleanup their UIDs
           List<String> users = new ArrayList<>();
           NodeList usersList = element.getElementsByTagName("uid");
           for (int j = 0; j < usersList.getLength(); j++) {
             users.add(cleanString(usersList.item(j).getTextContent()));
           }
-
           //convert start and end times to integers
           int startTimeInt = Integer.parseInt(startTime);
           int endTimeInt = Integer.parseInt(endTime);
-
           Day startDayEnum = Day.valueOf(startDay);
           Day endDayEnum = Day.valueOf(endDay);
           Time eventTime = new Time(startDayEnum, startTimeInt, endDayEnum, endTimeInt);
           Location eventLocation = new Location(isOnline, locationPlace);
-
           centralSystem.generateEvent(name, eventTime, eventLocation, users);
         }
       }
