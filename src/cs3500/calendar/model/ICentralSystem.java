@@ -24,6 +24,8 @@ public interface ICentralSystem {
    * @param time the time of the event
    * @param location the location of the event
    * @param users the list of users connected to the event
+   * @throws IllegalArgumentException if there is a time conflict with an existing event
+   *    for any users
    */
   void generateEvent(String name, Time time, Location location, List<String> users);
 

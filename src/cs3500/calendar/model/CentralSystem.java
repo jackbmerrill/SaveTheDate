@@ -45,11 +45,11 @@ public class CentralSystem implements ICentralSystem {
 
       //add event to schedule
       Schedule userSchedule = system.get(userId);
-      try {
+//      try {
         userSchedule.addEvent(generatedEvent);
-      } catch (IllegalStateException e) {
-        System.out.println("Error adding event for user " + userId + ": " + e.getMessage());
-      }
+//      } catch (IllegalStateException e) {
+//        System.out.println("Error adding event for user " + userId + ": " + e.getMessage());
+//      }
     }
   }
 
