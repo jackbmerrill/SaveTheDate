@@ -44,14 +44,9 @@ public class CentralSystem implements ICentralSystem {
     for (String userId : users) {
       // if they don't exist, make new schedule
       system.computeIfAbsent(userId, k -> new Schedule(userId));
-
       // add event to schedule
       Schedule userSchedule = system.get(userId);
-      try {
-        userSchedule.addEvent(generatedEvent);
-      } catch (IllegalStateException e) {
-        throw new IllegalArgumentException("Error adding event for user " + userId + ": " + e.getMessage());
-      }
+      userSchedule.addEvent(generatedEvent);
     }
   }
 
@@ -117,6 +112,7 @@ public class CentralSystem implements ICentralSystem {
     throw new IllegalStateException("Event does not exist");
   }
 
+  @Override
   public void loadSchedulesFromXML(String filePath) throws IOException {
     File file = new File(filePath);
     if (!file.exists() || !file.isFile()) {
@@ -125,7 +121,6 @@ public class CentralSystem implements ICentralSystem {
     XMLReader reader = new XMLReader();
     reader.loadScheduleFromFile(filePath, this);
   }
-
 
 
   @Override

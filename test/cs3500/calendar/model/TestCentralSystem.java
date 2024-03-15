@@ -75,6 +75,8 @@ public class TestCentralSystem {
               new Event("Random Event", time1, loc2, central1Users));
       assertEquals(central1.getSystem().get("3000").getEvent("Random Event"),
               new Event("Random Event", time1, loc2, central1Users));
+      assertThrows(IllegalStateException.class, () -> central1.generateEvent("Milo",
+              time1, loc1, central1Users));
     }
 
    // to test the updateEventName method
@@ -119,9 +121,9 @@ public class TestCentralSystem {
     assertEquals(loc1, central1.getEventsAtTime("1000", time4).get(0).getLocation());
     assertEquals(loc1, central1.getEventsAtTime("2000", time4).get(0).getLocation());
     assertThrows(IllegalStateException.class, () -> central1.updateEventLocation("Milo",
-            "jedd",loc1));
+            "jedd", loc1));
     assertThrows(IllegalStateException.class, () -> central1.updateEventLocation("John",
-            "Event4000",loc1));
+            "Event4000", loc1));
   }
 
   //to test the removeEvent method
@@ -154,6 +156,9 @@ public class TestCentralSystem {
     central1.addEventToUser("Jack", "New Event");
     assertEquals(central1.getSystem().get("Jack").getEvent("New Event"),
             new Event("New Event", time6, loc4, List.of("Milo", "Jack")));
+    assertThrows(IllegalStateException.class, () -> central1.addEventToUser("Milo",
+            "NON_EXISTENT"));
+
   }
 
   // to test the getEventsAtTime method
@@ -172,6 +177,8 @@ public class TestCentralSystem {
     assertEquals(new Event("Meet101", time5, loc1, List.of("Dio")), meet202And303.get(2));
     assertEquals(new Event("Meet202", time8, loc3, List.of("Dio")), meet202And303.get(1));
     assertEquals(new Event("Meet303", time7, loc3, List.of("Dio")), meet202And303.get(0));
+    assertThrows(IllegalStateException.class, () -> central1.getEventsAtTime("John",
+            time2));
   }
 
   // to test getSystem method
@@ -183,5 +190,7 @@ public class TestCentralSystem {
     assertTrue(systemTest.containsKey("Milo"));
     assertEquals(systemTest.get("Milo").getEvent("OOD Exam"), new Event(
             "OOD Exam", time4, loc4, List.of("Milo")));
+    assertThrows(IllegalStateException.class, () -> central1.removeEvent("John",
+            "GoingToRemove"));
   }
 }
