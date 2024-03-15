@@ -104,7 +104,7 @@ public class TestCentralSystem {
     assertEquals(time6, central1.getSystem().get("3043").getEvent("Event100").getTime());
     assertEquals(time6, central1.getSystem().get("5460").getEvent("Event100").getTime());
   }
-
+  
   // to test the updateEventLocation method
   @Test
   public void testUpdateEventLocation() {
@@ -115,6 +115,10 @@ public class TestCentralSystem {
     central1.updateEventLocation("1000", "Event4000", loc1);
     assertEquals(loc1, central1.getEventsAtTime("1000", time4).get(0).getLocation());
     assertEquals(loc1, central1.getEventsAtTime("2000", time4).get(0).getLocation());
+    assertThrows(IllegalStateException.class, () -> central1.updateEventLocation("Milo",
+            "jedd",loc1));
+    assertThrows(IllegalStateException.class, () -> central1.updateEventLocation("John",
+            "Event4000",loc1));
   }
 
   //to test the removeEvent method
@@ -123,12 +127,18 @@ public class TestCentralSystem {
     central1.addUser("Milo");
     central1.addUser("Jack");
     central1.generateEvent("GoingToRemove", time3, loc3, List.of("Milo", "Jack"));
-    assertThrows(IllegalArgumentException.class, () -> central1.removeEvent("Milo",
-            "GoingToRemove"));
     central1.removeEvent("Jack", "GoingToRemove");
     assertTrue(central1.getSystem().get("Jack").getEventsAtTime(time3).isEmpty());
+    assertEquals(new Event("GoingToRemove", time3, loc3, List.of("Milo", "Jack")),
+            central1.getEventsAtTime("Milo",time3).get(0));
+    central1.generateEvent("GoingToRemoveHost", time1, loc1, List.of("Milo", "Jack"));
+    central1.removeEvent("Milo", "GoingToRemoveHost");
+    assertTrue(central1.getEventsAtTime("Jack", time1).isEmpty());
+    assertTrue(central1.getEventsAtTime("Milo", time1).isEmpty());
     assertThrows(IllegalStateException.class, () -> central1.removeEvent("Milo",
             "NON_EXISTENT"));
+    assertThrows(IllegalStateException.class, () -> central1.removeEvent("John",
+            "GoingToRemove"));
   }
 
   // to test the addEventToUser method
