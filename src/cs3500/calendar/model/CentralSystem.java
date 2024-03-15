@@ -65,6 +65,7 @@ public class CentralSystem implements ICentralSystem {
   //check for all schedules connected
   @Override
   public void updateEventTime(String userID, String name, Time newTime) {
+    getSchedule(userID).getEvent(name);
     for (String user : system.get(userID).getEvent(name).getUsers()) {
       getSchedule(user).modifyEventTime(name, newTime);
     }
