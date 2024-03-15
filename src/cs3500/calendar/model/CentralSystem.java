@@ -10,27 +10,10 @@ import cs3500.calendar.xml.XMLReader;
 import cs3500.calendar.xml.XMLWriter;
 
 /**
- * The central system of the NUPlanner is the main entry point of the system.
- * This central system keeps track of all users and their individual schedules and
- * ensures all events between schedules are consistent. From here, events can be created,
- * modified, or even removed. It is the job of the central system to make sure all invited
- * users get events added or removed from their schedules. The central system must also
- * ensure any modification of an existing event is consistent in every invited user’s schedule.
- * This part also ensures if the host of an event has their event removed, every invited user’s
- * schedule is also updated to remove the event. If the user removes an event that they are not
- * hosting, then the event is only removed from their schedule. Naturally the events must be
- * updated to remove the invitee. However, there should be no issues if a user invited to an
- * event does not exist in the system because the current instance of the system might only have
- * some of the users loaded in.
- * <p></p>
- * We will assume all user names (or uid) are unique for ease.
- * We are also creating a system based on trust. This means any user can modify events,
- * regardless if they are hosts of the event or not. In other words, there is no distinct power a
- * user has in the system. If a user wishes to interact with the system, they have the same
- * privilege as a client. 1
+ * Implementation class of the central system. Has a map of string to schedule and a
+ * List of all the events within the system. Enables the creation of new events, modification,
+ * deletion, input of XML files and output of XMLs.
  */
-
-
 public class CentralSystem implements ICentralSystem {
 
   private final Map<String, Schedule> system;
