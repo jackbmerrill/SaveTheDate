@@ -37,6 +37,7 @@ public interface ICentralSystem {
    * @param userID userID of the event
    * @param oldName the old name of the event
    * @param newName the new name of the event
+   * @throws IllegalStateException if user or event does not exist in system
    */
   void updateEventName(String userID, String oldName, String newName);
 
@@ -47,6 +48,7 @@ public interface ICentralSystem {
    * @param userID userID of the event
    * @param name the name of the event
    * @param newTime the new time of the event
+   * @throws IllegalStateException if user or event does not exist in system
    */
   void updateEventTime(String userID, String name, Time newTime);
 
@@ -56,6 +58,7 @@ public interface ICentralSystem {
    * @param userID userID of the event
    * @param name the name of the event
    * @param newLocation the new location of the event
+   * @throws IllegalStateException if user or event does not exist in system
    */
   void updateEventLocation(String userID, String name, Location newLocation);
 
@@ -66,6 +69,7 @@ public interface ICentralSystem {
    * all the schedules. If user is not the host, only removes from user schedule.
    * @param userID userID of the event
    * @param eventName name of the event to be removed
+   * @throws IllegalStateException if user or event does not exist in system
    */
   void removeEvent(String userID, String eventName);
 
@@ -74,6 +78,7 @@ public interface ICentralSystem {
    * the specified users. Adds the user to the events users.
    * @param userID userID of the event
    * @param eventName name of the event to be removed
+   * @throws IllegalStateException if user or event does not exist in system
    */
   void addEventToUser(String userID, String eventName);
 
@@ -89,7 +94,8 @@ public interface ICentralSystem {
    * Saves the schedules of said users to XML files in the given directory
    * @param directoryPath directoryPath where the XML files are saved
    * @param userIDs The list of userIDs of users to save their schedules
-   * @throws Exception If an error occurs during the process of saving the files
+   * @throws IOException If an error occurs during the process of saving the files or user does
+   * not exist in the system.
    */
   void saveSchedulesToXML(String directoryPath, List<String> userIDs) throws IOException;
 

@@ -43,7 +43,7 @@ public class Schedule implements ISchedule {
 
   private void containsEvent(String eventName) throws IllegalStateException {
     if (!eventMap.containsKey(eventName)) {
-      throw new IllegalStateException("No such element exists");
+      throw new IllegalStateException("No such event exists");
     }
   }
 

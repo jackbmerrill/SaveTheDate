@@ -95,7 +95,7 @@ public class TestCentralSystem {
     central1.addUser("5460");
     List<String> centralUsers = List.of("3043", "5460");
     central1.generateEvent("Event100", time1, loc1, centralUsers);
-
+    assertEquals(time1, central1.getSystem().get("3043").getEvent("Event100").getTime());
     central1.updateEventTime("3043", "Event100", time6);
     assertEquals(time6, central1.getSystem().get("3043").getEvent("Event100").getTime());
     assertEquals(time6, central1.getSystem().get("5460").getEvent("Event100").getTime());
@@ -105,11 +105,12 @@ public class TestCentralSystem {
   @Test
   public void testUpdateEventLocation() {
     central1.addUser("1000");
-    central1.generateEvent("Event4000", time4, loc3, List.of("1000"));
-
+    central1.generateEvent("Event4000", time4, loc3, List.of("1000", "2000"));
+    assertEquals(loc3, central1.getEventsAtTime("1000", time4).get(0).getLocation());
+    assertEquals(loc3, central1.getEventsAtTime("2000", time4).get(0).getLocation());
     central1.updateEventLocation("1000", "Event4000", loc1);
-    assertEquals(loc1, central1.getSystem().get("1000").getEvent("Event4000"));
-
+    assertEquals(loc1, central1.getEventsAtTime("1000", time4).get(0).getLocation());
+    assertEquals(loc1, central1.getEventsAtTime("2000", time4).get(0).getLocation());
   }
 
   //to test the removeEvent method
