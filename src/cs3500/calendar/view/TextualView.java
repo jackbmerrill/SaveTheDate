@@ -13,16 +13,18 @@ import cs3500.calendar.model.Time;
 
 
 /**
- * To represent a textual view of a calendar. Sorts into each user and then into each day in
- * order of the times.
+ * Represents a textual view of schedules and their events along with all of their details
+ * in a CentralSystem. Each users unique schedule and their included events are displayed in a
+ * user-friendly readable textual format. It is ordered by time and date.
  */
 public class TextualView {
 
   private final CentralSystem centralSystem;
 
   /**
-   * Constructor for the textual view for the system.
-   * @param centralSystem the central system to be textualized.
+   * Constructor for the textual view for the system with a given CentralSystem.
+   * @param centralSystem the central system which contains all schedules that need to be viewed
+   *                      in a textual format.
    */
 
   public TextualView(CentralSystem centralSystem) {
@@ -31,8 +33,18 @@ public class TextualView {
 
 
   /**
-   * Creates a textual view of the system DIO ADD MORE
-   * @return string representation of the central system
+   * Generates a textual representation of all the schedules of the unique users within
+   * the central system. It takes each user one by one and lists all the events they have planned
+   * sorted in chronological order taking both day and time into account. Additionally, each unique event
+   * mentions its name, time, location, online status, and invitees for every unique user that is a participant
+   * and formats it in a readable textual format.
+   *
+   * Furthermore, when an event spans multiple days it will show up every day that its active for the user
+   * with the starting and finishing day and time in order to give the user a daily reminder of what
+   * their already started but unfinished events are so that they dont have to look back into their schedule.
+   *
+   * @return a String which contains a textual representation in a formated view of all of the schedules in
+   * a given system
    */
   public String generateTextualView() {
     StringBuilder textualViewBuilder = new StringBuilder();

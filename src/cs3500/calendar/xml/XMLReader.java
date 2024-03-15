@@ -16,14 +16,23 @@ import cs3500.calendar.model.Location;
 import cs3500.calendar.model.Time;
 
 /**
- * To represent an XMLReader.
+ * It provides the neccessary functions in order to read and parse XML files
+ * which contain event data, and it then loads said data into a CentralSystem. It opens
+ * an XML file, navigates through its structure, extracts all the neccessary information,
+ * and after identifying it, it registers those events to a CentralSystem.
  */
 public class XMLReader {
 
   /**
-   * DIO ADD JAVADOCS HERE.
-   * @param filePath filePath
-   * @param centralSystem centralSystem
+   * Reads and parses the given XML file and pushes that data into the given
+   * CentralSystem. It extracts details such the name, time, location, online status, and
+   * invitees of an event within a schedule in order to actually create it in the CentralSystem.
+   *
+   * All of the given information through the XML file are formatted in a way to allow them
+   * to be read by the CentralSystem.
+   *
+   * @param filePath filePath of the XML file that needs to be read and parsed
+   * @param centralSystem centralSystem where all the data will be registered
    */
   public void loadScheduleFromFile(String filePath, CentralSystem centralSystem) {
     try {

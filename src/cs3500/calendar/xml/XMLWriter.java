@@ -16,15 +16,23 @@ import cs3500.calendar.model.Time;
 import cs3500.calendar.model.Schedule;
 
 /**
- * To represent an XML writer.
+ * This class represents an XMLWriter which essentially converts a given Schedule
+ * to a newly generated XML file. It functions by formatting the given Schedules
+ * events along with all of their details such as name, time, location, invitees, and
+ * online status into the format that a structured XML file holds.
  */
 public class XMLWriter {
 
   /**
-   * DIO ADD JAVADOC HERE.
-   * @param filePath filePath
-   * @param schedule schedule
-   * @throws Exception throws exception
+   * This method writes the Schedule that its given to an XML file at the given file path. It
+   * then proceeds by iterating over each event in the given schedule, along with all of its details
+   * such as the name, time, location, invitees, and online status of the event and converts that data
+   * to an XML format. The XML file that is created is then stored in the requested file path which either
+   * creates an XML file or overwrites it if an old version is present.
+   *
+   * @param filePath filePath where the XML document is saved
+   * @param schedule schedule which contains the events and data we want to store in our XML document
+   * @throws Exception throws exception if any errors occur during the process
    */
   public void writeScheduleToFile(String filePath, Schedule schedule) throws Exception {
     DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
