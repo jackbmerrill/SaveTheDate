@@ -5,6 +5,8 @@ import org.junit.Test;
 
 import cs3500.calendar.model.Day;
 import cs3500.calendar.model.Time;
+
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertThrows;
 import static org.junit.Assert.assertTrue;
@@ -52,5 +54,31 @@ public class TestTime {
     assertTrue(time1.isOverlap(time5));
     assertTrue(time2.isOverlap(time5));
     assertTrue(time5.isOverlap(time3));
+  }
+
+  //tests for formatTime method
+  @Test
+  public void testFormatTime() {
+    assertEquals("Should return time in HHMM format", "0900", Time.formatTime(900));
+    assertEquals("Should return time in HHMM format with 00 at the start for a double digit input",
+            "0015", Time.formatTime(15));
+    assertEquals("Should return time in HHMM format for midnight", "0000", Time.formatTime(0));
+    assertEquals("Should return time in HHMM format for max time", "2359", Time.formatTime(2359));
+  }
+
+  //tests for getStartTime and getEndTime methods
+  @Test
+  public void testGetStartTimeAndEndTime() {
+    Time time = new Time(Day.MONDAY, 900, Day.MONDAY, 1700);
+    assertEquals("Should return the start time", 900, time.getStartTime());
+    assertEquals("Should return the end time", 1700, time.getEndTime());
+  }
+
+  //tests for getStartDay and getEndDay methods
+  @Test
+  public void testGetStartAndEndDay() {
+    Time time = new Time(Day.TUESDAY, 1000, Day.WEDNESDAY, 1100);
+    assertEquals("Should return the start day", Day.TUESDAY, time.getStartDay());
+    assertEquals("Should return the end day", Day.WEDNESDAY, time.getEndDay());
   }
 }
