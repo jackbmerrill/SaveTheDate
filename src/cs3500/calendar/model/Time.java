@@ -52,8 +52,7 @@ public class Time {
     int otherEndTotalMins = other.endDay.order() * 1440 + other.endTime + (other.endDay.order() < other.startDay.order() ? 7 * 1440 : 0);
 
     //actually check for overlaps
-    boolean overlap = thisStartTotalMins < otherEndTotalMins && otherStartTotalMins < thisEndTotalMins;
-    return overlap;
+    return thisStartTotalMins < otherEndTotalMins && otherStartTotalMins < thisEndTotalMins;
   }
 
 

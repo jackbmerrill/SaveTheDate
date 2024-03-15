@@ -11,7 +11,7 @@ import static org.junit.Assert.assertTrue;
 
 
 /**
- * To test the public methods in the time class.
+ * To test the public methods in the time class. Most important is overlap.
  */
 public class TestTime {
 
@@ -38,7 +38,7 @@ public class TestTime {
             new Time(Day.MONDAY, 0, Day.TUESDAY, 1390));
   }
 
-  //inbetween another time,(another week, day, hour) overlapping end, overlapping start
+
   @Test
   public void testIsOverlap() {
     assertTrue(time2.isOverlap(time1));
