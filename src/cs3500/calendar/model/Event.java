@@ -25,17 +25,19 @@ public class Event implements IEvent {
    * @param time time of the even
    * @param location location of the event
    * @param users list of users
-   * @throws NullPointerException if any arguments are null
-   * @throws IllegalArgumentException if there are no users
+   * @throws IllegalArgumentException if there are no users or any argument is null
    */
   public Event(String name, Time time, Location location, List<String> users) {
-
-    this.name = Objects.requireNonNull(name);
-    this.time = Objects.requireNonNull(time);
-    this.location = Objects.requireNonNull(location);
-    if (Objects.requireNonNull(users).isEmpty()) {
-      throw new IllegalArgumentException("There cannot be no users.");
-    }
+    nullCheck(name);
+    nullCheck(time);
+    nullCheck(location);
+    nullCheck(users);
+      this.name = name;
+      this.time = time;
+      this.location = location;
+      if (users.isEmpty()) {
+        throw new IllegalArgumentException("There cannot be no users");
+      }
     this.users = new ArrayList<>(users);
   }
 
@@ -51,23 +53,33 @@ public class Event implements IEvent {
 
   @Override
   public void updateName(String name) {
-    this.name = Objects.requireNonNull(name);
+    nullCheck(name);
+    this.name = name;
+  }
+
+  private static void nullCheck(Object field) {
+    if (field == null) {
+      throw new IllegalArgumentException("Argument cannot be null");
+    }
   }
 
   @Override
   public void updateTime(Time time) {
-    this.time = Objects.requireNonNull(time);
+    nullCheck(time);
+    this.time = time;
   }
 
   @Override
   public void updateLocation(Location loc) {
-    this.location = Objects.requireNonNull(loc);
+    nullCheck(loc);
+    this.location = loc;
   }
 
   @Override
   public void updateUsers(List<String> users) {
-    if (Objects.requireNonNull(users).isEmpty()) {
-      throw new IllegalArgumentException("Users cannot be empty");
+    nullCheck(users);
+    if (users.isEmpty()) {
+      throw new IllegalArgumentException("There cannot be no users");
     }
     if (!users.get(0).equals(getHost())) {
       throw new IllegalArgumentException("Host cannot be changed.");

@@ -12,6 +12,7 @@ import cs3500.calendar.model.Location;
 import cs3500.calendar.model.Time;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertThrows;
 
 /**
  * To test the event class.
@@ -27,7 +28,7 @@ public class TestEvent {
   Location loc3 = new Location(false, "Jack's House");
   Location loc4 = new Location(false, "Milo's House");
 
-  List<String> list1 = new ArrayList<>(List.of());
+  List<String> list1 = new ArrayList<>(List.of("1201"));
   List<String> list2 = new ArrayList<>(List.of("1023"));
   List<String> list3 = new ArrayList<>(Arrays.asList("3024", "1023", "4035"));
   List<String> list4 = new ArrayList<>(Arrays.asList("4035", "4035", "9604", "5046", "6755"));
@@ -38,9 +39,25 @@ public class TestEvent {
   Event event4 = new Event("Event4", time4, loc4, list4);
 
 
+  @Test
+  public void testConstructor() {
+    assertThrows("Argument cannot be null", IllegalArgumentException.class, () ->
+            new Event(null, time1, loc1, list1));
+    assertThrows("Argument cannot be null", IllegalArgumentException.class, () ->
+            new Event("Event1", null, loc1, list1));
+    assertThrows("Argument cannot be null", IllegalArgumentException.class, () ->
+            new Event("Event1", time1, null, list1));
+    assertThrows("Argument cannot be null", IllegalArgumentException.class, () ->
+            new Event("event1", time1, loc1, null));
+    assertThrows("There cannot be no users", IllegalArgumentException.class, () ->
+            new Event("event1", time1, loc1, new ArrayList<>()));
+  }
+
   // to test that the update name method works properly
   @Test
   public void testUpdateName() {
+    assertThrows("Argument cannot be null", IllegalArgumentException.class, () ->
+            event1.updateName(null));
     event1.updateName("new name!!");
     assertEquals(event1.getName(), "new name!!");
     event1.updateName("extra new name");
@@ -52,6 +69,8 @@ public class TestEvent {
   // to test that the updateName method works properly
   @Test
   public void testUpdateTime() {
+    assertThrows("Argument cannot be null", IllegalArgumentException.class, () ->
+            event1.updateTime(null));
     assertEquals(event3.getTime(), time3);
     event3.updateTime(time4);
     assertEquals(event3.getTime(), time4);
@@ -63,6 +82,8 @@ public class TestEvent {
   // to test that the updateLocation method works properly
   @Test
   public void testUpdateLocation() {
+    assertThrows("Argument cannot be null", IllegalArgumentException.class, () ->
+            event1.updateLocation(null));
     assertEquals(event3.getLocation(), loc3);
     event3.updateLocation(loc4);
     assertEquals(event3.getLocation(), loc4);
@@ -74,15 +95,18 @@ public class TestEvent {
   // to test that the updateUsers method works properly
   @Test
   public void testUpdateUsers() {
+    assertThrows("Argument cannot be null", IllegalArgumentException.class, () ->
+            event1.updateUsers(null));
     assertEquals(event1.getUsers(), list1);
-    event1.updateUsers(list4);
-    assertEquals(event1.getUsers(), list4);
+    assertThrows("Cannot change host", IllegalArgumentException.class, () ->
+            event1.updateUsers(list4));
     assertEquals(event4.getUsers(), list4);
     event4.updateUsers(list4);
     assertEquals(event4.getUsers(), list4);
     assertEquals(event2.getUsers(), list2);
-    event2.updateUsers(list3);
-    assertEquals(event2.getUsers(), list3);
+    List<String> list = new ArrayList<>(Arrays.asList("1023", "3024"));
+    event2.updateUsers(list);
+    assertEquals(event2.getUsers(), list);
   }
 
   // to test that the getUsers method works properly
@@ -97,7 +121,7 @@ public class TestEvent {
   // to test that the getHost method works properly
   @Test
   public void testGetHost() {
-    assertEquals(event1.getHost(), "");
+    assertEquals(event1.getHost(), "1201");
     assertEquals(event2.getHost(), "1023");
     assertEquals(event3.getHost(), "3024");
     assertEquals(event4.getHost(), "4035");

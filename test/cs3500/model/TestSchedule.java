@@ -139,6 +139,8 @@ public class TestSchedule {
   // to test the getEvent method
   @Test
   public void testGetEvent() {
+    assertThrows(IllegalStateException.class, () -> schedule1111.getEvent(
+            "Event1"));
     schedule5046.addEvent(event1);
     schedule5046.addEvent(event2);
     schedule5046.addEvent(event3);
@@ -159,10 +161,10 @@ public class TestSchedule {
     schedule1021.addEvent(event8);
     List<Event> eventsAtTime1 = Collections.singletonList(event1);
     assertEquals(schedule1021.getEventsAtTime(time1), eventsAtTime1);
-    List<Event> eventsAtTime4 = Arrays.asList(event5, event6, event7, event8);
-    assertEquals(schedule1021.getEventsAtTime(time4), eventsAtTime4);
-    List<Event> eventsAtTimeNull = Arrays.asList(event1, event2, event5, event6, event7, event8);
-    assertEquals(schedule1021.getEventsAtTime(null), eventsAtTimeNull);
+    assertEquals(schedule1021.getEventsAtTime(time4),
+            new ArrayList<>(Arrays.asList(event5, event6, event7, event8)));
+    assertEquals(schedule1021.getEventsAtTime(null), new ArrayList<>(Arrays.asList(event1,
+            event2, event5, event6, event7, event8)));
   }
 }
 
