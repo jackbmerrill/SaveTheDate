@@ -57,10 +57,11 @@ public class TestCentralSystem {
   public void testAddUser() {
     central1.addUser("9604");
     assertTrue(central1.getSystem().containsKey("9604"));
-    central1.getSystem().get("9604").addEvent(event4);
     Schedule schedule9604 = central1.getSystem().get("9604");
-    assertEquals(central1.getSystem().get("9604").getEvent("Event4"),
-            event4);
+    assertTrue(schedule9604.getEventsAtTime(null).isEmpty());
+    central1.generateEvent("Event4", time4, loc4, List.of("9604"));
+    Schedule schedule = central1.getSystem().get("9604");
+    assertEquals(event4, schedule.getEvent("Event4"));
   }
 
   // to test the generateEvent method
@@ -74,8 +75,6 @@ public class TestCentralSystem {
               new Event("Random Event", time1, loc2, central1Users));
       assertEquals(central1.getSystem().get("3000").getEvent("Random Event"),
               new Event("Random Event", time1, loc2, central1Users));
-      //assertThrows(IllegalArgumentException.class, () -> central1.generateEvent("Conflicting",
-              //time2, loc2, central1Users));
     }
 
    // to test the updateEventName method
@@ -151,8 +150,6 @@ public class TestCentralSystem {
     central1.addEventToUser("Jack", "New Event");
     assertEquals(central1.getSystem().get("Jack").getEvent("New Event"),
             new Event("New Event", time6, loc4, List.of("Milo", "Jack")));
-    //assertThrows(IllegalStateException.class, () -> central1.addEventToUser("Nobody",
-            //"Unheard of Event"));
   }
 
   // to test the getEventsAtTime method
