@@ -25,6 +25,19 @@ public class Schedule implements ISchedule {
     this.eventMap = new HashMap<>();
   }
 
+  /**
+   * To represent a constructor for a schedule that takes in a schedule.
+   * Creates a copy of all of the events.
+   * @param other other schedule
+   */
+  public Schedule(Schedule other) {
+    this.userID = other.userID;
+    this.eventMap = new HashMap<>();
+    for (Event event : other.getEventsAtTime(null)) {
+      this.addEvent(event);
+    }
+  }
+
   @Override
   public void addEvent(Event event) throws IllegalStateException {
     Objects.requireNonNull(event);
@@ -155,6 +168,11 @@ public class Schedule implements ISchedule {
     }
 
     return eventsByDay;
+  }
+
+  @Override
+  public String getUserID() {
+    return userID;
   }
 }
 

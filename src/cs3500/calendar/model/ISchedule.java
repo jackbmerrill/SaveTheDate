@@ -81,4 +81,10 @@ public interface ISchedule {
    * @return A map of a Day to a list of events
    */
   Map<Day, List<Event>> getEventsByDay();
+
+  /**
+   * Returns the user ID of the current schedule
+   * @return the user ID
+   */
+  String getUserID();
 }

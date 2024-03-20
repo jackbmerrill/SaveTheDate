@@ -52,6 +52,8 @@ public class TestTextualView {
             view.contains("Prof. Lucia") && view.contains("Student Anon") && view.contains(
                     "Chat"));
   }
+
+
   @Test
   public void testTextualViewOneUser() {
     CentralSystem centralSystem = new CentralSystem();
@@ -67,9 +69,13 @@ public class TestTextualView {
 
     System.out.println(view);
 
-    assertTrue("Textual view should contain Morning Jog event", view.contains("Morning Jog"));
-    assertTrue("Textual view should contain Evening Yoga event", view.contains("Evening Yoga"));
-    assertTrue("Textual view should mention Park location for Morning Jog", view.contains("Park"));
-    assertTrue("Textual view should mention Yoga Studio location for Evening Yoga", view.contains("Yoga Studio"));
+    assertTrue("Textual view should contain Morning Jog event",
+            view.contains("Morning Jog"));
+    assertTrue("Textual view should contain Evening Yoga event",
+            view.contains("Evening Yoga"));
+    assertTrue("Textual view should mention Park location for Morning Jog",
+            view.contains("Park"));
+    assertTrue("Textual view should mention Yoga Studio location for Evening Yoga",
+            view.contains("Yoga Studio"));
   }
 }

@@ -10,7 +10,7 @@ import java.util.Map;
  * them as desired by each user. Can add, remove, and modify events, as well as take in
  * an XML file and produce one of the schedule.
  */
-public interface ICentralSystem {
+public interface ICentralSystem extends ReadOnlyCentralSystem {
 
   /**
    * To add a user to the central system with their schedule.
@@ -104,20 +104,4 @@ public interface ICentralSystem {
    */
   void saveSchedulesToXML(String directoryPath, List<String> userIDs) throws IOException;
 
-
-  /**
-   * Returns all events at the given time. All events that are within this time frame are
-   * returned, empty is returned if no events exist.
-   * @param time the desired time
-   * @param userId the unique id of the user
-   * @return list of events at this time, returns empty if no events
-   * @throws IllegalStateException if user does not exist in system
-   */
-  List<Event> getEventsAtTime(String userId, Time time);
-
-  /**
-   * To get a copy of the central system.
-   * @return a copy of the current state of the central system
-   */
-  Map<String, Schedule> getSystem();
 }
