@@ -194,4 +194,19 @@ public class TestCentralSystem {
     assertThrows(IllegalStateException.class, () -> central1.removeEvent("John",
             "GoingToRemove"));
   }
+
+  @Test
+  public void testGetUsers() {
+    assertEquals(new ArrayList<String>(), central1.getUsers());
+    central1.addUser("Jack");
+    central1.addUser("Milo");
+    central1.addUser("Dio");
+    assertEquals(new ArrayList<String>(Arrays.asList("Milo", "Dio", "Jack")),
+            central1.getUsers());
+  }
+
+  @Test
+  public void testEventConflict() {
+
+  }
 }

@@ -172,4 +172,22 @@ public class CentralSystem implements ICentralSystem {
     Schedule userSchedule = system.get(userID);
     return new Schedule(userSchedule);
   }
+
+  @Override
+  public List<String> getUsers() {
+    return new ArrayList<>(system.keySet());
+  }
+
+  @Override
+  public boolean eventConflict(Time time, List<String> users) {
+    for (String user : users) {
+      if (!system.containsKey(user)) {
+        continue;
+      }
+      if (!getEventsAtTime(user, time).isEmpty()) {
+        return true;
+      }
+    }
+    return false;
+  }
 }

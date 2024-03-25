@@ -35,17 +35,20 @@ public interface ReadOnlyCentralSystem {
   Schedule getUserSchedule(String userID);
 
   /**
-   * To get a copy of all the users in the central system
-   * @return a list of all the users in the central system
+   * Returns a list of all userIds within the system to the user. Each user ID is a unique
+   * string. Can be used to view all users.
+   * @return A list of all users in the system
    */
-  List<String> getAllUsers();
+  List<String> getUsers();
 
 
   /**
-   * Does the given event have a conflict with any events exisitng in any of the users
-   * schedules who are invited? If so, return true, if not return false.
-   * @param event the event in question
-   * @return True iff no conflict
+   * Does the given time have a conflict with any events exisitng in any of the users
+   * schedules who are invited? Checks all users schedules for conflict. If so, return true,
+   * if not return false.
+   * @param time the time of the event in question
+   * @param users the users who are invited to the event
+   * @return True iff there is a conflict, otherwise returns false
    */
-  boolean EventConflict(Event event);
+  boolean eventConflict(Time time, List<String> users);
 }

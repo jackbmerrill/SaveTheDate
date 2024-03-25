@@ -20,7 +20,7 @@ public interface ICentralSystem extends ReadOnlyCentralSystem {
 
   /**
    * Generates a new event with the given details and adds it to the schedule of the
-   * specified users.
+   * specified users. Any conflicts will throw an error for all users.
    * @param name the name of the event
    * @param time the time of the event
    * @param location the location of the event
@@ -81,7 +81,6 @@ public interface ICentralSystem extends ReadOnlyCentralSystem {
    */
   void addEventToUser(String userID, String eventName);
 
-
   /**
    * Load schedules from an XML file and update the CentralSystem with its data.
    * Read schedules from the specific XML file and use them to update or add schedules
@@ -103,5 +102,6 @@ public interface ICentralSystem extends ReadOnlyCentralSystem {
    *                         not exist in the system.
    */
   void saveSchedulesToXML(String directoryPath, List<String> userIDs) throws IOException;
+
 
 }

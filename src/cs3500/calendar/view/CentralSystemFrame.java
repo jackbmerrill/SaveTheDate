@@ -35,7 +35,7 @@ public class CentralSystemFrame extends JFrame {
     schedulePanel = new JPanel();
 
     //users and schedules
-    for (String user : model.getAllUsers()) {
+    for (String user : model.getUsers()) {
       userScheduleDropdown.addItem(user);
     }
   }
