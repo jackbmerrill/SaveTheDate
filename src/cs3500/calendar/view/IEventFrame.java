@@ -18,6 +18,20 @@ public interface IEventFrame {
    * a message stating some kind of error. What that error message contains is up to you.
    */
 
+
+  /**
+   * Makes the view visible to the user. Shows itself.
+   */
+  void makeVisible();
+
+  /**
+   * Signal the view to draw itself and updates the view.
+   */
+  void refresh();
+
+
+
+
   // printing create event details when clicking on the create event button
 
   // printing the remove event details when clicking on the remove event button
