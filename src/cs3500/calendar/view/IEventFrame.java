@@ -20,7 +20,7 @@ public interface IEventFrame {
 
 
   /**
-   * Makes the view visible to the user. Shows itself.
+   * Makes the view visible to the user. Shows itself, the current user's event frame.
    */
   void makeVisible();
 
@@ -30,6 +30,21 @@ public interface IEventFrame {
   void refresh();
 
 
+  /**
+   * To modify the given event.
+   */
+  void modifyEvent();
+
+  /**
+   * To remove the event from the corresponding user schedule.
+   */
+  void removeEvent();
+
+  /**
+   * To close the window, but does not stop the program. All info that is not saved
+   * is discarded and forgotten.
+   */
+  void closeWindow();
 
 
   // printing create event details when clicking on the create event button
