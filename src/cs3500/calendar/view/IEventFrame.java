@@ -1,5 +1,7 @@
 package cs3500.calendar.view;
 
+import cs3500.calendar.model.Event;
+
 /**
  * To describe what the event’s frame is capable of.
  */
@@ -45,6 +47,12 @@ public interface IEventFrame {
    * is discarded and forgotten.
    */
   void closeWindow();
+
+  /**
+   * Takes in the given event, and updates the event frame with all the given info of the event.
+   * @param event the given event.
+   */
+  void inputEvent(Event event);
 
 
   // printing create event details when clicking on the create event button
