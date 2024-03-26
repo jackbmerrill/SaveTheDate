@@ -9,7 +9,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 
-public class CentralSystemFrame extends JFrame {
+public class CentralSystemFrame extends JFrame implements ICentralSystemPanel {
   private ReadOnlyCentralSystem model;
   private JComboBox<String> userScheduleDropdown;
   private JButton loadButton;
@@ -79,5 +79,45 @@ public class CentralSystemFrame extends JFrame {
         }
       }
     });
+  }
+
+  @Override
+  public void makeVisible() {
+
+  }
+
+  @Override
+  public void refresh() {
+
+  }
+
+  @Override
+  public void selectUser() {
+
+  }
+
+  @Override
+  public void createEvent() {
+
+  }
+
+  @Override
+  public void scheduleEvent() {
+
+  }
+
+  @Override
+  public void addCalendar() {
+
+  }
+
+  @Override
+  public void saveCalendar() {
+
+  }
+
+  @Override
+  public void selectEvent() {
+
   }
 }

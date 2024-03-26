@@ -1,13 +1,16 @@
 package cs3500.calendar.view;
+import java.util.ArrayList;
 import java.util.List;
 
 import java.awt.*;
 
 import javax.swing.*;
 
-import cs3500.calendar.model.CentralSystem;
 import cs3500.calendar.model.Day;
 import cs3500.calendar.model.Event;
+import cs3500.calendar.model.Location;
+import cs3500.calendar.model.ReadOnlyCentralSystem;
+import cs3500.calendar.model.Time;
 
 /**
  * To represent a EventFrame which implements all the public methods from IEventFrame.
@@ -19,20 +22,41 @@ public class EventFrame extends JFrame implements IEventFrame {
   private JTextField eventNameTextBox;
   private JPanel locationPanel;
   private JCheckBox isOnline;
+  private JTextField locationTextBox;
   private JPanel timePanel;
-  private JTextField StartingTimeTextBox;
-  private JComboBox<Day> StartingDayDropdown;
-  private JTextField EndingTimeTextBox;
-  private JComboBox<Day> EndingDayDropdown;
+  private JTextField startingTimeTextBox;
+  private JComboBox<Day> startingDayDropdown;
+  private JTextField endingTimeTextBox;
+  private JComboBox<Day> endingDayDropdown;
   private JPanel userPanel;
-  private JComboBox<String> availableUserDropdown;
-  private List<String> allUsers;
+  private JList<String> availableUserDropdown;
+  private ReadOnlyCentralSystem readOnlyCentralSystem;
   private JPanel buttonPanel;
   private JButton modifyEventButton, removeEventButton;
+  private Event event;
 
-  public EventFrame(List<String> users) {
+  public EventFrame(ReadOnlyCentralSystem readOnlyCentralSystem) {
     super();
-    this.allUsers = users;
+    initialize(readOnlyCentralSystem);
+  }
+
+  public EventFrame(ReadOnlyCentralSystem readOnlyCentralSystem, Event event) {
+    super();
+    this.event = event;
+    initialize(readOnlyCentralSystem);
+    eventNameTextBox.setText(event.getName());
+    Location loc = event.getLocation();
+    isOnline.setSelected(loc.isOnline());
+    locationTextBox.setText(loc.getPlace());
+    Time time = event.getTime();
+    startingDayDropdown.setSelectedItem(time.getStartDay());
+    endingDayDropdown.setSelectedItem(time.getEndDay());
+    startingTimeTextBox.setText(Integer.toString(time.getStartTime()));
+    endingTimeTextBox.setText(Integer.toString(time.getEndTime()));
+  }
+
+  private void initialize(ReadOnlyCentralSystem readOnlyCentralSystem) {
+    this.readOnlyCentralSystem = readOnlyCentralSystem;
     setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
     setLayout(new BoxLayout(getContentPane(), BoxLayout.Y_AXIS));
     setEventNamePanel();
@@ -56,6 +80,8 @@ public class EventFrame extends JFrame implements IEventFrame {
     locationPanel = new JPanel();
     locationPanel.setBorder(BorderFactory.createTitledBorder("Location:"));
     isOnline = new JCheckBox("Is Online");
+    locationTextBox = new JTextField(10);
+    locationPanel.add(locationTextBox);
     locationPanel.add(isOnline);
     add(locationPanel);
   }
@@ -64,28 +90,52 @@ public class EventFrame extends JFrame implements IEventFrame {
     timePanel = new JPanel();
     timePanel.setLayout(new GridLayout(4, 2, 5, 5));
     timePanel.setBorder(BorderFactory.createTitledBorder("Time:"));
-    StartingDayDropdown = new JComboBox<>(Day.values());
-    StartingTimeTextBox = new JTextField(5);
-    EndingDayDropdown = new JComboBox<>(Day.values());
-    EndingTimeTextBox = new JTextField(5);
+    startingDayDropdown = new JComboBox<>(Day.values());
+    startingTimeTextBox = new JTextField(5);
+    endingDayDropdown = new JComboBox<>(Day.values());
+    endingTimeTextBox = new JTextField(5);
     timePanel.add(new JLabel("Starting Day:"));
-    timePanel.add(StartingDayDropdown);
+    timePanel.add(startingDayDropdown);
     timePanel.add(new JLabel("Starting time:"));
-    timePanel.add(StartingTimeTextBox);
+    timePanel.add(startingTimeTextBox);
     timePanel.add(new JLabel("Ending Day:"));
-    timePanel.add(EndingDayDropdown);
+    timePanel.add(endingDayDropdown);
     timePanel.add(new JLabel("Ending time:"));
-    timePanel.add(EndingTimeTextBox);
+    timePanel.add(endingTimeTextBox);
     add(timePanel);
   }
 
   private void setUserPanel() {
     userPanel = new JPanel();
     userPanel.setBorder(BorderFactory.createTitledBorder("Available users"));
-    availableUserDropdown = new JComboBox<String>(allUsers);
-    userPanel.add(availableUserDropdown);
+    List<String> users = new ArrayList<>(readOnlyCentralSystem.getUsers());
+    if (!users.isEmpty()) {
+      users.remove(0);
+    }
+    availableUserDropdown = new JList<>(users.toArray(new String[0]));
+
+    if (this.event != null) {
+      List<String> eventUsers = event.getUsers();
+      List<Integer> selectedIndices = new ArrayList<>();
+
+      for (String user : eventUsers) {
+        int index = users.indexOf(user);
+        if (index != -1) {
+          selectedIndices.add(index);
+        }
+      }
+      int[] indices = selectedIndices.stream().mapToInt(i -> i).toArray();
+      availableUserDropdown.setSelectedIndices(indices);
+    }
+
+    JScrollPane scrollPane = new JScrollPane(availableUserDropdown);
+    scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
+    scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+    userPanel.add(scrollPane, BorderLayout.CENTER);
     add(userPanel);
   }
+
+
 
   private void setEventButtons() {
     buttonPanel = new JPanel();
@@ -114,12 +164,11 @@ public class EventFrame extends JFrame implements IEventFrame {
 
   @Override
   public void removeEvent() {
-
   }
 
   @Override
   public void closeWindow() {
-
+    this.dispose();
   }
 
   @Override
