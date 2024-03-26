@@ -26,13 +26,13 @@ public class EventFrame extends JFrame implements IEventFrame {
   private JComboBox<Day> EndingDayDropdown;
   private JPanel userPanel;
   private JComboBox<String> availableUserDropdown;
-  private CentralSystem centralSystem;
+  private List<String> allUsers;
   private JPanel buttonPanel;
   private JButton modifyEventButton, removeEventButton;
 
-  public EventFrame(CentralSystem centralSystem) {
+  public EventFrame(List<String> users) {
     super();
-    this.centralSystem = centralSystem;
+    this.allUsers = users;
     setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
     setLayout(new BoxLayout(getContentPane(), BoxLayout.Y_AXIS));
     setEventNamePanel();
@@ -82,8 +82,7 @@ public class EventFrame extends JFrame implements IEventFrame {
   private void setUserPanel() {
     userPanel = new JPanel();
     userPanel.setBorder(BorderFactory.createTitledBorder("Available users"));
-    List<String> users = centralSystem.getUsers();
-    availableUserDropdown = new JComboBox<>(users.toArray(new String[0]));
+    availableUserDropdown = new JComboBox<String>(allUsers);
     userPanel.add(availableUserDropdown);
     add(userPanel);
   }
