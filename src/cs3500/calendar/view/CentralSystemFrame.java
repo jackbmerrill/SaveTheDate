@@ -43,7 +43,7 @@ public class CentralSystemFrame extends JFrame implements ICentralSystemPanel {
     saveButton = new JButton("Save XML");
     createEventButton = new JButton("Create Event");
     scheduleEventButton = new JButton("Schedule Event");
-    this.schedulePanel = new SchedulePanel(new Schedule("<None>"));
+    this.schedulePanel = new SchedulePanel(new Schedule("<None>"), this.model);
     this.setResizable(false);
 
     //users and schedules
