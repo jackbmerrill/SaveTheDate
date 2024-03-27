@@ -35,60 +35,54 @@ public class XMLReader {
    */
   public void loadScheduleFromFile(String filePath, CentralSystem centralSystem) {
     try {
-      File xmlFile = new File(filePath);
-      DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
-      DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
-      Document doc = dBuilder.parse(xmlFile);
-      doc.getDocumentElement().normalize();
-      NodeList nList = doc.getElementsByTagName("event");
-      for (int i = 0; i < nList.getLength(); i++) {
-        Node nNode = nList.item(i);
-        if (nNode.getNodeType() == Node.ELEMENT_NODE) {
-          Element element = (Element) nNode;
-          //extract event details and clean them up
-          String name = element.getElementsByTagName("name").item(0).getTextContent();
-          name = name.startsWith("\"") && name.endsWith("\"")
-                  ? name.substring(1, name.length() - 1) : name;
-
-          String startDay = element.getElementsByTagName("start-day").item(0).
-                  getTextContent().toUpperCase();
-
-          String startTime = element.getElementsByTagName("start").item(0).getTextContent();
-
-          String endDay = element.getElementsByTagName("end-day").item(0).getTextContent().
-                  toUpperCase();
-
-          String endTime = element.getElementsByTagName("end").item(0).getTextContent();
-
-          String locationPlace = element.getElementsByTagName("place").item(0).
-                  getTextContent();
-          locationPlace = locationPlace.startsWith("\"") && locationPlace.endsWith("\"") ?
-                  locationPlace.substring(1, locationPlace.length() - 1) : locationPlace;
-          boolean isOnline = Boolean.parseBoolean(element.getElementsByTagName("online").
-                  item(0).getTextContent());
-
-          //extract users and cleanup their UIDs
-          List<String> users = new ArrayList<>();
-          NodeList usersList = element.getElementsByTagName("uid");
-          for (int j = 0; j < usersList.getLength(); j++) {
-            String user = usersList.item(j).getTextContent();
-            user = user.startsWith("\"") && user.endsWith("\"")
-                    ? user.substring(1, user.length() - 1) : user;
-            users.add(user);
-          }
-          //convert start and end times to integers
-          int startTimeInt = Integer.parseInt(startTime);
-          int endTimeInt = Integer.parseInt(endTime);
-          Day startDayEnum = Day.valueOf(startDay);
-          Day endDayEnum = Day.valueOf(endDay);
-          Time eventTime = new Time(startDayEnum, startTimeInt, endDayEnum, endTimeInt);
-          Location eventLocation = new Location(isOnline, locationPlace);
-          centralSystem.generateEvent(name, eventTime, eventLocation, users);
+      Document doc = parseXMLFile(filePath);
+      NodeList events = doc.getElementsByTagName("event");
+      for (int i = 0; i < events.getLength(); i++) {
+        Node node = events.item(i);
+        if (node.getNodeType() == Node.ELEMENT_NODE) {
+          processEventElement((Element) node, centralSystem);
         }
       }
     } catch (Exception e) {
       e.printStackTrace();
     }
+  }
+
+  private Document parseXMLFile(String filePath) throws Exception {
+    File xmlFile = new File(filePath);
+    DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
+    DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
+    Document doc = dBuilder.parse(xmlFile);
+    doc.getDocumentElement().normalize();
+    return doc;
+  }
+
+  private void processEventElement(Element element, CentralSystem centralSystem) {
+    String name = cleanString(element.getElementsByTagName("name").item(0).getTextContent());
+    Day startDay = Day.valueOf(cleanString(element.getElementsByTagName("start-day").item(0).getTextContent()).toUpperCase());
+    Day endDay = Day.valueOf(cleanString(element.getElementsByTagName("end-day").item(0).getTextContent()).toUpperCase());
+    int startTime = Integer.parseInt(element.getElementsByTagName("start").item(0).getTextContent());
+    int endTime = Integer.parseInt(element.getElementsByTagName("end").item(0).getTextContent());
+    String location = cleanString(element.getElementsByTagName("place").item(0).getTextContent());
+    boolean isOnline = Boolean.parseBoolean(element.getElementsByTagName("online").item(0).getTextContent());
+    List<String> users = extractUsers(element.getElementsByTagName("uid"));
+
+    Time eventTime = new Time(startDay, startTime, endDay, endTime);
+    Location eventLocation = new Location(isOnline, location);
+    centralSystem.generateEvent(name, eventTime, eventLocation, users);
+  }
+
+  private String cleanString(String s) {
+    return s.startsWith("\"") && s.endsWith("\"") ? s.substring(1, s.length() - 1) : s;
+  }
+
+  private List<String> extractUsers(NodeList nodeList) {
+    List<String> users = new ArrayList<>();
+    for (int i = 0; i < nodeList.getLength(); i++) {
+      String user = cleanString(nodeList.item(i).getTextContent());
+      users.add(user);
+    }
+    return users;
   }
 }
 

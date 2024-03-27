@@ -37,64 +37,80 @@ public class XMLWriter {
    *                XML document
    * @throws IOException throws exception if any errors occur during the process
    */
+
   public void writeScheduleToFile(String filePath, Schedule schedule, String scheduleId)
           throws IOException {
     try {
-      DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
-      DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
-      Document doc = dBuilder.newDocument();
-      //root schedule creation
-      Element rootElement = doc.createElement("schedule");
-      rootElement.setAttribute("id", scheduleId);
-      doc.appendChild(rootElement);
+      Document doc = createDocument();
+      Element rootElement = createRootElement(doc, scheduleId);
       for (Event event : schedule.getEventsAtTime(null)) {
-        Element eventElement = doc.createElement("event");
+        Element eventElement = createEventElement(doc, event);
         rootElement.appendChild(eventElement);
-        //append elements
-        Element name = doc.createElement("name");
-        name.appendChild(doc.createTextNode("\"" + event.getName() + "\""));
-        eventElement.appendChild(name);
-        Element timeElement = doc.createElement("time");
-        eventElement.appendChild(timeElement);
-        Element startDayElement = doc.createElement("start-day");
-        startDayElement.appendChild(doc.createTextNode(event.getTime().getStartDay().toString()));
-        timeElement.appendChild(startDayElement);
-        Element startTimeElement = doc.createElement("start");
-        startTimeElement.appendChild(doc.createTextNode(Time.formatTime(event.getTime().
-                getStartTime())));
-        timeElement.appendChild(startTimeElement);
-        Element endDayElement = doc.createElement("end-day");
-        endDayElement.appendChild(doc.createTextNode(event.getTime().getEndDay().toString()));
-        timeElement.appendChild(endDayElement);
-        Element endTimeElement = doc.createElement("end");
-        endTimeElement.appendChild(doc.createTextNode(Time.formatTime(event.getTime().
-                getEndTime())));
-        timeElement.appendChild(endTimeElement);
-        Element locationElement = doc.createElement("location");
-        eventElement.appendChild(locationElement);
-        Element onlineElement = doc.createElement("online");
-        onlineElement.appendChild(doc.createTextNode(Boolean.toString(event.getLocation().
-                isOnline())));
-        locationElement.appendChild(onlineElement);
-        Element placeElement = doc.createElement("place");
-        placeElement.appendChild(doc.createTextNode("\"" + event.getLocation().getPlace() + "\""));
-        locationElement.appendChild(placeElement);
-        Element usersElement = doc.createElement("users");
-        eventElement.appendChild(usersElement);
-        for (String user : event.getUsers()) {
-          Element userElement = doc.createElement("uid");
-          userElement.appendChild(doc.createTextNode("\"" + user + "\""));
-          usersElement.appendChild(userElement);
-        }
       }
-      TransformerFactory transformerFactory = TransformerFactory.newInstance();
-      Transformer transformer = transformerFactory.newTransformer();
-      transformer.setOutputProperty(OutputKeys.INDENT, "yes");
-      DOMSource source = new DOMSource(doc);
-      StreamResult result = new StreamResult(new File(filePath));
-      transformer.transform(source, result);
+      writeDocumentToFile(doc, filePath);
     } catch (Exception e) {
       throw new IOException("Error writing XML file: " + filePath, e);
     }
+  }
+
+  private Document createDocument() throws Exception {
+    DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
+    DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
+    return dBuilder.newDocument();
+  }
+
+  private Element createRootElement(Document doc, String scheduleId) {
+    Element rootElement = doc.createElement("schedule");
+    rootElement.setAttribute("id", scheduleId);
+    doc.appendChild(rootElement);
+    return rootElement;
+  }
+
+  private Element createEventElement(Document doc, Event event) {
+    Element eventElement = doc.createElement("event");
+    addElementWithText(doc, eventElement, "name", "\"" + event.getName() + "\"");
+    addTimeElements(doc, eventElement, event);
+    addLocationElements(doc, eventElement, event);
+    addUserElements(doc, eventElement, event);
+    return eventElement;
+  }
+
+  private void addElementWithText(Document doc, Element parent, String tagName, String text) {
+    Element element = doc.createElement(tagName);
+    element.appendChild(doc.createTextNode(text));
+    parent.appendChild(element);
+  }
+
+  private void addTimeElements(Document doc, Element parent, Event event) {
+    Element timeElement = doc.createElement("time");
+    parent.appendChild(timeElement);
+    addElementWithText(doc, timeElement, "start-day", event.getTime().getStartDay().toString());
+    addElementWithText(doc, timeElement, "start", Time.formatTime(event.getTime().getStartTime()));
+    addElementWithText(doc, timeElement, "end-day", event.getTime().getEndDay().toString());
+    addElementWithText(doc, timeElement, "end", Time.formatTime(event.getTime().getEndTime()));
+  }
+
+  private void addLocationElements(Document doc, Element parent, Event event) {
+    Element locationElement = doc.createElement("location");
+    parent.appendChild(locationElement);
+    addElementWithText(doc, locationElement, "online", Boolean.toString(event.getLocation().isOnline()));
+    addElementWithText(doc, locationElement, "place", "\"" + event.getLocation().getPlace() + "\"");
+  }
+
+  private void addUserElements(Document doc, Element parent, Event event) {
+    Element usersElement = doc.createElement("users");
+    parent.appendChild(usersElement);
+    for (String user : event.getUsers()) {
+      addElementWithText(doc, usersElement, "uid", "\"" + user + "\"");
+    }
+  }
+
+  private void writeDocumentToFile(Document doc, String filePath) throws Exception {
+    TransformerFactory transformerFactory = TransformerFactory.newInstance();
+    Transformer transformer = transformerFactory.newTransformer();
+    transformer.setOutputProperty(OutputKeys.INDENT, "yes");
+    DOMSource source = new DOMSource(doc);
+    StreamResult result = new StreamResult(new File(filePath));
+    transformer.transform(source, result);
   }
 }
