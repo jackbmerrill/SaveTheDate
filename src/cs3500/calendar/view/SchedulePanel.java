@@ -10,7 +10,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.List;
-import javax.swing.*;
+import javax.swing.JPanel;
 import cs3500.calendar.model.Day;
 import cs3500.calendar.model.Event;
 import cs3500.calendar.model.ReadOnlyCentralSystem;
