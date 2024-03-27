@@ -9,7 +9,7 @@ import java.awt.Color;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.List;
-import javax.swing.JPanel;
+import javax.swing.*;
 import cs3500.calendar.model.Day;
 import cs3500.calendar.model.Event;
 import cs3500.calendar.model.ReadOnlyCentralSystem;
@@ -17,17 +17,17 @@ import cs3500.calendar.model.Schedule;
 import cs3500.calendar.model.Time;
 
 /**
- * To represent a schedule panel.
+ *
  */
-public class SchedulePanel extends JPanel implements MouseListener {
+public class SchedulePanel extends JPanel implements MouseListener, ISchedulePanel {
 
   private Schedule schedule;
   private final ReadOnlyCentralSystem system;
 
   /**
-   * Constructor for schedule panel.
-   * @param schedule schedule
-   * @param system system
+   *
+   * @param schedule
+   * @param system
    */
   public SchedulePanel(Schedule schedule, ReadOnlyCentralSystem system) {
     super();
@@ -37,6 +37,7 @@ public class SchedulePanel extends JPanel implements MouseListener {
     addMouseListener(this);
   }
 
+  @Override
   public void updateSchedule(Schedule schedule) {
     this.schedule = schedule;
     this.repaint();
@@ -80,15 +81,22 @@ public class SchedulePanel extends JPanel implements MouseListener {
       }
       if (time.getStartDay().order() < time.getEndDay().order()) {
         g2d.fillRect((time.getStartDay().order() - 1) * 100, convertTime(time.getStartTime()),
-                100, getHeight() - convertTime(time.getStartTime()));
+                100, 24 * 25 - convertTime(time.getStartTime()));
         for (int days = time.getStartDay().order() + 1; days < time.getEndDay().order(); days++) {
           g2d.fillRect((days - 1) * 100, 0,
-                  100, getHeight());
+                  100, 25 * 24);
         }
         g2d.fillRect((time.getEndDay().order() - 1) * 100, 0,
                 100, convertTime(time.getEndTime()));
       }
-
+      if (time.getStartDay().order() > time.getEndDay().order()) {
+        g2d.fillRect((time.getStartDay().order() - 1) * 100, convertTime(time.getStartTime()),
+                100, 24 * 25 - convertTime(time.getStartTime()));
+        for (int days = time.getStartDay().order() + 1; days < 8; days++) {
+          g2d.fillRect((days - 1) * 100, 0,
+                  100, 24 * 25);
+        }
+      }
     }
   }
 
@@ -127,21 +135,21 @@ public class SchedulePanel extends JPanel implements MouseListener {
 
   @Override
   public void mousePressed(MouseEvent e) {
-    return;
+
   }
 
   @Override
   public void mouseReleased(MouseEvent e) {
-    return;
+
   }
 
   @Override
   public void mouseEntered(MouseEvent e) {
-    return;
+
   }
 
   @Override
   public void mouseExited(MouseEvent e) {
-    return;
+
   }
 }

@@ -14,9 +14,14 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 /**
- * To represent the frame for the central system.
+ * To represent the frame for the central system. Is unable to directly modify the model,
+ * only able to access the observable features. The central system frame consists of four
+ * buttons, enabling creation and scheduling of events, and import and export of XMLs.
+ * The schedule panel handles direct interaction with existing events and is a core component
+ * of the central frame. The frame is unable to be resized and upon closing, quits the program.
+ * The current user can also be switched via dropdown.
  */
-public class CentralSystemFrame extends JFrame implements ICentralSystemPanel {
+public class CentralSystemFrame extends JFrame implements ICentralSystemFrame {
   private final ReadOnlyCentralSystem model;
   private JComboBox<String> userScheduleDropdown;
   private JButton loadButton;
@@ -27,7 +32,8 @@ public class CentralSystemFrame extends JFrame implements ICentralSystemPanel {
   private SchedulePanel schedulePanel;
 
   /**
-   * Constructor for the central system frame.
+   * Constructor for the central system frame. Takes in a read only central system to
+   * display the view without being able to modify any aspects of the model.
    * @param model the calendar model
    */
   public CentralSystemFrame(ReadOnlyCentralSystem model) {
@@ -110,7 +116,8 @@ public class CentralSystemFrame extends JFrame implements ICentralSystemPanel {
     createEventButton.addActionListener(new ActionListener() {
       @Override
       public void actionPerformed(ActionEvent e) {
-        IEventFrame eventFrame = new EventFrame(model);
+        IEventFrame eventFrame = new EventFrame(model,
+                userScheduleDropdown.getSelectedItem().toString());
         eventFrame.makeVisible();
       }
     });
@@ -118,15 +125,15 @@ public class CentralSystemFrame extends JFrame implements ICentralSystemPanel {
     scheduleEventButton.addActionListener(new ActionListener() {
       @Override
       public void actionPerformed(ActionEvent e) {
-        IEventFrame eventFrame = new EventFrame(model);
+        IEventFrame eventFrame = new EventFrame(model,
+                userScheduleDropdown.getSelectedItem().toString());
         eventFrame.makeVisible();
       }
     });
   }
 
   @Override
-  public void makeVisible() {
-    this.setVisible(true);
+  public void makeVisible(boolean visible) {
+    this.setVisible(visible);
   }
-
 }

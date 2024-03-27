@@ -22,8 +22,11 @@ import cs3500.calendar.model.ReadOnlyCentralSystem;
 import cs3500.calendar.model.Time;
 
 /**
- * To represent a EventFrame which implements all the public methods from IEventFrame.
- * This class helps to describe what the event’s frame is capable of.
+ * Implementation of an Event Frame, see IEventFrame. This frame is unable to be resized,
+ * and will in future assignments connect to the controller with the listeners. The host
+ * is always at the top of the list of users and is already selected. When creating an
+ * event frame, if no event is provided, all fields will be left blank. Otherwise, all
+ * event details will be filled in.
  */
 public class EventFrame extends JFrame implements IEventFrame {
 
@@ -37,23 +40,32 @@ public class EventFrame extends JFrame implements IEventFrame {
   private JList<String> availableUserDropdown;
   private ReadOnlyCentralSystem readOnlyCentralSystem;
   private Event event;
+  private String host;
 
   /**
-   * Event frame constructor that takes in only a readOnlyCentralSystem.
+   * Event frame constructor that takes in only a readOnlyCentralSystem and the host of
+   * the event. Initializes the event frame and creates all the required text boxes. Sets
+   * the host of the event.
    * @param readOnlyCentralSystem readOnlyCentralSystem
+   * @param host the host of the event
    */
-  public EventFrame(ReadOnlyCentralSystem readOnlyCentralSystem) {
+  public EventFrame(ReadOnlyCentralSystem readOnlyCentralSystem, String host) {
     super();
+    this.host = host;
     initialize(readOnlyCentralSystem);
   }
 
   /**
-   * Event frame constructor that takes in a readOnlyCentralSystem and an event.
+   * Event frame constructor that takes in a readOnlyCentralSystem and an event. Takes the
+   * info from the provided event and fills in all the required details to all the different
+   * panels.
    * @param readOnlyCentralSystem readOnlyCentralSystem
+   * @param event the event to be edited
    */
   public EventFrame(ReadOnlyCentralSystem readOnlyCentralSystem, Event event) {
     super();
     this.event = event;
+    this.host = this.event.getHost();
     initialize(readOnlyCentralSystem);
     eventNameTextBox.setText(event.getName());
     Location loc = event.getLocation();
@@ -120,9 +132,10 @@ public class EventFrame extends JFrame implements IEventFrame {
     JPanel userPanel = new JPanel();
     userPanel.setBorder(BorderFactory.createTitledBorder("Available users"));
     List<String> users = new ArrayList<>(readOnlyCentralSystem.getUsers());
-    if (!users.isEmpty()) {
-      users.remove(0);
-    }
+
+    users.remove(this.host);
+    users.add(0, this.host);
+
     availableUserDropdown = new JList<>(users.toArray(new String[0]));
 
     if (this.event != null) {
@@ -135,8 +148,11 @@ public class EventFrame extends JFrame implements IEventFrame {
           selectedIndices.add(index);
         }
       }
+
       int[] indices = selectedIndices.stream().mapToInt(i -> i).toArray();
       availableUserDropdown.setSelectedIndices(indices);
+    } else {
+      availableUserDropdown.setSelectedIndex(0);
     }
 
     JScrollPane scrollPane = new JScrollPane(availableUserDropdown);
@@ -183,8 +199,4 @@ public class EventFrame extends JFrame implements IEventFrame {
     this.setVisible(true);
   }
 
-  @Override
-  public void refresh() {
-    this.repaint();
-  }
 }
