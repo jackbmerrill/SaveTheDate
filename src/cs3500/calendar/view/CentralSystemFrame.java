@@ -1,7 +1,5 @@
 package cs3500.calendar.view;
 
-import cs3500.calendar.model.CentralSystem;
-import cs3500.calendar.model.Day;
 import cs3500.calendar.model.ReadOnlyCentralSystem;
 import cs3500.calendar.model.Schedule;
 
@@ -16,6 +14,9 @@ public class CentralSystemFrame extends JFrame implements ICentralSystemPanel {
   private JComboBox<String> userScheduleDropdown;
   private JButton loadButton;
   private JButton saveButton;
+
+  private JButton createEventButton;
+  private JButton scheduleEventButton;
   private SchedulePanel schedulePanel;
 
   public CentralSystemFrame(ReadOnlyCentralSystem model) {
@@ -35,6 +36,8 @@ public class CentralSystemFrame extends JFrame implements ICentralSystemPanel {
     userScheduleDropdown = new JComboBox<>();
     loadButton = new JButton("Load XML");
     saveButton = new JButton("Save XML");
+    createEventButton = new JButton("Create Event");
+    scheduleEventButton = new JButton("Schedule Event");
     this.schedulePanel = new SchedulePanel(new Schedule("<None>"));
     this.schedulePanel.setSize(700, 1200);
     this.setResizable(false);
@@ -55,6 +58,8 @@ public class CentralSystemFrame extends JFrame implements ICentralSystemPanel {
     JPanel buttonPanel = new JPanel(new FlowLayout());
     buttonPanel.add(loadButton);
     buttonPanel.add(saveButton);
+    buttonPanel.add(createEventButton);
+    buttonPanel.add(scheduleEventButton);
     this.add(buttonPanel, BorderLayout.SOUTH);
   }
 
@@ -83,11 +88,28 @@ public class CentralSystemFrame extends JFrame implements ICentralSystemPanel {
         }
       }
     });
+
     userScheduleDropdown.addActionListener(new ActionListener() {
       @Override
       public void actionPerformed(ActionEvent e) {
         schedulePanel = new SchedulePanel(model.getUserSchedule(
                 userScheduleDropdown.getSelectedItem().toString()));
+      }
+    });
+
+    createEventButton.addActionListener(new ActionListener() {
+      @Override
+      public void actionPerformed(ActionEvent e) {
+        IEventFrame eventFrame = new EventFrame(model);
+        eventFrame.makeVisible();
+      }
+    });
+
+    scheduleEventButton.addActionListener(new ActionListener() {
+      @Override
+      public void actionPerformed(ActionEvent e) {
+        IEventFrame eventFrame = new EventFrame(model);
+        eventFrame.makeVisible();
       }
     });
   }
@@ -97,38 +119,4 @@ public class CentralSystemFrame extends JFrame implements ICentralSystemPanel {
     this.setVisible(true);
   }
 
-  @Override
-  public void refresh() {
-
-  }
-
-  @Override
-  public void selectUser() {
-
-  }
-
-  @Override
-  public void createEvent() {
-
-  }
-
-  @Override
-  public void scheduleEvent() {
-
-  }
-
-  @Override
-  public void addCalendar() {
-
-  }
-
-  @Override
-  public void saveCalendar() {
-
-  }
-
-  @Override
-  public void selectEvent() {
-
-  }
 }

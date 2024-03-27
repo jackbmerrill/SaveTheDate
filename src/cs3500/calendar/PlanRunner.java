@@ -3,16 +3,11 @@ package cs3500.calendar;
 
 import java.util.ArrayList;
 import java.util.List;
-
 import cs3500.calendar.model.CentralSystem;
 import cs3500.calendar.model.Day;
-import cs3500.calendar.model.Event;
 import cs3500.calendar.model.Location;
 import cs3500.calendar.model.Time;
 import cs3500.calendar.view.CentralSystemFrame;
-import cs3500.calendar.view.EventFrame;
-import cs3500.calendar.view.IEventFrame;
-import cs3500.calendar.view.SchedulePanel;
 
 /**
  * To run the view.
