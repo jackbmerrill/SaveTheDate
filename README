@@ -10,14 +10,16 @@ This codebase is designed to be a weekly calendar capable of managing multiple s
 
     ORGANIZATION:
     - src : our source file
-        - model : all classes and interfaces pertaining to our model are stored here
-        - xml : all xml related classes are here
-        - view : our textual view and GUI classes and interfaces are here
-        - controller : for when we build our controller, it will go here
+        -cs3500.calendar - further package isolation
+            - model : all classes and interfaces pertaining to our model are stored here
+            - xml : all xml related classes are here
+            - view : our textual view and GUI classes and interfaces are here
+            - controller : for when we build our controller, it will go here
     - test : all test classes
-        - model - all model tests
-        - view - tests for the textual view
-        - xml - all tests for the xml classes
+        -cs3500.calendar - further package isolation
+            - model - all model tests
+            - view - tests for the textual view
+            - xml - all tests for the xml classes
 
 
     KEY COMPONENTS:
