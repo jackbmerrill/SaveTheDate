@@ -15,7 +15,7 @@ public class CentralSystemFrame extends JFrame implements ICentralSystemPanel {
   private JComboBox<String> userScheduleDropdown;
   private JButton loadButton;
   private JButton saveButton;
-  private JPanel schedulePanel;
+  private SchedulePanel schedulePanel;
 
   public CentralSystemFrame(ReadOnlyCentralSystem model) {
     super("Central System Frame");
@@ -33,6 +33,7 @@ public class CentralSystemFrame extends JFrame implements ICentralSystemPanel {
     userScheduleDropdown = new JComboBox<>();
     loadButton = new JButton("Load XML");
     saveButton = new JButton("Save XML");
+    this.schedulePanel = new SchedulePanel();
 
 
     //users and schedules
@@ -43,7 +44,7 @@ public class CentralSystemFrame extends JFrame implements ICentralSystemPanel {
   }
 
   private void createCalendar() {
-    schedulePanel = new JPanel();
+    schedulePanel = new SchedulePanel();
     schedulePanel.setSize(2100,2400);
 
     for (int colLine = 1; colLine < 7; colLine++) {
