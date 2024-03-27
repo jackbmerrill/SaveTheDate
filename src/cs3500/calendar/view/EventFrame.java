@@ -1,5 +1,6 @@
 package cs3500.calendar.view;
 
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
 import java.awt.GridLayout;
@@ -41,6 +42,10 @@ public class EventFrame extends JFrame implements IEventFrame {
   private ReadOnlyCentralSystem readOnlyCentralSystem;
   private Event event;
   private String host;
+  private JButton createEventButton;
+  private JButton modifyEventButton;
+  private JButton removeEventButton;
+
 
   /**
    * Event frame constructor that takes in only a readOnlyCentralSystem and the host of
@@ -164,11 +169,11 @@ public class EventFrame extends JFrame implements IEventFrame {
 
   private void setEventButtons() {
     JPanel buttonPanel = new JPanel();
-    JButton createEventButton = new JButton("Create Event");
+    createEventButton = new JButton("Create Event");
     createEventButton.addActionListener(e -> printEvent("Create Event"));
-    JButton modifyEventButton = new JButton("Modify Event");
+    modifyEventButton = new JButton("Modify Event");
     modifyEventButton.addActionListener(e -> printEvent("Modify Event"));
-    JButton removeEventButton = new JButton("Remove Event");
+    removeEventButton = new JButton("Remove Event");
     removeEventButton.addActionListener(e -> printEvent("Remove Event"));
     buttonPanel.add(createEventButton);
     buttonPanel.add(modifyEventButton);
@@ -197,6 +202,13 @@ public class EventFrame extends JFrame implements IEventFrame {
   @Override
   public void makeVisible() {
     this.setVisible(true);
+  }
+
+  @Override
+  public void setListener(ActionListener listener) {
+    modifyEventButton.addActionListener(listener);
+    createEventButton.addActionListener(listener);
+    removeEventButton.addActionListener(listener);
   }
 
 }

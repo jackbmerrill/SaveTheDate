@@ -19,7 +19,7 @@ import java.awt.event.ActionListener;
  * buttons, enabling creation and scheduling of events, and import and export of XMLs.
  * The schedule panel handles direct interaction with existing events and is a core component
  * of the central frame. The frame is unable to be resized and upon closing, quits the program.
- * The current user can also be switched via dropdown.
+ * The current user can also be switched via dropdown. Listeners can be replaced by the view.
  */
 public class CentralSystemFrame extends JFrame implements ICentralSystemFrame {
   private final ReadOnlyCentralSystem model;
@@ -136,4 +136,13 @@ public class CentralSystemFrame extends JFrame implements ICentralSystemFrame {
   public void makeVisible(boolean visible) {
     this.setVisible(visible);
   }
+
+  @Override
+  public void setListener(ActionListener listener) {
+    loadButton.addActionListener(listener);
+    saveButton.addActionListener(listener);
+    createEventButton.addActionListener(listener);
+    scheduleEventButton.addActionListener(listener);
+  }
+
 }

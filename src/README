@@ -1,0 +1,64 @@
+OVERVIEW: our code can be run in the plan runner by creating a new model and passing it into
+          the view and then making the view visible. As of now, there is no controller,
+          but once that is created, it will all be handled via that.
+          For creation, simple use the central system constructor, and then pass that
+          into the view constructor
+
+This codebase is designed to be a weekly calendar capable of managing multiple schedules
+    and importing and exporting them as XMLs. Events can be added, removed, and modified,
+    where all changes will be shared across all schedules with the same events.
+
+    ORGANIZATION:
+    - src : our source file
+        - model : all classes and interfaces pertaining to our model are stored here
+        - xml : all xml related classes are here
+        - view : our textual view and GUI classes and interfaces are here
+        - controller : for when we build our controller, it will go here
+    - test : all test classes
+        - model - all model tests
+        - view - tests for the textual view
+        - xml - all tests for the xml classes
+
+
+    KEY COMPONENTS:
+    CentralSystem - main hub that houses all of the schedules
+    Schedules - individual user schedules that track a users events. acts as a calendar.
+    Events - events in the calendar of a user with a name, location, time and list of attendees.
+        - Time - the time of the event, ie. Start day to end day, start time to end time.
+                 each may last up to one week exactly.
+        - Name - the name of the event as a String
+        - Location - the location of the event and whether or not it is online
+        - Users - the list of all users who are attending including the host.
+
+
+The central system consists of a map of strings of user IDs to schedules. Whenever the schedule
+    is accessed, it calls get using the userid to get the schedule. Within the schedules,
+    there is a map of event names to events so to access the desired event. each action is
+    delegated from central system -> schedule -> event. Each event is a shared object therefore
+    each time one is modified, it modifies the event for all users with the event in their
+    schedule.
+
+
+Changes for Part 2:
+    ADDED KEY COMPONENTS:
+        CentralSystemFrame - visibly displays the calendar and allows selection of schedules
+        EventFrame - enables the editing and removal of existing events, and creation of new ones
+        SchedulePanel - panel within the central frame which displays the users schedules
+            - each has a respective interface
+
+        The central frame is the hub, pressing the buttons or clicking on an event in the
+        calendar opens an event frame. Different users can be selected to view their schedules
+        and xml can be imported and exported. Updates to the organization have been noted
+        above where the organization is marked.
+
+        NOTE: functionality has been added for listeners to be implemented in the future with
+              the creation of the controller, so once that is created the lambdas of the
+              buttons will be replaced with can be replaced with action commands to remove
+              any coupling.
+
+    Changes: we added two new methods in the read only central interface for get users and event
+             conflict, a new method in time to convert from an int to a enumerator for dates, and
+             added notes to the javadoc for event about the invariant included
+
+
+

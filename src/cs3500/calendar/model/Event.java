@@ -8,6 +8,10 @@ import java.util.Objects;
  * Class to represent an event in an individual's schedule. Has four fields, Name of the event,
  * Time of the event, location of the event, and a list of users. The first user is the host
  * and the rest of the users are the attendees.
+ * INVARIANT:
+ *         Within our code, Location and Time are invariants of the event class as they must
+ *         always be present. There is no possible way to have an object of the event class without
+ *         a time and a location.
  */
 public class Event implements IEvent {
 
