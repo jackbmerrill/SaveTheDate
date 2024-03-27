@@ -1,11 +1,20 @@
 package cs3500.calendar.view;
+
 import java.util.ArrayList;
 import java.util.List;
-
-import java.awt.*;
-
-import javax.swing.*;
-
+import java.awt.GridLayout;
+import java.awt.BorderLayout;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
+import javax.swing.JCheckBox;
+import javax.swing.JFrame;
+import javax.swing.JComboBox;
+import javax.swing.JList;
+import javax.swing.JButton;
+import javax.swing.BoxLayout;
+import javax.swing.BorderFactory;
+import javax.swing.JLabel;
+import javax.swing.JScrollPane;
 import cs3500.calendar.model.Day;
 import cs3500.calendar.model.Event;
 import cs3500.calendar.model.Location;
@@ -18,21 +27,15 @@ import cs3500.calendar.model.Time;
  */
 public class EventFrame extends JFrame implements IEventFrame {
 
-  private JPanel eventNamePanel;
   private JTextField eventNameTextBox;
-  private JPanel locationPanel;
   private JCheckBox isOnline;
   private JTextField locationTextBox;
-  private JPanel timePanel;
   private JTextField startingTimeTextBox;
   private JComboBox<Day> startingDayDropdown;
   private JTextField endingTimeTextBox;
   private JComboBox<Day> endingDayDropdown;
-  private JPanel userPanel;
   private JList<String> availableUserDropdown;
   private ReadOnlyCentralSystem readOnlyCentralSystem;
-  private JPanel buttonPanel;
-  private JButton modifyEventButton, removeEventButton, createEventButton;
   private Event event;
 
   public EventFrame(ReadOnlyCentralSystem readOnlyCentralSystem) {
@@ -69,7 +72,7 @@ public class EventFrame extends JFrame implements IEventFrame {
   }
 
   private void setEventNamePanel() {
-    eventNamePanel = new JPanel();
+    JPanel eventNamePanel = new JPanel();
     eventNamePanel.setBorder(BorderFactory.createTitledBorder("Event name:"));
     eventNameTextBox = new JTextField(20);
     eventNamePanel.add(eventNameTextBox);
@@ -77,7 +80,7 @@ public class EventFrame extends JFrame implements IEventFrame {
   }
 
   private void setLocationPanel() {
-    locationPanel = new JPanel();
+    JPanel locationPanel = new JPanel();
     locationPanel.setBorder(BorderFactory.createTitledBorder("Location:"));
     isOnline = new JCheckBox("Is Online");
     locationTextBox = new JTextField(10);
@@ -87,7 +90,7 @@ public class EventFrame extends JFrame implements IEventFrame {
   }
 
   private void setTimePanel() {
-    timePanel = new JPanel();
+    JPanel timePanel = new JPanel();
     timePanel.setLayout(new GridLayout(4, 2, 5, 5));
     timePanel.setBorder(BorderFactory.createTitledBorder("Time:"));
     startingDayDropdown = new JComboBox<>(Day.values());
@@ -106,7 +109,7 @@ public class EventFrame extends JFrame implements IEventFrame {
   }
 
   private void setUserPanel() {
-    userPanel = new JPanel();
+    JPanel userPanel = new JPanel();
     userPanel.setBorder(BorderFactory.createTitledBorder("Available users"));
     List<String> users = new ArrayList<>(readOnlyCentralSystem.getUsers());
     if (!users.isEmpty()) {
@@ -138,12 +141,12 @@ public class EventFrame extends JFrame implements IEventFrame {
 
 
   private void setEventButtons() {
-    buttonPanel = new JPanel();
-    createEventButton = new JButton("Create Event");
+    JPanel buttonPanel = new JPanel();
+    JButton createEventButton = new JButton("Create Event");
     createEventButton.addActionListener(e -> printEvent("Create Event"));
-    modifyEventButton = new JButton("Modify Event");
+    JButton modifyEventButton = new JButton("Modify Event");
     modifyEventButton.addActionListener(e -> printEvent("Modify Event"));
-    removeEventButton = new JButton("Remove Event");
+    JButton removeEventButton = new JButton("Remove Event");
     removeEventButton.addActionListener(e -> printEvent("Remove Event"));
     buttonPanel.add(createEventButton);
     buttonPanel.add(modifyEventButton);
@@ -180,22 +183,4 @@ public class EventFrame extends JFrame implements IEventFrame {
     this.repaint();
   }
 
-  @Override
-  public void modifyEvent() {
-
-  }
-
-  @Override
-  public void removeEvent() {
-  }
-
-  @Override
-  public void closeWindow() {
-    this.dispose();
-  }
-
-  @Override
-  public void inputEvent(Event event) {
-
-  }
 }

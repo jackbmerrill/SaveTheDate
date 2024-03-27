@@ -28,7 +28,7 @@ public interface ReadOnlyCentralSystem {
 
 
   /**
-   * To get a copy of the given user's schedule
+   * To get a copy of the given user's schedule.
    * @param userID the unique user id of the user
    * @return the schedule associated with the given userID
    */

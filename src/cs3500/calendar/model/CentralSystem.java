@@ -31,7 +31,10 @@ public class CentralSystem implements ICentralSystem {
     this.events = new ArrayList<>();
   }
 
-  // ability to create a model with valid schedules, assume valid
+  /**
+   * To represent the ability to create a model with valid schedules, assume they are valid
+   * @param schedules the given list of schedules
+   */
   public CentralSystem(List<Schedule> schedules) {
     this.system = new HashMap<>();
     this.events = new ArrayList<>();

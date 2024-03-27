@@ -84,17 +84,23 @@ public class XMLWriter {
   private void addTimeElements(Document doc, Element parent, Event event) {
     Element timeElement = doc.createElement("time");
     parent.appendChild(timeElement);
-    addElementWithText(doc, timeElement, "start-day", event.getTime().getStartDay().toString());
-    addElementWithText(doc, timeElement, "start", Time.formatTime(event.getTime().getStartTime()));
-    addElementWithText(doc, timeElement, "end-day", event.getTime().getEndDay().toString());
-    addElementWithText(doc, timeElement, "end", Time.formatTime(event.getTime().getEndTime()));
+    addElementWithText(doc, timeElement, "start-day", event.getTime().getStartDay().
+            toString());
+    addElementWithText(doc, timeElement, "start", Time.formatTime(event.getTime().
+            getStartTime()));
+    addElementWithText(doc, timeElement, "end-day", event.getTime().getEndDay().
+            toString());
+    addElementWithText(doc, timeElement, "end", Time.formatTime(event.getTime().
+            getEndTime()));
   }
 
   private void addLocationElements(Document doc, Element parent, Event event) {
     Element locationElement = doc.createElement("location");
     parent.appendChild(locationElement);
-    addElementWithText(doc, locationElement, "online", Boolean.toString(event.getLocation().isOnline()));
-    addElementWithText(doc, locationElement, "place", "\"" + event.getLocation().getPlace() + "\"");
+    addElementWithText(doc, locationElement, "online",
+            Boolean.toString(event.getLocation().isOnline()));
+    addElementWithText(doc, locationElement, "place", "\"" + event.getLocation().
+            getPlace() + "\"");
   }
 
   private void addUserElements(Document doc, Element parent, Event event) {
