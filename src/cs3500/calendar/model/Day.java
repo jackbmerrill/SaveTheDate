@@ -39,4 +39,30 @@ public enum Day {
     return order;
   }
 
+  /**
+   * Returns the time given the order. IE. the day associated with the given order.
+   * @return Day enumerator
+   * @throws IllegalArgumentException if no such day exists with associated order
+   */
+  public Day getDay(int i) {
+    switch (i) {
+      case 1:
+        return SUNDAY;
+      case 2:
+        return MONDAY;
+      case 3:
+        return TUESDAY;
+      case 4:
+        return WEDNESDAY;
+      case 5:
+        return THURSDAY;
+      case 6:
+        return FRIDAY;
+      case 7:
+        return SATURDAY;
+      default:
+        throw new IllegalArgumentException("No such day exists");
+    }
+
+  }
 }
