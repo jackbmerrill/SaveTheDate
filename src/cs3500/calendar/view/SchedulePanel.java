@@ -17,7 +17,10 @@ import cs3500.calendar.model.Schedule;
 import cs3500.calendar.model.Time;
 
 /**
- *
+ * Represents the Schedule of a system. Each red rectangle represents an event and clicking
+ * on said event opens it in an event frame. As events are added, the panel updates to match
+ * the schedule object. The schedule itself inside the panel can be replaced to display
+ * a different schedule.
  */
 public class SchedulePanel extends JPanel implements MouseListener, ISchedulePanel {
 
@@ -25,9 +28,10 @@ public class SchedulePanel extends JPanel implements MouseListener, ISchedulePan
   private final ReadOnlyCentralSystem system;
 
   /**
-   *
-   * @param schedule
-   * @param system
+   * Constructor for the schedule panel. Takes in a schedule to start with and the central
+   * system with which it is working. From there, draws all parts of the panel.
+   * @param schedule the desired starting schedule
+   * @param system the central system as read only
    */
   public SchedulePanel(Schedule schedule, ReadOnlyCentralSystem system) {
     super();
