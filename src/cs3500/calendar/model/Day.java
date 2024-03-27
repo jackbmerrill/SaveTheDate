@@ -44,7 +44,7 @@ public enum Day {
    * @return Day enumerator
    * @throws IllegalArgumentException if no such day exists with associated order
    */
-  public Day getDay(int i) {
+  public static Day getDay(int i) {
     switch (i) {
       case 1:
         return SUNDAY;
@@ -63,6 +63,5 @@ public enum Day {
       default:
         throw new IllegalArgumentException("No such day exists");
     }
-
   }
 }
