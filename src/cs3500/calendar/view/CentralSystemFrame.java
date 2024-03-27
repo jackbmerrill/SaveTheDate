@@ -3,6 +3,7 @@ package cs3500.calendar.view;
 import cs3500.calendar.model.CentralSystem;
 import cs3500.calendar.model.Day;
 import cs3500.calendar.model.ReadOnlyCentralSystem;
+import cs3500.calendar.model.Schedule;
 
 import javax.swing.*;
 import java.awt.*;
@@ -24,8 +25,9 @@ public class CentralSystemFrame extends JFrame implements ICentralSystemPanel {
     this.layoutComponents();
     this.attachListeners();
     this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-    this.setSize(800, 600); //initial frame size
+    this.setSize(700, 700); //initial frame size
     this.setLocationRelativeTo(null); //window centering
+
   }
 
   private void initializeComponents() {
@@ -33,26 +35,17 @@ public class CentralSystemFrame extends JFrame implements ICentralSystemPanel {
     userScheduleDropdown = new JComboBox<>();
     loadButton = new JButton("Load XML");
     saveButton = new JButton("Save XML");
-    this.schedulePanel = new SchedulePanel();
+    this.schedulePanel = new SchedulePanel(new Schedule("<None>"));
+    this.schedulePanel.setSize(700, 1200);
+    this.setResizable(false);
 
 
     //users and schedules
     for (String user : model.getUsers()) {
       userScheduleDropdown.addItem(user);
     }
-    createCalendar();
   }
 
-  private void createCalendar() {
-    schedulePanel = new SchedulePanel();
-    schedulePanel.setSize(2100,2400);
-
-    for (int colLine = 1; colLine < 7; colLine++) {
-
-    }
-
-
-  }
 
   private void layoutComponents() {
     //components
@@ -85,15 +78,23 @@ public class CentralSystemFrame extends JFrame implements ICentralSystemPanel {
         fileChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
         int option = fileChooser.showSaveDialog(CentralSystemFrame.this);
         if (option == JFileChooser.APPROVE_OPTION) {
-          System.out.println("Directory selected for saving XML files: " + fileChooser.getSelectedFile().getAbsolutePath());
+          System.out.println("Directory selected for saving XML files: "
+                  + fileChooser.getSelectedFile().getAbsolutePath());
         }
+      }
+    });
+    userScheduleDropdown.addActionListener(new ActionListener() {
+      @Override
+      public void actionPerformed(ActionEvent e) {
+        schedulePanel = new SchedulePanel(model.getUserSchedule(
+                userScheduleDropdown.getSelectedItem().toString()));
       }
     });
   }
 
   @Override
   public void makeVisible() {
-
+    this.setVisible(true);
   }
 
   @Override

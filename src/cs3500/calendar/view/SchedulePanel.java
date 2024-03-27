@@ -1,14 +1,14 @@
 package cs3500.calendar.view;
 
-import cs3500.calendar.model.Day;
-import cs3500.calendar.model.Event;
-import cs3500.calendar.model.Schedule;
-
-import javax.swing.*;
 import java.awt.*;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
+
+import javax.swing.*;
+
+import cs3500.calendar.model.Day;
+import cs3500.calendar.model.Event;
+import cs3500.calendar.model.Schedule;
 
 public class SchedulePanel extends JPanel {
 
@@ -21,29 +21,36 @@ public class SchedulePanel extends JPanel {
 
   public SchedulePanel(Schedule schedule) {
     this.schedule = schedule;
-    this.setPreferredSize(new Dimension(800, 2400));
+    this.setSize(new Dimension(700, 1200));
   }
 
   @Override
   protected void paintComponent(Graphics g) {
     super.paintComponent(g);
     drawSchedule(g);
+    drawEvents(g);
   }
 
   private void drawSchedule(Graphics g) {
     Graphics2D g2d = (Graphics2D) g;
 
-    for (int i = 0; i < Day.values().length; i++) {
-      g2d.drawString(Day.values()[i].toString(), COL_WIDTH * i, START_Y);
+    for (int i = 1; i < 7; i++) {
+      g2d.drawLine(i * getWidth() / 7, 0, i * getWidth() / 7, getHeight());
     }
 
-    for (int hour = 0; hour < HOURS_IN_DAY; hour++) {
-      int y = START_Y + (hour * ROW_HEIGHT);
-      g2d.drawLine(0, y, getWidth(), y);
-      g2d.drawString(hour + ":00", 0, y - 5);
+    for (int height = 0; height < 24; height++) {
+      if (height % 4 == 0) {
+        Stroke oldStroke = g2d.getStroke();
+        g2d.setStroke(new BasicStroke(2.0f));
+        g2d.drawLine(0, height * 25, getWidth(), height * 25);
+        g2d.setStroke(oldStroke);
+      }
+      g2d.drawLine(0, height * 25, getWidth(), height * 25);
     }
+  }
 
-    //draw events
+  private void drawEvents(Graphics g) {
+    Graphics2D g2d = (Graphics2D) g;
     Map<Day, List<Event>> eventsByDay = schedule.getEventsByDay();
     for (Map.Entry<Day, List<Event>> entry : eventsByDay.entrySet()) {
       int dayIndex = entry.getKey().ordinal();
