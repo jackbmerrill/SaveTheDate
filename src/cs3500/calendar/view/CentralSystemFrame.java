@@ -42,7 +42,6 @@ public class CentralSystemFrame extends JFrame implements ICentralSystemPanel {
     this.schedulePanel.setSize(700, 1200);
     this.setResizable(false);
 
-
     //users and schedules
     for (String user : model.getUsers()) {
       userScheduleDropdown.addItem(user);
@@ -56,10 +55,10 @@ public class CentralSystemFrame extends JFrame implements ICentralSystemPanel {
     this.add(userScheduleDropdown, BorderLayout.NORTH);
     this.add(schedulePanel, BorderLayout.CENTER);
     JPanel buttonPanel = new JPanel(new FlowLayout());
-    buttonPanel.add(loadButton);
-    buttonPanel.add(saveButton);
     buttonPanel.add(createEventButton);
     buttonPanel.add(scheduleEventButton);
+    buttonPanel.add(loadButton);
+    buttonPanel.add(saveButton);
     this.add(buttonPanel, BorderLayout.SOUTH);
   }
 
@@ -94,6 +93,9 @@ public class CentralSystemFrame extends JFrame implements ICentralSystemPanel {
       public void actionPerformed(ActionEvent e) {
         schedulePanel = new SchedulePanel(model.getUserSchedule(
                 userScheduleDropdown.getSelectedItem().toString()));
+        schedulePanel.setPreferredSize(new Dimension(700, 1200));
+        revalidate();
+        repaint();
       }
     });
 

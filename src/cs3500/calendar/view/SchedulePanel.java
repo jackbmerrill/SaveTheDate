@@ -9,15 +9,11 @@ import javax.swing.*;
 import cs3500.calendar.model.Day;
 import cs3500.calendar.model.Event;
 import cs3500.calendar.model.Schedule;
+import cs3500.calendar.model.Time;
 
 public class SchedulePanel extends JPanel {
 
   private final Schedule schedule;
-
-  private static final int START_Y = 50;
-  private static final int ROW_HEIGHT = 100;
-  private static final int COL_WIDTH = 100;
-  private static final int HOURS_IN_DAY = 24;
 
   public SchedulePanel(Schedule schedule) {
     this.schedule = schedule;
@@ -51,24 +47,30 @@ public class SchedulePanel extends JPanel {
 
   private void drawEvents(Graphics g) {
     Graphics2D g2d = (Graphics2D) g;
-    Map<Day, List<Event>> eventsByDay = schedule.getEventsByDay();
-    for (Map.Entry<Day, List<Event>> entry : eventsByDay.entrySet()) {
-      int dayIndex = entry.getKey().ordinal();
-      for (Event event : entry.getValue()) {
-
-        int eventStartHour = event.getTime().getStartTime();
-        int eventEndHour = event.getTime().getEndTime();
-        int eventDuration = eventEndHour - eventStartHour;
-
-        int x = dayIndex * COL_WIDTH;
-        int y = START_Y + (eventStartHour * ROW_HEIGHT);
-        int height = eventDuration * ROW_HEIGHT;
-
-        g2d.setColor(Color.BLUE);
-        g2d.fillRect(x, y, COL_WIDTH, height);
-        g2d.setColor(Color.BLACK);
-        g2d.drawString(event.getName(), x + 5, y + 20);
+    List<Event> events = schedule.getEventsAtTime(null);
+    g2d.setColor(Color.red);
+    for (Event event : events) {
+      Time time = event.getTime();
+      if (time.getStartDay().equals(time.getEndDay())) {
+        int height = convertTime(time.getEndTime()) - convertTime(time.getStartTime());
+        g2d.fillRect((time.getStartDay().order() - 1) * 100, convertTime(time.getStartTime()),
+                100, height);
+      }
+      if (time.getStartDay().order() < time.getEndDay().order()) {
+        g2d.fillRect((time.getStartDay().order() - 1) * 100, convertTime(time.getStartTime()),
+                100, 2400 - convertTime(time.getStartTime()));
+        for (int days = time.getStartDay().order() + 1; days < time.getEndDay().order(); days++) {
+          g2d.fillRect((days - 1) * 100, 0,
+                  100, 2400);
+        }
+        g2d.fillRect((time.getEndDay().order() - 1) * 100, 0,
+                100, convertTime(time.getEndTime()));
       }
     }
+  }
+
+  private int convertTime(int hour) {
+    int translated = (hour / 100) * 100;
+    return translated + (int) (((hour % 100) / 60.0) * 100.0);
   }
 }
