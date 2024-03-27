@@ -4,10 +4,12 @@ import org.junit.Test;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertThrows;
 import static org.junit.Assert.assertTrue;
 
@@ -195,6 +197,7 @@ public class TestCentralSystem {
             "GoingToRemove"));
   }
 
+  // to test get users method
   @Test
   public void testGetUsers() {
     assertEquals(new ArrayList<String>(), central1.getUsers());
@@ -205,8 +208,38 @@ public class TestCentralSystem {
             central1.getUsers());
   }
 
+  // to test event conflict method
   @Test
   public void testEventConflict() {
+    central1.addUser("1023");
+    central1.addUser("3024");
+    central1.generateEvent("Event1", time1, loc1, Arrays.asList("1023"));
+    central1.generateEvent("Event2", time2, loc2, Arrays.asList("1023"));
+    central1.generateEvent("Event3", time3, loc3, Arrays.asList("3024"));
+    central1.generateEvent("Event4", time7, loc4, Arrays.asList("1023"));
 
+    assertTrue(central1.eventConflict(time1, Arrays.asList("1023")));
+    assertTrue(central1.eventConflict(time7, Arrays.asList("1023")));
+    assertFalse(central1.eventConflict(time1, Arrays.asList("3024, 1023")));
+    assertFalse(central1.eventConflict(time2, Arrays.asList("3024")));
+  }
+
+  // to test get user schedule method
+  @Test
+  public void testGetUserSchedule() {
+    central1.addUser("4003");
+    assertEquals(central1.getUserSchedule("4003").getUserID(), new Schedule("4003").
+            getUserID());
+  }
+
+  @Test
+  public void testCentralSystemConstructor() {
+    schedule0202.addEvent(event1);
+    schedule1021.addEvent(event2);
+    List<Schedule> schedules = new ArrayList<>(Arrays.asList(schedule0202, schedule1021));
+    CentralSystem central1 = new CentralSystem(schedules);
+    assertEquals(central1.getSystem().size(), 2);
+    assertTrue(central1.getSystem().containsKey("1021"));
+    assertTrue(central1.getSystem().containsKey("0202"));
   }
 }

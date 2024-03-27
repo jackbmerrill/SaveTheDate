@@ -12,6 +12,8 @@ import cs3500.calendar.model.Location;
 import cs3500.calendar.model.Time;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertThrows;
 
 /**
@@ -152,5 +154,12 @@ public class TestEvent {
     assertEquals(event2.getLocation(), loc2);
     assertEquals(event3.getLocation(), loc3);
     assertEquals(event4.getLocation(), loc4);
+  }
+
+  // to test overriding hashcode for event
+  @Test
+  public void testHashCode() {
+    assertEquals(event1.hashCode(), event1.hashCode());
+    assertNotEquals(event1.hashCode(), event4.hashCode());
   }
 }

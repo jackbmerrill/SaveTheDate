@@ -75,7 +75,7 @@ public interface ICentralSystem extends ReadOnlyCentralSystem {
    * To add a user to an event with the given details and modify it in the schedules of all
    * the specified users. Adds the user to the events users.
    * @param userID userID of the event
-   * @param eventName name of the event to be removed
+   * @param eventName name of the event to be added
    * @throws IllegalStateException if event does not exist in system
    */
   void addEventToUser(String userID, String eventName);
