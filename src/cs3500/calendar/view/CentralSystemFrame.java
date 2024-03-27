@@ -10,7 +10,7 @@ import java.awt.event.ActionListener;
 
 
 public class CentralSystemFrame extends JFrame implements ICentralSystemPanel {
-  private ReadOnlyCentralSystem model;
+  private final ReadOnlyCentralSystem model;
   private JComboBox<String> userScheduleDropdown;
   private JButton loadButton;
   private JButton saveButton;
@@ -39,7 +39,6 @@ public class CentralSystemFrame extends JFrame implements ICentralSystemPanel {
     createEventButton = new JButton("Create Event");
     scheduleEventButton = new JButton("Schedule Event");
     this.schedulePanel = new SchedulePanel(new Schedule("<None>"));
-    this.schedulePanel.setSize(700, 1200);
     this.setResizable(false);
 
     //users and schedules
@@ -47,7 +46,6 @@ public class CentralSystemFrame extends JFrame implements ICentralSystemPanel {
       userScheduleDropdown.addItem(user);
     }
   }
-
 
   private void layoutComponents() {
     //components
@@ -91,11 +89,9 @@ public class CentralSystemFrame extends JFrame implements ICentralSystemPanel {
     userScheduleDropdown.addActionListener(new ActionListener() {
       @Override
       public void actionPerformed(ActionEvent e) {
-        schedulePanel = new SchedulePanel(model.getUserSchedule(
+        schedulePanel.updateSchedule(model.getUserSchedule(
                 userScheduleDropdown.getSelectedItem().toString()));
-        schedulePanel.setPreferredSize(new Dimension(700, 1200));
-        revalidate();
-        repaint();
+        schedulePanel.updateUI();
       }
     });
 

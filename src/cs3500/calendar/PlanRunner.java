@@ -16,11 +16,10 @@ public final class PlanRunner {
 
   public static void main(String[] args) {
     CentralSystem centralSystem = new CentralSystem();
-    Time time1 = new Time(Day.MONDAY, 1200, Day.MONDAY, 1300);
+    Time time1 = new Time(Day.MONDAY, 800, Day.MONDAY, 2359);
     Location loc1 = new Location(true, "Churchill 101");
-    List<String> list1 = new ArrayList<>(List.of("1201", "Frank"));
+    List<String> list1 = new ArrayList<>(List.of("Jack", "Frank"));
     centralSystem.addUser("Milo");
-    centralSystem.addUser("Jack");
     centralSystem.addUser("Dio");
     centralSystem.generateEvent("Event1", time1, loc1, list1);
     CentralSystemFrame frame = new CentralSystemFrame(centralSystem);
