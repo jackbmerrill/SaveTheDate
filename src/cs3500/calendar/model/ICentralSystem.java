@@ -2,7 +2,6 @@ package cs3500.calendar.model;
 
 import java.io.IOException;
 import java.util.List;
-import java.util.Map;
 
 /**
  * Defines the core functionalities for managing users, their schedules and events for the

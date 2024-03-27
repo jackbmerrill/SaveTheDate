@@ -1,6 +1,11 @@
 package cs3500.calendar.view;
 
-import java.awt.*;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.Dimension;
+import java.awt.Stroke;
+import java.awt.BasicStroke;
+import java.awt.Color;
 import java.util.List;
 import java.util.Map;
 

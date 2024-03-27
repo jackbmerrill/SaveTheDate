@@ -59,12 +59,18 @@ public class XMLReader {
 
   private void processEventElement(Element element, CentralSystem centralSystem) {
     String name = cleanString(element.getElementsByTagName("name").item(0).getTextContent());
-    Day startDay = Day.valueOf(cleanString(element.getElementsByTagName("start-day").item(0).getTextContent()).toUpperCase());
-    Day endDay = Day.valueOf(cleanString(element.getElementsByTagName("end-day").item(0).getTextContent()).toUpperCase());
-    int startTime = Integer.parseInt(element.getElementsByTagName("start").item(0).getTextContent());
-    int endTime = Integer.parseInt(element.getElementsByTagName("end").item(0).getTextContent());
-    String location = cleanString(element.getElementsByTagName("place").item(0).getTextContent());
-    boolean isOnline = Boolean.parseBoolean(element.getElementsByTagName("online").item(0).getTextContent());
+    Day startDay = Day.valueOf(cleanString(element.getElementsByTagName("start-day").item(0).
+            getTextContent()).toUpperCase());
+    Day endDay = Day.valueOf(cleanString(element.getElementsByTagName("end-day").item(0).
+            getTextContent()).toUpperCase());
+    int startTime = Integer.parseInt(element.getElementsByTagName("start").item(0).
+            getTextContent());
+    int endTime = Integer.parseInt(element.getElementsByTagName("end").item(0).
+            getTextContent());
+    String location = cleanString(element.getElementsByTagName("place").item(0).
+            getTextContent());
+    boolean isOnline = Boolean.parseBoolean(element.getElementsByTagName("online").item(0).
+            getTextContent());
     List<String> users = extractUsers(element.getElementsByTagName("uid"));
 
     Time eventTime = new Time(startDay, startTime, endDay, endTime);

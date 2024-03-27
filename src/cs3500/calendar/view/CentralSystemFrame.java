@@ -3,8 +3,13 @@ package cs3500.calendar.view;
 import cs3500.calendar.model.ReadOnlyCentralSystem;
 import cs3500.calendar.model.Schedule;
 
-import javax.swing.*;
-import java.awt.*;
+import javax.swing.JFrame;
+import javax.swing.JComboBox;
+import javax.swing.JButton;
+import javax.swing.JPanel;
+import javax.swing.JFileChooser;
+import java.awt.FlowLayout;
+import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -71,7 +76,8 @@ public class CentralSystemFrame extends JFrame implements ICentralSystemPanel {
         JFileChooser fileChooser = new JFileChooser();
         int option = fileChooser.showOpenDialog(CentralSystemFrame.this);
         if (option == JFileChooser.APPROVE_OPTION) {
-          System.out.println("Path to XML file: " + fileChooser.getSelectedFile().getAbsolutePath());
+          System.out.println("Path to XML file: " + fileChooser.getSelectedFile().
+                  getAbsolutePath());
         }
       }
     });
