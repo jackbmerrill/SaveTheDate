@@ -111,7 +111,6 @@ public class SchedulePanel extends JPanel implements MouseListener, ISchedulePan
 
   @Override
   public void mouseClicked(MouseEvent e) {
-    System.out.println("COORDS X,Y " + e.getX() + ", " + e.getY());
     int day = e.getX() / 100 + 1;
     int time = e.getY() * 4;
     int minute = time % 100;
@@ -127,7 +126,6 @@ public class SchedulePanel extends JPanel implements MouseListener, ISchedulePan
     } else {
       endTime = time + 100;
     }
-    System.out.println("Day" + day + ", Time" + time + ", EndTime: " + endTime);
     List<Event> events = schedule.getEventsAtTime(
             new Time(Day.getDay(day), time, Day.getDay(day), endTime));
     if (events.isEmpty()) {
