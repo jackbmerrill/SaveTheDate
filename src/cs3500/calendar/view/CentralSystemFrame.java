@@ -72,12 +72,7 @@ public class CentralSystemFrame extends JFrame implements ICentralSystemPanel {
         JFileChooser fileChooser = new JFileChooser();
         int option = fileChooser.showOpenDialog(CentralSystemFrame.this);
         if (option == JFileChooser.APPROVE_OPTION) {
-          try {
-            ((CentralSystem) model).loadSchedulesFromXML(fileChooser.getSelectedFile().getAbsolutePath());
-            //update with new schedules
-          } catch (Exception ex) {
-            ex.printStackTrace();
-          }
+          System.out.println("Path to XML file: " + fileChooser.getSelectedFile().getAbsolutePath());
         }
       }
     });
@@ -89,6 +84,7 @@ public class CentralSystemFrame extends JFrame implements ICentralSystemPanel {
         fileChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
         int option = fileChooser.showSaveDialog(CentralSystemFrame.this);
         if (option == JFileChooser.APPROVE_OPTION) {
+          System.out.println("Directory selected for saving XML files: " + fileChooser.getSelectedFile().getAbsolutePath());
         }
       }
     });
