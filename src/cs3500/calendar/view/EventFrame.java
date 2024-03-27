@@ -1,4 +1,6 @@
 package cs3500.calendar.view;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -32,7 +34,7 @@ public class EventFrame extends JFrame implements IEventFrame {
   private JList<String> availableUserDropdown;
   private ReadOnlyCentralSystem readOnlyCentralSystem;
   private JPanel buttonPanel;
-  private JButton modifyEventButton, removeEventButton;
+  private JButton modifyEventButton, removeEventButton, createEventButton;
   private Event event;
 
   public EventFrame(ReadOnlyCentralSystem readOnlyCentralSystem) {
@@ -139,11 +141,59 @@ public class EventFrame extends JFrame implements IEventFrame {
 
   private void setEventButtons() {
     buttonPanel = new JPanel();
+    createEventButton = new JButton("Create Event");
+    createEventButton.addActionListener(new ActionListener() {
+      @Override
+      public void actionPerformed(ActionEvent e) {
+        if (eventNameTextBox.getText().isEmpty() || locationTextBox.getText().isEmpty()
+                || startingTimeTextBox.getText().isEmpty() || endingTimeTextBox.getText().isEmpty()) {
+          System.out.println("\nNot all required information is provided");
+          return;
+        }
+        printEvent("Create Event");
+      }
+    });
     modifyEventButton = new JButton("Modify Event");
+    modifyEventButton.addActionListener(new ActionListener() {
+      @Override
+      public void actionPerformed(ActionEvent e) {
+        if (eventNameTextBox.getText().isEmpty() || locationTextBox.getText().isEmpty()
+                || startingTimeTextBox.getText().isEmpty() || endingTimeTextBox.getText().isEmpty()) {
+          System.out.println("\nNot all required information is provided");
+          return;
+        }
+        printEvent("Modify Event");
+      }
+    });
     removeEventButton = new JButton("Remove Event");
+    removeEventButton.addActionListener(new ActionListener() {
+      @Override
+      public void actionPerformed(ActionEvent e) {
+        if (eventNameTextBox.getText().isEmpty() || locationTextBox.getText().isEmpty()
+                || startingTimeTextBox.getText().isEmpty() || endingTimeTextBox.getText().isEmpty()) {
+          System.out.println("\nNot all required information is provided");
+          return;
+        }
+        printEvent("Remove Event");
+      }
+    });
+    buttonPanel.add(createEventButton);
     buttonPanel.add(modifyEventButton);
     buttonPanel.add(removeEventButton);
     add(buttonPanel);
+  }
+
+  private void printEvent(String title) {
+    System.out.println("\n" + title + ": \nEvent Name: " + eventNameTextBox.getText()
+            + "\nLocation: \n\tName: " + locationTextBox.getText() + "\n\tOnline: "
+    + isOnline.isSelected() + "\nTime \n\tStart Day: "
+            + startingDayDropdown.getSelectedItem().toString() + "\n\tStarting Time: "
+    + startingTimeTextBox.getText() +  "\n\tEnd Day: "
+            + endingDayDropdown.getSelectedItem().toString() + "\n\tEnding Time: "
+            + endingTimeTextBox.getText() + "\n Users: \t");
+    for (String user : availableUserDropdown.getSelectedValuesList()) {
+      System.out.print(user + " ");
+    }
   }
 
 
