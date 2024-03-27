@@ -1,6 +1,7 @@
 package cs3500.calendar.view;
 
 import cs3500.calendar.model.CentralSystem;
+import cs3500.calendar.model.Day;
 import cs3500.calendar.model.ReadOnlyCentralSystem;
 
 import javax.swing.*;
@@ -32,12 +33,24 @@ public class CentralSystemFrame extends JFrame implements ICentralSystemPanel {
     userScheduleDropdown = new JComboBox<>();
     loadButton = new JButton("Load XML");
     saveButton = new JButton("Save XML");
-    schedulePanel = new JPanel();
+
 
     //users and schedules
     for (String user : model.getUsers()) {
       userScheduleDropdown.addItem(user);
     }
+    createCalendar();
+  }
+
+  private void createCalendar() {
+    schedulePanel = new JPanel();
+    schedulePanel.setSize(2100,2400);
+
+    for (int colLine = 1; colLine < 7; colLine++) {
+
+    }
+
+
   }
 
   private void layoutComponents() {
