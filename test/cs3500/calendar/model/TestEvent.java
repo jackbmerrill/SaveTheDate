@@ -6,18 +6,12 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import cs3500.calendar.model.Day;
-import cs3500.calendar.model.Event;
-import cs3500.calendar.model.Location;
-import cs3500.calendar.model.Time;
-
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertThrows;
 
 /**
- * To test the event class.
+ * To test al public methods in the event class.
  */
 public class TestEvent {
   Time time1 = new Time(Day.MONDAY, 1200, Day.MONDAY, 1300);

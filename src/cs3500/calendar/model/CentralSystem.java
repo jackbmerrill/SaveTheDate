@@ -32,7 +32,7 @@ public class CentralSystem implements ICentralSystem {
   }
 
   /**
-   * To represent the ability to create a model with valid schedules, assume they are valid
+   * To represent the ability to create a model with valid schedules, assume they are valid.
    * @param schedules the given list of schedules
    */
   public CentralSystem(List<Schedule> schedules) {

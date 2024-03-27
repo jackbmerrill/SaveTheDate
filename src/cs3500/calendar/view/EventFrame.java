@@ -38,11 +38,19 @@ public class EventFrame extends JFrame implements IEventFrame {
   private ReadOnlyCentralSystem readOnlyCentralSystem;
   private Event event;
 
+  /**
+   * Event frame constructor that takes in only a readOnlyCentralSystem.
+   * @param readOnlyCentralSystem readOnlyCentralSystem
+   */
   public EventFrame(ReadOnlyCentralSystem readOnlyCentralSystem) {
     super();
     initialize(readOnlyCentralSystem);
   }
 
+  /**
+   * Event frame constructor that takes in a readOnlyCentralSystem and an event.
+   * @param readOnlyCentralSystem readOnlyCentralSystem
+   */
   public EventFrame(ReadOnlyCentralSystem readOnlyCentralSystem, Event event) {
     super();
     this.event = event;
@@ -160,9 +168,9 @@ public class EventFrame extends JFrame implements IEventFrame {
     }
     System.out.println("\n" + title + ": \nEvent Name: " + eventNameTextBox.getText()
             + "\nLocation: \n\tName: " + locationTextBox.getText() + "\n\tOnline: "
-    + isOnline.isSelected() + "\nTime \n\tStart Day: "
+        + isOnline.isSelected() + "\nTime \n\tStart Day: "
             + startingDayDropdown.getSelectedItem().toString() + "\n\tStarting Time: "
-    + startingTimeTextBox.getText() +  "\n\tEnd Day: "
+        + startingTimeTextBox.getText() +  "\n\tEnd Day: "
             + endingDayDropdown.getSelectedItem().toString() + "\n\tEnding Time: "
             + endingTimeTextBox.getText() + "\n Users: \t");
     for (String user : availableUserDropdown.getSelectedValuesList()) {
@@ -179,5 +187,4 @@ public class EventFrame extends JFrame implements IEventFrame {
   public void refresh() {
     this.repaint();
   }
-
 }

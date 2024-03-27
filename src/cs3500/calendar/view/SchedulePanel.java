@@ -9,18 +9,26 @@ import java.awt.Color;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.List;
-import javax.swing.*;
+import javax.swing.JPanel;
 import cs3500.calendar.model.Day;
 import cs3500.calendar.model.Event;
 import cs3500.calendar.model.ReadOnlyCentralSystem;
 import cs3500.calendar.model.Schedule;
 import cs3500.calendar.model.Time;
 
+/**
+ * To represent a schedule panel.
+ */
 public class SchedulePanel extends JPanel implements MouseListener {
 
   private Schedule schedule;
   private final ReadOnlyCentralSystem system;
 
+  /**
+   * Constructor for schedule panel.
+   * @param schedule schedule
+   * @param system system
+   */
   public SchedulePanel(Schedule schedule, ReadOnlyCentralSystem system) {
     super();
     this.schedule = schedule;
@@ -45,7 +53,7 @@ public class SchedulePanel extends JPanel implements MouseListener {
     Graphics2D g2d = (Graphics2D) g.create();
 
     for (int i = 1; i < 7; i++) {
-      g2d.drawLine(i * getWidth() / 7, 0, i * getWidth() / 7, 24*25);
+      g2d.drawLine(i * getWidth() / 7, 0, i * getWidth() / 7, 24 * 25);
     }
 
     for (int height = 0; height <= 24; height++) {
@@ -119,21 +127,21 @@ public class SchedulePanel extends JPanel implements MouseListener {
 
   @Override
   public void mousePressed(MouseEvent e) {
-
+    return;
   }
 
   @Override
   public void mouseReleased(MouseEvent e) {
-
+    return;
   }
 
   @Override
   public void mouseEntered(MouseEvent e) {
-
+    return;
   }
 
   @Override
   public void mouseExited(MouseEvent e) {
-
+    return;
   }
 }

@@ -1,7 +1,5 @@
 package cs3500.calendar.view;
 
-import cs3500.calendar.model.Event;
-
 /**
  * Once all the information is given to the frame for an event, clicking on the "Create"
  * button should print a message (using System.out) with the words "Create event:" and containing

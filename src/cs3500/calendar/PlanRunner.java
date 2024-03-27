@@ -14,6 +14,10 @@ import cs3500.calendar.view.CentralSystemFrame;
  */
 public final class PlanRunner {
 
+  /**
+   * To represent the main runnable calendar.
+   * @param args args
+   */
   public static void main(String[] args) {
     CentralSystem centralSystem = new CentralSystem();
     Time time1 = new Time(Day.MONDAY, 800, Day.MONDAY, 2359);

@@ -13,7 +13,9 @@ import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-
+/**
+ * To represent the frame for the central system.
+ */
 public class CentralSystemFrame extends JFrame implements ICentralSystemPanel {
   private final ReadOnlyCentralSystem model;
   private JComboBox<String> userScheduleDropdown;
@@ -24,6 +26,10 @@ public class CentralSystemFrame extends JFrame implements ICentralSystemPanel {
   private JButton scheduleEventButton;
   private SchedulePanel schedulePanel;
 
+  /**
+   * Constructor for the central system frame.
+   * @param model the calendar model
+   */
   public CentralSystemFrame(ReadOnlyCentralSystem model) {
     super("Central System Frame");
     this.model = model;
