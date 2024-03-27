@@ -142,41 +142,11 @@ public class EventFrame extends JFrame implements IEventFrame {
   private void setEventButtons() {
     buttonPanel = new JPanel();
     createEventButton = new JButton("Create Event");
-    createEventButton.addActionListener(new ActionListener() {
-      @Override
-      public void actionPerformed(ActionEvent e) {
-        if (eventNameTextBox.getText().isEmpty() || locationTextBox.getText().isEmpty()
-                || startingTimeTextBox.getText().isEmpty() || endingTimeTextBox.getText().isEmpty()) {
-          System.out.println("\nNot all required information is provided");
-          return;
-        }
-        printEvent("Create Event");
-      }
-    });
+    createEventButton.addActionListener(e -> printEvent("Create Event"));
     modifyEventButton = new JButton("Modify Event");
-    modifyEventButton.addActionListener(new ActionListener() {
-      @Override
-      public void actionPerformed(ActionEvent e) {
-        if (eventNameTextBox.getText().isEmpty() || locationTextBox.getText().isEmpty()
-                || startingTimeTextBox.getText().isEmpty() || endingTimeTextBox.getText().isEmpty()) {
-          System.out.println("\nNot all required information is provided");
-          return;
-        }
-        printEvent("Modify Event");
-      }
-    });
+    modifyEventButton.addActionListener(e -> printEvent("Modify Event"));
     removeEventButton = new JButton("Remove Event");
-    removeEventButton.addActionListener(new ActionListener() {
-      @Override
-      public void actionPerformed(ActionEvent e) {
-        if (eventNameTextBox.getText().isEmpty() || locationTextBox.getText().isEmpty()
-                || startingTimeTextBox.getText().isEmpty() || endingTimeTextBox.getText().isEmpty()) {
-          System.out.println("\nNot all required information is provided");
-          return;
-        }
-        printEvent("Remove Event");
-      }
-    });
+    removeEventButton.addActionListener(e -> printEvent("Remove Event"));
     buttonPanel.add(createEventButton);
     buttonPanel.add(modifyEventButton);
     buttonPanel.add(removeEventButton);
@@ -184,6 +154,11 @@ public class EventFrame extends JFrame implements IEventFrame {
   }
 
   private void printEvent(String title) {
+    if (eventNameTextBox.getText().isEmpty() || locationTextBox.getText().isEmpty()
+            || startingTimeTextBox.getText().isEmpty() || endingTimeTextBox.getText().isEmpty()) {
+      System.out.println("\nNot all required information is provided");
+      return;
+    }
     System.out.println("\n" + title + ": \nEvent Name: " + eventNameTextBox.getText()
             + "\nLocation: \n\tName: " + locationTextBox.getText() + "\n\tOnline: "
     + isOnline.isSelected() + "\nTime \n\tStart Day: "
