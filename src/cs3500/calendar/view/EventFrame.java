@@ -138,8 +138,6 @@ public class EventFrame extends JFrame implements IEventFrame {
     add(userPanel);
   }
 
-
-
   private void setEventButtons() {
     JPanel buttonPanel = new JPanel();
     JButton createEventButton = new JButton("Create Event");
@@ -171,7 +169,6 @@ public class EventFrame extends JFrame implements IEventFrame {
       System.out.print(user + " ");
     }
   }
-
 
   @Override
   public void makeVisible() {

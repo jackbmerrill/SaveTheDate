@@ -9,10 +9,7 @@ import java.awt.Color;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.List;
-import java.util.Map;
-
 import javax.swing.*;
-
 import cs3500.calendar.model.Day;
 import cs3500.calendar.model.Event;
 import cs3500.calendar.model.ReadOnlyCentralSystem;
@@ -83,6 +80,7 @@ public class SchedulePanel extends JPanel implements MouseListener {
         g2d.fillRect((time.getEndDay().order() - 1) * 100, 0,
                 100, convertTime(time.getEndTime()));
       }
+
     }
   }
 
@@ -90,7 +88,6 @@ public class SchedulePanel extends JPanel implements MouseListener {
     int translated = (hour / 100) * 100;
     return (translated + (int) (((hour % 100) / 60.0) * 100.0)) / 4;
   }
-
 
   @Override
   public void mouseClicked(MouseEvent e) {
