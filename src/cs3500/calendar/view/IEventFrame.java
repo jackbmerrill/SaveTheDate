@@ -2,6 +2,8 @@ package cs3500.calendar.view;
 
 import java.awt.event.ActionListener;
 
+import cs3500.calendar.controller.IFeatures;
+
 /**
  * A visual representation of an Event. Should display and enable the editing and removal
  * of an event and its details. Details include the title, location, time, and the
@@ -18,7 +20,7 @@ public interface IEventFrame {
   /**
    * Sets the listener for the controller to have access to the interactions between
    * the user and the view. Will be fully implemented when the view is created.
-   * @param listener the listener to be taken in
+   * @param feature the listener to be taken in
    */
-  void setListener(ActionListener listener);
+  void setFeature(IFeatures feature);
 }

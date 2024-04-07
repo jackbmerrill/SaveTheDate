@@ -91,16 +91,17 @@ public interface ICentralSystem extends ReadOnlyCentralSystem {
   void loadSchedulesFromXML(String filePath) throws IOException;
 
   /**
+   * //FIXME: update to one user rather than a list
    * Saves the schedules of said users to XML files in the given directory of a specified
    * requested user. Iterate through the list in order to pick the requested userID. An IOException
    * is thrown in the case that there is an error in the process such as the given directory
    * not existing.
    * @param directoryPath directoryPath where the XML files are saved
-   * @param userIDs The list of userIDs of users to save their schedules
+   * @param userID the userid to save the schedule
    * @throws IOException     If an error occurs during the process of saving the files or user does
    *                         not exist in the system.
    */
-  void saveSchedulesToXML(String directoryPath, List<String> userIDs) throws IOException;
+  void saveSchedulesToXML(String directoryPath, String userID) throws IOException;
 
 
 }

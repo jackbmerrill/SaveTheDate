@@ -16,6 +16,8 @@ import javax.swing.BoxLayout;
 import javax.swing.BorderFactory;
 import javax.swing.JLabel;
 import javax.swing.JScrollPane;
+
+import cs3500.calendar.controller.IFeatures;
 import cs3500.calendar.model.Day;
 import cs3500.calendar.model.Event;
 import cs3500.calendar.model.Location;
@@ -27,7 +29,7 @@ import cs3500.calendar.model.Time;
  * and will in future assignments connect to the controller with the listeners. The host
  * is always at the top of the list of users and is already selected. When creating an
  * event frame, if no event is provided, all fields will be left blank. Otherwise, all
- * event details will be filled in.
+ * event details will be filled in. Upon closing, the code does not quit.
  */
 public class EventFrame extends JFrame implements IEventFrame {
 
@@ -45,6 +47,8 @@ public class EventFrame extends JFrame implements IEventFrame {
   private JButton createEventButton;
   private JButton modifyEventButton;
   private JButton removeEventButton;
+
+  private IFeatures controller;
 
 
   /**
@@ -170,33 +174,40 @@ public class EventFrame extends JFrame implements IEventFrame {
   private void setEventButtons() {
     JPanel buttonPanel = new JPanel();
     createEventButton = new JButton("Create Event");
-    createEventButton.addActionListener(e -> printEvent("Create Event"));
+    createEventButton.addActionListener(e ->
+            controller.createEvent(makeEvent("Create Event")));
     modifyEventButton = new JButton("Modify Event");
-    modifyEventButton.addActionListener(e -> printEvent("Modify Event"));
+    modifyEventButton.addActionListener(e ->
+            controller.modifyEvent(event, makeEvent("Modify Event")));
     removeEventButton = new JButton("Remove Event");
-    removeEventButton.addActionListener(e -> printEvent("Remove Event"));
+    removeEventButton.addActionListener(e -> controller.removeEvent(event));
     buttonPanel.add(createEventButton);
     buttonPanel.add(modifyEventButton);
     buttonPanel.add(removeEventButton);
     add(buttonPanel);
   }
 
-  private void printEvent(String title) {
+  private Event makeEvent(String title) {
     if (eventNameTextBox.getText().isEmpty() || locationTextBox.getText().isEmpty()
             || startingTimeTextBox.getText().isEmpty() || endingTimeTextBox.getText().isEmpty()) {
       System.out.println("\nNot all required information is provided");
-      return;
+      //create error box
+      //TODO: end the method, throw an exception and catch in the controller
     }
-    System.out.println("\n" + title + ": \nEvent Name: " + eventNameTextBox.getText()
-            + "\nLocation: \n\tName: " + locationTextBox.getText() + "\n\tOnline: "
-        + isOnline.isSelected() + "\nTime \n\tStart Day: "
-            + startingDayDropdown.getSelectedItem().toString() + "\n\tStarting Time: "
-        + startingTimeTextBox.getText() +  "\n\tEnd Day: "
-            + endingDayDropdown.getSelectedItem().toString() + "\n\tEnding Time: "
-            + endingTimeTextBox.getText() + "\n Users: \t");
-    for (String user : availableUserDropdown.getSelectedValuesList()) {
-      System.out.print(user + " ");
+    try {
+      int startTime = Integer.parseInt(startingTimeTextBox.getText());
+      int endTime = Integer.parseInt(endingTimeTextBox.getText());
+      List<String> users = new ArrayList<>();
+      users.addAll(availableUserDropdown.getSelectedValuesList());
+      return new Event(eventNameTextBox.getText(), new Time((Day) startingDayDropdown.getSelectedItem(),
+              startTime, (Day) endingDayDropdown.getSelectedItem(), endTime),
+              new Location(isOnline.isSelected(), locationTextBox.getText()),
+              users);
+    } catch (NumberFormatException e) {
+      //create new box saying invalid time
     }
+    throw new IllegalArgumentException();
+    //placeholder
   }
 
   @Override
@@ -205,10 +216,8 @@ public class EventFrame extends JFrame implements IEventFrame {
   }
 
   @Override
-  public void setListener(ActionListener listener) {
-    modifyEventButton.addActionListener(listener);
-    createEventButton.addActionListener(listener);
-    removeEventButton.addActionListener(listener);
+  public void setFeature(IFeatures feature) {
+    this.controller = feature;
   }
 
 }

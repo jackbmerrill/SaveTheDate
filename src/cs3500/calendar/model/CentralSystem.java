@@ -136,9 +136,8 @@ public class CentralSystem implements ICentralSystem {
 
 
   @Override
-  public void saveSchedulesToXML(String directoryPath, List<String> userIDs) throws IOException {
+  public void saveSchedulesToXML(String directoryPath, String userID) throws IOException {
     XMLWriter writer = new XMLWriter();
-    for (String userID : userIDs) {
       Schedule userSchedule = system.get(userID);
       if (userSchedule == null) {
         throw new FileNotFoundException("Schedule not found for user: " + userID);
@@ -148,7 +147,6 @@ public class CentralSystem implements ICentralSystem {
               : directoryPath + File.separator + userID + "-schedule.xml";
       writer.writeScheduleToFile(filePath, userSchedule, userID);
     }
-  }
 
 
   @Override

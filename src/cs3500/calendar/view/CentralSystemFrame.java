@@ -1,5 +1,6 @@
 package cs3500.calendar.view;
 
+import cs3500.calendar.controller.IFeatures;
 import cs3500.calendar.model.ReadOnlyCentralSystem;
 import cs3500.calendar.model.Schedule;
 
@@ -30,6 +31,7 @@ public class CentralSystemFrame extends JFrame implements ICentralSystemFrame {
   private JButton createEventButton;
   private JButton scheduleEventButton;
   private SchedulePanel schedulePanel;
+  private IFeatures controller;
 
   /**
    * Constructor for the central system frame. Takes in a read only central system to
@@ -85,8 +87,7 @@ public class CentralSystemFrame extends JFrame implements ICentralSystemFrame {
         JFileChooser fileChooser = new JFileChooser();
         int option = fileChooser.showOpenDialog(CentralSystemFrame.this);
         if (option == JFileChooser.APPROVE_OPTION) {
-          System.out.println("Path to XML file: " + fileChooser.getSelectedFile().
-                  getAbsolutePath());
+          controller.loadXML(fileChooser.getSelectedFile().getAbsolutePath());
         }
       }
     });
@@ -98,8 +99,8 @@ public class CentralSystemFrame extends JFrame implements ICentralSystemFrame {
         fileChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
         int option = fileChooser.showSaveDialog(CentralSystemFrame.this);
         if (option == JFileChooser.APPROVE_OPTION) {
-          System.out.println("Directory selected for saving XML files: "
-                  + fileChooser.getSelectedFile().getAbsolutePath());
+          controller.saveXML(fileChooser.getSelectedFile().getAbsolutePath(),
+                  userScheduleDropdown.getSelectedItem().toString());
         }
       }
     });
@@ -118,6 +119,7 @@ public class CentralSystemFrame extends JFrame implements ICentralSystemFrame {
       public void actionPerformed(ActionEvent e) {
         IEventFrame eventFrame = new EventFrame(model,
                 userScheduleDropdown.getSelectedItem().toString());
+        eventFrame.setFeature(controller);
         eventFrame.makeVisible();
       }
     });
@@ -125,9 +127,11 @@ public class CentralSystemFrame extends JFrame implements ICentralSystemFrame {
     scheduleEventButton.addActionListener(new ActionListener() {
       @Override
       public void actionPerformed(ActionEvent e) {
-        IEventFrame eventFrame = new EventFrame(model,
-                userScheduleDropdown.getSelectedItem().toString());
-        eventFrame.makeVisible();
+        //TODO: need to make a schedule frame
+//        IEventFrame eventFrame = new EventFrame(model,
+//                userScheduleDropdown.getSelectedItem().toString());
+//        eventFrame.setFeature(controller);
+//        eventFrame.makeVisible();
       }
     });
   }
@@ -138,11 +142,9 @@ public class CentralSystemFrame extends JFrame implements ICentralSystemFrame {
   }
 
   @Override
-  public void setListener(ActionListener listener) {
-    loadButton.addActionListener(listener);
-    saveButton.addActionListener(listener);
-    createEventButton.addActionListener(listener);
-    scheduleEventButton.addActionListener(listener);
+  public void setFeature(IFeatures feature) {
+    this.controller = feature;
   }
+
 
 }
