@@ -44,11 +44,25 @@ public class EventFrame extends JFrame implements IEventFrame {
   private ReadOnlyCentralSystem readOnlyCentralSystem;
   private Event event;
   private String host;
+  private String user;
   private JButton createEventButton;
   private JButton modifyEventButton;
   private JButton removeEventButton;
   private IFeatures controller;
 
+  /**
+   * Event frame constructor that takes in only a readOnlyCentralSystem and the host of
+   * the event. Initializes the event frame and creates all the required text boxes. Sets
+   * the host of the event.
+   * @param readOnlyCentralSystem readOnlyCentralSystem
+   * @param host the host of the event
+   */
+  public EventFrame(ReadOnlyCentralSystem readOnlyCentralSystem, String host) {
+    super();
+    this.host = host;
+    this.user = user;
+    initialize(readOnlyCentralSystem);
+  }
 
   /**
    * Event frame constructor that takes in a readOnlyCentralSystem and an event. Takes the
@@ -57,9 +71,10 @@ public class EventFrame extends JFrame implements IEventFrame {
    * @param readOnlyCentralSystem readOnlyCentralSystem
    * @param event the event to be edited
    */
-  public EventFrame(ReadOnlyCentralSystem readOnlyCentralSystem, Event event) {
+  public EventFrame(ReadOnlyCentralSystem readOnlyCentralSystem, Event event, String user) {
     super();
     this.event = event;
+    this.user = user;
     this.host = this.event.getHost();
     initialize(readOnlyCentralSystem);
     eventNameTextBox.setText(event.getName());
@@ -166,7 +181,7 @@ public class EventFrame extends JFrame implements IEventFrame {
     modifyEventButton.addActionListener(e ->
             controller.modifyEvent(event, makeEvent("Modify Event")));
     removeEventButton = new JButton("Remove Event");
-    removeEventButton.addActionListener(e -> controller.removeEvent(event, ));
+    removeEventButton.addActionListener(e -> controller.removeEvent(event, user));
     //need a way to differentiate between who is opening the event frame.
     buttonPanel.add(createEventButton);
     buttonPanel.add(modifyEventButton);

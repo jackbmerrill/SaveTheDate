@@ -135,7 +135,7 @@ public class SchedulePanel extends JPanel implements MouseListener, ISchedulePan
     if (events.isEmpty()) {
       return;
     }
-    IEventFrame eventFrame = new EventFrame(this.system, events.get(0));
+    IEventFrame eventFrame = new EventFrame(this.system, events.get(0), this.schedule.getUserID());
     if (this.controller != null) {
       eventFrame.setFeature(this.controller);
     }
