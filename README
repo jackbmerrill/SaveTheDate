@@ -64,3 +64,12 @@ Changes for Part 2:
 
 
 
+Changes for part 3:
+    - changed the load and save xml methods in the central system to take in a single user as
+    a string rather than taking in a list of strings. Makes life easier for the controller and
+    simply just does not make sense with our view as it only interacts with one user at a time.
+    - Changed the listeners and add listener methods in all classes in the view to take in
+    the features interface and assign it to a local field in order to perform callbacks to the
+    controller. Therefore, the respective methods that should output something have been connected
+    to the controller methods to ensure they work as intended and pass up the desired information.
+

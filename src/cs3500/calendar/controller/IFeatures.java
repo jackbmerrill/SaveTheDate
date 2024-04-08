@@ -53,8 +53,9 @@ public interface IFeatures {
    * then the event is removed from all users. Otherwise, it is only removed from the current
    * users schedule.
    * @param event the event to be removed.
+   * @param user the user schedule to remove the event
    */
   //TODD: do we also need to take in a user id to differentiate between who is removing the event.
-  void removeEvent(Event event);
+  void removeEvent(Event event, String user);
 
 }

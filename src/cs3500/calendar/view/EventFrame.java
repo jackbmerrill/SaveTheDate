@@ -47,7 +47,6 @@ public class EventFrame extends JFrame implements IEventFrame {
   private JButton createEventButton;
   private JButton modifyEventButton;
   private JButton removeEventButton;
-
   private IFeatures controller;
 
 
@@ -180,7 +179,8 @@ public class EventFrame extends JFrame implements IEventFrame {
     modifyEventButton.addActionListener(e ->
             controller.modifyEvent(event, makeEvent("Modify Event")));
     removeEventButton = new JButton("Remove Event");
-    removeEventButton.addActionListener(e -> controller.removeEvent(event));
+    removeEventButton.addActionListener(e -> controller.removeEvent(event, ));
+    //need a way to differentiate between who is opening the event frame.
     buttonPanel.add(createEventButton);
     buttonPanel.add(modifyEventButton);
     buttonPanel.add(removeEventButton);
@@ -201,7 +201,8 @@ public class EventFrame extends JFrame implements IEventFrame {
       int endTime = Integer.parseInt(endingTimeTextBox.getText());
       List<String> users = new ArrayList<>();
       users.addAll(availableUserDropdown.getSelectedValuesList());
-      return new Event(eventNameTextBox.getText(), new Time((Day) startingDayDropdown.getSelectedItem(),
+      return new Event(eventNameTextBox.getText(),
+              new Time((Day) startingDayDropdown.getSelectedItem(),
               startTime, (Day) endingDayDropdown.getSelectedItem(), endTime),
               new Location(isOnline.isSelected(), locationTextBox.getText()),
               users);
