@@ -175,8 +175,6 @@ public class Schedule implements ISchedule {
     return userID;
   }
 
-
-
 }
 
 

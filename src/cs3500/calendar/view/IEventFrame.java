@@ -23,4 +23,6 @@ public interface IEventFrame {
    * @param feature the listener to be taken in
    */
   void setFeature(IFeatures feature);
+
+  void setListener(ActionListener listener);
 }

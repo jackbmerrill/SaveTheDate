@@ -5,10 +5,15 @@ import java.util.ArrayList;
 import java.util.List;
 import cs3500.calendar.model.CentralSystem;
 import cs3500.calendar.model.Day;
+import cs3500.calendar.model.Event;
 import cs3500.calendar.model.Location;
+import cs3500.calendar.model.ReadOnlyCentralSystem;
 import cs3500.calendar.model.Time;
 import cs3500.calendar.view.CentralSystemFrame;
+import cs3500.calendar.view.EventFrame;
 import cs3500.calendar.view.ICentralSystemFrame;
+import cs3500.calendar.view.IEventFrame;
+import cs3500.calendar.view.SchedulingFrame;
 
 /**
  * To run the view.
@@ -30,7 +35,11 @@ public final class PlanRunner {
     centralSystem.generateEvent("Event1", time1, loc1, list1);
     centralSystem.generateEvent("Event2", time2, loc1, list1);
     ICentralSystemFrame frame = new CentralSystemFrame(centralSystem);
-    frame.makeVisible(true);
+    //frame.makeVisible(true);
+
+    //ReadOnlyCentralSystem readOnlyCentralSystem = new ReadOnlyCentralSystem();
+    IEventFrame schedulingEvent = new SchedulingFrame(centralSystem);
+    schedulingEvent.makeVisible();
     frame.createErrorBox("test");
   }
 }

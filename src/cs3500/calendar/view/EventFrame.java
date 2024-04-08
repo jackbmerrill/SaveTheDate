@@ -52,19 +52,6 @@ public class EventFrame extends JFrame implements IEventFrame {
 
 
   /**
-   * Event frame constructor that takes in only a readOnlyCentralSystem and the host of
-   * the event. Initializes the event frame and creates all the required text boxes. Sets
-   * the host of the event.
-   * @param readOnlyCentralSystem readOnlyCentralSystem
-   * @param host the host of the event
-   */
-  public EventFrame(ReadOnlyCentralSystem readOnlyCentralSystem, String host) {
-    super();
-    this.host = host;
-    initialize(readOnlyCentralSystem);
-  }
-
-  /**
    * Event frame constructor that takes in a readOnlyCentralSystem and an event. Takes the
    * info from the provided event and fills in all the required details to all the different
    * panels.
@@ -220,6 +207,11 @@ public class EventFrame extends JFrame implements IEventFrame {
   @Override
   public void setFeature(IFeatures feature) {
     this.controller = feature;
+  }
+
+  @Override
+  public void setListener(ActionListener listener) {
+
   }
 
 }
