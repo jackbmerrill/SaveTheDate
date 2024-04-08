@@ -146,5 +146,9 @@ public class CentralSystemFrame extends JFrame implements ICentralSystemFrame {
     this.controller = feature;
   }
 
+  @Override
+  public void createErrorBox(String message) {
+    new ErrorBox(message);
+  }
 
 }

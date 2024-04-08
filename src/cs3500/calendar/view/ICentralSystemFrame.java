@@ -23,4 +23,11 @@ public interface ICentralSystemFrame {
    */
   void setFeature(IFeatures feature);
 
+  /**
+   * Displays an error box to the user with the desired method. For use when there is
+   * an issue with creating event or some such conflict in the model.
+   * @param message the message to be displayed
+   */
+  void createErrorBox(String message);
+
 }

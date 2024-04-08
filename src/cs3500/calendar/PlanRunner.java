@@ -31,5 +31,6 @@ public final class PlanRunner {
     centralSystem.generateEvent("Event2", time2, loc1, list1);
     ICentralSystemFrame frame = new CentralSystemFrame(centralSystem);
     frame.makeVisible(true);
+    frame.createErrorBox("test");
   }
 }

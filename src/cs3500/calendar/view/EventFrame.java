@@ -191,8 +191,10 @@ public class EventFrame extends JFrame implements IEventFrame {
     if (eventNameTextBox.getText().isEmpty() || locationTextBox.getText().isEmpty()
             || startingTimeTextBox.getText().isEmpty() || endingTimeTextBox.getText().isEmpty()) {
       System.out.println("\nNot all required information is provided");
-      //create error box
+      new ErrorBox("Not all required information is provided.");
       //TODO: end the method, throw an exception and catch in the controller
+      //also check what is throwing in the create event part. or throw exception, create
+      //the box via method in the controller
     }
     try {
       int startTime = Integer.parseInt(startingTimeTextBox.getText());
@@ -204,7 +206,7 @@ public class EventFrame extends JFrame implements IEventFrame {
               new Location(isOnline.isSelected(), locationTextBox.getText()),
               users);
     } catch (NumberFormatException e) {
-      //create new box saying invalid time
+      new ErrorBox("Invalid time.");
     }
     throw new IllegalArgumentException();
     //placeholder

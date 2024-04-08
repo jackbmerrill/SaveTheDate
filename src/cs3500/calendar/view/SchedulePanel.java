@@ -11,6 +11,8 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.List;
 import javax.swing.JPanel;
+
+import cs3500.calendar.controller.IFeatures;
 import cs3500.calendar.model.Day;
 import cs3500.calendar.model.Event;
 import cs3500.calendar.model.ReadOnlyCentralSystem;
@@ -27,7 +29,7 @@ public class SchedulePanel extends JPanel implements MouseListener, ISchedulePan
 
   private Schedule schedule;
   private final ReadOnlyCentralSystem system;
-  private ActionListener listener;
+  private IFeatures controller;
 
   /**
    * Constructor for the schedule panel. Takes in a schedule to start with and the central
@@ -134,8 +136,8 @@ public class SchedulePanel extends JPanel implements MouseListener, ISchedulePan
       return;
     }
     IEventFrame eventFrame = new EventFrame(this.system, events.get(0));
-    if (this.listener != null) {
-      eventFrame.setListener(this.listener);
+    if (this.controller != null) {
+      eventFrame.setFeature(this.controller);
     }
     eventFrame.makeVisible();
   }
