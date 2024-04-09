@@ -17,7 +17,6 @@ import cs3500.calendar.model.ICentralSystem;
 import cs3500.calendar.model.Location;
 import cs3500.calendar.model.Time;
 import cs3500.calendar.strategy.WorkHoursSchedulingStrategy;
-import cs3500.calendar.view.ICentralSystemFrame;
 import cs3500.calendar.view.MockView;
 
 import static org.junit.Assert.assertEquals;
