@@ -6,10 +6,13 @@ import java.util.List;
 
 import cs3500.calendar.controller.Controller;
 import cs3500.calendar.controller.IFeatures;
+import cs3500.calendar.model.AnyTimeSchedulingStrategies;
 import cs3500.calendar.model.CentralSystem;
 import cs3500.calendar.model.Day;
 import cs3500.calendar.model.Location;
+import cs3500.calendar.model.SchedulingStrategies;
 import cs3500.calendar.model.Time;
+import cs3500.calendar.model.WorkHoursSchedulingStrategy;
 import cs3500.calendar.view.CentralSystemFrame;
 import cs3500.calendar.view.ICentralSystemFrame;
 
@@ -32,6 +35,19 @@ public final class PlanRunner {
     centralSystem.addUser("Dio");
     centralSystem.generateEvent("Event1", time1, loc1, list1);
     centralSystem.generateEvent("Event2", time2, loc1, list1);
-    IFeatures controller = new Controller(centralSystem);
+
+    SchedulingStrategies strategy = null;
+    if (args.length > 0) {
+      if ("anytime".equalsIgnoreCase(args[0])) {
+        strategy = new AnyTimeSchedulingStrategies();
+      } else if ("workhours".equalsIgnoreCase(args[0])) {
+        strategy = new WorkHoursSchedulingStrategy();
+      } else {
+        System.err.println("Not a valid strategy.");
+        return;
+      }
+    }
+
+    IFeatures controller = new Controller(centralSystem, strategy);
   }
 }

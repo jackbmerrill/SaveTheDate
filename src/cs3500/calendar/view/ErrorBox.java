@@ -6,7 +6,7 @@ import javax.swing.*;
 
 /**
  * Creates and displays an error box with the desired message. Used to display issues
- * when they arrise either within the view itself or within the model.
+ * when they arise either within the view itself or within the model.
  */
 public class ErrorBox extends JFrame {
 
@@ -21,13 +21,18 @@ public class ErrorBox extends JFrame {
     setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
     this.setSize(200, 150);
     setTitle("Message");
-    setLayout(new BorderLayout());
-    JLabel text = new JLabel(message);
+
+    //setLayout(new BorderLayout());
+    String messageFormatted = "<html><body style='text-align: center;'>" + message + "</body></html>";
+
+    JLabel text = new JLabel(messageFormatted);
     text.setHorizontalAlignment(SwingConstants.CENTER);
     this.add(text, BorderLayout.CENTER);
+
     JButton close = new JButton("Close");
     close.addActionListener(e -> this.dispose());
     this.add(close, BorderLayout.SOUTH);
+
     this.setLocationRelativeTo(null);
     this.setVisible(true);
   }

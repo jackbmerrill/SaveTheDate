@@ -7,6 +7,7 @@ import java.util.List;
 import javax.swing.*;
 
 import cs3500.calendar.controller.IFeatures;
+import cs3500.calendar.model.Event;
 import cs3500.calendar.model.Location;
 import cs3500.calendar.model.ReadOnlyCentralSystem;
 
@@ -41,6 +42,32 @@ public class SchedulingFrame extends JFrame implements IEventFrame {
     setLocationRelativeTo(null);
   }
 
+//  private void setInitialComponents() {
+//    eventNameTextBox = new JTextField(20);
+//    isOnline = new JCheckBox("Is Online");
+//    locationTextBox = new JTextField(10);
+//    durationTextBox = new JTextField(5);
+//    listOfAvailableUsers = new JList<>(new ArrayList<>(readOnlyCentralSystem.getUsers()).
+//            toArray(new String[0]));
+//    scheduleEventButton = new JButton("Schedule Event");
+//    scheduleEventButton.addActionListener(e -> {
+//      try {
+//        List<String> users = new ArrayList<>();
+//        users.addAll(listOfAvailableUsers.getSelectedValuesList());
+//        if (eventNameTextBox.getText().isEmpty() || locationTextBox.getText().isEmpty()
+//                || durationTextBox.getText().isEmpty() || users.isEmpty()) {
+//          throw new IllegalArgumentException("Not all required information is provided.");
+//        }
+//        controller.scheduleEvent(eventNameTextBox.getText(),
+//                Integer.parseInt(durationTextBox.getText()),
+//                new Location(isOnline.isSelected(), locationTextBox.getText()),
+//                users);
+//      } catch (NumberFormatException x) {
+//        new ErrorBox("Invalid time, enter in minutes.");
+//      }
+//    });
+//  }
+
   private void setInitialComponents() {
     eventNameTextBox = new JTextField(20);
     isOnline = new JCheckBox("Is Online");
@@ -51,16 +78,16 @@ public class SchedulingFrame extends JFrame implements IEventFrame {
     scheduleEventButton = new JButton("Schedule Event");
     scheduleEventButton.addActionListener(e -> {
       try {
-        List<String> users = new ArrayList<>();
-        users.addAll(listOfAvailableUsers.getSelectedValuesList());
+        List<String> users = new ArrayList<>(listOfAvailableUsers.getSelectedValuesList());
         if (eventNameTextBox.getText().isEmpty() || locationTextBox.getText().isEmpty()
                 || durationTextBox.getText().isEmpty() || users.isEmpty()) {
-          throw new IllegalArgumentException("Not all required information is provided.");
+          JOptionPane.showMessageDialog(this, "Not all required information is provided.",
+                  "Error", JOptionPane.ERROR_MESSAGE);
+          return;
         }
-        controller.scheduleEvent(eventNameTextBox.getText(),
-                Integer.parseInt(durationTextBox.getText()),
-                new Location(isOnline.isSelected(), locationTextBox.getText()),
-                users);
+        int duration = Integer.parseInt(durationTextBox.getText());
+        Location location = new Location(isOnline.isSelected(), locationTextBox.getText());
+        controller.scheduleEvent(eventNameTextBox.getText(), duration, location, users);
       } catch (NumberFormatException x) {
         new ErrorBox("Invalid time, enter in minutes.");
       }

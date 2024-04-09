@@ -28,9 +28,10 @@ public class Controller implements IFeatures {
    * creates a new view with the model
    * @param model the model to be taken in
    */
-  public Controller(ICentralSystem model) {
+  public Controller(ICentralSystem model, SchedulingStrategies strategy) {
     this.model = Objects.requireNonNull(model);
     this.view = new CentralSystemFrame(model);
+    this.strategy = strategy;
     this.view.setFeature(this);
     this.view.makeVisible(true);
   }
@@ -82,9 +83,22 @@ public class Controller implements IFeatures {
 
   @Override
   public void scheduleEvent(String name, int time, Location loc, List<String> users) {
+    if (strategy == null) {
+      view.createErrorBox("Scheduling Strategy is not set");
+      return;
+    }
     Event event = strategy.findTime(model, name, time, loc, users);
-    this.model.generateEvent(event.getName(), event.getTime(),
-            event.getLocation(), event.getUsers());
+
+    if (event == null) {
+      view.createErrorBox("Unable to schedule an event because no suitable time was found.");
+    } else {
+      try {
+        model.generateEvent(event.getName(), event.getTime(), event.getLocation(), event.getUsers());
+        this.view.refresh();
+      } catch (IllegalStateException e) {
+        view.createErrorBox(e.getMessage());
+      }
+    }
   }
 
   @Override

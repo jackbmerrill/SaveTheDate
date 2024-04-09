@@ -51,4 +51,12 @@ public interface ReadOnlyCentralSystem {
    * @return True iff there is a conflict, otherwise returns false
    */
   boolean eventConflict(Time time, List<String> users);
+
+  /**
+   * Checks if the given time slot is available for all the given users.
+   * @param time the given time.
+   * @param users the given users.
+   * @return a boolean if the time slot is available for all the given users or not.
+   */
+  boolean isTimeAvailableForUsers(Time time, List<String> users);
 }
