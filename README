@@ -1,8 +1,14 @@
 OVERVIEW: our code can be run in the plan runner by creating a new model and passing it into
-          the view and then making the view visible. As of now, there is no controller,
-          but once that is created, it will all be handled via that.
+          the view. Then, create a new controller which takes in both the view and the model.
+          In the command line, before the code actually runs, one must specify which strategy
+          they want to use for the schedule event frame, either "anytime" or "workhours."
           For creation, simple use the central system constructor, and then pass that
-          into the view constructor
+          into the view constructor, and then pass both into the controller along with the
+          desired strategy as an object.
+
+QUICKSTART: Create a new run configuration with PlanRunner as the desired class and in
+            the command line, enter the name of the desired strategy you would like to use
+            to search for times to schedule events.
 
 This codebase is designed to be a weekly calendar capable of managing multiple schedules
     and importing and exporting them as XMLs. Events can be added, removed, and modified,
@@ -14,12 +20,15 @@ This codebase is designed to be a weekly calendar capable of managing multiple s
             - model : all classes and interfaces pertaining to our model are stored here
             - xml : all xml related classes are here
             - view : our textual view and GUI classes and interfaces are here
-            - controller : for when we build our controller, it will go here
+            - controller : Controller related classes and interfaces
+            - strategy : strategy related classes and interfaces
     - test : all test classes
         -cs3500.calendar - further package isolation
-            - model - all model tests
+            - model - all model tests and mocks for controller
             - view - tests for the textual view
             - xml - all tests for the xml classes
+            - controller - tests for the controller using mocks
+            - strategy - all tests for the strategies
 
 
     KEY COMPONENTS:
@@ -69,7 +78,25 @@ Changes for part 3:
     a string rather than taking in a list of strings. Makes life easier for the controller and
     simply just does not make sense with our view as it only interacts with one user at a time.
     - Changed the listeners and add listener methods in all classes in the view to take in
-    the features interface and assign it to a local field in order to perform callbacks to the
+    the features interface and assign it to a field in order to perform callbacks to the
     controller. Therefore, the respective methods that should output something have been connected
     to the controller methods to ensure they work as intended and pass up the desired information.
+    - updated the file organization to reflect the new packages
+    - Added a new implementation of the IEventFrame interface for the schedule event panel and
+    hooked it up to our existing code base.
+
+    ADDED KEY COMPONENTS:
+        - IFeatures interface - interface defining all actions our controller should be able to
+                                do and use to interact between the view and the controller.
+                                The controller only quits when the central system frame is closed.
+        - Controller - implementation of the controller. Delegates any input from the view via
+                       callbacks to the model and if any errors occur, the controller creates a
+                       new error box in the view with the given exception message.
+        - Strategies - define the way in which the the system will search for available times to
+                       schedule an event for all the requested users. If there is no such valid
+                       time, the strategy will throw an error. Each strategy is an object,
+                       and the method takes in the desired info and attempts to find a time.
+
+
+
 

@@ -31,6 +31,6 @@ public final class PlanRunner {
         throw new IllegalArgumentException("Invalid strategy type");
     }
     CentralSystem centralSystem = new CentralSystem();
-    new Controller(centralSystem, strategy);
+      new Controller(centralSystem, strategy);
   }
 }
