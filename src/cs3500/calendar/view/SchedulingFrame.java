@@ -35,7 +35,6 @@ public class SchedulingFrame extends JFrame implements IEventFrame {
     this.readOnlyCentralSystem = readOnlyCentralSystem;
     setInitialComponents();
     setInitialLayout();
-    attachHandlers();;
     pack();
     setLocationRelativeTo(null);
   }
@@ -66,14 +65,6 @@ public class SchedulingFrame extends JFrame implements IEventFrame {
       panel.add(component);
     }
     return panel;
-  }
-
-  private void attachHandlers() {
-//    scheduleEventButton.addActionListener(actionListener);
-  }
-
-  private void scheduleEvent() {
-    return;
   }
 
   @Override
