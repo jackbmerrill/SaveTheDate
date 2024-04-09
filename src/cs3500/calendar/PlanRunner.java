@@ -1,7 +1,6 @@
 package cs3500.calendar;
 
 import cs3500.calendar.controller.Controller;
-import cs3500.calendar.controller.IFeatures;
 import cs3500.calendar.model.CentralSystem;
 import cs3500.calendar.strategy.SchedulingStrategies;
 import cs3500.calendar.strategy.StrategyCreator;
@@ -33,6 +32,6 @@ public final class PlanRunner {
     }
     CentralSystem centralSystem = new CentralSystem();
     //should the controller only take in the view.
-    IFeatures controller = new Controller(centralSystem, strategy);
+    new Controller(centralSystem, strategy);
   }
 }
