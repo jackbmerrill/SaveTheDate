@@ -25,8 +25,7 @@ public class Controller implements IFeatures {
 
   /**
    * Constructor for the controller. Takes in a model of the ICentralSystem interface and
-   * creates a new view with the model
-   *
+   * creates a new view with the model using the view we created as the default.
    * @param model the model to be taken in
    */
   public Controller(ICentralSystem model, SchedulingStrategies strategy) {
@@ -40,7 +39,6 @@ public class Controller implements IFeatures {
   /**
    * Constructor that enables the specification of the view, rather than using the default
    * view. Enables use of mock views and other versions for testing.
-   *
    * @param view     the view to be taken in
    * @param model    the model to be taken in
    * @param strategy the strategy to be taken in

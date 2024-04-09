@@ -9,7 +9,7 @@ import cs3500.calendar.model.Location;
  * The IFeatures interface delegates all interactions between the model and the view
  * to prevent loose coupling. Acts as the intermediary of the system. Defines each action
  * available to the user in the view and the model to ensure the correct action is performed
- * without the user knowing how.
+ * without the user knowing how. All interactions are delegated to the model.
  */
 public interface IFeatures {
 
@@ -33,35 +33,38 @@ public interface IFeatures {
 
 
   /**
-   *
-   * @param name
-   * @param time
-   * @param loc
-   * @param users
+   * Schedules an event in the model at an available time for all users. This is done through
+   * delegating the inputs to the provided strategy to the controller. If there is not a
+   * given strategy for, an error box is created in the view.
+   * @param name name of the event
+   * @param time duration of the event as an integer in minutes
+   * @param loc the location of the event
+   * @param users the desired users of the event
    */
   void scheduleEvent(String name, int time, Location loc, List<String> users);
 
   /**
-   * Load the desired file into the model.
+   * Load the desired file into the model. If for any reason it cannot be loaded,
+   * an error box is created in the view. Delgates to the model
    * @param filePath the file path to the desired schedule XML.
    */
   void loadXML(String filePath);
 
   /**
-   * Saves the desired users schedule to the given filepath.
+   * Saves the desired users schedule to the given filepath. Delegates the info to the model
+   * and if the xml cannot be saved or an error occurs, an error box is displayed in the view.
    * @param filePath the file path to save the XML.
    * @param userID the desired users schedule to save.
    */
   void saveXML(String filePath, String userID);
 
   /**
-   * Removes the given event from the system. If the user removing the event is the hsot,
+   * Removes the given event from the system. If the user removing the event is the host,
    * then the event is removed from all users. Otherwise, it is only removed from the current
    * users schedule.
    * @param event the event to be removed.
    * @param user the user schedule to remove the event
    */
-  //TODD: do we also need to take in a user id to differentiate between who is removing the event.
   void removeEvent(Event event, String user);
 
 }
