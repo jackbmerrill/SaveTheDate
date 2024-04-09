@@ -1,6 +1,5 @@
 package cs3500.calendar.view;
 
-import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
 import java.awt.GridLayout;
@@ -175,11 +174,21 @@ public class EventFrame extends JFrame implements IEventFrame {
   private void setEventButtons() {
     JPanel buttonPanel = new JPanel();
     createEventButton = new JButton("Create Event");
-    createEventButton.addActionListener(e ->
-            controller.createEvent(makeEvent()));
+    createEventButton.addActionListener(e -> {
+      try {
+        controller.createEvent(makeEvent());
+      } catch (IllegalArgumentException x) {
+        new ErrorBox(x.getMessage());
+      }
+    });
     modifyEventButton = new JButton("Modify Event");
-    modifyEventButton.addActionListener(e ->
-            controller.modifyEvent(event, makeEvent()));
+    modifyEventButton.addActionListener(e -> {
+      try {
+        controller.modifyEvent(event, makeEvent());
+      } catch (IllegalArgumentException x) {
+        new ErrorBox(x.getMessage());
+      }
+    });
     removeEventButton = new JButton("Remove Event");
     removeEventButton.addActionListener(e -> {
       controller.removeEvent(event, user);
@@ -194,11 +203,7 @@ public class EventFrame extends JFrame implements IEventFrame {
   private Event makeEvent() {
     if (eventNameTextBox.getText().isEmpty() || locationTextBox.getText().isEmpty()
             || startingTimeTextBox.getText().isEmpty() || endingTimeTextBox.getText().isEmpty()) {
-      System.out.println("\nNot all required information is provided");
-      new ErrorBox("Not all required information is provided.");
-      //TODO: end the method, throw an exception and catch in the controller
-      //also check what is throwing in the create event part. or throw exception, create
-      //the box via method in the controller
+      throw new IllegalArgumentException("Not all required information is provided.");
     }
     try {
       int startTime = Integer.parseInt(startingTimeTextBox.getText());
@@ -213,10 +218,8 @@ public class EventFrame extends JFrame implements IEventFrame {
       this.dispose();
       return event;
     } catch (NumberFormatException e) {
-      new ErrorBox("Invalid time.");
+      throw new IllegalArgumentException("Invalid time.");
     }
-    throw new IllegalArgumentException();
-    //placeholder
   }
 
   @Override
