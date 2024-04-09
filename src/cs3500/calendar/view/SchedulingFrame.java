@@ -30,7 +30,8 @@ public class SchedulingFrame extends JFrame implements IEventFrame {
 
   /**
    * SchedulingEvent Frame constructor that takes in a readOnlyCentralSystem. Takes the
-   * info from the provided event and fills in all the required details to all the different panels.
+   * info from the provided event and fills in all the required details to all the different
+   * panels.
    * @param readOnlyCentralSystem readOnlyCentralSystem
    */
   public SchedulingFrame(ReadOnlyCentralSystem readOnlyCentralSystem) {
@@ -41,32 +42,6 @@ public class SchedulingFrame extends JFrame implements IEventFrame {
     pack();
     setLocationRelativeTo(null);
   }
-
-//  private void setInitialComponents() {
-//    eventNameTextBox = new JTextField(20);
-//    isOnline = new JCheckBox("Is Online");
-//    locationTextBox = new JTextField(10);
-//    durationTextBox = new JTextField(5);
-//    listOfAvailableUsers = new JList<>(new ArrayList<>(readOnlyCentralSystem.getUsers()).
-//            toArray(new String[0]));
-//    scheduleEventButton = new JButton("Schedule Event");
-//    scheduleEventButton.addActionListener(e -> {
-//      try {
-//        List<String> users = new ArrayList<>();
-//        users.addAll(listOfAvailableUsers.getSelectedValuesList());
-//        if (eventNameTextBox.getText().isEmpty() || locationTextBox.getText().isEmpty()
-//                || durationTextBox.getText().isEmpty() || users.isEmpty()) {
-//          throw new IllegalArgumentException("Not all required information is provided.");
-//        }
-//        controller.scheduleEvent(eventNameTextBox.getText(),
-//                Integer.parseInt(durationTextBox.getText()),
-//                new Location(isOnline.isSelected(), locationTextBox.getText()),
-//                users);
-//      } catch (NumberFormatException x) {
-//        new ErrorBox("Invalid time, enter in minutes.");
-//      }
-//    });
-//  }
 
   private void setInitialComponents() {
     eventNameTextBox = new JTextField(20);
@@ -81,13 +56,13 @@ public class SchedulingFrame extends JFrame implements IEventFrame {
         List<String> users = new ArrayList<>(listOfAvailableUsers.getSelectedValuesList());
         if (eventNameTextBox.getText().isEmpty() || locationTextBox.getText().isEmpty()
                 || durationTextBox.getText().isEmpty() || users.isEmpty()) {
-          JOptionPane.showMessageDialog(this, "Not all required information is provided.",
-                  "Error", JOptionPane.ERROR_MESSAGE);
+          new ErrorBox("Not all required information is provided.");
           return;
         }
         int duration = Integer.parseInt(durationTextBox.getText());
         Location location = new Location(isOnline.isSelected(), locationTextBox.getText());
         controller.scheduleEvent(eventNameTextBox.getText(), duration, location, users);
+        this.dispose();
       } catch (NumberFormatException x) {
         new ErrorBox("Invalid time, enter in minutes.");
       }

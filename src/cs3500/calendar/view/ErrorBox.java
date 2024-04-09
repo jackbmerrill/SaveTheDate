@@ -18,23 +18,8 @@ public class ErrorBox extends JFrame {
    */
   public ErrorBox(String message) {
     super();
-    setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-    this.setSize(200, 150);
-    setTitle("Message");
-
-    //setLayout(new BorderLayout());
-    String messageFormatted = "<html><body style='text-align: center;'>" + message + "</body></html>";
-
-    JLabel text = new JLabel(messageFormatted);
-    text.setHorizontalAlignment(SwingConstants.CENTER);
-    this.add(text, BorderLayout.CENTER);
-
-    JButton close = new JButton("Close");
-    close.addActionListener(e -> this.dispose());
-    this.add(close, BorderLayout.SOUTH);
-
-    this.setLocationRelativeTo(null);
-    this.setVisible(true);
+    JOptionPane.showMessageDialog(this, message,
+            "Error", JOptionPane.ERROR_MESSAGE);
   }
 
 }
