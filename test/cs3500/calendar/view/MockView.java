@@ -1,5 +1,6 @@
 package cs3500.calendar.view;
 
+import java.io.IOException;
 import java.util.List;
 
 import cs3500.calendar.controller.IFeatures;
@@ -13,10 +14,11 @@ import cs3500.calendar.model.Location;
  */
 public class MockView implements ICentralSystemFrame, IFeatures {
 
-  private final IFeatures controller;
+  private IFeatures controller;
+  private final Appendable appendable;
 
-  public MockView(IFeatures feature) {
-    this.controller = feature;
+  public MockView(Appendable appendable) {
+    this.appendable = appendable;
   }
 
   @Override
@@ -26,12 +28,16 @@ public class MockView implements ICentralSystemFrame, IFeatures {
 
   @Override
   public void setFeature(IFeatures feature) {
-    return;
+    this.controller = feature;
   }
 
   @Override
   public void createErrorBox(String message) {
-    return;
+    try {
+      appendable.append(message);
+    } catch (IOException e) {
+      throw new IllegalStateException("IO Failed.");
+    }
   }
 
   @Override

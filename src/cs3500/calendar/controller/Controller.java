@@ -36,6 +36,22 @@ public class Controller implements IFeatures {
     this.view.makeVisible(true);
   }
 
+  /**
+   * Constructor that enables the specification of the view, rather than using the default
+   * view. Enables use of mock views and other versions for testing.
+   * @param view the view to be taken in
+   * @param model the model to be taken in
+   * @param strategy the strategy to be taken in
+   */
+  public Controller(ICentralSystemFrame view, ICentralSystem model,
+                    SchedulingStrategies strategy) {
+    this.model = Objects.requireNonNull(model);
+    this.view = view;
+    this.strategy = strategy;
+    this.view.setFeature(this);
+    this.view.makeVisible(true);
+  }
+
   @Override
   public void createEvent(Event event) {
     try {
