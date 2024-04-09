@@ -125,7 +125,8 @@ public class CentralSystemFrame extends JFrame implements ICentralSystemFrame {
     scheduleEventButton.addActionListener(new ActionListener() {
       @Override
       public void actionPerformed(ActionEvent e) {
-        IEventFrame schedule = new SchedulingFrame(model);
+        IEventFrame schedule = new SchedulingFrame(model,
+                userScheduleDropdown.getSelectedItem().toString());
         schedule.setFeature(controller);
         schedule.makeVisible();
       }
@@ -152,7 +153,7 @@ public class CentralSystemFrame extends JFrame implements ICentralSystemFrame {
   public void refresh() {
     this.schedulePanel.updateSchedule(model.getUserSchedule(
             userScheduleDropdown.getSelectedItem().toString()));
-    this.repaint();   //
+    this.repaint();
   }
 
 }

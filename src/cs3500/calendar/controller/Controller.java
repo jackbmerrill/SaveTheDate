@@ -50,6 +50,7 @@ public class Controller implements IFeatures {
     this.strategy = strategy;
     this.view.setFeature(this);
     this.view.makeVisible(true);
+    this.view.refresh();
   }
 
   @Override
