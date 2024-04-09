@@ -23,7 +23,11 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
-public class TestController {
+/**
+ * Class designed to test that the inputs from the controller actually modify the view.
+ * It also tests for the exceptions thrown creating error boxes in the view.
+ */
+public class TestControllerModifiesModel {
 
   IFeatures controller;
   Appendable output;
