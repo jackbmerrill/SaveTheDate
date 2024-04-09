@@ -1,8 +1,6 @@
 package cs3500.calendar.view;
-
-import java.awt.*;
-
-import javax.swing.*;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 
 /**
  * Creates and displays an error box with the desired message. Used to display issues

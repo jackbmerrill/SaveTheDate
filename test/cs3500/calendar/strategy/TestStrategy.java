@@ -91,10 +91,17 @@ public class TestStrategy {
     central1.generateEvent("event1", time1, loc1, list1);
     central1.generateEvent("event2", time5, loc2, list1);
     central1.generateEvent("event3", time6, loc3, list2);
-    Time expectedTime = new Time(Day.MONDAY, 1300, Day.MONDAY, 1500);
+    Time expectedTime = new Time(Day.MONDAY, 9000, Day.MONDAY, 1100);
     Event expectedEvent = new Event("Event11", expectedTime, loc1, list1);
     Event createdEvent = workhours.findTime(central1, "Event11", 120, loc1, list1);
     assertEquals(expectedEvent, createdEvent);
+  }
+
+  // to test that workhours can be scheduled in between events
+  @Test public void testWorkHoursInBetweenEvents() {
+    central1.generateEvent("event4", time4, loc1, list1);
+    central1.generateEvent("event8", time8, loc2, list1);
+    //Time expectedTime = new Time()
   }
 
   // to test the failing addition of an event to a full workhours system

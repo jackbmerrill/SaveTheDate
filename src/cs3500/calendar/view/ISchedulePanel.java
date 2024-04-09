@@ -1,6 +1,5 @@
 package cs3500.calendar.view;
 
-import java.awt.event.ActionListener;
 
 import cs3500.calendar.controller.IFeatures;
 import cs3500.calendar.model.Schedule;

@@ -44,9 +44,6 @@ public class EventFrame extends JFrame implements IEventFrame {
   private Event event;
   private String host;
   private String user;
-  private JButton createEventButton;
-  private JButton modifyEventButton;
-  private JButton removeEventButton;
   private IFeatures controller;
 
   /**
@@ -173,7 +170,7 @@ public class EventFrame extends JFrame implements IEventFrame {
 
   private void setEventButtons() {
     JPanel buttonPanel = new JPanel();
-    createEventButton = new JButton("Create Event");
+    JButton createEventButton = new JButton("Create Event");
     createEventButton.addActionListener(e -> {
       try {
         controller.createEvent(makeEvent());
@@ -181,7 +178,7 @@ public class EventFrame extends JFrame implements IEventFrame {
         new ErrorBox(x.getMessage());
       }
     });
-    modifyEventButton = new JButton("Modify Event");
+    JButton modifyEventButton = new JButton("Modify Event");
     modifyEventButton.addActionListener(e -> {
       try {
         controller.modifyEvent(event, makeEvent());
@@ -189,7 +186,7 @@ public class EventFrame extends JFrame implements IEventFrame {
         new ErrorBox(x.getMessage());
       }
     });
-    removeEventButton = new JButton("Remove Event");
+    JButton removeEventButton = new JButton("Remove Event");
     removeEventButton.addActionListener(e -> {
       controller.removeEvent(event, user);
       this.dispose();

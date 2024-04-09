@@ -1,13 +1,11 @@
 package cs3500.calendar;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import cs3500.calendar.controller.Controller;
 import cs3500.calendar.model.CentralSystem;
 import cs3500.calendar.model.Day;
-import cs3500.calendar.model.Event;
 import cs3500.calendar.model.Location;
 import cs3500.calendar.model.Schedule;
 import cs3500.calendar.model.Time;
@@ -16,7 +14,7 @@ import cs3500.calendar.strategy.StrategyCreator;
 
 
 /**
- * To run the view.
+ * This allows the user to run the view of the calendar. The user can create, remove, schedule etc.
  */
 public final class PlanRunner {
 
