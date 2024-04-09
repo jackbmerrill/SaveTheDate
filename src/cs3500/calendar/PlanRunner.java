@@ -31,7 +31,6 @@ public final class PlanRunner {
         throw new IllegalArgumentException("Invalid strategy type");
     }
     CentralSystem centralSystem = new CentralSystem();
-    //should the controller only take in the view.
     new Controller(centralSystem, strategy);
   }
 }

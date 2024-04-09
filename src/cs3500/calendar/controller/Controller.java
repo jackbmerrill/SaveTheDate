@@ -80,7 +80,6 @@ public class Controller implements IFeatures {
       if (!originalEvent.getLocation().equals(modifiedEvent.getLocation())) {
         this.model.updateEventLocation(host, name, modifiedEvent.getLocation());
       }
-      //make a list of the removed users and the added users.
       //removing users
       for (String user : originalEvent.getUsers()) {
         if (!modifiedEvent.getUsers().contains(user)) {
