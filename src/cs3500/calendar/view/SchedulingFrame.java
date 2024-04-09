@@ -3,7 +3,16 @@ package cs3500.calendar.view;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.swing.*;
+import javax.swing.JTextField;
+import javax.swing.JCheckBox;
+import javax.swing.JFrame;
+import javax.swing.JButton;
+import javax.swing.JList;
+import javax.swing.JComponent;
+import javax.swing.JPanel;
+import javax.swing.BorderFactory;
+import javax.swing.BoxLayout;
+import javax.swing.JScrollPane;
 
 import cs3500.calendar.controller.IFeatures;
 import cs3500.calendar.model.Location;

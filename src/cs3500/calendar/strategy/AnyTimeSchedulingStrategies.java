@@ -16,7 +16,8 @@ import cs3500.calendar.model.Time;
 public class AnyTimeSchedulingStrategies implements SchedulingStrategies {
 
   @Override
-  public Event findTime(ReadOnlyCentralSystem system, String name, int time, Location loc, List<String> users) {
+  public Event findTime(ReadOnlyCentralSystem system, String name, int time, Location loc,
+                        List<String> users) {
     for (Day day : Day.values()) {
       for (int hr = 0; hr < 24; hr++) {
         for (int min = 0; min < 60; min++) {
@@ -25,7 +26,7 @@ public class AnyTimeSchedulingStrategies implements SchedulingStrategies {
 
           if (endMin >= 60) {
             endHr++;
-            endMin -=60;
+            endMin -= 60;
           }
 
           Day endDay = day;
@@ -36,7 +37,7 @@ public class AnyTimeSchedulingStrategies implements SchedulingStrategies {
           }
 
           if (endHr < 24 && !system.eventConflict(new Time(day, hr * 100 + min, endDay,
-          endHr * 100 + endMin), users)) {
+                  endHr * 100 + endMin), users)) {
             return new Event(name, new Time(day, hr * 100 + min, endDay,
                     endHr * 100 + endMin), loc, users);
           }
