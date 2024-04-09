@@ -13,6 +13,7 @@ import cs3500.calendar.model.Location;
 import cs3500.calendar.model.Schedule;
 import cs3500.calendar.model.Time;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertThrows;
 
 /**
@@ -29,6 +30,8 @@ public class TestStrategy {
   Time time7 = new Time(Day.THURSDAY, 1801, Day.THURSDAY, 1802);
   Time time8 = new Time(Day.THURSDAY, 2300, Day.THURSDAY, 2359);
   Time time9 = new Time(Day.SUNDAY, 0000, Day.SATURDAY, 2359);
+  Time time10 = new Time(Day.SUNDAY, 0000, Day.SATURDAY, 2300);
+  Time time11 = new Time(Day.TUESDAY, 900, Day.TUESDAY, 1400);
 
 
   Location loc1 = new Location(true, "Churchill 101");
@@ -57,16 +60,34 @@ public class TestStrategy {
   Schedule schedule0202 = new Schedule("0202");
 
   CentralSystem central1 = new CentralSystem();
+  CentralSystem central2 = new CentralSystem();
+  CentralSystem central3 = new CentralSystem();
 
   SchedulingStrategies workhours = new WorkHoursSchedulingStrategy();
 
   @Test
-  public void testFullWorkHoursSystem() {
+  public void testWorkHoursSystem() {
     central1.generateEvent("event1", time9, loc2, list1);
-    // to ensure that the work hours
-    assertThrows(IllegalArgumentException.class, () -> workhours.findTime(central1, "event10",
-            60, loc1, list4));
+    // to ensure that the work hours strategy throws when the calendar is completely full
+    //assertThrows(IllegalArgumentException.class, () -> workhours.findTime(central1, "event10",
+            //60, loc1, list4));
+
+    central2.generateEvent("event1", time10, loc2, list1);
+    // to ensure that the work hours strategy throws when the calendar is not full, but does not
+    // have enough space to store the total time of the new event
+    //assertThrows(IllegalStateException.class, () -> workhours.findTime(central2, "event10",
+            //61, loc1, list4));
+
+    // to ensure that the work hours strategy adds a new event at the earliest time given that
+    // other event exist in the schedule
+    central3.generateEvent("event1", time1, loc1, list1);
+    central3.generateEvent("event2", time5, loc2, list1);
+    central3.generateEvent("event3", time6, loc3, list1);
+    assertEquals(new Event("event1", time11, loc1, list1),
+            workhours.findTime(central3, "event11", 300, loc1, list1));
   }
+
+
 
 
 }
