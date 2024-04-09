@@ -154,7 +154,7 @@ public class CentralSystemFrame extends JFrame implements ICentralSystemFrame {
   public void refresh() {
     this.schedulePanel.updateSchedule(model.getUserSchedule(
             userScheduleDropdown.getSelectedItem().toString()));
-    this.repaint();
+    this.repaint();   //
   }
 
 }
