@@ -30,8 +30,6 @@ public interface IFeatures {
    */
   void modifyEvent(Event originalEvent, Event modifiedEvent);
 
-  //this needs to be worked out how we are doing this.
-  //ie strategy, users, time, etc
 
   void scheduleEvent();
 
