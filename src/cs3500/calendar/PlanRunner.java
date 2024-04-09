@@ -3,6 +3,9 @@ package cs3500.calendar;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import cs3500.calendar.controller.Controller;
+import cs3500.calendar.controller.IFeatures;
 import cs3500.calendar.model.CentralSystem;
 import cs3500.calendar.model.Day;
 import cs3500.calendar.model.Location;
@@ -29,7 +32,6 @@ public final class PlanRunner {
     centralSystem.addUser("Dio");
     centralSystem.generateEvent("Event1", time1, loc1, list1);
     centralSystem.generateEvent("Event2", time2, loc1, list1);
-    ICentralSystemFrame frame = new CentralSystemFrame(centralSystem);
-    frame.makeVisible(true);
+    IFeatures controller = new Controller(centralSystem);
   }
 }

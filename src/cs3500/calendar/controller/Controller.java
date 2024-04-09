@@ -1,8 +1,6 @@
 package cs3500.calendar.controller;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Objects;
 
 import cs3500.calendar.model.Event;
@@ -22,13 +20,14 @@ public class Controller implements IFeatures {
   private final ICentralSystemFrame view;
 
   /**
-   * Contructor for the controller. Takes in a model of the ICentralSystem interface and
+   * Constructor for the controller. Takes in a model of the ICentralSystem interface and
    * creates a new view with the model
    * @param model the model to be taken in
    */
   public Controller(ICentralSystem model) {
     this.model = Objects.requireNonNull(model);
     this.view = new CentralSystemFrame(model);
+    this.view.setFeature(this);
     this.view.makeVisible(true);
   }
 
@@ -37,6 +36,7 @@ public class Controller implements IFeatures {
     try {
       model.generateEvent(event.getName(), event.getTime(),
               event.getLocation(), event.getUsers());
+      this.view.refresh();
     } catch (IllegalStateException e) {
       view.createErrorBox(e.getMessage());
     }
@@ -70,6 +70,7 @@ public class Controller implements IFeatures {
           this.model.addEventToUser(user, name);
         }
       }
+      this.view.refresh();
     } catch (IllegalStateException | IllegalArgumentException e) {
       this.view.createErrorBox(e.getMessage());
     }
@@ -98,11 +99,11 @@ public class Controller implements IFeatures {
     }
   }
 
-
   @Override
   public void removeEvent(Event event, String user) {
     try {
-      this.model.removeEvent(event.getName(), user);
+      this.model.removeEvent(user, event.getName());
+      this.view.refresh();
     } catch (IllegalStateException e){
       this.view.createErrorBox(e.getMessage());
     }

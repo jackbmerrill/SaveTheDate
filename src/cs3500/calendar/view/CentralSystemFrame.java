@@ -27,7 +27,6 @@ public class CentralSystemFrame extends JFrame implements ICentralSystemFrame {
   private JComboBox<String> userScheduleDropdown;
   private JButton loadButton;
   private JButton saveButton;
-
   private JButton createEventButton;
   private JButton scheduleEventButton;
   private SchedulePanel schedulePanel;
@@ -47,7 +46,6 @@ public class CentralSystemFrame extends JFrame implements ICentralSystemFrame {
     this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     this.setSize(700, 700); //initial frame size
     this.setLocationRelativeTo(null); //window centering
-
   }
 
   private void initializeComponents() {
@@ -144,11 +142,18 @@ public class CentralSystemFrame extends JFrame implements ICentralSystemFrame {
   @Override
   public void setFeature(IFeatures feature) {
     this.controller = feature;
+    this.schedulePanel.setFeature(feature);
   }
 
   @Override
   public void createErrorBox(String message) {
     new ErrorBox(message);
+  }
+
+  @Override
+  public void refresh() {
+    this.schedulePanel.repaint();
+    this.repaint();
   }
 
 }

@@ -18,11 +18,10 @@ public interface IEventFrame {
   void makeVisible();
 
   /**
-   * Sets the listener for the controller to have access to the interactions between
-   * the user and the view. Will be fully implemented when the view is created.
-   * @param feature the listener to be taken in
+   * Sets the feature for the controller to have access to the interactions between
+   * the user and the view. Connects the controller to the panel for selecting existing
+   * events from the panel.
+   * @param feature the feature to be taken in
    */
   void setFeature(IFeatures feature);
-
-  void setListener(ActionListener listener);
 }

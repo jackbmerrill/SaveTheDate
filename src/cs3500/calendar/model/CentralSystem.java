@@ -93,7 +93,6 @@ public class CentralSystem implements ICentralSystem {
     throw new IllegalStateException("System does not contain user");
   }
 
-
   @Override
   public void removeEvent(String userID, String eventName) {
     Schedule userSchedule = getSchedule(userID);

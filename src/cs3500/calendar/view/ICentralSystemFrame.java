@@ -30,4 +30,10 @@ public interface ICentralSystemFrame {
    */
   void createErrorBox(String message);
 
+  /**
+   * Refreshes the view to reflect any changes made to the model. Shows any additions,
+   * removals or changes made to events.
+   */
+  void refresh();
+
 }

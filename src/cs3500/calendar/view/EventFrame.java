@@ -60,7 +60,7 @@ public class EventFrame extends JFrame implements IEventFrame {
   public EventFrame(ReadOnlyCentralSystem readOnlyCentralSystem, String host) {
     super();
     this.host = host;
-    this.user = user;
+    this.user = host;
     initialize(readOnlyCentralSystem);
   }
 
@@ -176,20 +176,22 @@ public class EventFrame extends JFrame implements IEventFrame {
     JPanel buttonPanel = new JPanel();
     createEventButton = new JButton("Create Event");
     createEventButton.addActionListener(e ->
-            controller.createEvent(makeEvent("Create Event")));
+            controller.createEvent(makeEvent()));
     modifyEventButton = new JButton("Modify Event");
     modifyEventButton.addActionListener(e ->
-            controller.modifyEvent(event, makeEvent("Modify Event")));
+            controller.modifyEvent(event, makeEvent()));
     removeEventButton = new JButton("Remove Event");
-    removeEventButton.addActionListener(e -> controller.removeEvent(event, user));
-    //need a way to differentiate between who is opening the event frame.
+    removeEventButton.addActionListener(e -> {
+      controller.removeEvent(event, user);
+      this.dispose();
+    });
     buttonPanel.add(createEventButton);
     buttonPanel.add(modifyEventButton);
     buttonPanel.add(removeEventButton);
     add(buttonPanel);
   }
 
-  private Event makeEvent(String title) {
+  private Event makeEvent() {
     if (eventNameTextBox.getText().isEmpty() || locationTextBox.getText().isEmpty()
             || startingTimeTextBox.getText().isEmpty() || endingTimeTextBox.getText().isEmpty()) {
       System.out.println("\nNot all required information is provided");
@@ -203,11 +205,13 @@ public class EventFrame extends JFrame implements IEventFrame {
       int endTime = Integer.parseInt(endingTimeTextBox.getText());
       List<String> users = new ArrayList<>();
       users.addAll(availableUserDropdown.getSelectedValuesList());
-      return new Event(eventNameTextBox.getText(),
+      Event event = new Event(eventNameTextBox.getText(),
               new Time((Day) startingDayDropdown.getSelectedItem(),
               startTime, (Day) endingDayDropdown.getSelectedItem(), endTime),
               new Location(isOnline.isSelected(), locationTextBox.getText()),
               users);
+      this.dispose();
+      return event;
     } catch (NumberFormatException e) {
       new ErrorBox("Invalid time.");
     }
@@ -223,11 +227,6 @@ public class EventFrame extends JFrame implements IEventFrame {
   @Override
   public void setFeature(IFeatures feature) {
     this.controller = feature;
-  }
-
-  @Override
-  public void setListener(ActionListener listener) {
-
   }
 
 }

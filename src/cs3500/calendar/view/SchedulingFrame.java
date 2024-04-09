@@ -24,7 +24,6 @@ public class SchedulingFrame extends JFrame implements IEventFrame {
   private ReadOnlyCentralSystem readOnlyCentralSystem;
   private JButton scheduleEventButton;
   private IFeatures controller;
-  private ActionListener actionListener;
 
   /**
    * SchedulingEvent Frame constructor that takes in a readOnlyCentralSystem. Takes the
@@ -53,7 +52,6 @@ public class SchedulingFrame extends JFrame implements IEventFrame {
 
   private void setInitialLayout() {
     setLayout(new BoxLayout(getContentPane(), BoxLayout.Y_AXIS));
-
     add(createSchedulingPanels("Event name: ", eventNameTextBox));
     add(createSchedulingPanels("Location: ", locationTextBox, isOnline));
     add(createSchedulingPanels("Duration in minutes: ", durationTextBox));
@@ -71,7 +69,7 @@ public class SchedulingFrame extends JFrame implements IEventFrame {
   }
 
   private void attachHandlers() {
-    scheduleEventButton.addActionListener(actionListener);
+//    scheduleEventButton.addActionListener(actionListener);
   }
 
   private void scheduleEvent() {
@@ -86,11 +84,5 @@ public class SchedulingFrame extends JFrame implements IEventFrame {
   @Override
   public void setFeature(IFeatures feature) {
     this.controller = feature;
-  }
-
-  @Override
-  public void setListener(ActionListener listener) {
-    this.actionListener = listener;
-    scheduleEventButton.addActionListener(listener);
   }
 }

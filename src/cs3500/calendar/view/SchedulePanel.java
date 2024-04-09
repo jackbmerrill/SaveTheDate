@@ -6,7 +6,6 @@ import java.awt.Dimension;
 import java.awt.Stroke;
 import java.awt.BasicStroke;
 import java.awt.Color;
-import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.List;
@@ -34,8 +33,9 @@ public class SchedulePanel extends JPanel implements MouseListener, ISchedulePan
   /**
    * Constructor for the schedule panel. Takes in a schedule to start with and the central
    * system with which it is working. From there, draws all parts of the panel.
+   *
    * @param schedule the desired starting schedule
-   * @param system the central system as read only
+   * @param system   the central system as read only
    */
   public SchedulePanel(Schedule schedule, ReadOnlyCentralSystem system) {
     super();
@@ -49,6 +49,11 @@ public class SchedulePanel extends JPanel implements MouseListener, ISchedulePan
   public void updateSchedule(Schedule schedule) {
     this.schedule = schedule;
     this.repaint();
+  }
+
+  @Override
+  public void setFeature(IFeatures feature) {
+    this.controller = feature;
   }
 
   @Override
@@ -136,11 +141,10 @@ public class SchedulePanel extends JPanel implements MouseListener, ISchedulePan
       return;
     }
     IEventFrame eventFrame = new EventFrame(this.system, events.get(0), this.schedule.getUserID());
-    if (this.controller != null) {
-      eventFrame.setFeature(this.controller);
-    }
+    eventFrame.setFeature(this.controller);
     eventFrame.makeVisible();
   }
+
 
   @Override
   public void mousePressed(MouseEvent e) {
