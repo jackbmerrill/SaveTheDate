@@ -119,9 +119,4 @@ public class TestControllerModifiesModel {
     assertTrue(Files.exists(filePath));
   }
 
-  @Test
-  public void testScheduleEvent() {
-
-  }
-
 }

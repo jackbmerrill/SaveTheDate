@@ -17,6 +17,12 @@ public class MockView implements ICentralSystemFrame, IFeatures {
   private IFeatures controller;
   private final Appendable appendable;
 
+
+  /**
+   * Constructor for the mock view. Takes in an appendable to append any error messages sent
+   * to the view by the controller.
+   * @param appendable the appendable.
+   */
   public MockView(Appendable appendable) {
     this.appendable = appendable;
   }

@@ -26,7 +26,6 @@ import static org.junit.Assert.assertEquals;
  */
 public class TestControllerInputsToModel {
 
-
   IFeatures controller;
   Appendable output;
   ICentralSystem model;
