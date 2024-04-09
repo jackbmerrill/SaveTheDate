@@ -1,5 +1,7 @@
 package cs3500.calendar.model;
 
+import java.util.Objects;
+
 /**
  * To represent time. Has a start time, end time, start day, end day. Each time can last up
  * to exactly a week. Event cannot start and end at the same time.
@@ -100,6 +102,26 @@ public class Time {
    */
   public Day getEndDay() {
     return this.endDay;
+  }
+
+  @Override
+  public boolean equals(Object o) {
+    if (this == o)  {
+      return true;
+    }
+    if (! (o instanceof Time)) {
+      return false;
+    }
+    Time other = (Time)o;
+    return Objects.equals(this.startTime, other.startTime)
+            && Objects.equals(this.endTime, other.endTime)
+            && Objects.equals(this.startDay, other.startDay)
+            && Objects.equals(this.endDay, other.endDay);
+  }
+
+  @Override
+  public int hashCode() {
+    return Objects.hash(startTime, endTime, startDay, endDay);
   }
 
 }

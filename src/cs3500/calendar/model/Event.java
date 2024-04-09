@@ -120,6 +120,6 @@ public class Event implements IEvent {
 
   @Override
   public int hashCode() {
-    return Objects.hash(name, time, location, users);
+    return Objects.hash(name, time, location);
   }
 }

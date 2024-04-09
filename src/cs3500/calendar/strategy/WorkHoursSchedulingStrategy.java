@@ -8,35 +8,41 @@ import cs3500.calendar.model.Location;
 import cs3500.calendar.model.ReadOnlyCentralSystem;
 import cs3500.calendar.model.Time;
 
+/**
+ * Represents a scheduling strategy that finds available time slots for events
+ * that fall within the standard work hours. This means between 9:00am to 5:00pm Monday through
+ * Friday.
+ */
 public class WorkHoursSchedulingStrategy implements SchedulingStrategies {
+
   @Override
-  public Event findTime(ReadOnlyCentralSystem system, String name, int duration,
+  public Event findTime(ReadOnlyCentralSystem system, String name, int time,
                         Location loc, List<String> users) {
     for (Day day : Day.values()) {
-      if (day == Day.SATURDAY || day == Day.SUNDAY) continue;
+      if (day == Day.SUNDAY || day == Day.SATURDAY) continue;
 
-      for (int hour = 9; hour < 17; hour++) {
+      for (int hr = 9; hr < 17; hr++) {
         for (int min = 0; min < 60; min += 15) {
-          int startMin = hour * 100 + min;
-          int endHour = hour + duration / 60;
-          int endMin = min + duration % 60;
+          int startMin = hr * 100 + min;
+          int endHr = hr + time / 60;
+          int endMin = min + time % 60;
 
           if (endMin >= 60) {
-            endHour++;
+            endHr++;
             endMin -= 60;
           }
 
-          // Ensure the event ends within work hours (before 5:00 PM)
-          if (endHour < 17 || (endHour == 17 && endMin == 0)) {
-            Time potentialTime = new Time(day, startMin, day, endHour * 100 + endMin);
-            if (!system.eventConflict(potentialTime, users)) {
-              return new Event(name, potentialTime, loc, users);
+          if (endHr < 17 || (endHr == 17 && endMin == 0)) {
+            Time currTime = new Time(day, startMin, day, endHr * 100 + endMin);
+            if (!system.eventConflict(currTime, users)) {
+              return new Event(name, currTime, loc, users);
             }
           }
         }
       }
     }
-    throw new IllegalStateException("Unable to schedule an event because no suitable time was found.");
+    throw new IllegalStateException("No suitable time was found.");
   }
 }
+
 
