@@ -7,7 +7,7 @@ import java.util.Objects;
 import cs3500.calendar.model.Event;
 import cs3500.calendar.model.ICentralSystem;
 import cs3500.calendar.model.Location;
-import cs3500.calendar.model.SchedulingStrategies;
+import cs3500.calendar.strategy.SchedulingStrategies;
 import cs3500.calendar.view.CentralSystemFrame;
 import cs3500.calendar.view.ICentralSystemFrame;
 

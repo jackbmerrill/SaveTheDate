@@ -1,7 +1,11 @@
-package cs3500.calendar.model;
+package cs3500.calendar.strategy;
 
 
 import java.util.List;
+
+import cs3500.calendar.model.Event;
+import cs3500.calendar.model.Location;
+import cs3500.calendar.model.ReadOnlyCentralSystem;
 
 public interface SchedulingStrategies {
 

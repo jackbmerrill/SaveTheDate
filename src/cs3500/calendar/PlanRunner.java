@@ -6,15 +6,13 @@ import java.util.List;
 
 import cs3500.calendar.controller.Controller;
 import cs3500.calendar.controller.IFeatures;
-import cs3500.calendar.model.AnyTimeSchedulingStrategies;
+import cs3500.calendar.strategy.AnyTimeSchedulingStrategies;
 import cs3500.calendar.model.CentralSystem;
 import cs3500.calendar.model.Day;
 import cs3500.calendar.model.Location;
-import cs3500.calendar.model.SchedulingStrategies;
+import cs3500.calendar.strategy.SchedulingStrategies;
 import cs3500.calendar.model.Time;
-import cs3500.calendar.model.WorkHoursSchedulingStrategy;
-import cs3500.calendar.view.CentralSystemFrame;
-import cs3500.calendar.view.ICentralSystemFrame;
+import cs3500.calendar.strategy.WorkHoursSchedulingStrategy;
 
 /**
  * To run the view.
