@@ -20,7 +20,6 @@ public class WorkHoursSchedulingStrategy implements SchedulingStrategies {
                         Location loc, List<String> users) {
     for (Day day : Day.values()) {
       if (day == Day.SUNDAY || day == Day.SATURDAY) continue;
-
       for (int hr = 9; hr < 17 - time / 60; hr++) {
         for (int min = 0; min < 60; min += 15) {
           if (time + hr * 60 + min > 1020) {
