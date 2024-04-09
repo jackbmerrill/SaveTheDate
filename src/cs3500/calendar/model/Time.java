@@ -46,11 +46,6 @@ public class Time {
    * @return true if the times overlap
    */
   public boolean isOverlap(Time other) {
-    if (this.endDay.equals(this.startDay) && this.startTime < this.endTime) {
-      return this.endDay.equals(other.endDay) && this.startDay.equals(other.startDay)
-              && ((this.startTime < other.startTime && other.startTime < this.endTime)
-              || (this.startTime < other.endTime && other.endTime < this.endTime));
-    }
     //compute minutes in order to calculate overlaps
     int thisStartTotalMins = this.startDay.order() * 1440 + this.startTime;
     int thisEndTotalMins = this.endDay.order() * 1440 + this.endTime
@@ -58,9 +53,11 @@ public class Time {
     int otherStartTotalMins = other.startDay.order() * 1440 + other.startTime;
     int otherEndTotalMins = other.endDay.order() * 1440 + other.endTime
             + (other.endDay.order() < other.startDay.order() ? 7 * 1440 : 0);
-
     //actually check for overlaps
-    return thisStartTotalMins < otherEndTotalMins && otherStartTotalMins < thisEndTotalMins;
+    return thisStartTotalMins < otherEndTotalMins && otherStartTotalMins < thisEndTotalMins
+            || this.endDay.equals(other.endDay) && this.startDay.equals(other.startDay)
+            && ((this.startTime < other.startTime && other.startTime < this.endTime)
+            || (this.startTime < other.endTime && other.endTime < this.endTime));
   }
 
 
