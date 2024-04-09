@@ -70,7 +70,7 @@ public class TestCentralSystemXML {
 
     String invalidDirectoryPath = "\0invalidPath";
     assertThrows(IOException.class, () -> centralSystem.
-            saveSchedulesToXML(invalidDirectoryPath, eventUsers));
+            saveSchedulesToXML(invalidDirectoryPath, "john"));
   }
 
   @Test
@@ -80,7 +80,7 @@ public class TestCentralSystemXML {
 
     assertThrows(FileNotFoundException.class, () -> centralSystem.
             saveSchedulesToXML(knownDirectoryPath,
-            Arrays.asList(unregisteredUser)));
+            "john"));
   }
 
   // to test the save schedule to XML method
@@ -93,7 +93,7 @@ public class TestCentralSystemXML {
     centralSystem.generateEvent(eventName, eventTime, eventLocation, eventUsers);
     String knownDirectoryPath = "src";
     String userToSave = "TestUser1";
-    centralSystem.saveSchedulesToXML(knownDirectoryPath, Arrays.asList(userToSave));
+    centralSystem.saveSchedulesToXML(knownDirectoryPath, "TestUser1");
     Path filePath = Paths.get(knownDirectoryPath, userToSave + "-schedule.xml");
     assertTrue(Files.exists(filePath));
   }

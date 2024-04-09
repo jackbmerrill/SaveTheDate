@@ -11,7 +11,6 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import java.io.File;
 import java.io.IOException;
-
 import cs3500.calendar.model.Event;
 import cs3500.calendar.model.Time;
 import cs3500.calendar.model.Schedule;
