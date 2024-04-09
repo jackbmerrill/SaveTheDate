@@ -26,6 +26,7 @@ public class Controller implements IFeatures {
   /**
    * Constructor for the controller. Takes in a model of the ICentralSystem interface and
    * creates a new view with the model
+   *
    * @param model the model to be taken in
    */
   public Controller(ICentralSystem model, SchedulingStrategies strategy) {
@@ -39,8 +40,9 @@ public class Controller implements IFeatures {
   /**
    * Constructor that enables the specification of the view, rather than using the default
    * view. Enables use of mock views and other versions for testing.
-   * @param view the view to be taken in
-   * @param model the model to be taken in
+   *
+   * @param view     the view to be taken in
+   * @param model    the model to be taken in
    * @param strategy the strategy to be taken in
    */
   public Controller(ICentralSystemFrame view, ICentralSystem model,
@@ -103,17 +105,12 @@ public class Controller implements IFeatures {
       view.createErrorBox("Scheduling Strategy is not set");
       return;
     }
-    Event event = strategy.findTime(model, name, time, loc, users);
-
-    if (event == null) {
-      view.createErrorBox("Unable to schedule an event because no suitable time was found.");
-    } else {
-      try {
-        model.generateEvent(event.getName(), event.getTime(), event.getLocation(), event.getUsers());
-        this.view.refresh();
-      } catch (IllegalStateException e) {
-        view.createErrorBox(e.getMessage());
-      }
+    try {
+      Event event = strategy.findTime(model, name, time, loc, users);
+      model.generateEvent(event.getName(), event.getTime(), event.getLocation(), event.getUsers());
+      this.view.refresh();
+    } catch (IllegalStateException e) {
+      view.createErrorBox(e.getMessage());
     }
   }
 
@@ -140,7 +137,7 @@ public class Controller implements IFeatures {
     try {
       this.model.removeEvent(user, event.getName());
       this.view.refresh();
-    } catch (IllegalStateException e){
+    } catch (IllegalStateException e) {
       this.view.createErrorBox(e.getMessage());
     }
   }

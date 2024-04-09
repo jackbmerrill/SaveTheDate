@@ -11,7 +11,8 @@ import cs3500.calendar.strategy.SchedulingStrategies;
 
 public class AnyTimeSchedulingStrategies implements SchedulingStrategies {
   @Override
-  public Event findTime(ReadOnlyCentralSystem system, String name, int time, Location loc, List<String> users) {
+  public Event findTime(ReadOnlyCentralSystem system, String name, int time,
+                        Location loc, List<String> users) {
     for (Day day : Day.values()) {
       for (int hour = 0; hour < 24; hour ++) {
         for (int min = 0; min < 60; min ++) {
@@ -39,6 +40,7 @@ public class AnyTimeSchedulingStrategies implements SchedulingStrategies {
         }
       }
     }
-    return null;
+    throw new IllegalStateException(
+            "Unable to schedule an event because no suitable time was found.");
   }
 }
