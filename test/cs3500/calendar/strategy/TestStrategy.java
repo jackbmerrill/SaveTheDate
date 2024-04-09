@@ -1,5 +1,6 @@
 package cs3500.calendar.strategy;
 
+import org.junit.Before;
 import org.junit.Test;
 
 import java.util.ArrayList;
@@ -30,7 +31,7 @@ public class TestStrategy {
   Time time7 = new Time(Day.THURSDAY, 1801, Day.THURSDAY, 1802);
   Time time8 = new Time(Day.THURSDAY, 2300, Day.THURSDAY, 2359);
   Time time9 = new Time(Day.SUNDAY, 0000, Day.SATURDAY, 2359);
-  Time time10 = new Time(Day.SUNDAY, 0000, Day.SATURDAY, 2300);
+  Time time10 = new Time(Day.SUNDAY, 0, Day.SATURDAY, 2359);
   Time time11 = new Time(Day.TUESDAY, 900, Day.TUESDAY, 1400);
 
 
@@ -59,12 +60,17 @@ public class TestStrategy {
   Schedule schedule1111 = new Schedule("1111");
   Schedule schedule0202 = new Schedule("0202");
 
-  CentralSystem central1 = new CentralSystem();
-  CentralSystem central2 = new CentralSystem();
-  CentralSystem central3 = new CentralSystem();
 
-  SchedulingStrategies workhours = new WorkHoursSchedulingStrategy();
-  SchedulingStrategies anytime = new AnyTimeSchedulingStrategies();
+  SchedulingStrategies workhours =
+          StrategyCreator.strategyCreator(StrategyCreator.Strategy.WORKHOURS);
+  SchedulingStrategies anytime =
+          StrategyCreator.strategyCreator(StrategyCreator.Strategy.ANYTIME);
+  CentralSystem central1;
+
+  @Before
+  public void init() {
+    central1 = new CentralSystem();
+  }
 
   // to test the failing addition of an event to a full workhours system
   @Test
@@ -91,7 +97,7 @@ public class TestStrategy {
     central1.generateEvent("event1", time1, loc1, list1);
     central1.generateEvent("event2", time5, loc2, list1);
     central1.generateEvent("event3", time6, loc3, list2);
-    Time expectedTime = new Time(Day.MONDAY, 1300, Day.MONDAY, 1500);
+    Time expectedTime = new Time(Day.MONDAY, 900, Day.MONDAY, 1100);
     Event expectedEvent = new Event("Event11", expectedTime, loc1, list1);
     Event createdEvent = workhours.findTime(central1, "Event11", 120, loc1, list1);
     assertEquals(expectedEvent, createdEvent);
@@ -102,6 +108,7 @@ public class TestStrategy {
   public void testThrowsFullCalendarAnyTime() {
     central1.generateEvent("event1", time9, loc2, list1);
     // to ensure that the work hours displays an error message when it cannot find a suitable time
+
     assertThrows(IllegalStateException.class, () -> {
       anytime.findTime(central1, "Wrong Event", 60, loc1, list1);
     });
@@ -111,9 +118,7 @@ public class TestStrategy {
   @Test
   public void testThrowsNonFullCalendarAnyTime() {
     central1.generateEvent("event1", time10, loc2, list1);
-    assertThrows(IllegalStateException.class, () -> {
-      anytime.findTime(central1, "Wrong Event", 85, loc1, list1);
-    });
+    assertThrows(IllegalStateException.class, () -> anytime.findTime(central1, "Wrong Event", 85, loc1, list1));
   }
 
   // to test that any time can be scheduled at the earliest time
@@ -122,7 +127,7 @@ public class TestStrategy {
     central1.generateEvent("event1", time1, loc1, list1);
     central1.generateEvent("event2", time5, loc2, list1);
     central1.generateEvent("event3", time6, loc3, list2);
-    Time expectedTime = new Time(Day.MONDAY, 1300, Day.MONDAY, 1800);
+    Time expectedTime = new Time(Day.MONDAY, 0, Day.MONDAY, 500);
     Event expectedEvent = new Event("Event11", expectedTime, loc1, list1);
     Event createdEvent = anytime.findTime(central1, "Event11", 300, loc1, list1);
     assertEquals(expectedEvent, createdEvent);

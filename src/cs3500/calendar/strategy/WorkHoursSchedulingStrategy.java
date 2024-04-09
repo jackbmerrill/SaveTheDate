@@ -21,12 +21,14 @@ public class WorkHoursSchedulingStrategy implements SchedulingStrategies {
     for (Day day : Day.values()) {
       if (day == Day.SUNDAY || day == Day.SATURDAY) continue;
 
-      for (int hr = 9; hr < 17; hr++) {
+      for (int hr = 9; hr < 17 - time / 60; hr++) {
         for (int min = 0; min < 60; min += 15) {
+          if (time + hr * 60 + min > 1020) {
+            break;
+          }
           int startMin = hr * 100 + min;
           int endHr = hr + time / 60;
           int endMin = min + time % 60;
-
           if (endMin >= 60) {
             endHr++;
             endMin -= 60;
