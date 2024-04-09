@@ -51,7 +51,7 @@ public class TestControllerInputsToModel {
   @Test
   public void testCreateEvent() {
     this.controller.createEvent(event1);
-    assertEquals("Test1, cs3500.calendar.model.Time@2de8284b, false, somewhere, [Jack, Milo]\n",
+    assertEquals("Test1, 0, false, somewhere, [Jack, Milo]\n",
             this.output.toString());
   }
 
@@ -61,7 +61,7 @@ public class TestControllerInputsToModel {
             new ArrayList<>(List.of("Jack")));
     this.controller.modifyEvent(event1, event2);
     assertEquals("Jack, Test1, Renamed\n" +
-                    "Jack, Renamed, cs3500.calendar.model.Time@365185bd\n" +
+                    "Jack, Renamed, 600\n" +
                     "Jack, Renamed, true, churchill\n" +
                     "Milo, Renamed\n",
             this.output.toString());

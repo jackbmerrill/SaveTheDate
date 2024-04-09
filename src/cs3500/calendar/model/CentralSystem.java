@@ -25,7 +25,6 @@ public class CentralSystem implements ICentralSystem {
    * To represent a constructor for Central System.
    * Is initialized as an empty hashmap that can take in key String and value Event.
    */
-  // ability to create a model without any schedules?
   public CentralSystem() {
     this.system = new HashMap<>();
     this.events = new ArrayList<>();
@@ -43,7 +42,6 @@ public class CentralSystem implements ICentralSystem {
     }
   }
 
-  //need to fix this for the input
   @Override
   public void addUser(String userId) {
     this.system.put(userId, new Schedule(userId));

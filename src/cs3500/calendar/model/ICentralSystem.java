@@ -91,7 +91,6 @@ public interface ICentralSystem extends ReadOnlyCentralSystem {
   void loadSchedulesFromXML(String filePath) throws IOException;
 
   /**
-   * //FIXME: update to one user rather than a list
    * Saves the schedules of said users to XML files in the given directory of a specified
    * requested user. Iterate through the list in order to pick the requested userID. An IOException
    * is thrown in the case that there is an error in the process such as the given directory

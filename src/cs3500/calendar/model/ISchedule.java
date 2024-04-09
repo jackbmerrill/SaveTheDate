@@ -17,7 +17,7 @@ public interface ISchedule {
    * @param event an event to be added to the schedule
    * @throws IllegalStateException if there is a time conflict
    */
-  public void addEvent(Event event) throws IllegalStateException;
+  void addEvent(Event event) throws IllegalStateException;
 
   /**
    * To remove an event from the schedule. Removes the current user from the event
@@ -26,14 +26,14 @@ public interface ISchedule {
    * @param eventName an event to be removed from the schedule
    * @throws IllegalStateException if no such event exists in this schedule
    */
-  public void removeEvent(String eventName);
+  void removeEvent(String eventName);
 
   /**
    * To modify the event name.
    * @param eventName the event on the schedule name to be changed
    * @throws IllegalStateException if no such event exists
    */
-  public void modifyEventName(String eventName, String name);
+  void modifyEventName(String eventName, String name);
 
   /**
    * To modify the event time. If the event has a time conflict, it does not get added to the
@@ -41,14 +41,14 @@ public interface ISchedule {
    * @param eventName an event name on the schedule to be changed
    * @throws IllegalStateException if no such event exists
    */
-  public void modifyEventTime(String eventName, Time time);
+  void modifyEventTime(String eventName, Time time);
 
   /**
    * To modify the event location.
    * @param eventName an event location to be changed on the schedule
    * @throws IllegalStateException if no such event exists
    */
-  public void modifyEventLocation(String eventName, Location location);
+  void modifyEventLocation(String eventName, Location location);
 
   /**
    * To return all the user of the event.
@@ -56,7 +56,7 @@ public interface ISchedule {
    * @return the event users of the requested event as a list of string
    * @throws IllegalStateException if no such event exists
    */
-  public List<String> getAllEventUsers(String eventName);
+  List<String> getAllEventUsers(String eventName);
 
   /**
    * Returns the requested event as a copy.
@@ -64,7 +64,7 @@ public interface ISchedule {
    * @return the requested event as a new object
    * @throws IllegalStateException if no such event exists
    */
-  public Event getEvent(String eventName);
+  Event getEvent(String eventName);
 
   /**
    * To get a list of all the events at a given time.

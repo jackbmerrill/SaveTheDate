@@ -6,16 +6,14 @@ import java.util.List;
 import javax.swing.*;
 
 import cs3500.calendar.controller.IFeatures;
-import cs3500.calendar.model.Event;
 import cs3500.calendar.model.Location;
 import cs3500.calendar.model.ReadOnlyCentralSystem;
 
 /**
- * Implementation of a Scheduling Frame that is almost the same as the event frame.
- * The differences visually are as follows: Instead of places to take in the starting day/time and
- * ending day/time, you will have one place to take in the number of minutes representing the
- * duration of the event. Instead of having multiple buttons to create/modify/remove the event,
- * you will have one to simply schedule it.
+ * Implementation of the scheduling frame. Implements the IEventFrame interface but
+ * only has one button to schedule an event given the name, desired users, length of time, and
+ * location. All fields must have information or an error box will be created. Sends the desired
+ * information the controller via a callback.
  */
 public class SchedulingFrame extends JFrame implements IEventFrame {
   private JTextField eventNameTextBox;

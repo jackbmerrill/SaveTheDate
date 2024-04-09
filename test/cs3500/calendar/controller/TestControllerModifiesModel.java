@@ -15,6 +15,7 @@ import cs3500.calendar.model.Day;
 import cs3500.calendar.model.Event;
 import cs3500.calendar.model.ICentralSystem;
 import cs3500.calendar.model.Location;
+import cs3500.calendar.model.MockModelIOFail;
 import cs3500.calendar.model.Time;
 import cs3500.calendar.strategy.WorkHoursSchedulingStrategy;
 import cs3500.calendar.view.MockView;
@@ -36,6 +37,7 @@ public class TestControllerModifiesModel {
   Time time1;
   Time time2;
   Event event1;
+  IFeatures failureController;
 
   @Before
   public void init() {
@@ -49,6 +51,8 @@ public class TestControllerModifiesModel {
             time1,
             new Location(false, "somewhere"),
             new ArrayList<>(Arrays.asList("Jack", "Milo")));
+    failureController = new Controller(new MockView(this.output), new MockModelIOFail(),
+            null);
   }
 
   @Test
@@ -118,5 +122,24 @@ public class TestControllerModifiesModel {
     Path filePath = Paths.get(knownDirectoryPath, userToSave + "-schedule.xml");
     assertTrue(Files.exists(filePath));
   }
+
+  @Test
+  public void testSaveXMLFail() {
+    this.failureController.saveXML("input", "someone");
+    assertEquals("IO failed", this.output.toString());
+  }
+  @Test
+  public void testLoadXMLFail() {
+    this.failureController.loadXML("input");
+    assertEquals("IO failed", this.output.toString());
+  }
+
+  @Test
+  public void testNoStrategy() {
+    this.failureController.scheduleEvent("Test", 90,
+            new Location(false, "test"), new ArrayList<>(Arrays.asList("Jack")));
+    assertEquals("Scheduling Strategy is not set", this.output.toString());
+  }
+
 
 }

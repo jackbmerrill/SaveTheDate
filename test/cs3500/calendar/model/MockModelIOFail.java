@@ -1,76 +1,63 @@
 package cs3500.calendar.model;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
 /**
- * Public class for testing the inputs given to the model by the controller and via the view.
- * Does not work for any other purposes. Used purely for testing inputs.
+ * Mock class to test an IO failure and how the controller handles that error.
+ * Does not work for any other purpose
  */
-public class MockModel implements ICentralSystem {
-
-  private final Appendable appendable;
-
-  /**
-   * Constructor for the fake model. Works only for testing
-   * @param appendable the appendable to be taken in
-   */
-  public MockModel(Appendable appendable) {
-    this.appendable = appendable;
-  }
+public class MockModelIOFail implements ICentralSystem {
 
   @Override
   public void addUser(String userId) {
-    add(userId);
+    return;
   }
 
   @Override
   public void generateEvent(String name, Time time, Location location, List<String> users) {
-    add(name + ", " + time.getStartTime() + ", " + location.isOnline() + ", "
-    + location.getPlace() + ", " + users);
+    return;
   }
 
   @Override
   public void updateEventName(String userID, String oldName, String newName) {
-    add(userID + ", " + oldName + ", " + newName);
+    return;
   }
 
   @Override
   public void updateEventTime(String userID, String name, Time newTime) {
-    add(userID + ", " + name + ", " + newTime.getStartTime());
+    return;
   }
 
   @Override
   public void updateEventLocation(String userID, String name, Location newLocation) {
-    add(userID + ", " + name + ", " + newLocation.isOnline() + ", "
-            + newLocation.getPlace());
+    return;
   }
 
   @Override
   public void removeEvent(String userID, String eventName) {
-    add(userID + ", " + eventName);
+    return;
   }
 
   @Override
   public void addEventToUser(String userID, String eventName) {
-    add(userID + ", " + eventName);
+    return;
   }
 
   @Override
   public void loadSchedulesFromXML(String filePath) throws IOException {
-    add(filePath);
+    throw new IOException("IO failed");
   }
 
   @Override
   public void saveSchedulesToXML(String directoryPath, String userID) throws IOException {
-    add(directoryPath + ", " + userID);
+    throw new IOException("IO failed");
   }
 
   @Override
   public List<Event> getEventsAtTime(String userId, Time time) {
-    return new ArrayList<Event>();
+    return null;
   }
 
   @Override
@@ -91,13 +78,5 @@ public class MockModel implements ICentralSystem {
   @Override
   public boolean eventConflict(Time time, List<String> users) {
     return false;
-  }
-
-  private void add(String str) {
-    try {
-      this.appendable.append(str + "\n");
-    } catch (IOException e) {
-      throw new IllegalStateException("Appendable failed");
-    }
   }
 }
