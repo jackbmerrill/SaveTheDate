@@ -1,14 +1,15 @@
 OVERVIEW: our code can be run in the plan runner by creating a new model and passing it into
-          the view. Then, create a new controller which takes in both the view and the model.
-          In the command line, before the code actually runs, one must specify which strategy
-          they want to use for the schedule event frame, either "anytime" or "workhours."
-          For creation, simple use the central system constructor, and then pass that
-          into the view constructor, and then pass both into the controller along with the
-          desired strategy as an object.
+          a new object of the controller. In the command line, before the code actually runs,
+          one must specify which strategy they want to use for the schedule event frame, either
+          "anytime" or "workhours." For creation, simply create a new model and then pass it
+          into the controller along with the desired strategy as an object.
 
 QUICKSTART: Create a new run configuration with PlanRunner as the desired class and in
             the command line, enter the name of the desired strategy you would like to use
-            to search for times to schedule events.
+            to search for times to schedule events. Before running, if you would like to add
+            users to the system, add them to the model. Otherwise, simply import your
+            XML file to add the users and schedules. You can also create a model which
+            takes in schedules you have already created.
 
 This codebase is designed to be a weekly calendar capable of managing multiple schedules
     and importing and exporting them as XMLs. Events can be added, removed, and modified,
@@ -91,7 +92,9 @@ Changes for part 3:
                                 The controller only quits when the central system frame is closed.
         - Controller - implementation of the controller. Delegates any input from the view via
                        callbacks to the model and if any errors occur, the controller creates a
-                       new error box in the view with the given exception message.
+                       new error box in the view with the given exception message. In creation of
+                       the controller, it only takes in the model and strategy, and connects it
+                       to a new private view created within the constructor of the controller.
         - Strategies - define the way in which the the system will search for available times to
                        schedule an event for all the requested users. If there is no such valid
                        time, the strategy will throw an error. Each strategy is an object,

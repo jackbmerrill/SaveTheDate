@@ -44,13 +44,8 @@ public final class PlanRunner {
     Time time2 = new Time(Day.WEDNESDAY, 0000, Day.SATURDAY, 1600);
 
     Location loc1 = new Location(true, "Churchill 101");
-
     List<String> list1 = new ArrayList<>(List.of("Jack", "Milo", "Jake", "Lucia", "Dio"));
-
     Schedule schedule1021 = new Schedule("1021");
-
-
-
     CentralSystem centralSystem = new CentralSystem();
     centralSystem.generateEvent("Event1", time1, loc1, list1);
     centralSystem.generateEvent("Event2", time2, loc1, list1);
