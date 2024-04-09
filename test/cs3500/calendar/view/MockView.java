@@ -1,7 +1,10 @@
 package cs3500.calendar.view;
 
+import java.util.List;
+
 import cs3500.calendar.controller.IFeatures;
 import cs3500.calendar.model.Event;
+import cs3500.calendar.model.Location;
 
 /**
  * Implements both the central view class and the features class in order to test that
@@ -47,7 +50,7 @@ public class MockView implements ICentralSystemFrame, IFeatures {
   }
 
   @Override
-  public void scheduleEvent() {
+  public void scheduleEvent(String name, int time, Location loc, List<String> users) {
 
   }
 

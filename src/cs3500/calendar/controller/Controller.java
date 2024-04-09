@@ -1,10 +1,13 @@
 package cs3500.calendar.controller;
 
 import java.io.IOException;
+import java.util.List;
 import java.util.Objects;
 
 import cs3500.calendar.model.Event;
 import cs3500.calendar.model.ICentralSystem;
+import cs3500.calendar.model.Location;
+import cs3500.calendar.model.SchedulingStrategies;
 import cs3500.calendar.view.CentralSystemFrame;
 import cs3500.calendar.view.ICentralSystemFrame;
 
@@ -18,6 +21,7 @@ public class Controller implements IFeatures {
 
   private final ICentralSystem model;
   private final ICentralSystemFrame view;
+  private SchedulingStrategies strategy;
 
   /**
    * Constructor for the controller. Takes in a model of the ICentralSystem interface and
@@ -77,8 +81,10 @@ public class Controller implements IFeatures {
   }
 
   @Override
-  public void scheduleEvent() {
-
+  public void scheduleEvent(String name, int time, Location loc, List<String> users) {
+    Event event = strategy.findTime(model, name, time, loc, users);
+    this.model.generateEvent(event.getName(), event.getTime(),
+            event.getLocation(), event.getUsers());
   }
 
   @Override

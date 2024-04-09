@@ -3,6 +3,7 @@ package cs3500.calendar.controller;
 import java.util.List;
 
 import cs3500.calendar.model.Event;
+import cs3500.calendar.model.Location;
 
 /**
  * The IFeatures interface delegates all interactions between the model and the view
@@ -31,7 +32,14 @@ public interface IFeatures {
   void modifyEvent(Event originalEvent, Event modifiedEvent);
 
 
-  void scheduleEvent();
+  /**
+   *
+   * @param name
+   * @param time
+   * @param loc
+   * @param users
+   */
+  void scheduleEvent(String name, int time, Location loc, List<String> users);
 
   /**
    * Load the desired file into the model.

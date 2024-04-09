@@ -2,10 +2,12 @@ package cs3500.calendar.view;
 
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.*;
 
 import cs3500.calendar.controller.IFeatures;
+import cs3500.calendar.model.Location;
 import cs3500.calendar.model.ReadOnlyCentralSystem;
 
 /**
@@ -47,6 +49,22 @@ public class SchedulingFrame extends JFrame implements IEventFrame {
     listOfAvailableUsers = new JList<>(new ArrayList<>(readOnlyCentralSystem.getUsers()).
             toArray(new String[0]));
     scheduleEventButton = new JButton("Schedule Event");
+    scheduleEventButton.addActionListener(e -> {
+      try {
+        List<String> users = new ArrayList<>();
+        users.addAll(listOfAvailableUsers.getSelectedValuesList());
+        if (eventNameTextBox.getText().isEmpty() || locationTextBox.getText().isEmpty()
+                || durationTextBox.getText().isEmpty() || users.isEmpty()) {
+          throw new IllegalArgumentException("Not all required information is provided.");
+        }
+        controller.scheduleEvent(eventNameTextBox.getText(),
+                Integer.parseInt(durationTextBox.getText()),
+                new Location(isOnline.isSelected(), locationTextBox.getText()),
+                users);
+      } catch (NumberFormatException x) {
+        new ErrorBox("Invalid time, enter in minutes.");
+      }
+    });
   }
 
   private void setInitialLayout() {
