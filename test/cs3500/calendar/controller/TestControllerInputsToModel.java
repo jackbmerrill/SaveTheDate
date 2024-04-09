@@ -3,14 +3,11 @@ package cs3500.calendar.controller;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import cs3500.calendar.model.CentralSystem;
+
 import cs3500.calendar.model.Day;
 import cs3500.calendar.model.Event;
 import cs3500.calendar.model.ICentralSystem;
@@ -21,7 +18,6 @@ import cs3500.calendar.strategy.WorkHoursSchedulingStrategy;
 import cs3500.calendar.view.MockView;
 
 import static org.junit.Assert.assertEquals;
-
 
 /**
  * Tests all the controller inputs to the model. All inputs to the model are
