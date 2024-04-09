@@ -147,21 +147,6 @@ public class CentralSystem implements ICentralSystem {
       writer.writeScheduleToFile(filePath, userSchedule, userID);
     }
 
-  @Override
-  public boolean isTimeAvailableForUsers(Time time, List<String> users) {
-    for (String userId : users) {
-      Schedule userSchedule = system.get(userId);
-      if (userSchedule == null) {
-        return false;
-      }
-      List<Event> eventsAtTime = userSchedule.getEventsAtTime(time);
-      if (!eventsAtTime.isEmpty()) {
-        return false;
-      }
-    }
-    return true;
-  }
-
 
   @Override
   public List<Event> getEventsAtTime(String user, Time time) {

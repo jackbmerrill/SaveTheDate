@@ -34,7 +34,7 @@ public class AnyTimeSchedulingStrategies implements SchedulingStrategies {
             endDay = Day.values()[nextDayIndex];
           }
           Time currTime = new Time(day, startTime, endDay, endTime);
-          if (system.isTimeAvailableForUsers(currTime, users)) {
+          if (! system.eventConflict(currTime, users)) {
             return new Event(name, currTime, loc, users);
           }
         }
