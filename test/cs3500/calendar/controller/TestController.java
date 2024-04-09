@@ -3,6 +3,9 @@ package cs3500.calendar.controller;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -18,6 +21,8 @@ import cs3500.calendar.view.ICentralSystemFrame;
 import cs3500.calendar.view.MockView;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 public class TestController {
 
@@ -82,12 +87,33 @@ public class TestController {
 
   @Test
   public void testLoadXML() {
-
+    Time time1 = new Time(Day.TUESDAY, 950, Day.TUESDAY, 1130);
+    String filePath = "src/testSchedule.xml";
+    this.view.loadXML(filePath);
+    List<Event> events = model.getEventsAtTime("Prof. Lucia", null);
+    assertEquals(3, events.size());
+    Event morningLecture = model.getEventsAtTime("Prof. Lucia", time1).get(0);
+    assertEquals("Churchill Hall 101", morningLecture.getLocation().getPlace());
+    assertFalse(morningLecture.getLocation().isOnline());
+    assertTrue(morningLecture.getUsers().contains("Prof. Lucia"));
+    assertTrue(morningLecture.getUsers().contains("Student Anon"));
+    assertTrue(morningLecture.getUsers().contains("Chat"));
+    String formattedStartTime = Time.formatTime(morningLecture.getTime().getStartTime());
+    assertEquals("0950", formattedStartTime);
   }
 
   @Test
   public void testSaveXML() {
-
+    String eventName = "Sample Event";
+    Time eventTime = new Time(Day.MONDAY, 1000, Day.MONDAY, 1200);
+    Location eventLocation = new Location(false, "Sample Location");
+    List<String> eventUsers = Arrays.asList("TestUser1", "TestUser2");
+    model.generateEvent(eventName, eventTime, eventLocation, eventUsers);
+    String knownDirectoryPath = "src";
+    String userToSave = "TestUser1";
+    view.saveXML(knownDirectoryPath, "TestUser1");
+    Path filePath = Paths.get(knownDirectoryPath, userToSave + "-schedule.xml");
+    assertTrue(Files.exists(filePath));
   }
 
   @Test

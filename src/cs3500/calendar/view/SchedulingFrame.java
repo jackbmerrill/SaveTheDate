@@ -1,6 +1,5 @@
 package cs3500.calendar.view;
 
-import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
 
