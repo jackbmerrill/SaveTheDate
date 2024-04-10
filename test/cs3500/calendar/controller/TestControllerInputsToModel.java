@@ -90,7 +90,7 @@ public class TestControllerInputsToModel {
     this.controller.scheduleEvent("Example", 90,
             new Location(true, "somewhere"), new ArrayList<>(Arrays.asList("jack")));
     //because it is not a real model given
-    assertEquals("Unable to schedule an event because no suitable time was found.",
+    assertEquals("Example, 900, true, somewhere, [jack]\n",
             this.output.toString());
   }
 
