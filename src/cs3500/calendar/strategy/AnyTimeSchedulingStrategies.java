@@ -21,9 +21,11 @@ public class AnyTimeSchedulingStrategies implements SchedulingStrategies {
     for (Day day : Day.values()) {
       for (int hr = 0; hr < 24; hr++) {
         for (int min = 0; min < 60; min++) {
+          if (day.order() * 2400 + time + hr * 60 + min > 16800) {
+            break;
+          }
           int endHr = hr + time / 60;
           int endMin = min + time % 60;
-
           if (endMin >= 60) {
             endHr++;
             endMin -= 60;
