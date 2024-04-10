@@ -85,6 +85,8 @@ Changes for part 3:
     - updated the file organization to reflect the new packages
     - Added a new implementation of the IEventFrame interface for the schedule event panel and
     hooked it up to our existing code base.
+    - Changed the order in which the days are initialized in the enumerator so Sunday comes
+    first always. Helps make our strategies more accurate.
 
     ADDED KEY COMPONENTS:
         - IFeatures interface - interface defining all actions our controller should be able to

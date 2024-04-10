@@ -22,7 +22,7 @@ import static org.junit.Assert.assertThrows;
  */
 public class TestStrategy {
 
-  Time time1 = new Time(Day.MONDAY, 1200, Day.MONDAY, 1300);
+  Time time1 = new Time(Day.SUNDAY, 1200, Day.SUNDAY, 1300);
   Time time2 = new Time(Day.SUNDAY, 1000, Day.SUNDAY, 1800);
   Time time3 = new Time(Day.TUESDAY, 1259, Day.THURSDAY, 1300);
   Time time4 = new Time(Day.TUESDAY, 1300, Day.FRIDAY, 2359);
@@ -139,7 +139,7 @@ public class TestStrategy {
     central1.generateEvent("event1", time1, loc1, list1);
     central1.generateEvent("event2", time5, loc2, list1);
     central1.generateEvent("event3", time6, loc3, list2);
-    Time expectedTime = new Time(Day.MONDAY, 0, Day.MONDAY, 500);
+    Time expectedTime = new Time(Day.SUNDAY, 0, Day.SUNDAY, 500);
     Event expectedEvent = new Event("Event11", expectedTime, loc1, list1);
     Event createdEvent = anytime.findTime(central1, "Event11", 300, loc1, list1);
     assertEquals(expectedEvent, createdEvent);

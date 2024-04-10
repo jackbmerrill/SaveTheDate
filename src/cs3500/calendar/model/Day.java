@@ -5,13 +5,13 @@ package cs3500.calendar.model;
  * Sunday at 1 and Saturday at 7, in the order of the week.
  */
 public enum Day {
+  SUNDAY("Sunday", 1),
   MONDAY("Monday", 2),
   TUESDAY("Tuesday", 3),
   WEDNESDAY("Wednesday", 4),
   THURSDAY("Thursday", 5),
   FRIDAY("Friday", 6),
-  SATURDAY("Saturday", 7),
-  SUNDAY("Sunday", 1);
+  SATURDAY("Saturday", 7);
 
   private final String day;
   private final int order;
