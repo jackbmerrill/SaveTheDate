@@ -32,7 +32,8 @@ public class TestStrategy {
   Time time8 = new Time(Day.THURSDAY, 2300, Day.THURSDAY, 2359);
   Time time9 = new Time(Day.SUNDAY, 0000, Day.SATURDAY, 2359);
   Time time10 = new Time(Day.SUNDAY, 0, Day.SATURDAY, 2359);
-  Time time11 = new Time(Day.TUESDAY, 900, Day.TUESDAY, 1400);
+  Time time11 = new Time(Day.SUNDAY, 0000, Day.SUNDAY, 0010);
+  Time time12 = new Time(Day.FRIDAY, 0000, Day.FRIDAY, 0010);
 
 
   Location loc1 = new Location(true, "Churchill 101");
@@ -103,14 +104,24 @@ public class TestStrategy {
     assertEquals(expectedEvent, createdEvent);
   }
 
+  // to test that workhours can be scheduled between events
+  @Test
+  public void testWorkHoursBetweenEvents() {
+    central1.generateEvent("event1", time11, loc1, list1);
+    central1.generateEvent("event2", time12, loc2, list1);
+    Time expectedTime = new Time(Day.MONDAY, 900, Day.MONDAY, 1000);
+    Event expectedEvent = new Event("Event11", expectedTime, loc1, list1);
+    Event createdEvent = workhours.findTime(central1, "Event11", 60, loc1, list1);
+    assertEquals(expectedEvent, createdEvent);
+  }
+
   // to test the failing addition of an event to a full workhours system
   @Test
   public void testThrowsFullCalendarAnyTime() {
     central1.generateEvent("event1", time9, loc2, list1);
     // to ensure that the work hours displays an error message when it cannot find a suitable time
-
     assertThrows(IllegalStateException.class, () -> {
-      anytime.findTime(central1, "Wrong Event", 60, loc1, list1);
+      anytime.findTime(central1, "Wrong Event", 400, loc1, list1);
     });
   }
 
@@ -118,7 +129,8 @@ public class TestStrategy {
   @Test
   public void testThrowsNonFullCalendarAnyTime() {
     central1.generateEvent("event1", time10, loc2, list1);
-    assertThrows(IllegalStateException.class, () -> anytime.findTime(central1, "Wrong Event", 85, loc1, list1));
+    assertThrows(IllegalStateException.class, () -> anytime.findTime(central1, "Wrong Event",
+            4000, loc1, list1));
   }
 
   // to test that any time can be scheduled at the earliest time
