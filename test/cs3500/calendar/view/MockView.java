@@ -63,7 +63,7 @@ public class MockView implements ICentralSystemFrame, IFeatures {
 
   @Override
   public void scheduleEvent(String name, int time, Location loc, List<String> users) {
-
+    return;
   }
 
   @Override

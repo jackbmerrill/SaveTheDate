@@ -6,6 +6,9 @@ package cs3500.calendar.strategy;
  */
 public final class StrategyCreator {
 
+  /**
+   * To represent the types of scheduling strategies.
+   */
   public enum Strategy { ANYTIME, WORKHOURS }
 
   /**

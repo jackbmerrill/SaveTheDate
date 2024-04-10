@@ -128,6 +128,7 @@ public class TestControllerModifiesModel {
     this.failureController.saveXML("input", "someone");
     assertEquals("IO failed", this.output.toString());
   }
+  
   @Test
   public void testLoadXMLFail() {
     this.failureController.loadXML("input");

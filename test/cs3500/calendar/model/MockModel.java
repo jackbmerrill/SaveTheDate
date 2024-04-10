@@ -29,7 +29,7 @@ public class MockModel implements ICentralSystem {
   @Override
   public void generateEvent(String name, Time time, Location location, List<String> users) {
     add(name + ", " + time.getStartTime() + ", " + location.isOnline() + ", "
-    + location.getPlace() + ", " + users);
+            + location.getPlace() + ", " + users);
   }
 
   @Override
