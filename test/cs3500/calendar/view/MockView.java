@@ -5,6 +5,7 @@ import java.util.List;
 
 import cs3500.calendar.controller.IFeatures;
 import cs3500.calendar.model.Event;
+import cs3500.calendar.model.IEvent;
 import cs3500.calendar.model.Location;
 
 /**
@@ -52,12 +53,12 @@ public class MockView implements ICentralSystemFrame, IFeatures {
   }
 
   @Override
-  public void createEvent(Event event) {
+  public void createEvent(IEvent event) {
     this.controller.createEvent(event);
   }
 
   @Override
-  public void modifyEvent(Event originalEvent, Event modifiedEvent) {
+  public void modifyEvent(IEvent originalEvent, IEvent modifiedEvent) {
     this.controller.modifyEvent(originalEvent, modifiedEvent);
   }
 
@@ -77,7 +78,7 @@ public class MockView implements ICentralSystemFrame, IFeatures {
   }
 
   @Override
-  public void removeEvent(Event event, String user) {
+  public void removeEvent(IEvent event, String user) {
     this.controller.removeEvent(event, user);
   }
 }

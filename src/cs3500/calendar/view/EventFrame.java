@@ -19,6 +19,7 @@ import javax.swing.JScrollPane;
 import cs3500.calendar.controller.IFeatures;
 import cs3500.calendar.model.Day;
 import cs3500.calendar.model.Event;
+import cs3500.calendar.model.IEvent;
 import cs3500.calendar.model.Location;
 import cs3500.calendar.model.ReadOnlyCentralSystem;
 import cs3500.calendar.model.Time;
@@ -41,7 +42,7 @@ public class EventFrame extends JFrame implements IEventFrame {
   private JComboBox<Day> endingDayDropdown;
   private JList<String> availableUserDropdown;
   private ReadOnlyCentralSystem readOnlyCentralSystem;
-  private Event event;
+  private IEvent event;
   private String host;
   private String user;
   private IFeatures controller;
@@ -67,7 +68,7 @@ public class EventFrame extends JFrame implements IEventFrame {
    * @param readOnlyCentralSystem readOnlyCentralSystem
    * @param event the event to be edited
    */
-  public EventFrame(ReadOnlyCentralSystem readOnlyCentralSystem, Event event, String user) {
+  public EventFrame(ReadOnlyCentralSystem readOnlyCentralSystem, IEvent event, String user) {
     super();
     this.event = event;
     this.user = user;

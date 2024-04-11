@@ -14,6 +14,8 @@ import javax.swing.JPanel;
 import cs3500.calendar.controller.IFeatures;
 import cs3500.calendar.model.Day;
 import cs3500.calendar.model.Event;
+import cs3500.calendar.model.IEvent;
+import cs3500.calendar.model.ISchedule;
 import cs3500.calendar.model.ReadOnlyCentralSystem;
 import cs3500.calendar.model.Schedule;
 import cs3500.calendar.model.Time;
@@ -26,7 +28,7 @@ import cs3500.calendar.model.Time;
  */
 public class SchedulePanel extends JPanel implements MouseListener, ISchedulePanel {
 
-  private Schedule schedule;
+  private ISchedule schedule;
   private final ReadOnlyCentralSystem system;
   private IFeatures controller;
 
@@ -37,7 +39,7 @@ public class SchedulePanel extends JPanel implements MouseListener, ISchedulePan
    * @param schedule the desired starting schedule
    * @param system   the central system as read only
    */
-  public SchedulePanel(Schedule schedule, ReadOnlyCentralSystem system) {
+  public SchedulePanel(ISchedule schedule, ReadOnlyCentralSystem system) {
     super();
     this.schedule = schedule;
     this.system = system;
@@ -46,7 +48,7 @@ public class SchedulePanel extends JPanel implements MouseListener, ISchedulePan
   }
 
   @Override
-  public void updateSchedule(Schedule schedule) {
+  public void updateSchedule(ISchedule schedule) {
     this.schedule = schedule;
     this.repaint();
   }
@@ -83,9 +85,9 @@ public class SchedulePanel extends JPanel implements MouseListener, ISchedulePan
 
   private void drawEvents(Graphics g) {
     Graphics2D g2d = (Graphics2D) g.create();
-    List<Event> events = schedule.getEventsAtTime(null);
+    List<IEvent> events = schedule.getEventsAtTime(null);
     g2d.setColor(Color.red);
-    for (Event event : events) {
+    for (IEvent event : events) {
       Time time = event.getTime();
       if (time.getStartDay().equals(time.getEndDay())) {
         int height = convertTime(time.getEndTime()) - convertTime(time.getStartTime());
@@ -135,7 +137,7 @@ public class SchedulePanel extends JPanel implements MouseListener, ISchedulePan
     } else {
       endTime = time + 100;
     }
-    List<Event> events = schedule.getEventsAtTime(
+    List<IEvent> events = schedule.getEventsAtTime(
             new Time(Day.getDay(day), time, Day.getDay(day), endTime));
     if (events.isEmpty()) {
       return;

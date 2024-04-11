@@ -18,8 +18,8 @@ import cs3500.calendar.xml.XMLWriter;
  */
 public class CentralSystem implements ICentralSystem {
 
-  private final Map<String, Schedule> system;
-  private final List<Event> events;
+  private final Map<String, ISchedule> system;
+  private final List<IEvent> events;
 
   /**
    * To represent a constructor for Central System.
@@ -34,10 +34,10 @@ public class CentralSystem implements ICentralSystem {
    * To represent the ability to create a model with valid schedules, assume they are valid.
    * @param schedules the given list of schedules
    */
-  public CentralSystem(List<Schedule> schedules) {
+  public CentralSystem(List<ISchedule> schedules) {
     this.system = new HashMap<>();
     this.events = new ArrayList<>();
-    for (Schedule sched : schedules) {
+    for (ISchedule sched : schedules) {
       this.system.put(sched.getUserID(), new Schedule(sched));
     }
   }
@@ -49,13 +49,13 @@ public class CentralSystem implements ICentralSystem {
 
   @Override
   public void generateEvent(String name, Time time, Location location, List<String> users) {
-    Event generatedEvent = new Event(name, time, location, users);
+    IEvent generatedEvent = new Event(name, time, location, users);
     events.add(generatedEvent);
     for (String userId : users) {
       // if they don't exist, make new schedule
       system.computeIfAbsent(userId, k -> new Schedule(userId));
       // add event to schedule
-      Schedule userSchedule = system.get(userId);
+      ISchedule userSchedule = system.get(userId);
       userSchedule.addEvent(generatedEvent);
     }
   }
@@ -84,7 +84,7 @@ public class CentralSystem implements ICentralSystem {
   // checks to unsure that the user is within the central system
   // and then gets the schedule associated with the user
 
-  private Schedule getSchedule(String userID) {
+  private ISchedule getSchedule(String userID) {
     if (this.system.containsKey(userID)) {
       return this.system.get(userID);
     }
@@ -93,8 +93,8 @@ public class CentralSystem implements ICentralSystem {
 
   @Override
   public void removeEvent(String userID, String eventName) {
-    Schedule userSchedule = getSchedule(userID);
-    Event event = userSchedule.getEvent(eventName);
+    ISchedule userSchedule = getSchedule(userID);
+    IEvent event = userSchedule.getEvent(eventName);
     if (event.getHost().equals(userID)) {
       for (String user : event.getUsers()) {
         if (this.system.containsKey(user)) {
@@ -108,7 +108,7 @@ public class CentralSystem implements ICentralSystem {
 
   @Override
   public void addEventToUser(String userID, String eventName) {
-    for (Event event : events) {
+    for (IEvent event : events) {
       if (event.getName().equals(eventName)) {
         system.putIfAbsent(userID, new Schedule(userID));
         List<String> users = event.getUsers();
@@ -135,7 +135,7 @@ public class CentralSystem implements ICentralSystem {
   @Override
   public void saveSchedulesToXML(String directoryPath, String userID) throws IOException {
     XMLWriter writer = new XMLWriter();
-    Schedule userSchedule = system.get(userID);
+    ISchedule userSchedule = system.get(userID);
     if (userSchedule == null) {
       throw new FileNotFoundException("Schedule not found for user: " + userID);
     }
@@ -147,17 +147,17 @@ public class CentralSystem implements ICentralSystem {
 
 
   @Override
-  public List<Event> getEventsAtTime(String user, Time time) {
+  public List<IEvent> getEventsAtTime(String user, Time time) {
     return getSchedule(user).getEventsAtTime(time);
   }
 
   @Override
-  public Map<String, Schedule> getSystem() {
-    Map<String, Schedule> systemClone = new HashMap<>();
-    for (Map.Entry<String, Schedule> entry : system.entrySet()) {
+  public Map<String, ISchedule> getSystem() {
+    Map<String, ISchedule> systemClone = new HashMap<>();
+    for (Map.Entry<String, ISchedule> entry : system.entrySet()) {
       String userID = entry.getKey();
       Schedule clonedSchedule = new Schedule(userID);
-      for (Event event : system.get(userID).getEventsAtTime(null)) {
+      for (IEvent event : system.get(userID).getEventsAtTime(null)) {
         clonedSchedule.addEvent(event);
       }
       systemClone.put(entry.getKey(), clonedSchedule);
@@ -166,8 +166,8 @@ public class CentralSystem implements ICentralSystem {
   }
 
   @Override
-  public Schedule getUserSchedule(String userID) {
-    Schedule userSchedule = system.get(userID);
+  public ISchedule getUserSchedule(String userID) {
+    ISchedule userSchedule = system.get(userID);
     return new Schedule(userSchedule);
   }
 

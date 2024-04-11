@@ -10,6 +10,7 @@ import org.junit.Test;
 
 import cs3500.calendar.model.CentralSystem;
 import cs3500.calendar.model.Day;
+import cs3500.calendar.model.IEvent;
 import cs3500.calendar.model.Location;
 import cs3500.calendar.model.Time;
 import cs3500.calendar.model.Event;
@@ -40,9 +41,9 @@ public class TestCentralSystemXML {
     Time time1 = new Time(Day.TUESDAY, 950, Day.TUESDAY, 1130);
     String filePath = "src/testSchedule.xml";
     centralSystem.loadSchedulesFromXML(filePath);
-    List<Event> events = centralSystem.getEventsAtTime("Prof. Lucia", null);
+    List<IEvent> events = centralSystem.getEventsAtTime("Prof. Lucia", null);
     assertEquals(3, events.size());
-    Event morningLecture = centralSystem.getEventsAtTime("Prof. Lucia", time1).get(0);
+    IEvent morningLecture = centralSystem.getEventsAtTime("Prof. Lucia", time1).get(0);
     assertEquals("Churchill Hall 101", morningLecture.getLocation().getPlace());
     assertFalse(morningLecture.getLocation().isOnline());
     assertTrue(morningLecture.getUsers().contains("Prof. Lucia"));

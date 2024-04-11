@@ -2,7 +2,7 @@ package cs3500.calendar.controller;
 
 import java.util.List;
 
-import cs3500.calendar.model.Event;
+import cs3500.calendar.model.IEvent;
 import cs3500.calendar.model.Location;
 
 /**
@@ -19,7 +19,7 @@ public interface IFeatures {
    * creating the event in the model, the view displays an error box to the user.
    * @param event the event to be created in the model.
    */
-  void createEvent(Event event);
+  void createEvent(IEvent event);
 
   /**
    * Modifies an existing event in the model via the user input in the view. Takes in
@@ -29,7 +29,7 @@ public interface IFeatures {
    * @param originalEvent the original event to be modified
    * @param modifiedEvent the updated version of the event
    */
-  void modifyEvent(Event originalEvent, Event modifiedEvent);
+  void modifyEvent(IEvent originalEvent, IEvent modifiedEvent);
 
 
   /**
@@ -65,6 +65,6 @@ public interface IFeatures {
    * @param event the event to be removed.
    * @param user the user schedule to remove the event
    */
-  void removeEvent(Event event, String user);
+  void removeEvent(IEvent event, String user);
 
 }

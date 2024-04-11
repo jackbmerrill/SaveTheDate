@@ -56,17 +56,17 @@ public class MockModelIOFail implements ICentralSystem {
   }
 
   @Override
-  public List<Event> getEventsAtTime(String userId, Time time) {
+  public List<IEvent> getEventsAtTime(String userId, Time time) {
     return null;
   }
 
   @Override
-  public Map<String, Schedule> getSystem() {
+  public Map<String, ISchedule> getSystem() {
     return null;
   }
 
   @Override
-  public Schedule getUserSchedule(String userID) {
+  public ISchedule getUserSchedule(String userID) {
     return null;
   }
 

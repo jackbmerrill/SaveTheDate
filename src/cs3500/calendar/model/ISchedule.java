@@ -17,7 +17,7 @@ public interface ISchedule {
    * @param event an event to be added to the schedule
    * @throws IllegalStateException if there is a time conflict
    */
-  void addEvent(Event event) throws IllegalStateException;
+  void addEvent(IEvent event) throws IllegalStateException;
 
   /**
    * To remove an event from the schedule. Removes the current user from the event
@@ -64,7 +64,7 @@ public interface ISchedule {
    * @return the requested event as a new object
    * @throws IllegalStateException if no such event exists
    */
-  Event getEvent(String eventName);
+  IEvent getEvent(String eventName);
 
   /**
    * To get a list of all the events at a given time.
@@ -73,14 +73,14 @@ public interface ISchedule {
    * @param time the time
    * @return a list of all the events at the specified time
    */
-  List<Event> getEventsAtTime(Time time);
+  List<IEvent> getEventsAtTime(Time time);
 
   /**
    * Gets a map of all the events ordered by day. Creates a list of events assigned to
    * a key of each day. Utilized for XML and view.
    * @return A map of a Day to a list of events
    */
-  Map<Day, List<Event>> getEventsByDay();
+  Map<Day, List<IEvent>> getEventsByDay();
 
   /**
    * Returns the user ID of the current schedule.

@@ -102,6 +102,12 @@ Changes for part 3:
                        time, the strategy will throw an error. Each strategy is an object,
                        and the method takes in the desired info and attempts to find a time.
 
+Changes for part 4.
+                    -pre sending to other groups
+                        - changed all interfaces to take in other interfaces rather than
+                        the actual classes. Ie to make use of our code work with other
+                        implementations of the interfaces.
+
 
 
 

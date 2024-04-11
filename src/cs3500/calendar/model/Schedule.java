@@ -13,7 +13,7 @@ import java.util.Objects;
  */
 public class Schedule implements ISchedule {
 
-  private final Map<String, Event> eventMap;
+  private final Map<String, IEvent> eventMap;
   private final String userID;
 
   /**
@@ -30,16 +30,16 @@ public class Schedule implements ISchedule {
    * Creates a copy of all of the events.
    * @param other other schedule
    */
-  public Schedule(Schedule other) {
-    this.userID = other.userID;
+  public Schedule(ISchedule other) {
+    this.userID = other.getUserID();
     this.eventMap = new HashMap<>();
-    for (Event event : other.getEventsAtTime(null)) {
+    for (IEvent event : other.getEventsAtTime(null)) {
       this.addEvent(event);
     }
   }
 
   @Override
-  public void addEvent(Event event) throws IllegalStateException {
+  public void addEvent(IEvent event) throws IllegalStateException {
     Objects.requireNonNull(event);
     eventOverlap(null, event.getTime());
     eventMap.put(event.getName(), event);
@@ -88,7 +88,7 @@ public class Schedule implements ISchedule {
   }
 
   private void eventOverlap(String eventName, Time time) throws IllegalStateException {
-    for (Event event : eventMap.values()) {
+    for (IEvent event : eventMap.values()) {
       //ignores current event
       if (event.getName().equals(eventName)) {
         continue;
@@ -116,21 +116,21 @@ public class Schedule implements ISchedule {
   @Override
   public Event getEvent(String eventName) {
     containsEvent(eventName);
-    Event temp = this.eventMap.get(eventName);
+    IEvent temp = this.eventMap.get(eventName);
     //we could do this diff and create a new constructor
     return new Event(temp.getName(), temp.getTime(), temp.getLocation(), temp.getUsers());
   }
 
   @Override
-  public List<Event> getEventsAtTime(Time time) {
-    ArrayList<Event> events = new ArrayList<>();
+  public List<IEvent> getEventsAtTime(Time time) {
+    ArrayList<IEvent> events = new ArrayList<>();
 
     if (time == null) {
       events.addAll(eventMap.values());
       return events;
     }
 
-    for (Event event : eventMap.values()) {
+    for (IEvent event : eventMap.values()) {
       if (event.getTime().isOverlap(time)) {
         events.add(event);
       }
@@ -140,8 +140,8 @@ public class Schedule implements ISchedule {
   }
 
   @Override
-  public Map<Day, List<Event>> getEventsByDay() {
-    Map<Day, List<Event>> eventsByDay = new EnumMap<>(Day.class);
+  public Map<Day, List<IEvent>> getEventsByDay() {
+    Map<Day, List<IEvent>> eventsByDay = new EnumMap<>(Day.class);
 
     //empty list for each day
     for (Day day : Day.values()) {
@@ -149,7 +149,7 @@ public class Schedule implements ISchedule {
     }
 
     //check events for each day
-    for (Event event : eventMap.values()) {
+    for (IEvent event : eventMap.values()) {
       Day startDay = event.getTime().getStartDay();
       Day endDay = event.getTime().getEndDay();
 

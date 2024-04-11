@@ -2,7 +2,7 @@ package cs3500.calendar.view;
 
 
 import cs3500.calendar.controller.IFeatures;
-import cs3500.calendar.model.Schedule;
+import cs3500.calendar.model.ISchedule;
 
 /**
  * Represents the schedule panel of the central system. Displays a users schedule and all of
@@ -17,7 +17,7 @@ public interface ISchedulePanel {
    * provided one as a parameter.
    * @param schedule the desired schedule to view.
    */
-  void updateSchedule(Schedule schedule);
+  void updateSchedule(ISchedule schedule);
 
   /**
    * Sets the feature for the controller to have access to the interactions between

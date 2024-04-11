@@ -6,7 +6,7 @@ import java.util.Objects;
  * To represent time. Has a start time, end time, start day, end day. Each time can last up
  * to exactly a week. Event cannot start and end at the same time.
  */
-public class Time {
+public class Time implements ITime {
   private final int startTime;
   private final int endTime;
   private final Day startDay;

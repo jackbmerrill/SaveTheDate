@@ -164,15 +164,15 @@ public class TestSchedule {
     schedule1021.addEvent(event6);
     schedule1021.addEvent(event7);
     schedule1021.addEvent(event8);
-    List<Event> eventsAtTime1 = Collections.singletonList(event1);
+    List<IEvent> eventsAtTime1 = Collections.singletonList(event1);
     assertEquals(schedule1021.getEventsAtTime(time1), eventsAtTime1);
-    List<Event> eventsAtTime4 = schedule1021.getEventsAtTime(time4);
+    List<IEvent> eventsAtTime4 = schedule1021.getEventsAtTime(time4);
     assertEquals(eventsAtTime4.size(), 4);
     assertEquals(eventsAtTime4.get(0), event6);
     assertEquals(eventsAtTime4.get(1), event7);
     assertEquals(eventsAtTime4.get(2), event8);
     assertEquals(eventsAtTime4.get(3), event5);
-    List<Event> eventsAtAllTimes = schedule1021.getEventsAtTime(null);
+    List<IEvent> eventsAtAllTimes = schedule1021.getEventsAtTime(null);
     assertEquals(eventsAtAllTimes.size(), 6);
     assertEquals(eventsAtAllTimes.get(0), event6);
     assertEquals(eventsAtAllTimes.get(1), event7);
@@ -186,11 +186,11 @@ public class TestSchedule {
   @Test
   public void testGetEventsByDay() {
     schedule1111.addEvent(event1);
-    Map<Day, List<Event>> mapEvent1 = schedule1111.getEventsByDay();
+    Map<Day, List<IEvent>> mapEvent1 = schedule1111.getEventsByDay();
     assertEquals(mapEvent1.get(Day.MONDAY).size(), 1);
     assertEquals(mapEvent1.get(Day.MONDAY).get(0), event1);
     schedule1111.addEvent(event3);
-    Map<Day, List<Event>> mapEvent3 = schedule1111.getEventsByDay();
+    Map<Day, List<IEvent>> mapEvent3 = schedule1111.getEventsByDay();
     assertEquals(mapEvent3.get(Day.TUESDAY).size(), 1);
     assertEquals(mapEvent3.get(Day.WEDNESDAY).size(), 1);
     assertEquals(mapEvent3.get(Day.THURSDAY).size(), 1);
@@ -200,7 +200,7 @@ public class TestSchedule {
     schedule1111.addEvent(event6);
     schedule1111.addEvent(event7);
     schedule1111.addEvent(event8);
-    Map<Day, List<Event>> mapEvents678 = schedule1111.getEventsByDay();
+    Map<Day, List<IEvent>> mapEvents678 = schedule1111.getEventsByDay();
     assertEquals(mapEvents678.get(Day.THURSDAY).size(), 4);
     assertEquals(mapEvents678.get(Day.THURSDAY).get(0), event6);
     assertEquals(mapEvents678.get(Day.THURSDAY).get(1), event7);

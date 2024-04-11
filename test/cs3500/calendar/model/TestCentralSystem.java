@@ -46,10 +46,10 @@ public class TestCentralSystem {
   Event event8 = new Event("Event8", time8, loc4, list4);
   Event newEvent1 = new Event("NewEvent1", time1, loc1, list1);
 
-  Schedule schedule1021 = new Schedule("1021");
-  Schedule schedule5046 = new Schedule("5046");
-  Schedule schedule1111 = new Schedule("1111");
-  Schedule schedule0202 = new Schedule("0202");
+  ISchedule schedule1021 = new Schedule("1021");
+  ISchedule schedule5046 = new Schedule("5046");
+  ISchedule schedule1111 = new Schedule("1111");
+  ISchedule schedule0202 = new Schedule("0202");
 
   CentralSystem central1 = new CentralSystem();
 
@@ -58,10 +58,10 @@ public class TestCentralSystem {
   public void testAddUser() {
     central1.addUser("9604");
     assertTrue(central1.getSystem().containsKey("9604"));
-    Schedule schedule9604 = central1.getSystem().get("9604");
+    ISchedule schedule9604 = central1.getSystem().get("9604");
     assertTrue(schedule9604.getEventsAtTime(null).isEmpty());
     central1.generateEvent("Event4", time4, loc4, List.of("9604"));
-    Schedule schedule = central1.getSystem().get("9604");
+    ISchedule schedule = central1.getSystem().get("9604");
     assertEquals(event4, schedule.getEvent("Event4"));
   }
 
@@ -171,8 +171,8 @@ public class TestCentralSystem {
     central1.generateEvent("Meet202", time8, loc3, List.of("Dio"));
     central1.generateEvent("Meet303", time7, loc3, List.of("Dio"));
 
-    List<Event> meet101 = central1.getEventsAtTime("Dio", time5);
-    List<Event> meet202And303 = central1.getEventsAtTime("Dio", time4);
+    List<IEvent> meet101 = central1.getEventsAtTime("Dio", time5);
+    List<IEvent> meet202And303 = central1.getEventsAtTime("Dio", time4);
     assertEquals(1, meet101.size());
     assertEquals(new Event("Meet101", time5, loc1, List.of("Dio")), meet101.get(0));
     assertEquals(3, meet202And303.size());
@@ -188,7 +188,7 @@ public class TestCentralSystem {
   public void testGetSystem() {
     central1.addUser("Milo");
     central1.generateEvent("OOD Exam", time4, loc4, List.of("Milo"));
-    Map<String, Schedule> systemTest = central1.getSystem();
+    Map<String, ISchedule> systemTest = central1.getSystem();
     assertTrue(systemTest.containsKey("Milo"));
     assertEquals(systemTest.get("Milo").getEvent("OOD Exam"), new Event(
             "OOD Exam", time4, loc4, List.of("Milo")));
@@ -235,7 +235,7 @@ public class TestCentralSystem {
   public void testCentralSystemConstructor() {
     schedule0202.addEvent(event1);
     schedule1021.addEvent(event2);
-    List<Schedule> schedules = new ArrayList<>(Arrays.asList(schedule0202, schedule1021));
+    List<ISchedule> schedules = new ArrayList<>(Arrays.asList(schedule0202, schedule1021));
     CentralSystem central1 = new CentralSystem(schedules);
     assertEquals(central1.getSystem().size(), 2);
     assertTrue(central1.getSystem().containsKey("1021"));

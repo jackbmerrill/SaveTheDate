@@ -6,6 +6,7 @@ import java.util.Objects;
 
 import cs3500.calendar.model.Event;
 import cs3500.calendar.model.ICentralSystem;
+import cs3500.calendar.model.IEvent;
 import cs3500.calendar.model.Location;
 import cs3500.calendar.strategy.SchedulingStrategies;
 import cs3500.calendar.view.CentralSystemFrame;
@@ -54,7 +55,7 @@ public class Controller implements IFeatures {
   }
 
   @Override
-  public void createEvent(Event event) {
+  public void createEvent(IEvent event) {
     try {
       model.generateEvent(event.getName(), event.getTime(),
               event.getLocation(), event.getUsers());
@@ -65,7 +66,7 @@ public class Controller implements IFeatures {
   }
 
   @Override
-  public void modifyEvent(Event originalEvent, Event modifiedEvent) {
+  public void modifyEvent(IEvent originalEvent, IEvent modifiedEvent) {
     String host = originalEvent.getHost();
     String name = originalEvent.getName();
     try {
@@ -104,7 +105,7 @@ public class Controller implements IFeatures {
       return;
     }
     try {
-      Event event = strategy.findTime(model, name, time, loc, users);
+      IEvent event = strategy.findTime(model, name, time, loc, users);
       model.generateEvent(event.getName(), event.getTime(), event.getLocation(), event.getUsers());
       this.view.refresh();
     } catch (IllegalStateException e) {
@@ -131,7 +132,7 @@ public class Controller implements IFeatures {
   }
 
   @Override
-  public void removeEvent(Event event, String user) {
+  public void removeEvent(IEvent event, String user) {
     try {
       this.model.removeEvent(user, event.getName());
       this.view.refresh();

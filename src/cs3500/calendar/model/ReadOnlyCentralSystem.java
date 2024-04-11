@@ -18,13 +18,13 @@ public interface ReadOnlyCentralSystem {
    * @return list of events at this time, returns empty if no events
    * @throws IllegalStateException if user does not exist in system
    */
-  List<Event> getEventsAtTime(String userId, Time time);
+  List<IEvent> getEventsAtTime(String userId, Time time);
 
   /**
    * To get a copy of the central system.
    * @return a copy of the current state of the central system
    */
-  Map<String, Schedule> getSystem();
+  Map<String, ISchedule> getSystem();
 
 
   /**
@@ -32,7 +32,7 @@ public interface ReadOnlyCentralSystem {
    * @param userID the unique user id of the user
    * @return the schedule associated with the given userID
    */
-  Schedule getUserSchedule(String userID);
+  ISchedule getUserSchedule(String userID);
 
   /**
    * Returns a list of all userIds within the system to the user. Each user ID is a unique

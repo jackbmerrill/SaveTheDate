@@ -8,6 +8,8 @@ import java.util.Map;
 import cs3500.calendar.model.CentralSystem;
 import cs3500.calendar.model.Day;
 import cs3500.calendar.model.Event;
+import cs3500.calendar.model.IEvent;
+import cs3500.calendar.model.ISchedule;
 import cs3500.calendar.model.Schedule;
 import cs3500.calendar.model.Time;
 
@@ -51,25 +53,25 @@ public class TextualView {
    */
   public String generateTextualView() {
     StringBuilder textualViewBuilder = new StringBuilder();
-    Map<String, Schedule> systemSchedules = centralSystem.getSystem();
-    for (Map.Entry<String, Schedule> entry : systemSchedules.entrySet()) {
+    Map<String, ISchedule> systemSchedules = centralSystem.getSystem();
+    for (Map.Entry<String, ISchedule> entry : systemSchedules.entrySet()) {
       String userId = entry.getKey();
-      Schedule schedule = entry.getValue();
-      Map<Day, List<Event>> eventsByDay = schedule.getEventsByDay();
+      ISchedule schedule = entry.getValue();
+      Map<Day, List<IEvent>> eventsByDay = schedule.getEventsByDay();
       textualViewBuilder.append("User: ").append(userId).append("\n");
       for (Day day : Day.values()) {
-        List<Event> eventsForDay = eventsByDay.get(day);
+        List<IEvent> eventsForDay = eventsByDay.get(day);
         if (eventsForDay != null) {
-          Collections.sort(eventsForDay, new Comparator<Event>() {
+          Collections.sort(eventsForDay, new Comparator<IEvent>() {
             @Override
-            public int compare(Event e1, Event e2) {
+            public int compare(IEvent e1, IEvent e2) {
               return Integer.compare(e1.getTime().getStartTime(), e2.getTime().getStartTime());
             }
           });
         }
         textualViewBuilder.append(day.toString()).append(":\n");
         if (eventsForDay != null && !eventsForDay.isEmpty()) {
-          for (Event event : eventsForDay) {
+          for (IEvent event : eventsForDay) {
             String formattedStartTime = Time.formatTime(event.getTime().getStartTime());
             String formattedEndTime = Time.formatTime(event.getTime().getEndTime());
             String niceStartTime = formattedStartTime.substring(0, 2) + ":" + formattedStartTime.

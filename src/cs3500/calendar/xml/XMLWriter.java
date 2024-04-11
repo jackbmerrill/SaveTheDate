@@ -12,6 +12,8 @@ import org.w3c.dom.Element;
 import java.io.File;
 import java.io.IOException;
 import cs3500.calendar.model.Event;
+import cs3500.calendar.model.IEvent;
+import cs3500.calendar.model.ISchedule;
 import cs3500.calendar.model.Time;
 import cs3500.calendar.model.Schedule;
 
@@ -37,12 +39,12 @@ public class XMLWriter {
    * @throws IOException throws exception if any errors occur during the process
    */
 
-  public void writeScheduleToFile(String filePath, Schedule schedule, String scheduleId)
+  public void writeScheduleToFile(String filePath, ISchedule schedule, String scheduleId)
           throws IOException {
     try {
       Document doc = createDocument();
       Element rootElement = createRootElement(doc, scheduleId);
-      for (Event event : schedule.getEventsAtTime(null)) {
+      for (IEvent event : schedule.getEventsAtTime(null)) {
         Element eventElement = createEventElement(doc, event);
         rootElement.appendChild(eventElement);
       }
@@ -65,7 +67,7 @@ public class XMLWriter {
     return rootElement;
   }
 
-  private Element createEventElement(Document doc, Event event) {
+  private Element createEventElement(Document doc, IEvent event) {
     Element eventElement = doc.createElement("event");
     addElementWithText(doc, eventElement, "name", "\"" + event.getName() + "\"");
     addTimeElements(doc, eventElement, event);
@@ -80,7 +82,7 @@ public class XMLWriter {
     parent.appendChild(element);
   }
 
-  private void addTimeElements(Document doc, Element parent, Event event) {
+  private void addTimeElements(Document doc, Element parent, IEvent event) {
     Element timeElement = doc.createElement("time");
     parent.appendChild(timeElement);
     addElementWithText(doc, timeElement, "start-day", event.getTime().getStartDay().
@@ -93,7 +95,7 @@ public class XMLWriter {
             getEndTime()));
   }
 
-  private void addLocationElements(Document doc, Element parent, Event event) {
+  private void addLocationElements(Document doc, Element parent, IEvent event) {
     Element locationElement = doc.createElement("location");
     parent.appendChild(locationElement);
     addElementWithText(doc, locationElement, "online",
@@ -102,7 +104,7 @@ public class XMLWriter {
             getPlace() + "\"");
   }
 
-  private void addUserElements(Document doc, Element parent, Event event) {
+  private void addUserElements(Document doc, Element parent, IEvent event) {
     Element usersElement = doc.createElement("users");
     parent.appendChild(usersElement);
     for (String user : event.getUsers()) {
