@@ -72,7 +72,7 @@ public class Schedule implements ISchedule {
 
   //need to ignore the current event
   @Override
-  public void modifyEventTime(String eventName, Time time) {
+  public void modifyEventTime(String eventName, ITime time) {
     containsEvent(eventName);
     try {
       eventOverlap(eventName, time);
@@ -87,7 +87,7 @@ public class Schedule implements ISchedule {
     this.eventMap.get(eventName).updateTime(time);
   }
 
-  private void eventOverlap(String eventName, Time time) throws IllegalStateException {
+  private void eventOverlap(String eventName, ITime time) throws IllegalStateException {
     for (IEvent event : eventMap.values()) {
       //ignores current event
       if (event.getName().equals(eventName)) {
@@ -122,7 +122,7 @@ public class Schedule implements ISchedule {
   }
 
   @Override
-  public List<IEvent> getEventsAtTime(Time time) {
+  public List<IEvent> getEventsAtTime(ITime time) {
     ArrayList<IEvent> events = new ArrayList<>();
 
     if (time == null) {

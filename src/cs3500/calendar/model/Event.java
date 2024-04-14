@@ -16,7 +16,7 @@ import java.util.Objects;
 public class Event implements IEvent {
 
   private String name;
-  private Time time;
+  private ITime time;
   private Location location;
   private List<String> users;
 
@@ -29,7 +29,7 @@ public class Event implements IEvent {
    * @param users list of users
    * @throws IllegalArgumentException if there are no users or any argument is null
    */
-  public Event(String name, Time time, Location location, List<String> users) {
+  public Event(String name, ITime time, Location location, List<String> users) {
     nullCheck(name);
     nullCheck(time);
     nullCheck(location);
@@ -66,7 +66,7 @@ public class Event implements IEvent {
   }
 
   @Override
-  public void updateTime(Time time) {
+  public void updateTime(ITime time) {
     nullCheck(time);
     this.time = time;
   }
@@ -100,7 +100,7 @@ public class Event implements IEvent {
   }
 
   @Override
-  public Time getTime() {
+  public ITime getTime() {
     return time;
   }
 

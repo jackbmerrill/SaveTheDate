@@ -47,19 +47,19 @@ public class Time implements ITime {
    * @param other the other time to check
    * @return true if the times overlap
    */
-  public boolean isOverlap(Time other) {
+  public boolean isOverlap(ITime other) {
     //compute minutes in order to calculate overlaps
     int thisStartTotalMins = this.startDay.order() * 1440 + this.startTime;
     int thisEndTotalMins = this.endDay.order() * 1440 + this.endTime
             + (this.endDay.order() < this.startDay.order() ? 7 * 1440 : 0);
-    int otherStartTotalMins = other.startDay.order() * 1440 + other.startTime;
-    int otherEndTotalMins = other.endDay.order() * 1440 + other.endTime
-            + (other.endDay.order() < other.startDay.order() ? 7 * 1440 : 0);
+    int otherStartTotalMins = other.getStartDay().order() * 1440 + other.getStartTime();
+    int otherEndTotalMins = other.getEndDay().order() * 1440 + other.getEndTime()
+            + (other.getEndDay().order() < other.getStartDay().order() ? 7 * 1440 : 0);
     //actually check for overlaps
     return thisStartTotalMins < otherEndTotalMins && otherStartTotalMins < thisEndTotalMins
-            || this.endDay.equals(other.endDay) && this.startDay.equals(other.startDay)
-            && ((this.startTime < other.startTime && other.startTime < this.endTime)
-            || (this.startTime < other.endTime && other.endTime < this.endTime));
+            || this.endDay.equals(other.getEndDay()) && this.startDay.equals(other.getStartDay())
+            && ((this.startTime < other.getStartTime() && other.getStartTime() < this.endTime)
+            || (this.startTime < other.getEndTime() && other.getEndTime() < this.endTime));
   }
 
 

@@ -41,7 +41,7 @@ public interface ISchedule {
    * @param eventName an event name on the schedule to be changed
    * @throws IllegalStateException if no such event exists
    */
-  void modifyEventTime(String eventName, Time time);
+  void modifyEventTime(String eventName, ITime time);
 
   /**
    * To modify the event location.
@@ -73,7 +73,7 @@ public interface ISchedule {
    * @param time the time
    * @return a list of all the events at the specified time
    */
-  List<IEvent> getEventsAtTime(Time time);
+  List<IEvent> getEventsAtTime(ITime time);
 
   /**
    * Gets a map of all the events ordered by day. Creates a list of events assigned to

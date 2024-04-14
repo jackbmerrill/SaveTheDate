@@ -27,7 +27,7 @@ public interface ICentralSystem extends ReadOnlyCentralSystem {
    * @throws IllegalStateException     if there is a time conflict with an existing event
    *                                   for any users
    */
-  void generateEvent(String name, Time time, Location location, List<String> users);
+  void generateEvent(String name, ITime time, Location location, List<String> users);
 
   /**
    * To update an event name and modify it in the schedules of all
@@ -48,7 +48,7 @@ public interface ICentralSystem extends ReadOnlyCentralSystem {
    * @param newTime the new time of the event
    * @throws IllegalStateException if user or event does not exist in system
    */
-  void updateEventTime(String userID, String name, Time newTime);
+  void updateEventTime(String userID, String name, ITime newTime);
 
   /**
    *  To update an event location and modify it in the schedules of all

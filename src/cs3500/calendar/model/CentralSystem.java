@@ -48,7 +48,7 @@ public class CentralSystem implements ICentralSystem {
   }
 
   @Override
-  public void generateEvent(String name, Time time, Location location, List<String> users) {
+  public void generateEvent(String name, ITime time, Location location, List<String> users) {
     IEvent generatedEvent = new Event(name, time, location, users);
     events.add(generatedEvent);
     for (String userId : users) {
@@ -69,7 +69,7 @@ public class CentralSystem implements ICentralSystem {
 
   //check for all schedules connected
   @Override
-  public void updateEventTime(String userID, String name, Time newTime) {
+  public void updateEventTime(String userID, String name, ITime newTime) {
     getSchedule(userID).getEvent(name);
     for (String user : system.get(userID).getEvent(name).getUsers()) {
       getSchedule(user).modifyEventTime(name, newTime);
@@ -147,7 +147,7 @@ public class CentralSystem implements ICentralSystem {
 
 
   @Override
-  public List<IEvent> getEventsAtTime(String user, Time time) {
+  public List<IEvent> getEventsAtTime(String user, ITime time) {
     return getSchedule(user).getEventsAtTime(time);
   }
 
@@ -177,7 +177,7 @@ public class CentralSystem implements ICentralSystem {
   }
 
   @Override
-  public boolean eventConflict(Time time, List<String> users) {
+  public boolean eventConflict(ITime time, List<String> users) {
     for (String user : users) {
       if (!system.containsKey(user)) {
         continue;

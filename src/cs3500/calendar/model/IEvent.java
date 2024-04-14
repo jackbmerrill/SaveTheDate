@@ -21,7 +21,7 @@ public interface IEvent {
    * @param time the time to be replaced
    * @throws IllegalArgumentException if argument is null
    */
-  void updateTime(Time time);
+  void updateTime(ITime time);
 
   /**
    * Updates the location of the event.
@@ -55,7 +55,7 @@ public interface IEvent {
    * Gives the time object of the event.
    * @return the time object of event
    */
-  Time getTime();
+  ITime getTime();
 
   /**
    * Gets the name of the event.

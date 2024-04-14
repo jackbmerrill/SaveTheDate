@@ -18,7 +18,7 @@ public interface ReadOnlyCentralSystem {
    * @return list of events at this time, returns empty if no events
    * @throws IllegalStateException if user does not exist in system
    */
-  List<IEvent> getEventsAtTime(String userId, Time time);
+  List<IEvent> getEventsAtTime(String userId, ITime time);
 
   /**
    * To get a copy of the central system.
@@ -50,5 +50,5 @@ public interface ReadOnlyCentralSystem {
    * @param users the users who are invited to the event
    * @return True iff there is a conflict, otherwise returns false
    */
-  boolean eventConflict(Time time, List<String> users);
+  boolean eventConflict(ITime time, List<String> users);
 }

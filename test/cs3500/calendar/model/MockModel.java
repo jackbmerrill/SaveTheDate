@@ -27,7 +27,7 @@ public class MockModel implements ICentralSystem {
   }
 
   @Override
-  public void generateEvent(String name, Time time, Location location, List<String> users) {
+  public void generateEvent(String name, ITime time, Location location, List<String> users) {
     add(name + ", " + time.getStartTime() + ", " + location.isOnline() + ", "
             + location.getPlace() + ", " + users);
   }
@@ -38,7 +38,7 @@ public class MockModel implements ICentralSystem {
   }
 
   @Override
-  public void updateEventTime(String userID, String name, Time newTime) {
+  public void updateEventTime(String userID, String name, ITime newTime) {
     add(userID + ", " + name + ", " + newTime.getStartTime());
   }
 
@@ -69,7 +69,7 @@ public class MockModel implements ICentralSystem {
   }
 
   @Override
-  public List<IEvent> getEventsAtTime(String userId, Time time) {
+  public List<IEvent> getEventsAtTime(String userId, ITime time) {
     return new ArrayList<IEvent>();
   }
 
@@ -89,7 +89,7 @@ public class MockModel implements ICentralSystem {
   }
 
   @Override
-  public boolean eventConflict(Time time, List<String> users) {
+  public boolean eventConflict(ITime time, List<String> users) {
     return false;
   }
 

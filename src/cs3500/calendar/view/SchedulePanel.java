@@ -16,6 +16,7 @@ import cs3500.calendar.model.Day;
 import cs3500.calendar.model.Event;
 import cs3500.calendar.model.IEvent;
 import cs3500.calendar.model.ISchedule;
+import cs3500.calendar.model.ITime;
 import cs3500.calendar.model.ReadOnlyCentralSystem;
 import cs3500.calendar.model.Schedule;
 import cs3500.calendar.model.Time;
@@ -88,7 +89,7 @@ public class SchedulePanel extends JPanel implements MouseListener, ISchedulePan
     List<IEvent> events = schedule.getEventsAtTime(null);
     g2d.setColor(Color.red);
     for (IEvent event : events) {
-      Time time = event.getTime();
+      ITime time = event.getTime();
       if (time.getStartDay().equals(time.getEndDay())) {
         int height = convertTime(time.getEndTime()) - convertTime(time.getStartTime());
         g2d.fillRect((time.getStartDay().order() - 1) * 100, convertTime(time.getStartTime()),

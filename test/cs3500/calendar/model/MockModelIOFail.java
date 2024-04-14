@@ -16,7 +16,7 @@ public class MockModelIOFail implements ICentralSystem {
   }
 
   @Override
-  public void generateEvent(String name, Time time, Location location, List<String> users) {
+  public void generateEvent(String name, ITime time, Location location, List<String> users) {
     return;
   }
 
@@ -26,7 +26,7 @@ public class MockModelIOFail implements ICentralSystem {
   }
 
   @Override
-  public void updateEventTime(String userID, String name, Time newTime) {
+  public void updateEventTime(String userID, String name, ITime newTime) {
     return;
   }
 
@@ -56,7 +56,7 @@ public class MockModelIOFail implements ICentralSystem {
   }
 
   @Override
-  public List<IEvent> getEventsAtTime(String userId, Time time) {
+  public List<IEvent> getEventsAtTime(String userId, ITime time) {
     return null;
   }
 
@@ -76,7 +76,7 @@ public class MockModelIOFail implements ICentralSystem {
   }
 
   @Override
-  public boolean eventConflict(Time time, List<String> users) {
+  public boolean eventConflict(ITime time, List<String> users) {
     return false;
   }
 }
