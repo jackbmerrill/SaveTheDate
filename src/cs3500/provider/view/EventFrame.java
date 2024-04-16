@@ -1,9 +1,7 @@
 package cs3500.provider.view;
 
 import cs3500.provider.controller.Features;
-import cs3500.provider.model.ReadOnlyPlannerModel;
 import cs3500.provider.model.Event;
-import cs3500.provider.model.ReadOnlyPlannerModel;
 import cs3500.provider.model.User;
 
 import javax.swing.*;

@@ -1,9 +1,9 @@
 package cs3500.provider.view;
 
-import controller.Features;
-import model.Event;
+import cs3500.provider.controller.Features;
+import cs3500.provider.model.Event;
 import model.ReadOnlyPlannerModel;
-import model.User;
+import cs3500.provider.model.User;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableCellRenderer;

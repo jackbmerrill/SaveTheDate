@@ -1,4 +1,7 @@
-The `CentralSystem` class implements the `IScheduler` interface, serving as a comprehensive system for scheduling events. It facilitates the management of users and their respective events through a variety of operations including addition, removal, and updates of both users and events. Here's a detailed breakdown of its components and functionalities:
+The `CentralSystem` class implements the `IScheduler` interface, serving as a comprehensive system
+for scheduling events. It facilitates the management of users and their respective events through a
+ variety of operations including addition, removal, and updates of both users and events. Here's a
+ detailed breakdown of its components and functionalities:
 
 ### Class Overview: CentralSystem
 - **Implements:** `IScheduler` interface
@@ -6,11 +9,13 @@ The `CentralSystem` class implements the `IScheduler` interface, serving as a co
 
 ### Fields
 - **`List<User> users`**
-  - A list to store user objects within the system. It is initialized as an `ArrayList<User>` in the constructor.
+  - A list to store user objects within the system. It is initialized as an `ArrayList<User>` in
+   the constructor.
 
 ### Constructor
 - **`CentralSystem()`**
-  - Initializes the `users` list as a new instance of `ArrayList<>`, ensuring the system is ready to manage users upon instantiation.
+  - Initializes the `users` list as a new instance of `ArrayList<>`, ensuring the system is
+   ready to manage users upon instantiation.
 
 ### Methods Implemented from `IScheduler`
 
@@ -21,10 +26,12 @@ The `CentralSystem` class implements the `IScheduler` interface, serving as a co
   - Removes a user from the system. Throws `IllegalArgumentException` if the provided user is `null`.
 
 - **`User getUser(String name)`**
-  - Retrieves a user by their name. Throws `IllegalArgumentException` if the name is `null` or if the user cannot be found.
+  - Retrieves a user by their name. Throws `IllegalArgumentException` if the name is `null`
+   or if the user cannot be found.
 
 - **`void createEvent(Event event)`**
-  - Adds an event to the host's and invited users' schedules. Ensures that the host exists in the system and has a schedule to which the event can be added.
+  - Adds an event to the host's and invited users' schedules. Ensures that the host exists
+  in the system and has a schedule to which the event can be added.
 
 ### Additional Methods
 
