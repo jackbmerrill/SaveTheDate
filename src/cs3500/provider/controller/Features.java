@@ -1,7 +1,7 @@
 package cs3500.provider.controller;
 
-import model.Event;
-import model.User;
+import cs3500.provider.model.Event;
+import cs3500.provider.model.User;
 
 import java.io.File;
 import java.util.List;

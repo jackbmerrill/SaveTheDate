@@ -1,4 +1,4 @@
-package model;
+package cs3500.provider.model;
 
 /**
  * The IScheduler interface defines the operations for scheduling and managing events,

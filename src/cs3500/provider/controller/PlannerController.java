@@ -1,8 +1,8 @@
 package cs3500.provider.controller;
 
-import model.Event;
-import model.PlannerModel;
-import model.User;
+import cs3500.provider.model.Event;
+import cs3500.provider.model.PlannerModel;
+import cs3500.provider.model.User;
 import cs3500.provider.view.CalendarUI;
 import cs3500.provider.view.EventFrame;
 

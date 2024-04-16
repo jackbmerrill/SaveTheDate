@@ -1,7 +1,7 @@
 package cs3500.provider.view;
 
-import model.ReadOnlyPlannerModel;
-import model.User;
+import cs3500.provider.model.ReadOnlyPlannerModel;
+import cs3500.provider.model.User;
 
 import javax.swing.*;
 import java.awt.*;
