@@ -1,4 +1,4 @@
-package cs3500.provider.controller;
+package cs3500.provider.view;
 
 
 /**

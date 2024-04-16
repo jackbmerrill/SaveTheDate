@@ -1,4 +1,4 @@
-package cs3500.provider.view;
+package view;
 
 /**
  * The PopUpFrame interface specifies the
