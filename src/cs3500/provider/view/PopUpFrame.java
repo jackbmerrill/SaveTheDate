@@ -14,5 +14,4 @@ public interface PopUpFrame {
 
   public void render();
 
-
 }

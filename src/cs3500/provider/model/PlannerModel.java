@@ -1,4 +1,4 @@
-package cs3500.provider.model;
+package model;
 
 /**
  * The IScheduler interface defines the operations for scheduling and managing events,
@@ -21,5 +21,9 @@ public interface PlannerModel extends ReadOnlyPlannerModel {
   void exportUserScheduleToXML(String username, String filePath);
 
   void updateEvent(Event originalEvent, Event updatedEvent);
+
+  User getCurrentUser();
+
+  void setCurrentUser(User newUser);
 
 }

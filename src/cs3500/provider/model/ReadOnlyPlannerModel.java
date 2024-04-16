@@ -1,4 +1,4 @@
-package cs3500.provider.model;
+package model;
 
 import java.util.List;
 
@@ -15,5 +15,8 @@ public interface ReadOnlyPlannerModel {
   User getUser(String name);
 
   List<User> getUsers();
-}
 
+  User getCurrentUser();
+
+
+}
