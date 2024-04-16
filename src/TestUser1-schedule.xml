@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<schedule id="TestUser1">
+    <event>
+        <name>"Sample Event"</name>
+        <time>
+            <start-day>Monday</start-day>
+            <start>1000</start>
+            <end-day>Monday</end-day>
+            <end>1200</end>
+        </time>
+        <location>
+            <online>false</online>
+            <place>"Sample Location"</place>
+        </location>
+        <users>
+            <uid>"TestUser1"</uid>
+            <uid>"TestUser2"</uid>
+        </users>
+    </event>
+</schedule>
