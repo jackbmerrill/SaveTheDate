@@ -1,0 +1,21 @@
+Self Review:
+
+We felt proud about the way we set up our design and implementation for this project.
+All of our code was well documented in the interfaces and thoroughly tested. Before sending our
+code to their other groups, we changed all our methods from all classes to take in interfaces rather
+than the specific implementation of each interface, which allows the customers to smoothly compile
+our code into their system. Our customers did not reach out to us for updates, and we believe that
+this is because our code was well-documented and flexible.
+
+The primary area of personal improvement involved our event frame and schedule panel, both of which
+needed to take in ReadOnly instances of the model. This design forces our customer to make changes
+to their codebase. In the future, we would change our implementation, to create an event frame that
+is not dependent on taking in a whole model and instead relies solely on a list of users.
+
+Our providers were very responsive and up-front about the code they were giving to us.
+They explained that many of the features were missing and that their interface methods were not
+documented. However, this made it very challenging for us to create a compatible adaptor because
+there was such a big gap between the features of our calendar and the features of there's
+(or the lack thereof). We found this to be a good opportunity to work on our communication and
+troubleshooting skills, as we worked with the other team to understand and attempt to compile their
+code within our system.

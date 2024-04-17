@@ -6,7 +6,6 @@ import cs3500.provider.model.User;
 import javax.swing.*;
 import java.awt.*;
 
-
 /**
  * The AutoEventFrame class provides a graphical
  * user interface for automatically scheduling events.

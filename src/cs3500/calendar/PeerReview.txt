@@ -13,12 +13,12 @@ schedule interface. In the update, we noticed that some javadocs had been added,
 majority of methods were left undocumented.
 
 We sent our providers a second communication and received an updated event, user, and schedule
-class, as they explained that they did not have time to implement a strategy so we will leave
+class, as they explained that they did not have time to implement a strategy, so we will leave
 that out of this assignment. Although we were supposed to have received interfaces for event,
 user, and schedule, rather than classes, we began attempting to create an adapter.
 
 At this point (the night before the assignment was due), we were able to begin creating an
-adaptor, connecting our controller with their view. In order to do so we created two new
+adaptor, connecting our controller with their view. In order to do so, we created two new
 classes, FeatureAdapter and CentralFrameAdapter. FeatureAdapter, implements their feature
 interface and composes it so all inputs are passed to our controller. There were a number
 of missing functionalities, such as creating an error box and using a strategy to schedule
@@ -26,9 +26,9 @@ an event. Eventually, through enough trial and error, and creating an adapter fr
 read-only model to ours, we completed the feature adapter. They also had a method in
 their features interface to switch the current user of the model, which would then
 update the view, which was incompatible with our code. The central frame adapter
-class implements our central frame class and composes using their view to pass their
+class implements our central frame class and composes itself using their view to pass their
 view into our controller and enable it to run. Without well-defined interfaces, it was
-very difficult to tell what did what and it was very difficult to reuse thier code.
+very difficult to tell what did what and it was very difficult to reuse their code.
 
 There was a shocking lack of interfaces and interface depth within the provided code. Only their
 central system and the read only version in the model had interfaces, and they were lacking any
