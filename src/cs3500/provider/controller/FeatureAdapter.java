@@ -17,7 +17,6 @@ import cs3500.provider.model.Schedule;
 import cs3500.provider.model.User;
 import cs3500.provider.view.CalendarUI;
 import cs3500.provider.view.EventFrame;
-import cs3500.provider.view.PlannerGrid;
 
 
 /**
@@ -30,7 +29,6 @@ public class FeatureAdapter implements Features {
 
   private final IFeatures controller;
   private final CalendarUI view;
-  private final ICentralSystem model;
   private final ReadOnlyPlannerModel adaptedModel;
 
   /**
@@ -41,7 +39,6 @@ public class FeatureAdapter implements Features {
    */
   public FeatureAdapter(IFeatures controller, ICentralSystem model) {
     this.controller = controller;
-    this.model = model;
     this.adaptedModel = new ReadOnlyModelAdapter(model);
     this.view = new CalendarUI(adaptedModel);
     this.view.setFeatures(this);
@@ -113,7 +110,7 @@ public class FeatureAdapter implements Features {
 
   /**
    * Adapter for provider read only model. We cannot make it work as there are no interfaces
-   * for users or schedules, which the user each contain. There are no javadocs on the interface
+   * for users or schedules, which the user each contain. There are no javadocs on the interface,
    * so we do not even know what errors are supposed to be thrown when. All I can do is guess
    * what each method is supposed to do.
    */
