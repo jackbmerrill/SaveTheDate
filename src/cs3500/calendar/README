@@ -120,8 +120,8 @@ Changes for part 4.
                             - Create event works as intended, used adapter to push a valid event
                             to our model and create it. However the users do not show up.
                             - Remove event does not fully work. It will remove the event, but it
-                            will remove the event from everyones schedules, regardless of who is
-                            removing it as thier code does not check at all.
+                            will remove the event from everyone's schedule, regardless of who is
+                            removing it as their code does not check at all.
                             - Switching schedules does not work as the way it is designed is
                             incompatible with our code. It relies on modifying the model, rather
                             than just viewing a read only version.
@@ -130,7 +130,9 @@ Changes for part 4.
                             is produced, nothing happens.
                             - Modifying the event does not work. It causes an error in the
                             listeners due to the way we had to adapt their code without knowing
-                            how any of it really worked.
+                            how any of it really worked. (lack of comments)
+
+
 
 
 
