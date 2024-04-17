@@ -11,18 +11,29 @@ QUICKSTART: Create a new run configuration with PlanRunner as the desired class 
             XML file to add the users and schedules. You can also create a model which
             takes in schedules you have already created.
 
+            QUICKSTART WITH JAR: java -jar SaveTheDate.jar "any commands"
+                - this is how to run the program using the jar. In "any commands", enter
+                the desired strategy, whether "anytime" or "workhours". If you wish to use
+                the provider model, select a strategy and then write "provider"
+                    i.e. java -jar SaveTheDate.jar anytime provider
+
 This codebase is designed to be a weekly calendar capable of managing multiple schedules
     and importing and exporting them as XMLs. Events can be added, removed, and modified,
     where all changes will be shared across all schedules with the same events.
 
     ORGANIZATION:
     - src : our source file
-        -cs3500.calendar - further package isolation
-            - model : all classes and interfaces pertaining to our model are stored here
-            - xml : all xml related classes are here
-            - view : our textual view and GUI classes and interfaces are here
-            - controller : Controller related classes and interfaces
-            - strategy : strategy related classes and interfaces
+        -cs3500.
+            -calendar - further package isolation - Our code base
+                - model : all classes and interfaces pertaining to our model are stored here
+                - xml : all xml related classes are here
+                - view : our textual view and GUI classes and interfaces are here
+                - controller : Controller related classes and interfaces
+                - strategy : strategy related classes and interfaces
+            -provider - code provided from our provider
+                - model : model classes and interfaces
+                - controller : controller interface and adapter
+                - view : view interfaces, classes, and adapter
     - test : all test classes
         -cs3500.calendar - further package isolation
             - model - all model tests and mocks for controller
@@ -102,8 +113,8 @@ Changes for part 3:
                        time, the strategy will throw an error. Each strategy is an object,
                        and the method takes in the desired info and attempts to find a time.
 
-Changes for part 4.
-                    -pre sending to other groups
+Changes for part 4:
+                    -pre sending to customer
                         - changed all interfaces and constructors to take in interfaces rather than
                         the actual classes. Ie to make use of our code work with other
                         implementations of the interfaces and more modular. Also to allow for
