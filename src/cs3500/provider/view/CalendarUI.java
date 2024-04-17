@@ -4,9 +4,19 @@ import cs3500.provider.controller.Features;
 import cs3500.provider.model.Event;
 import cs3500.provider.model.ReadOnlyPlannerModel;
 import cs3500.provider.model.User;
-
 import javax.swing.JPanel;
 import javax.swing.JButton;
+import javax.swing.JMenu;
+import javax.swing.BorderFactory;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
+import javax.swing.JFileChooser;
+import javax.swing.JComboBox;
+
+import java.awt.*;
+
+import javax.swing.JOptionPane;
+import javax.swing.JTable;
 import javax.swing.JScrollPane;
 import javax.swing.JFrame;
 import javax.swing.SwingUtilities;
@@ -42,7 +52,6 @@ public class CalendarUI extends JFrame implements PlannerGrid {
 
   private ReadOnlyPlannerModel model;
   private Features features;
-
   private User currentUser;
   private JTable table;
   private HashMap<Integer, Event> intEvent; // Declare this as a class-level attribute.
@@ -195,7 +204,8 @@ public class CalendarUI extends JFrame implements PlannerGrid {
     });
     buttonPanel.add(dropdownMenu);
     JButton createEventButton = new JButton("Create event");
-    createEventButton.addActionListener(e -> new EventFrame(null, model, features, this).render());
+    createEventButton.addActionListener(e -> new EventFrame(null, model, features,
+            this).render());
     buttonPanel.add(createEventButton);
     frame.add(buttonPanel, BorderLayout.SOUTH);
     frame.pack();

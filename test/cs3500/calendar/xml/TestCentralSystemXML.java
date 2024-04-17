@@ -13,7 +13,6 @@ import cs3500.calendar.model.Day;
 import cs3500.calendar.model.IEvent;
 import cs3500.calendar.model.Location;
 import cs3500.calendar.model.Time;
-import cs3500.calendar.model.Event;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
