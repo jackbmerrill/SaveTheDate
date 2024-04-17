@@ -104,9 +104,12 @@ Changes for part 3:
 
 Changes for part 4.
                     -pre sending to other groups
-                        - changed all interfaces to take in other interfaces rather than
+                        - changed all interfaces and constructors to take in interfaces rather than
                         the actual classes. Ie to make use of our code work with other
-                        implementations of the interfaces.
+                        implementations of the interfaces and more modular. Also to allow for
+                        easier creation of adapters by using interfaces rather than classes.
+                        - create ITime interface to define our time class as all complex classes
+                        need to have interfaces in order to make code sharing and reuse easier.
 
 
 
