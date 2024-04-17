@@ -30,27 +30,20 @@ class implements our central frame class and composes itself using their view to
 view into our controller and enable it to run. Without well-defined interfaces, it was
 very difficult to tell what did what and it was very difficult to reuse their code.
 
-There was a shocking lack of interfaces and interface depth within the provided code. Only their
-central system and the read only version in the model had interfaces, and they were lacking any
-javadocs whatsoever. In addition, none of their other classes in the model had any interfaces,
-which made it very frustrating to try to adapt the code. In the view, PlannerGrid and PopUpFrame
-were missing some javadocs, and additionaly, there were methods declared public in the classes
-implementing the interfaces that were not overriden or even declared in the interface.
-When adapting any of the classes, it felt like we were guessing what was supposed to do what.
-I would highly recommend that all classes have interfaces with proper javadocs, so we can
-understand what we are trying to work with. The lack of proper interfaces and javadocs was
-a common theme among the code we were sent. The features interface was also missing some javadocs,
-especially at the top of the interface explaining what the interface does.
+In regards to the interfaces, only central system and the read only version in the model had
+interfaces, and they were lacking javadocs. In addition, none of their other classes
+in the model had any interfaces, which made it challenging to try to adapt the code.
+In the view, PlannerGrid and PopUpFrame were missing some javadocs, and additionaly,
+there were methods declared public in the classes implementing the interfaces that were not
+overriden or even declared in the interface. We would recommend that all classes have interfaces
+with proper javadocs, so we can understand what we are trying to work with.
 
 Moving on to the overall code critique and feedback, we noticed that our provider’s remove event
 method does not check which user is removing the event, and the event ends up being removed from
 all users. Therefore, while implementing our adapter, we just allowed the remove event to remove
 all the users schedules in order to make it compile with our system. We would recommend that our
 providers add a private helper to check which user is removing the event and then update the
-method accordingly. They also did not implement strategies at all, which as slightly concerning.
-They did have a schedule event (strategy) frame, however it was not connected to their view or
-controller other than just creating the frame, meaning there was no way to pass in the features
-interface to get the information from the frame back to the controller.
+method accordingly.
 
 The provider's event frame takes in a calendar UI class which is a direct implementation, rather
 than an interface, providing us with a compilation challenge. We would recommend that the event

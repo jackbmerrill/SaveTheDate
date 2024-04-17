@@ -1,4 +1,3 @@
-Self Review:
 
 We felt proud about the way we set up our design and implementation for this project.
 All of our code was well documented in the interfaces and thoroughly tested. Before sending our
@@ -15,7 +14,9 @@ is not dependent on taking in a whole model and instead relies solely on a list 
 Our providers were very responsive and up-front about the code they were giving to us.
 They explained that many of the features were missing and that their interface methods were not
 documented. However, this made it very challenging for us to create a compatible adaptor because
-there was such a big gap between the features of our calendar and the features of there's
+there was such a big gap between the features of our calendar and the features of theirs
 (or the lack thereof). We found this to be a good opportunity to work on our communication and
 troubleshooting skills, as we worked with the other team to understand and attempt to compile their
 code within our system.
+
+
