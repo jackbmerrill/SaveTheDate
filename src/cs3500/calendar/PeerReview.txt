@@ -65,9 +65,13 @@ schedule, the view must send a request to the model to change the selected user.
 only inefficient, but it causes the view and model to be much more tightly coupled than needed.
 Because of this, while we were able to adapt their view, we cannot change the selected user.
 In addition, the schedule event frame exits the entire program when the frame is closed. Due to
-these issues, the view did not feel very capable.
+these issues, the view did not feel very capable. The event frame is also required to take in
+an event in order to get the users to show who is attending, so when you are creating a new event,
+there are no users because there is no event to take in. I would recommend relying on the model
+for the list of users rather than an event which may not exist. Maybe that was on us for how
+we adapted the read only model, but more on that below.
 
-Due to the lack of interfaces, it was very difficult to adapt thier read only model.
+Due to the lack of interfaces, it was very difficult to adapt their read only model.
 Without interfaces, there was less opportunity for code reuse or adaptation.  Many of their
 implementations, i.e. users, schedule, return aliases to their private fields, which I would
 highly recommend changing to return copies. By leaving access to the internals of the system,

@@ -13,12 +13,10 @@ import javax.swing.JPanel;
 
 import cs3500.calendar.controller.IFeatures;
 import cs3500.calendar.model.Day;
-import cs3500.calendar.model.Event;
 import cs3500.calendar.model.IEvent;
 import cs3500.calendar.model.ISchedule;
 import cs3500.calendar.model.ITime;
 import cs3500.calendar.model.ReadOnlyCentralSystem;
-import cs3500.calendar.model.Schedule;
 import cs3500.calendar.model.Time;
 
 /**
