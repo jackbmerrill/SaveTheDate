@@ -77,6 +77,7 @@ public class FeatureAdapter implements Features {
   @Override
   public void modifyEvent(Event oldEvent, Event newEvent) {
     this.controller.modifyEvent(makeIEvent(oldEvent), makeIEvent(newEvent));
+    view.render();
   }
 
   private static IEvent makeIEvent(Event event) {
@@ -97,6 +98,7 @@ public class FeatureAdapter implements Features {
   @Override
   public void removeEvent(Event eventId) {
     this.controller.removeEvent(makeIEvent(eventId), eventId.getHost().getName());
+    view.render();
   }
 
   @Override
@@ -107,7 +109,6 @@ public class FeatureAdapter implements Features {
 
   @Override
   public void switchUser(String userId) {
-
   }
 
   /**
@@ -155,9 +156,9 @@ public class FeatureAdapter implements Features {
       return new Event(event.getName(), event.getLocation().getPlace(),
               event.getLocation().isOnline(),
               event.getTime().getStartDay().toString(),
-              Integer.toString(event.getTime().getStartTime()),
+              String.format("%04d", event.getTime().getStartTime()),
               event.getTime().getEndDay().toString(),
-              Integer.toString(event.getTime().getEndTime()),
+              String.format("%04d", event.getTime().getEndTime()),
               host, invitees);
     }
 

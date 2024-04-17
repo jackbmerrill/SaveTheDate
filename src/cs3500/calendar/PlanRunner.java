@@ -53,12 +53,10 @@ public final class PlanRunner {
 
     if (args.length > 1) {
       if (args[1].toLowerCase().equals("provider")) {
-        IFeatures controller = new Controller(new CentralFrameAdapter(centralSystem),
-                centralSystem, strategy);
-        new FeatureAdapter(controller, centralSystem);
-      } else {
-        new Controller(centralSystem, strategy);
+        new Controller(new CentralFrameAdapter(centralSystem), centralSystem, strategy);
       }
+    } else {
+      new Controller(centralSystem, strategy);
     }
   }
 }
