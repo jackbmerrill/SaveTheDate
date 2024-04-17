@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import cs3500.calendar.controller.Controller;
+import cs3500.calendar.controller.IFeatures;
 import cs3500.calendar.model.CentralSystem;
 import cs3500.calendar.model.Day;
 import cs3500.calendar.model.Location;
@@ -11,6 +12,8 @@ import cs3500.calendar.model.Schedule;
 import cs3500.calendar.model.Time;
 import cs3500.calendar.strategy.SchedulingStrategies;
 import cs3500.calendar.strategy.StrategyCreator;
+import cs3500.provider.controller.FeatureAdapter;
+import cs3500.provider.view.CentralFrameAdapter;
 
 
 /**
@@ -47,6 +50,15 @@ public final class PlanRunner {
     CentralSystem centralSystem = new CentralSystem();
     centralSystem.generateEvent("Event1", time1, loc1, list1);
     centralSystem.generateEvent("Event2", time2, loc1, list1);
-    new Controller(centralSystem, strategy);
+
+    if (args.length > 1) {
+      if (args[1].toLowerCase().equals("provider")) {
+        IFeatures controller = new Controller(new CentralFrameAdapter(centralSystem),
+                centralSystem, strategy);
+        new FeatureAdapter(controller, centralSystem);
+      } else {
+        new Controller(centralSystem, strategy);
+      }
+    }
   }
 }
