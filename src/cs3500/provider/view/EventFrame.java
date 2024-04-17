@@ -5,11 +5,25 @@ import cs3500.provider.model.Event;
 import cs3500.provider.model.User;
 import cs3500.provider.model.ReadOnlyPlannerModel;
 
-import javax.swing.*;
-import java.awt.*;
+import java.awt.Component;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
+import javax.swing.JTextField;
+import javax.swing.JComboBox;
+import javax.swing.ListSelectionModel;
+import javax.swing.BoxLayout;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JComponent;
+import javax.swing.JCheckBox;
+import javax.swing.JList;
+import javax.swing.JButton;
+import javax.swing.JLabel;
+import javax.swing.JScrollPane;
+import javax.swing.JFrame;
+import javax.swing.SwingUtilities;
+
 
 
 /**

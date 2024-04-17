@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.util.List;
 
 import cs3500.calendar.controller.IFeatures;
-import cs3500.calendar.model.Event;
 import cs3500.calendar.model.IEvent;
 import cs3500.calendar.model.Location;
 

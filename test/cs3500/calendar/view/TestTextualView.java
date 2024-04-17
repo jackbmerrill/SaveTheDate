@@ -10,7 +10,6 @@ import cs3500.calendar.model.CentralSystem;
 import cs3500.calendar.model.Day;
 import cs3500.calendar.model.Location;
 import cs3500.calendar.model.Time;
-import cs3500.calendar.view.TextualView;
 import cs3500.calendar.xml.XMLReader;
 
 /**

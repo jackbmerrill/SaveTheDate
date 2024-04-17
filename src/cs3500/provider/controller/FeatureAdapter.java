@@ -106,6 +106,7 @@ public class FeatureAdapter implements Features {
 
   @Override
   public void switchUser(String userId) {
+    return;
   }
 
   /**
@@ -120,7 +121,7 @@ public class FeatureAdapter implements Features {
     private final List<User> users;
 
     /**
-     * Constructor for the read only model adapter
+     * Constructor for the read only model adapter.
      * @param model our model to be taken in
      */
     public ReadOnlyModelAdapter(ReadOnlyCentralSystem model) {

@@ -11,11 +11,9 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import java.io.File;
 import java.io.IOException;
-import cs3500.calendar.model.Event;
 import cs3500.calendar.model.IEvent;
 import cs3500.calendar.model.ISchedule;
 import cs3500.calendar.model.Time;
-import cs3500.calendar.model.Schedule;
 
 /**
  * This class represents an XMLWriter which essentially converts a given Schedule

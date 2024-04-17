@@ -3,8 +3,17 @@ package cs3500.provider.view;
 import cs3500.provider.model.ReadOnlyPlannerModel;
 import cs3500.provider.model.User;
 
-import javax.swing.*;
-import java.awt.*;
+import javax.swing.JTextField;
+import javax.swing.JPanel;
+import javax.swing.JCheckBox;
+import javax.swing.JList;
+import javax.swing.JButton;
+import javax.swing.JLabel;
+import javax.swing.JScrollPane;
+import javax.swing.JFrame;
+import javax.swing.SwingUtilities;
+import java.awt.GridBagLayout;
+import java.awt.GridBagConstraints;
 
 /**
  * The AutoEventFrame class provides a graphical
@@ -16,14 +25,13 @@ import java.awt.*;
  */
 public class AutoEventFrame extends JPanel {
 
-  private ReadOnlyPlannerModel model;
-  private User currentUser;
   private JTextField eventNameField;
   private JTextField locationField;
   private JCheckBox onlineCheckBox;
   private JTextField durationField;
   private JList<String> usersList;
   private JButton scheduleButton;
+
   /**
    * Constructs an AutoEventFrame using a model.
    * Initializes the UI components based on the model's state,
@@ -32,11 +40,10 @@ public class AutoEventFrame extends JPanel {
    * @param model the read-only planner model to use for getting initial data
    */
   public AutoEventFrame(ReadOnlyPlannerModel model) {
-    this.model = model;
     System.out.println(model.users);
 
     if (!model.getUsers().isEmpty()) {
-      this.currentUser = model.getUsers().get(0);
+      User currentUser = model.getUsers().get(0);
     }
   }
 
@@ -102,7 +109,7 @@ public class AutoEventFrame extends JPanel {
     gbc.gridwidth = 2;
     add(new JLabel("Available users"), gbc);
 
-//    List<User> users = model.getUsers();
+    //List<User> users = model.getUsers();
     String[] users = {"Prof. Lucia", "Chat", "Student Anon"};
     usersList = new JList<>(users);
     usersList.setVisibleRowCount(3);

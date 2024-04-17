@@ -3,9 +3,11 @@ package cs3500.provider.controller;
 import cs3500.provider.model.Event;
 import cs3500.provider.model.User;
 
-import java.io.File;
 import java.util.List;
 
+/**
+ * Features.
+ */
 public interface Features {
 
   /**
@@ -16,8 +18,8 @@ public interface Features {
 
   /**
    * Saves all schedules in the system to XML files in a specified directory.
-   * @param userName
-   * @param filepath
+   * @param userName userName
+   * @param filepath filePath
    */
   void saveSchedules(String userName, String filepath);
 
@@ -30,8 +32,8 @@ public interface Features {
 
   /**
    * Modifies an existing event.
-   * @param eventId The ID of the event to modify.
-   * @param newDetails The new event to replace the old event.
+   * @param oldEvent The ID of the event to modify.
+   * @param newEvent The new event to replace the old event.
    */
   void modifyEvent(Event oldEvent, Event newEvent);
 
