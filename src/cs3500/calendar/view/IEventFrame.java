@@ -20,6 +20,7 @@ public interface IEventFrame {
    * Sets the feature for the controller to have access to the interactions between
    * the user and the view. Connects the controller to the panel for selecting existing
    * events from the panel.
+   *
    * @param feature the feature to be taken in
    */
   void setFeature(IFeatures feature);

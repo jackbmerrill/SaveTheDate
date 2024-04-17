@@ -15,6 +15,7 @@ public interface ISchedulePanel {
   /**
    * Updates current schedule of the panel. Replaces the existing schedule with the
    * provided one as a parameter.
+   *
    * @param schedule the desired schedule to view.
    */
   void updateSchedule(ISchedule schedule);
@@ -23,6 +24,7 @@ public interface ISchedulePanel {
    * Sets the feature for the controller to have access to the interactions between
    * the user and the view. Connects the controller to the panel for selecting existing
    * events from the panel.
+   *
    * @param feature the feature to be taken in
    */
   void setFeature(IFeatures feature);

@@ -11,13 +11,13 @@ import java.util.Map;
 public class Event {
 
   private static final Map<String, Integer> DAY_TO_INT = Map.of(
-      "Monday", 1,
-      "Tuesday", 2,
-      "Wednesday", 3,
-      "Thursday", 4,
-      "Friday", 5,
-      "Saturday", 6,
-      "Sunday", 7
+          "Monday", 1,
+          "Tuesday", 2,
+          "Wednesday", 3,
+          "Thursday", 4,
+          "Friday", 5,
+          "Saturday", 6,
+          "Sunday", 7
   );
   private static final int MINUTES_IN_A_WEEK = 7 * 24 * 60;
   private String name;
@@ -49,7 +49,7 @@ public class Event {
                String startTime, String endDay, String endTime,
                User host, List<User> invitedUsers) {
     if (isValidTime(startTime) && isValidTime(endTime)
-        && isWithinAWeek(startDay, startTime, endDay, endTime)) {
+            && isWithinAWeek(startDay, startTime, endDay, endTime)) {
       this.name = name;
       this.location = location;
       this.onlineStatus = onlineStatus;
@@ -109,9 +109,9 @@ public class Event {
     int endDayInt = DAY_TO_INT.get(endDay);
 
     int startMinutes = (startDayInt - 1) * 24 * 60 + Integer.parseInt(startTime.substring(0, 2))
-        * 60 + Integer.parseInt(startTime.substring(2, 4));
+            * 60 + Integer.parseInt(startTime.substring(2, 4));
     int endMinutes = (endDayInt - 1) * 24 * 60 + Integer.parseInt(endTime.substring(0, 2))
-        * 60 + Integer.parseInt(endTime.substring(2, 4));
+            * 60 + Integer.parseInt(endTime.substring(2, 4));
 
     // Check if the event duration is within a week
     return endMinutes - startMinutes < MINUTES_IN_A_WEEK && endMinutes - startMinutes >= 0;
@@ -205,8 +205,6 @@ public class Event {
 
     return !(thisEnd <= otherStart || thisStart >= otherEnd);
   }
-
-
 
 
 }

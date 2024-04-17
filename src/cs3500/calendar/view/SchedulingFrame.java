@@ -3,16 +3,7 @@ package cs3500.calendar.view;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.swing.JTextField;
-import javax.swing.JCheckBox;
-import javax.swing.JFrame;
-import javax.swing.JButton;
-import javax.swing.JList;
-import javax.swing.JComponent;
-import javax.swing.JPanel;
-import javax.swing.BorderFactory;
-import javax.swing.BoxLayout;
-import javax.swing.JScrollPane;
+import javax.swing.*;
 
 import cs3500.calendar.controller.IFeatures;
 import cs3500.calendar.model.Location;
@@ -38,6 +29,7 @@ public class SchedulingFrame extends JFrame implements IEventFrame {
    * SchedulingEvent Frame constructor that takes in a readOnlyCentralSystem. Takes the
    * info from the provided event and fills in all the required details to all the different
    * panels.
+   *
    * @param readOnlyCentralSystem readOnlyCentralSystem
    */
   public SchedulingFrame(ReadOnlyCentralSystem readOnlyCentralSystem) {
