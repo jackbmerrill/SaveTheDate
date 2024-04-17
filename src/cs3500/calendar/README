@@ -111,6 +111,27 @@ Changes for part 4.
                         - create ITime interface to define our time class as all complex classes
                         need to have interfaces in order to make code sharing and reuse easier.
 
+                    - After adding provider code
+                        - in the command line for plan runner, simply add "provider" after the
+                        strategy to use the provider view.
+                        PROVIDER VIEW -
+                            - they have no strategies so the schedule frame does not work in
+                            their view. When the schedule frame is closed, it quits the program.
+                            - Create event works as intended, used adapter to push a valid event
+                            to our model and create it. However the users do not show up.
+                            - Remove event does not fully work. It will remove the event, but it
+                            will remove the event from everyones schedules, regardless of who is
+                            removing it as thier code does not check at all.
+                            - Switching schedules does not work as the way it is designed is
+                            incompatible with our code. It relies on modifying the model, rather
+                            than just viewing a read only version.
+                            - Loading and saving schedules works as intended.
+                            - There is no way of displaying errors in their view, so when an error
+                            is produced, nothing happens.
+                            - Modifying the event does not work. It causes an error in the
+                            listeners due to the way we had to adapt their code without knowing
+                            how any of it really worked.
+
 
 
 
