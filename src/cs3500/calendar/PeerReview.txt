@@ -1,0 +1,82 @@
+Note: Prof. Nuñez directed us to write a longer Peer Review due to unique provider circumstances.
+
+The initial code we received was quite challenging and Jack and I to work with because it was
+missing an event, user, and schedule interface, as well as the README. The given files were
+also missing interactive view and strategy implementations. Finally, none of the methods in
+any of the interfaces we were given had any javadocs explaining their purpose.
+
+We reached out to our providers to ask for the missing interfaces, implementations, etc, and
+the team sent us the README, the view implementation, and a controller implementation (which
+helped us understand the code despite the lack of javadocs).  Although this was a good start,
+we were still missing three essential interfaces; the user interface, event interface and
+schedule interface. In the update, we noticed that some javadocs had been added, but the
+majority of methods were left undocumented.
+
+We sent our providers a second communication and received an updated event, user, and schedule
+class, as they explained that they did not have time to implement a strategy so we will leave
+that out of this assignment. Although we were supposed to have received interfaces for event,
+user, and schedule, rather than classes, we began attempting to create an adapter.
+
+At this point (the night before the assignment was due), we were able to begin creating an
+adaptor, connecting our controller with their view. In order to do so we created two new
+classes, FeatureAdapter and CentralFrameAdapter. FeatureAdapter, implements their feature
+interface and composes it so all inputs are passed to our controller. There were a number
+of missing functionalities, such as creating an error box and using a strategy to schedule
+an event. Eventually, through enough trial and error, and creating an adapter from their
+read-only model to ours, we completed the feature adapter. They also had a method in
+their features interface to switch the current user of the model, which would then
+update the view, which was incompatible with our code. The central frame adapter
+class implements our central frame class and composes using their view to pass their
+view into our controller and enable it to run. Without well-defined interfaces, it was
+very difficult to tell what did what and it was very difficult to reuse thier code.
+
+There was a shocking lack of interfaces and interface depth within the provided code. Only their
+central system and the read only version in the model had interfaces, and they were lacking any
+javadocs whatsoever. In addition, none of their other classes in the model had any interfaces,
+which made it very frustrating to try to adapt the code. In the view, PlannerGrid and PopUpFrame
+were missing some javadocs, and additionaly, there were methods declared public in the classes
+implementing the interfaces that were not overriden or even declared in the interface.
+When adapting any of the classes, it felt like we were guessing what was supposed to do what.
+I would highly recommend that all classes have interfaces with proper javadocs, so we can
+understand what we are trying to work with. The lack of proper interfaces and javadocs was
+a common theme among the code we were sent. The features interface was also missing some javadocs,
+especially at the top of the interface explaining what the interface does.
+
+Moving on to the overall code critique and feedback, we noticed that our provider’s remove event
+method does not check which user is removing the event, and the event ends up being removed from
+all users. Therefore, while implementing our adapter, we just allowed the remove event to remove
+all the users schedules in order to make it compile with our system. We would recommend that our
+providers add a private helper to check which user is removing the event and then update the
+method accordingly. They also did not implement strategies at all, which as slightly concerning.
+They did have a schedule event (strategy) frame, however it was not connected to their view or
+controller other than just creating the frame, meaning there was no way to pass in the features
+interface to get the information from the frame back to the controller.
+
+The provider's event frame takes in a calendar UI class which is a direct implementation, rather
+than an interface, providing us with a compilation challenge. We would recommend that the event
+frame take in an interface rather than a class itself. Additionally, there is a method called
+GetCurrentUser in the provider’s ReadOnly model which is not compatible with our code because
+we did not implement a way to store the current user. We don’t have any issue with this
+implementation other than the fact that it was challenging to integrate into our system
+without creating a new method in our model. In addition, I would recommend changing either
+the model or the view to be able to access the entire system without needing to request a change
+through the controller. The way the code currently works, in order to view a different user's
+schedule, the view must send a request to the model to change the selected user. This is not
+only inefficient, but it causes the view and model to be much more tightly coupled than needed.
+Because of this, while we were able to adapt their view, we cannot change the selected user.
+In addition, the schedule event frame exits the entire program when the frame is closed. Due to
+these issues, the view did not feel very capable.
+
+Due to the lack of interfaces, it was very difficult to adapt thier read only model.
+Without interfaces, there was less opportunity for code reuse or adaptation.  Many of their
+implementations, i.e. users, schedule, return aliases to their private fields, which I would
+highly recommend changing to return copies. By leaving access to the internals of the system,
+anyone can come in and edit their code however they want.
+
+In terms of future feedback, the main comment we have is regarding javadocs. Without proper
+javadocs, Jack and I struggled to understand the purpose of each method, especially because
+we could not view many of the implementations. Another piece of feedback we have would be to
+make the days of the week and their order into enumerators, as they are a constant across
+your code. That way, it will be easier to use across your classes. Further, we noticed that
+the provider's code did not seem to throw errors anywhere or produce error messages in the
+view, so we recommend adding features to throw errors and maintain invariants in the future.
