@@ -143,8 +143,29 @@ Changes for part 4:
                             listeners due to the way we had to adapt their code without knowing
                             how any of it really worked. (lack of comments)
 
+Changes for part 5:
+                   For Level 0:
+                        - Updated the CentralSystemFrame to add a new JButton called
+                          toggleHostColor, initialized the button in the controller, and added a
+                          new action listener which called a new toggleHostColor method onto the
+                          schedule.
+                        - Added this toggleHostColor method to the ISchedulePanel interface and
+                          implemented this new method into the SchedulePanel class. When the method
+                          is called the color of the host changes to either blue or the default red
+                          depending on its current position.
+
+                   For Level 1:
+                        - Our model already allows for the week to start on a different day, since
+                          each day is assigned to a numerical value. The view decides which day of
+                          the week is assigned to which column of the calendar, since the calendar
+                          only spans a singular week. Due to the flexibility of our model, we were
+                          able to jump straight into Level 2.
+
+                   For Level 2:
+                        -
 
 
-
-
-
+                   For Level 3:
+                        - Once again, because our model does not rely on the ordering of the days
+                          and our strategy classes implement a read only instance of our model,
+                          both of our strategies can be run with a start day of Saturday.
