@@ -29,6 +29,7 @@ public class CentralSystemFrame extends JFrame implements ICentralSystemFrame {
   private JButton saveButton;
   private JButton createEventButton;
   private JButton scheduleEventButton;
+  private JButton toggleHostColor;
   private SchedulePanel schedulePanel;
   private IFeatures controller;
 
@@ -55,6 +56,7 @@ public class CentralSystemFrame extends JFrame implements ICentralSystemFrame {
     saveButton = new JButton("Save XML");
     createEventButton = new JButton("Create Event");
     scheduleEventButton = new JButton("Schedule Event");
+    toggleHostColor = new JButton("Toggle host color");
     this.schedulePanel = new SchedulePanel(new Schedule("<None>"), this.model);
     this.setResizable(false);
 
@@ -74,6 +76,7 @@ public class CentralSystemFrame extends JFrame implements ICentralSystemFrame {
     buttonPanel.add(scheduleEventButton);
     buttonPanel.add(loadButton);
     buttonPanel.add(saveButton);
+    buttonPanel.add(toggleHostColor);
     this.add(buttonPanel, BorderLayout.SOUTH);
   }
 
@@ -130,7 +133,17 @@ public class CentralSystemFrame extends JFrame implements ICentralSystemFrame {
         schedule.makeVisible();
       }
     });
+
+    toggleHostColor.addActionListener(new ActionListener() {
+      @Override
+      public void actionPerformed(ActionEvent e) {
+        schedulePanel.toggleHostColor();
+      }
+    });
+
   }
+
+
 
   @Override
   public void makeVisible(boolean visible) {

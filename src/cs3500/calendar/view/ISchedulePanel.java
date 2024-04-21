@@ -28,4 +28,5 @@ public interface ISchedulePanel {
    * @param feature the feature to be taken in
    */
   void setFeature(IFeatures feature);
+
 }
