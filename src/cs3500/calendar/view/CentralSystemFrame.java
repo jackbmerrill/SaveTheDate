@@ -23,14 +23,14 @@ import java.awt.event.ActionListener;
  * The current user can also be switched via dropdown. Listeners can be replaced by the view.
  */
 public class CentralSystemFrame extends JFrame implements ICentralSystemFrame {
-  private final ReadOnlyCentralSystem model;
+  protected final ReadOnlyCentralSystem model;
   private JComboBox<String> userScheduleDropdown;
   private JButton loadButton;
   private JButton saveButton;
   private JButton createEventButton;
   private JButton scheduleEventButton;
   private JButton toggleHostColor;
-  private SchedulePanel schedulePanel;
+  protected SchedulePanel schedulePanel;
   private IFeatures controller;
 
   /**
@@ -42,11 +42,16 @@ public class CentralSystemFrame extends JFrame implements ICentralSystemFrame {
     super("Central System Frame");
     this.model = model;
     this.initializeComponents();
+    setSchedulePanel();
     this.layoutComponents();
     this.attachListeners();
     this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     this.setSize(700, 700); //initial frame size
     this.setLocationRelativeTo(null); //window centering
+  }
+
+  protected void setSchedulePanel() {
+    this.schedulePanel = new SchedulePanel(new Schedule("<None>"), this.model);
   }
 
   private void initializeComponents() {
@@ -57,9 +62,7 @@ public class CentralSystemFrame extends JFrame implements ICentralSystemFrame {
     createEventButton = new JButton("Create Event");
     scheduleEventButton = new JButton("Schedule Event");
     toggleHostColor = new JButton("Toggle host color");
-    this.schedulePanel = new SchedulePanel(new Schedule("<None>"), this.model);
     this.setResizable(false);
-
     //users and schedules
     for (String user : model.getUsers()) {
       userScheduleDropdown.addItem(user);

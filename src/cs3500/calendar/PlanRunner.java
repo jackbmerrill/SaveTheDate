@@ -11,6 +11,7 @@ import cs3500.calendar.model.Schedule;
 import cs3500.calendar.model.Time;
 import cs3500.calendar.strategy.SchedulingStrategies;
 import cs3500.calendar.strategy.StrategyCreator;
+import cs3500.calendar.view.SaturdayCentralSystemFrame;
 import cs3500.provider.view.CentralFrameAdapter;
 
 
@@ -52,6 +53,8 @@ public final class PlanRunner {
     if (args.length > 1) {
       if (args[1].toLowerCase().equals("provider")) {
         new Controller(new CentralFrameAdapter(centralSystem), centralSystem, strategy);
+      } else if (args[1].toLowerCase().equals("saturday")) {
+        new Controller(new SaturdayCentralSystemFrame(centralSystem), centralSystem, strategy);
       }
     } else {
       new Controller(centralSystem, strategy);

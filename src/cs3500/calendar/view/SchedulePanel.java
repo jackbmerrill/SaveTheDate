@@ -9,7 +9,6 @@ import java.awt.Color;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.List;
-import java.util.Map;
 
 import javax.swing.JPanel;
 
@@ -29,10 +28,10 @@ import cs3500.calendar.model.Time;
  */
 public class SchedulePanel extends JPanel implements MouseListener, ISchedulePanel {
 
-  private ISchedule schedule;
-  private final ReadOnlyCentralSystem system;
-  private IFeatures controller;
-  private boolean toggleColors;
+  protected ISchedule schedule;
+  protected final ReadOnlyCentralSystem system;
+  protected IFeatures controller;
+  protected boolean toggleColors;
 
   /**
    * Constructor for the schedule panel. Takes in a schedule to start with and the central
@@ -92,7 +91,7 @@ public class SchedulePanel extends JPanel implements MouseListener, ISchedulePan
     }
   }
 
-  private void drawEvents(Graphics g) {
+  protected void drawEvents(Graphics g) {
     Graphics2D g2d = (Graphics2D) g.create();
     List<IEvent> events = schedule.getEventsAtTime(null);
     for (IEvent event : events) {
@@ -128,7 +127,7 @@ public class SchedulePanel extends JPanel implements MouseListener, ISchedulePan
     }
   }
 
-  private int convertTime(int hour) {
+  protected int convertTime(int hour) {
     int translated = (hour / 100) * 100;
     return (translated + (int) (((hour % 100) / 60.0) * 100.0)) / 4;
   }
