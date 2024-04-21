@@ -9,6 +9,8 @@ import java.awt.Color;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.List;
+import java.util.Map;
+
 import javax.swing.JPanel;
 
 import cs3500.calendar.controller.IFeatures;
@@ -30,6 +32,7 @@ public class SchedulePanel extends JPanel implements MouseListener, ISchedulePan
   private ISchedule schedule;
   private final ReadOnlyCentralSystem system;
   private IFeatures controller;
+  private boolean toggleColors;
 
   /**
    * Constructor for the schedule panel. Takes in a schedule to start with and the central
@@ -42,6 +45,7 @@ public class SchedulePanel extends JPanel implements MouseListener, ISchedulePan
     super();
     this.schedule = schedule;
     this.system = system;
+    this.toggleColors = false;
     this.setSize(new Dimension(700, 600));
     addMouseListener(this);
   }
@@ -55,6 +59,12 @@ public class SchedulePanel extends JPanel implements MouseListener, ISchedulePan
   @Override
   public void setFeature(IFeatures feature) {
     this.controller = feature;
+  }
+
+  @Override
+  public void toggleHostColor() {
+    this.toggleColors = !toggleColors;
+    this.repaint();
   }
 
   @Override
@@ -85,9 +95,13 @@ public class SchedulePanel extends JPanel implements MouseListener, ISchedulePan
   private void drawEvents(Graphics g) {
     Graphics2D g2d = (Graphics2D) g.create();
     List<IEvent> events = schedule.getEventsAtTime(null);
-    g2d.setColor(Color.red);
     for (IEvent event : events) {
       ITime time = event.getTime();
+      if (toggleColors && schedule.getUserID().equals(event.getHost())) {
+        g2d.setColor(Color.blue);
+      } else {
+        g2d.setColor(Color.red);
+      }
       if (time.getStartDay().equals(time.getEndDay())) {
         int height = convertTime(time.getEndTime()) - convertTime(time.getStartTime());
         g2d.fillRect((time.getStartDay().order() - 1) * 100, convertTime(time.getStartTime()),

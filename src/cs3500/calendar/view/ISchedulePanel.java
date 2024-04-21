@@ -29,4 +29,12 @@ public interface ISchedulePanel {
    */
   void setFeature(IFeatures feature);
 
+  /**
+   * Toggles the default colors of all events depending on who the host is. The default for
+   * the toggle host color is to be off, meaning all events will have the same color. When
+   * this method is called and the toggle is off, each event will have a different color
+   * depending on who is the current host. I.e. one host would be blue and another would be
+   * red.
+   */
+  void toggleHostColor();
 }
