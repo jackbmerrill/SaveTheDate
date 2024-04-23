@@ -162,7 +162,12 @@ Changes for part 5:
                           able to jump straight into Level 2.
 
                    For Level 2:
-                        -
+                        - Implemented new versions of the Central Frame and the Schedule panel
+                        for when the calendar is starting from saturday. We extended our existing
+                        classes, made the required fields and methods we needed protected so that
+                        we could override and access them in order to make the calendar run. For
+                        the Schedule panel, we overrode the drawEvents to draw saturday as the
+                        start of the week and changed
 
 
                    For Level 3:
