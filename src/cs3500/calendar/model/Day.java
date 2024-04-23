@@ -6,6 +6,7 @@ package cs3500.calendar.model;
  */
 public enum Day {
   SUNDAY("Sunday", 1),
+
   MONDAY("Monday", 2),
   TUESDAY("Tuesday", 3),
   WEDNESDAY("Wednesday", 4),
