@@ -12,6 +12,12 @@ import cs3500.calendar.model.ITime;
 import cs3500.calendar.model.ReadOnlyCentralSystem;
 import cs3500.calendar.model.Time;
 
+/**
+ *  Represents the SchedulePanel of a system that starts on Saturday. Each red rectangle represents
+ *  an event and clicking on said event opens it in an event frame. As events are added, the panel
+ *  updates to match the schedule object. The schedule itself inside the panel can be replaced to
+ *  display a different schedule.
+ */
 public class SaturdaySchedulePanel extends SchedulePanel {
 
   /**

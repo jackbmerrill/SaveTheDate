@@ -10,6 +10,15 @@ import cs3500.calendar.model.Location;
 import cs3500.calendar.model.ReadOnlyCentralSystem;
 import cs3500.calendar.model.STime;
 
+/**
+ *
+ * Implementation of an Event Frame starting on Saturday, see IEventFrame. This frame is unable to
+ * be resized, and will in future assignments connect to the controller with the listeners. The host
+ * is always at the top of the list of users and is already selected. When creating an
+ * event frame, if no event is provided, all fields will be left blank. Otherwise, all
+ * event details will be filled in. Upon closing, the code does not quit.
+ */
+
 public class SaturdayEventFrame extends EventFrame {
 
   public SaturdayEventFrame(ReadOnlyCentralSystem readOnlyCentralSystem, String host) {
