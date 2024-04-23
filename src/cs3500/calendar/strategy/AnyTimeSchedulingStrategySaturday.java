@@ -8,7 +8,6 @@ import cs3500.calendar.model.Day;
 import cs3500.calendar.model.Event;
 import cs3500.calendar.model.Location;
 import cs3500.calendar.model.ReadOnlyCentralSystem;
-import cs3500.calendar.model.STime;
 import cs3500.calendar.model.Time;
 
 /**
@@ -41,12 +40,12 @@ public class AnyTimeSchedulingStrategySaturday implements SchedulingStrategies {
           if (endHr >= 24) {
             endHr -= 24;
             int nextDay = (day.ordinal() + 1) % Day.values().length;
-            endDay = Day.values()[nextDay];
+            endDay = saturdayFirst.get(nextDay);
           }
 
           if (endHr < 24 && !system.eventConflict(new Time(day, hr * 100 + min, endDay,
                   endHr * 100 + endMin), users)) {
-            return new Event(name, new STime(day, hr * 100 + min, endDay,
+            return new Event(name, new Time(day, hr * 100 + min, endDay,
                     endHr * 100 + endMin), loc, users);
           }
         }
