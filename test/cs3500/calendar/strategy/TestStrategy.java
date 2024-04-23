@@ -151,9 +151,11 @@ public class TestStrategy {
   public void testAnyTimeEarliestTimeSaturdayIsSaturday() {
     Time expectedTime = new Time(Day.SATURDAY, 0, Day.SATURDAY, 500);
     Event expectedEvent = new Event("Event11", expectedTime, loc1, list1);
-    Event createdEvent = saturdayAnytime.findTime(central1, "Event11", 300, loc1, list1);
+    Event createdEvent = saturdayAnytime.findTime(central1, "Event11", 300,
+            loc1, list1);
     assertEquals(expectedEvent.getTime(), createdEvent.getTime());
   }
+
 
 
 }
