@@ -26,7 +26,7 @@ public class AnyTimeSchedulingStrategySaturday implements SchedulingStrategies {
     for (Day day : saturdayFirst) {
       for (int hr = 0; hr < 24; hr++) {
         for (int min = 0; min < 60; min++) {
-          if (modifiedOrder(day) * 2400 + time + hr * 60 + min > 16800) {
+          if (modifiedOrder(day) * 1440 + hr * 60 + min + (time % 60) + (time / 60) * 60 > 16800) {
             break;
           }
           int endHr = hr + time / 60;
