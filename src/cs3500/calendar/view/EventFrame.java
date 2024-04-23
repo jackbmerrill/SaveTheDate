@@ -34,14 +34,14 @@ import cs3500.calendar.model.Time;
  */
 public class EventFrame extends JFrame implements IEventFrame {
 
-  private JTextField eventNameTextBox;
-  private JCheckBox isOnline;
-  private JTextField locationTextBox;
-  private JTextField startingTimeTextBox;
-  private JComboBox<Day> startingDayDropdown;
-  private JTextField endingTimeTextBox;
-  private JComboBox<Day> endingDayDropdown;
-  private JList<String> availableUserDropdown;
+  protected JTextField eventNameTextBox;
+  protected JCheckBox isOnline;
+  protected JTextField locationTextBox;
+  protected JTextField startingTimeTextBox;
+  protected JComboBox<Day> startingDayDropdown;
+  protected JTextField endingTimeTextBox;
+  protected JComboBox<Day> endingDayDropdown;
+  protected JList<String> availableUserDropdown;
   private ReadOnlyCentralSystem readOnlyCentralSystem;
   private IEvent event;
   private String host;
@@ -199,7 +199,7 @@ public class EventFrame extends JFrame implements IEventFrame {
     add(buttonPanel);
   }
 
-  private Event makeEvent() {
+  protected Event makeEvent() {
     if (eventNameTextBox.getText().isEmpty() || locationTextBox.getText().isEmpty()
             || startingTimeTextBox.getText().isEmpty() || endingTimeTextBox.getText().isEmpty()) {
       throw new IllegalArgumentException("Not all required information is provided.");

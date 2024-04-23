@@ -24,14 +24,14 @@ import java.awt.event.ActionListener;
  */
 public class CentralSystemFrame extends JFrame implements ICentralSystemFrame {
   protected final ReadOnlyCentralSystem model;
-  private JComboBox<String> userScheduleDropdown;
+  protected JComboBox<String> userScheduleDropdown;
   private JButton loadButton;
   private JButton saveButton;
-  private JButton createEventButton;
+  protected JButton createEventButton;
   private JButton scheduleEventButton;
   private JButton toggleHostColor;
   protected SchedulePanel schedulePanel;
-  private IFeatures controller;
+  protected IFeatures controller;
 
   /**
    * Constructor for the central system frame. Takes in a read only central system to
@@ -118,15 +118,7 @@ public class CentralSystemFrame extends JFrame implements ICentralSystemFrame {
       }
     });
 
-    createEventButton.addActionListener(new ActionListener() {
-      @Override
-      public void actionPerformed(ActionEvent e) {
-        IEventFrame eventFrame = new EventFrame(model,
-                userScheduleDropdown.getSelectedItem().toString());
-        eventFrame.setFeature(controller);
-        eventFrame.makeVisible();
-      }
-    });
+    createEventButtonListener();
 
     scheduleEventButton.addActionListener(new ActionListener() {
       @Override
@@ -146,6 +138,17 @@ public class CentralSystemFrame extends JFrame implements ICentralSystemFrame {
 
   }
 
+  protected void createEventButtonListener() {
+    createEventButton.addActionListener(new ActionListener() {
+      @Override
+      public void actionPerformed(ActionEvent e) {
+        IEventFrame eventFrame = new EventFrame(model,
+                userScheduleDropdown.getSelectedItem().toString());
+        eventFrame.setFeature(controller);
+        eventFrame.makeVisible();
+      }
+    });
+  }
 
 
   @Override

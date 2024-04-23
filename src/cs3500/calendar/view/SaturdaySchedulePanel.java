@@ -2,12 +2,9 @@ package cs3500.calendar.view;
 
 import java.awt.*;
 import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 import java.util.List;
 
-import javax.swing.*;
 
-import cs3500.calendar.controller.IFeatures;
 import cs3500.calendar.model.Day;
 import cs3500.calendar.model.IEvent;
 import cs3500.calendar.model.ISchedule;
@@ -91,7 +88,7 @@ public class SaturdaySchedulePanel extends SchedulePanel {
     if (events.isEmpty()) {
       return;
     }
-    IEventFrame eventFrame = new EventFrame(this.system, events.get(0), this.schedule.getUserID());
+    IEventFrame eventFrame = new SaturdayEventFrame(this.system, events.get(0), this.schedule.getUserID());
     eventFrame.setFeature(this.controller);
     eventFrame.makeVisible();
   }

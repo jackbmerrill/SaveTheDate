@@ -41,7 +41,7 @@ public final class PlanRunner {
     }
 
     Time time1 = new Time(Day.MONDAY, 1200, Day.MONDAY, 1300);
-    Time time2 = new Time(Day.WEDNESDAY, 0000, Day.SATURDAY, 1600);
+    Time time2 = new Time(Day.WEDNESDAY, 0000, Day.SUNDAY, 2359);
 
     Location loc1 = new Location(true, "Churchill 101");
     List<String> list1 = new ArrayList<>(List.of("Jack", "Milo", "Jake", "Lucia", "Dio"));
