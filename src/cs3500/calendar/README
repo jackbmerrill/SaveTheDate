@@ -167,10 +167,21 @@ Changes for part 5:
                         classes, made the required fields and methods we needed protected so that
                         we could override and access them in order to make the calendar run. For
                         the Schedule panel, we overrode the drawEvents to draw saturday as the
-                        start of the week and changed
-
+                        start of the week and overrode the mouse click so it would still open
+                        the desired events as before by shifting the day over. You can still
+                        click on any event and it will open. For the saturday Central Frame,
+                        we created a new protected method in the original central frame to set
+                        the schedule so we could override it in our new class and set a saturday
+                        schedule panel. Because we handled it in this way using inheritance and
+                        overrides, we did not need to change any other code to get it to work.
 
                    For Level 3:
                         - Once again, because our model does not rely on the ordering of the days
                           and our strategy classes implement a read only instance of our model,
-                          both of our strategies can be run with a start day of Saturday.
+                          our workhours strategy does not need to be adapted for the new saturday
+                          first calendar and works the same. However for the anytime strategy,
+                          we created a new strategy so the first available time would be saturday
+                          first, and then sunday. We did so by simply implementing our strategy
+                          interface and implementing the method. We did not find any need to
+                          abstract anything as the method in each strategy is dependent on the
+                          accessible fields.

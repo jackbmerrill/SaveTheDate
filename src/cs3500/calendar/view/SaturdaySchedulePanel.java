@@ -46,14 +46,17 @@ public class SaturdaySchedulePanel extends SchedulePanel {
 
       if (time.getStartDay().equals(time.getEndDay())) {
         int height = convertTime(time.getEndTime()) - convertTime(time.getStartTime());
-        g2d.fillRect((modifiedOrder(time.getStartDay()) - 1) * 100, convertTime(time.getStartTime()),
+        g2d.fillRect((modifiedOrder(time.getStartDay()) - 1) * 100,
+                convertTime(time.getStartTime()),
                 100, height);
       }
 
       if (modifiedOrder(time.getStartDay()) < modifiedOrder(time.getEndDay())) {
-        g2d.fillRect((modifiedOrder(time.getStartDay()) - 1) * 100, convertTime(time.getStartTime()),
+        g2d.fillRect((modifiedOrder(time.getStartDay()) - 1) * 100,
+                convertTime(time.getStartTime()),
                 100, 24 * 25 - convertTime(time.getStartTime()));
-        for (int days = modifiedOrder(time.getStartDay()) + 1; days < modifiedOrder(time.getEndDay()); days++) {
+        for (int days = modifiedOrder(time.getStartDay()) + 1;
+             days < modifiedOrder(time.getEndDay()); days++) {
           g2d.fillRect((days - 1) * 100, 0,
                   100, 25 * 24);
         }
@@ -62,7 +65,8 @@ public class SaturdaySchedulePanel extends SchedulePanel {
       }
 
       if (modifiedOrder(time.getStartDay()) > modifiedOrder(time.getEndDay())) {
-        g2d.fillRect((modifiedOrder(time.getStartDay()) - 1) * 100, convertTime(time.getStartTime()),
+        g2d.fillRect((modifiedOrder(time.getStartDay()) - 1) * 100,
+                convertTime(time.getStartTime()),
                 100, 24 * 25 - convertTime(time.getStartTime()));
         for (int days = modifiedOrder(time.getStartDay()) + 1; days < 8; days++) {
           g2d.fillRect((days - 1) * 100, 0,
@@ -94,7 +98,8 @@ public class SaturdaySchedulePanel extends SchedulePanel {
     if (events.isEmpty()) {
       return;
     }
-    IEventFrame eventFrame = new SaturdayEventFrame(this.system, events.get(0), this.schedule.getUserID());
+    IEventFrame eventFrame = new EventFrame(
+            this.system, events.get(0), this.schedule.getUserID());
     eventFrame.setFeature(this.controller);
     eventFrame.makeVisible();
   }

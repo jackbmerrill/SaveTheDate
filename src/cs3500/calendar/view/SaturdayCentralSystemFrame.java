@@ -32,16 +32,4 @@ public class SaturdayCentralSystemFrame extends CentralSystemFrame {
     this.schedulePanel = new SaturdaySchedulePanel(new Schedule("<None>"), this.model);
   }
 
-  @Override
-  protected void createEventButtonListener() {
-    createEventButton.addActionListener(new ActionListener() {
-      @Override
-      public void actionPerformed(ActionEvent e) {
-        IEventFrame eventFrame = new SaturdayEventFrame(model,
-                userScheduleDropdown.getSelectedItem().toString());
-        eventFrame.setFeature(controller);
-        eventFrame.makeVisible();
-      }
-    });
-  }
 }
